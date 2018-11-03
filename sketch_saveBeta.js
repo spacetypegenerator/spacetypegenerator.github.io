@@ -38,25 +38,45 @@ var bkgdColor = 255;
 var bkgdStrokeColor = 235;
 
 // SAVE
-var gifLength = 180;
-var canvas;
+const btn = document.querySelector('button')
+const chunks = [];
 
-var recordStart = 0;
-var gifButton;
-var record = false;
+function record() {
+  chunks.length = 0;
+  let stream = document.querySelector('canvas').captureStream(30),
+    recorder = new MediaRecorder(stream);
+  recorder.ondataavailable = e => {
+    if (e.data.size) {
+      chunks.push(e.data);
+    }
+  };
+  recorder.onstop = exportVideo;
+  btn.onclick = e => {
+    recorder.stop();
+    btn.textContent = 'start recording';
+    btn.onclick = record;
+  };
+  recorder.start();
+  btn.textContent = 'stop recording';
+}
+
+function exportVideo(e) {
+  var blob = new Blob(chunks);
+  var vid = document.createElement('video');
+  vid.id = 'recorded'
+  vid.controls = true;
+  vid.src = URL.createObjectURL(blob);
+  document.body.appendChild(vid);
+  vid.play();
+}
+btn.onclick = record;
 
 function preload() {
  font = loadFont('assets/IBMPlexMono-Regular.otf');
 }
 
 function setup(){
-//  createCanvas(windowWidth,windowHeight, WEBGL);
-  var p5Canvas = createCanvas(540,540, WEBGL);
-  canvas = p5Canvas.canvas;
-  
-  gifButton = createButton('Save Loop');
-  gifButton.position(width-100,height/2);
-  gifButton.mousePressed(gifSave);  
+  createCanvas(windowWidth,windowHeight, WEBGL);
     
   background(bkgdColor);
   smooth();
@@ -95,10 +115,6 @@ function setup(){
 }
 
 function draw(){
-  if(record === true && recordStart ==0){
-    recordStart = frameCount;
-    capturer.start();
-  }
     
   background(bkgdColor);
   letter_select = 0;
@@ -257,14 +273,6 @@ function draw(){
  	}
 	pop();
     
-  if(frameCount < (recordStart + gifLength) && record === true){
-    capturer.capture(canvas);
-  } else if (frameCount === (recordStart + gifLength) && record === true){
-    capturer.stop();
-    capturer.save();
-    record  = false;
-    recordStart = 0;
-  }
 }
 
 function inverter() {
@@ -277,9 +285,4 @@ function inverter() {
     bkgdColor = color(255);
     bkgdStrokeColor = color(235);
   }
-}
-
-function gifSave(){
-  record = !record;
-//  capturer.start();
 }
