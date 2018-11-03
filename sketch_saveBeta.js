@@ -51,7 +51,7 @@ function preload() {
 
 function setup(){
 //  createCanvas(windowWidth,windowHeight, WEBGL);
-  var p5Canvas = createCanvas(1080,1080, WEBGL);
+  var p5Canvas = createCanvas(540,540, WEBGL);
   canvas = p5Canvas.canvas;
   
   gifButton = createButton('Save Loop');
