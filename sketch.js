@@ -21,6 +21,7 @@ var rLongSlider, rLong;
 var xRotTweakSlider,xRotTweak, yRotTweakSlider, yRotTweak, zRotTweakSlider, zRotTweak;
 var rWaveOffset;
 var stackHeight;
+var stackHeightAdjust = 0;
 
 // CAMERA
 var xRotCamera, yRotCamera, zRotCamera;
@@ -31,11 +32,17 @@ var zoomCamera, zoomCameraSlider;
 var letter_select, inp, inpText;
 var myText = [];
 
+// SAVE
+var exportButton;
+
 // COLOR
 var invertCheck;
 var strkColor = 0;
 var bkgdColor = 255;
 var bkgdStrokeColor = 235;
+
+// PRESETS
+var presetSimple, presetJellyfish, presetCrown, presetComplex, presetWeave, presetZebra, presetHoops;
 
 function preload() {
  font = loadFont('assets/IBMPlexMono-Regular.otf');
@@ -70,11 +77,21 @@ function setup(){
   yRotTweakSlider = createSlider(0,45,0); yRotTweakSlider.position(15,547); yRotTweakSlider.style('width','100px');
   zRotTweakSlider = createSlider(0,45,0); zRotTweakSlider.position(15,577); zRotTweakSlider.style('width','100px');
   
-  invertCheck = createCheckbox('',false); invertCheck.position(130,height - 60);
+  invertCheck = createCheckbox('',false); invertCheck.position(140,60);
   xRotCameraSlider = createSlider(-180,180,15); xRotCameraSlider.position(-20,height-107); xRotCameraSlider.style('width','100px'); xRotCameraSlider.style('rotate',270);
   yRotCameraSlider = createSlider(-180,180,0); yRotCameraSlider.position(20,height-107); yRotCameraSlider.style('width','100px'); yRotCameraSlider.style('rotate',270);
   zRotCameraSlider = createSlider(-180,180,0); zRotCameraSlider.position(60,height-107); zRotCameraSlider.style('width','100px'); zRotCameraSlider.style('rotate',270);
 	zoomCameraSlider = createSlider(-500,500,0); zoomCameraSlider.position(15,height-20); zoomCameraSlider.style('width','100px');
+
+  exportButton = createButton('Export PNG'); exportButton.position(140,20); exportButton.mousePressed(exportPNG);  
+
+  presetSimple = createButton('Simple'); presetSimple.position(140,height-30); presetSimple.mousePressed(simpleSet);
+  presetJellyfish = createButton('Jellyfish'); presetJellyfish.position(200,height-30); presetJellyfish.mousePressed(jellyfishSet);
+  presetCrown = createButton('Crown'); presetCrown.position(270,height-30); presetCrown.mousePressed(crownSet);
+  presetComplex = createButton('Complex'); presetComplex.position(330,height-30); presetComplex.mousePressed(complexSet);
+  presetWeave = createButton('Weave'); presetWeave.position(405,height-30); presetWeave.mousePressed(weaveSet);
+  presetZebra = createButton('Zebra'); presetZebra.position(465,height-30); presetZebra.mousePressed(zebraSet);
+  presetHoops = createButton('Hoops'); presetHoops.position(515,height-30); presetHoops.mousePressed(hoopsSet);
   
   invertCheck.changed(inverter);
 }
@@ -106,53 +123,58 @@ function draw(){
   zRotTweak = zRotTweakSlider.value();
   zoomCamera = zoomCameraSlider.value();
   
-  stackHeight = (typeY+strecherYsize/2)+5;
+  stackHeight = (typeY+strecherYsize/2) + 5 + stackHeightAdjust;
   pieSlice = 2*PI/inpText.length;
   rWaveOffset = 2*PI/inpText.length*rWaveCount;
-    
-  push();
-  translate(-width/2,-height/2);
-  stroke(bkgdStrokeColor);
-  strokeWeight(1);
-  line(10,130,130,130);
-  line(10,350,130,350);
-  rect(5,450,125,160);    
-  
-  fill(strkColor);
-	textSize(9);
-  textAlign(LEFT);
-  text("CYLINDER: Radius " + radius,15,16);
-  text("CYLINDER: Count " + stackNum,15,46);
-  text("CYLINDER: Rotate " + rRotate,15,76);
-  text("CYLINDER: Offset " + rOffset,15,106);
-//  line break
-  text("WAVE: Count " + rWaveCount,15,146);
-  text("WAVE: Speed " + rWaveSpeed,15,176);
-  text("WAVE: Latitude  " + rWave,15,206);
-  text("WAVE: Longitude " + rLong,15,236);
-  text("WAVE: Ripple " + rZaxis,15,266);
-  text("WAVE: X-Scale " + strecherYsize,15,296);
-  text("WAVE: Y-Scale " + strecherXsize,15,326);
-// line break  
-  text("TYPE: X-Scale " + typeX,15,366);
-  text("TYPE: Y-Scale " + typeY,15,396);
-  text("TYPE: Weight " + typeStroke,15,426);
 
-  text("Use to smooth form\nafter LATITUDE (x,y)\nor RIPPLE (z) adjust",15,470);  
-	text("TWEAK: X Rotation " + xRotTweak,15,516);
-	text("TWEAK: Y Rotation " + yRotTweak,15,546);
-	text("TWEAK: Z Rotation " + zRotTweak,15,576);
-  
-	text("INVERT",148,height-46);
-	text("CAMERA: Zoom",15,height-22);
-  
-  translate(0,height);
-  rotateZ(-PI/2);
-  text("CAMERA: X-Rotation " + xRotCamera,45,20);
-  text("CAMERA: Y-Rotation " + yRotCamera,45,60);
-  text("CAMERA: Z-Rotation " + zRotCamera,45,100);
-  
-  pop();
+  if(mouseX>145 && mouseX<220 && mouseY>18 && mouseY<45){
+  } else {
+    push();
+    translate(-width/2,-height/2);
+    stroke(bkgdStrokeColor);
+    strokeWeight(1);
+    line(10,130,130,130);
+    line(10,350,130,350);
+    rect(5,450,125,160);    
+    line(185,height-43,500,height-43); 
+
+    fill(strkColor);
+    textSize(9);
+    textAlign(LEFT);
+    text("CYLINDER: Radius " + radius,15,16);
+    text("CYLINDER: Count " + stackNum,15,46);
+    text("CYLINDER: Rotate " + rRotate,15,76);
+    text("CYLINDER: Offset " + rOffset,15,106);
+  //  line break
+    text("WAVE: Count " + rWaveCount,15,146);
+    text("WAVE: Speed " + rWaveSpeed,15,176);
+    text("WAVE: Latitude  " + rWave,15,206);
+    text("WAVE: Longitude " + rLong,15,236);
+    text("WAVE: Ripple " + rZaxis,15,266);
+    text("WAVE: X-Scale " + strecherXsize,15,296);
+    text("WAVE: Y-Scale " + strecherYsize,15,326);
+  // line break  
+    text("TYPE: X-Scale " + typeX,15,366);
+    text("TYPE: Y-Scale " + typeY,15,396);
+    text("TYPE: Weight " + typeStroke,15,426);
+
+    text("Use to smooth form\nafter LATITUDE (x,y)\nor RIPPLE (z) adjust",15,470);  
+    text("TWEAK: X Rotation " + xRotTweak,15,516);
+    text("TWEAK: Y Rotation " + yRotTweak,15,546);
+    text("TWEAK: Z Rotation " + zRotTweak,15,576);
+
+    text("INVERT",158,74);  
+    text("CAMERA: Zoom",15,height-22);
+		text("PRESETS", 145,height-40);
+    
+    translate(0,height);
+    rotateZ(-PI/2);
+    text("CAMERA: X-Rotation " + xRotCamera,45,20);
+    text("CAMERA: Y-Rotation " + yRotCamera,45,60);
+    text("CAMERA: Z-Rotation " + zRotCamera,45,100);
+
+    pop();
+  }
   
   noFill();
   strokeWeight(typeStroke);
@@ -175,16 +197,19 @@ function draw(){
     
     letter_select = ringSpot;  
     
-    if(strecherYsize!=0){
+//    if(strecherYsize!=0){
       if(floor(i/inpText.length)%2 === 1){
         strecherY = map(sin(ringSpot*rWaveOffset + frameCount*(rWaveSpeed/1000)),-1,1,0,strecherYsize);
       } else {
-        strecherY = map(sin(ringSpot*rWaveOffset + frameCount*(rWaveSpeed/1000) + PI),-1,1,0,strecherYsize)
+        strecherY = map(sin(ringSpot*rWaveOffset + frameCount*(rWaveSpeed/1000) + PI),-1,1,0,strecherYsize);
       }
-    }
-		if(strecherXsize!=0){
-	    strecherX = map(sin(ringSpot*rWaveOffset + frameCount*(rWaveSpeed/1000) + PI),-1,1,0,strecherXsize)
-    }
+//    }
+//		if(strecherXsize!=0){
+	    // Longitudinal
+//    	strecherX = map(sin(ringSpot*rWaveOffset + frameCount*(rWaveSpeed/1000)),-1,1,0,strecherXsize);
+			// Latitudinal
+	    strecherX = map(sin(floor(i/inpText.length)*rWaveOffset+frameCount*(rWaveSpeed/1000)),-1,1,0,strecherXsize);
+//    }
     
     push();
     // stack translates
@@ -224,7 +249,7 @@ function draw(){
     if(zRotTweak!=0){
       rotateZ(cos(ringSpot*rWaveOffset + frameCount*(rWaveSpeed/1000)) * radians(zRotTweak));
     }
-    
+        
     translate(-(typeX+strecherX)/2,-(typeY+strecherY)/2,0);
     	// outer surface
     	stroke(strkColor);
@@ -238,6 +263,10 @@ function draw(){
 	pop();
 }
 
+function exportPNG() {
+	saveCanvas('STG_cylinder', 'png');
+}
+
 function inverter() {
 	if(this.checked()){
 		strkColor = color(255);
@@ -248,4 +277,94 @@ function inverter() {
     bkgdColor = color(255);
     bkgdStrokeColor = color(235);
   }
+}
+
+function reSetting() {
+  stackHeightAdjust = 0;
+	rSlider.value(250); stackNumSlider.value(1); rRotateSlider.value(-5); rOffsetSlider.value(0); rWaveCountSlider.value(2); rWaveSpeedSlider.value(0); rWaveSlider.value(0);
+  rLongSlider.value(0); rZaxisSlider.value(0); strecherXslider.value(0); strecherYslider.value(0); typeXSlider.value(20); typeYSlider.value(40); typeStrokeSlider.value(2);
+  xRotTweakSlider.value(0); yRotTweakSlider.value(0); zRotTweakSlider.value(0);
+  xRotCameraSlider.value(15);  yRotCameraSlider.value(0);  zRotCameraSlider.value(0); zoomCameraSlider.value(0);
+  
+  invertCheck.checked(false);
+  strkColor = color(0);
+	bkgdColor = color(255);
+  bkgdStrokeColor = color(235);
+}
+
+function simpleSet() {
+	reSetting();
+	rSlider.value(185); stackNumSlider.value(8); rRotateSlider.value(-10); rOffsetSlider.value(0.2); rWaveSpeedSlider.value(75); rWaveSlider.value(41);
+  xRotTweakSlider.value(24); yRotTweakSlider.value(27);
+  xRotCameraSlider.value(20);
+}
+
+function jellyfishSet() {
+	reSetting();
+	rSlider.value(200); stackNumSlider.value(6); rOffsetSlider.value(0.15); rWaveCountSlider.value(3); rWaveSpeedSlider.value(100);
+  rLongSlider.value(80); strecherXslider.value(23); typeXSlider.value(13); typeYSlider.value(64); typeStrokeSlider.value(.5);
+  xRotCameraSlider.value(25);
+  
+  invertCheck.checked(true);
+		strkColor = color(255);
+    bkgdColor = color(0);
+    bkgdStrokeColor = color(25); 
+}
+
+function crownSet() {
+	reSetting();
+  stackNumSlider.value(3); rRotateSlider.value(-5); rWaveCountSlider.value(4); rWaveSpeedSlider.value(50);
+  rZaxisSlider.value(21); strecherYslider.value(76); typeXSlider.value(30); typeStrokeSlider.value(3);
+  strecherXslider.value(-25); zoomCameraSlider.value(-500);
+}
+
+function complexSet() {
+	reSetting();
+	rSlider.value(178); stackNumSlider.value(11); rRotateSlider.value(0); rOffsetSlider.value(0.16); rWaveCountSlider.value(6); rWaveSpeedSlider.value(75); rWaveSlider.value(10);
+  rLongSlider.value(31); typeXSlider.value(16); typeYSlider.value(40); typeStrokeSlider.value(2);
+  xRotTweakSlider.value(15); yRotTweakSlider.value(35); zRotTweakSlider.value(0);
+  xRotCameraSlider.value(-34);  yRotCameraSlider.value(10);  zRotCameraSlider.value(25);
+  
+  invertCheck.checked(true);
+		strkColor = color(255);
+    bkgdColor = color(0);
+    bkgdStrokeColor = color(25); 
+}
+
+
+function weaveSet() {
+	reSetting();
+  stackHeightAdjust = 30;
+	rSlider.value(110); stackNumSlider.value(7); rRotateSlider.value(15); rOffsetSlider.value(0.62); rWaveCountSlider.value(5); rWaveSpeedSlider.value(30);
+  rZaxisSlider.value(15); typeXSlider.value(12); typeYSlider.value(19); typeStrokeSlider.value(1);
+	zRotTweakSlider.value(33);
+  xRotCameraSlider.value(15);  yRotCameraSlider.value(0);  zRotCameraSlider.value(0); zoomCameraSlider.value(0);
+}
+
+function zebraSet() {
+	reSetting();
+  stackHeightAdjust = 10;
+	rSlider.value(110); stackNumSlider.value(7); rRotateSlider.value(20); rOffsetSlider.value(0.3); rWaveCountSlider.value(2); rWaveSpeedSlider.value(30); rWaveSlider.value(15);
+  rZaxisSlider.value(15); strecherYslider.value(33); typeXSlider.value(12); typeYSlider.value(19); typeStrokeSlider.value(1);
+  xRotTweakSlider.value(9); yRotTweakSlider.value(24); zRotTweakSlider.value(22);
+  xRotCameraSlider.value(15);  yRotCameraSlider.value(0);  zRotCameraSlider.value(0); zoomCameraSlider.value(0);
+  
+  invertCheck.checked(true);
+		strkColor = color(255);
+    bkgdColor = color(0);
+    bkgdStrokeColor = color(25); 
+}
+
+function hoopsSet() {
+	reSetting();
+  stackHeightAdjust = 30;
+	rSlider.value(110); stackNumSlider.value(7); rRotateSlider.value(15); rOffsetSlider.value(0.62); rWaveCountSlider.value(1); rWaveSpeedSlider.value(100);
+  rZaxisSlider.value(58); typeXSlider.value(12); typeYSlider.value(19); typeStrokeSlider.value(1.5);
+  zRotTweakSlider.value(28);
+  xRotCameraSlider.value(-10);
+
+  invertCheck.checked(true);
+		strkColor = color(255);
+    bkgdColor = color(0);
+    bkgdStrokeColor = color(25); 
 }
