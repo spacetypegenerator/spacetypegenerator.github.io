@@ -131,6 +131,26 @@ function keyboardEngine() {
       letter_slash( strecherX,  strecherY);
     } else if (c1 == '&') {
       letter_amp( strecherX,  strecherY);
+    } else if (c1 == '1') {
+      one( strecherX,  strecherY);
+    } else if (c1 == '2') {
+      two( strecherX,  strecherY);
+    } else if (c1 == '3') {
+      three( strecherX,  strecherY);
+    } else if (c1 == '4') {
+      four( strecherX,  strecherY);
+    } else if (c1 == '5') {
+      five( strecherX,  strecherY);
+    } else if (c1 == '6') {
+      six( strecherX,  strecherY);
+    } else if (c1 == '7') {
+      seven( strecherX,  strecherY);
+    } else if (c1 == '8') {
+      eight( strecherX,  strecherY);
+    } else if (c1 == '9') {
+      nine( strecherX,  strecherY);
+    } else if (c1 == '0') {
+      zero(strecherX,  strecherY);
     }
 //  }
 }
@@ -1130,5 +1150,179 @@ function letter_amp ( strX,  strY) {
 function letter_space ( strX,  strY) {
   push();
 
+  pop();
+}
+
+function one (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(0,typeY/4);
+    vertex(typeX/2+strX/2,0);
+    vertex(typeX/2+strX/2,typeY+strY);
+    endShape();
+    
+    line(0,typeY+strY,typeX+strX,typeY+strY);
+  pop();
+}
+
+function two (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(0,typeY/3);
+    quadraticVertex(0,0,typeX/2,0);
+    vertex(typeX/2+strX,0);
+    quadraticVertex(typeX+strX,0,typeX+strX,typeY/3);
+    vertex(typeX+strX,typeY/3+strY);
+    bezierVertex(typeX+strX,2*typeY/3+strY,0,2*typeY/3+strY,0,typeY+strY);
+    vertex(typeX+strX,typeY+strY);
+    endShape();
+  pop();
+}
+
+function three (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(0,0);
+    vertex(typeX+strX,0);
+    vertex(typeX/2+strX/2,typeY/3);
+    quadraticVertex(typeX+strX,typeY/3,typeX+strX,2*typeY/3);
+    vertex(typeX+strX,2*typeY/3+strY);
+    quadraticVertex(typeX+strX,typeY+strY,typeX/2+strX,typeY+strY);
+    vertex(typeX/2,typeY+strY);
+    bezierVertex(0,typeY+strY,0,2*typeY/3+strY,0,2*typeY/3+strY);
+    endShape();
+  pop();
+}
+
+function four (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(typeX/3,0);
+    vertex(0,2*typeY/3+strY);
+    vertex(typeX+strX,2*typeY/3+strY);
+    endShape();
+    line(2*typeX/3+strX,0,2*typeX/3+strX,typeY);
+  pop();
+}
+
+function five (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(typeX+strX,0);
+    vertex(0,0);
+    vertex(0,typeY/3);
+    vertex(typeX/2+strX,typeY/3);
+    quadraticVertex(typeX+strX,typeY/3,typeX+strX,2*typeY/3);
+    vertex(typeX+strX,2*typeY/3+strY);
+    quadraticVertex(typeX+strX,typeY+strY,typeX/2+strX,typeY+strY);
+    bezierVertex(0,typeY+strY,0,2*typeY/3+strY,0,2*typeY/3+strY);
+    endShape();
+  pop();
+}
+
+function six (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(typeX+strX,2*typeY/3+strY);
+    quadraticVertex(typeX+strX,typeY+strY,typeX/2+strX,typeY+strY);
+    vertex(typeX/2,typeY+strY);
+    bezierVertex(0,typeY+strY,0,2*typeY/3+strY,0,2*typeY/3+strY);
+    vertex(0,2*typeY/3);
+    quadraticVertex(0,typeY/3,typeX/2,typeY/3);
+    vertex(typeX/2+strX,typeY/3);
+    bezierVertex(typeX+strX,typeY/3,typeX+strX,2*typeY/3,typeX+strX,2*typeY/3);
+    vertex(typeX+strX,2*typeY/3+strY);
+    endShape();
+    
+    beginShape();
+    vertex(0,2*typeY/3);
+    quadraticVertex(0,0,2*typeX/3,0);
+    endShape();
+  pop();
+}
+
+function seven (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(0,0);
+    vertex(typeX+strX,0);
+    vertex(typeX/2+strX/2,typeY+strY);
+    endShape();
+  pop();
+}
+
+function eight (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(0,typeY/4);
+    quadraticVertex(0,0,typeX/2,0);
+    vertex(typeX/2+strX,0);
+    bezierVertex(typeX+strX,0,typeX+strX,typeY/4,typeX+strX,typeY/4);
+    vertex(typeX+strX,typeY/4+strY/2);
+    quadraticVertex(typeX+strX,typeY/2+strY/2,typeX/2+strX,typeY/2+strY/2);
+    vertex(typeX/2,typeY/2+strY/2);
+    bezierVertex(0,typeY/2+strY/2,0,typeY/4+strY/2,0,typeY/4+strY/2);
+    vertex(0,typeY/4);
+    endShape();
+    
+    translate(0,typeY/2+strY/2);//bottom hump
+    beginShape();
+    vertex(0,typeY/4);
+    quadraticVertex(0,0,typeX/2,0);
+    vertex(typeX/2+strX,0);
+    bezierVertex(typeX+strX,0,typeX+strX,typeY/4,typeX+strX,typeY/4);
+    vertex(typeX+strX,typeY/4+strY/2);
+    quadraticVertex(typeX+strX,typeY/2+strY/2,typeX/2+strX,typeY/2+strY/2);
+    vertex(typeX/2,typeY/2+strY/2);
+    bezierVertex(0,typeY/2+strY/2,0,typeY/4+strY/2,0,typeY/4+strY/2);
+    vertex(0,typeY/4);
+    endShape();
+    
+  pop();
+}
+
+function nine (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(0,typeY/3);
+    quadraticVertex(0,0,typeX/2,0);
+    vertex(typeX/2+strX,0);
+    bezierVertex(typeX+strX,0,typeX+strX,typeY/3,typeX+strX,typeY/3);
+    vertex(typeX+strX,typeY/3+strY);
+    quadraticVertex(typeX+strX,2*typeY/3+strY,typeX/2+strX,2*typeY/3+strY);
+    vertex(typeX/2,2*typeY/3+strY);
+    bezierVertex(0,2*typeY/3+strY,0,typeY/3+strY,0,typeY/3+strY);
+    vertex(0,typeY/3);
+    endShape();
+    
+    line(typeX+strX,typeY/3+strY,typeX+strX,typeY+strY);
+  pop();
+}
+
+function zero (strX,  strY) {
+  push();
+
+    beginShape();
+    vertex(typeX/2+strX,0);
+    quadraticVertex(typeX+strX,0,  typeX+strX,typeY/3);
+    vertex(typeX+strX,2*typeY/3+strY);
+    quadraticVertex(typeX+strX,typeY+strY,  typeX/2+strX,typeY+strY);
+    vertex(typeX/2,typeY+strY);
+    quadraticVertex(0,typeY+strY,  0,2*typeY/3+strY);
+    vertex(0,typeY/3);
+    quadraticVertex(0,0,  typeX/2,0);
+    vertex(typeX/2+strX,0);
+    endShape();
+    
+    line(2*typeX/3 + strX,typeY/3,typeX/3,2*typeY/3+strY);
   pop();
 }
