@@ -1205,7 +1205,7 @@ function four (strX,  strY) {
     vertex(0,2*typeY/3+strY);
     vertex(typeX+strX,2*typeY/3+strY);
     endShape();
-    line(2*typeX/3+strX,0,2*typeX/3+strX,typeY);
+    line(2*typeX/3+strX,0,2*typeX/3+strX,typeY+strY);
   pop();
 }
 
