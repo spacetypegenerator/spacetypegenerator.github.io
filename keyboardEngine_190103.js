@@ -699,13 +699,13 @@ function letter_P ( strX,  strY) {
   push();
        
     beginShape();
-    vertex(SA, letY+strY);
-    vertex(SA, SA);
-    vertex(letX/2+strX, SA);
-    quadraticVertex(letX+strX-SA,SA,  letX+strX-SA,letY/4);
-    vertex(letX+strX-SA, letY/4+strY/2);
-    quadraticVertex(letX+strX-SA, letY/2+strY/2,  letX/2+strX,letY/2+strY/2);
-    vertex(SA,letY/2+strY/2);
+    vertex(0, typeY+strY);
+    vertex(0, 0);
+    vertex(typeX/2+strX, 0);
+    quadraticVertex(typeX+strX,0,  typeX+strX,typeY/4);
+    vertex(typeX+strX, typeY/4+strY/2);
+    quadraticVertex(typeX+strX, typeY/2+strY/2,  typeX/2+strX,typeY/2+strY/2);
+    vertex(0,typeY/2+strY/2);
     endShape();
   pop();
 }
@@ -778,13 +778,13 @@ function letter_R ( strX,  strY) {
   push();
     
     beginShape();
-    vertex(SA, letY+strY);
-    vertex(SA, SA);
-    vertex(letX/2+strX, SA);
-    quadraticVertex(letX+strX-SA,SA,  letX+strX-SA,letY/4);
-    vertex(letX+strX-SA, letY/4+strY/2);
-    quadraticVertex(letX+strX-SA, letY/2+strY/2,  letX/2+strX,letY/2+strY/2);
-    vertex(SA,letY/2+strY/2);
+    vertex(0, typeY+strY);
+    vertex(0, 0);
+    vertex(typeX/2+strX, 0);
+    quadraticVertex(typeX+strX,0,  typeX+strX,typeY/4);
+    vertex(typeX+strX, typeY/4+strY/2);
+    quadraticVertex(typeX+strX, typeY/2+strY/2,  typeX/2+strX,typeY/2+strY/2);
+    vertex(0,typeY/2+strY/2);
     endShape();
 
   line(typeX/2+strX/2, typeY/2+strY/2, typeX+strX, typeY+strY);
