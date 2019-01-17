@@ -122,7 +122,7 @@ function letter_A () {
    ang = atan((typeX/2)/(typeY));
    angX = tan(ang)*(typeY/3);
 
-  line(angX-SA, 22*typeY/28, typeX-angX+SA, 22*typeY/28);
+  line(angX-SA/2, 22*typeY/28, typeX-angX+SA/2, 22*typeY/28);
   pop();
 }
 
