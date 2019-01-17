@@ -13,6 +13,7 @@ var row, rowSlider;
 var tracking, trackSlider;
 var lineSpace, lineSpaceSlider;
 var xSpace, ySpace;
+var SA;
 
 // WAVE
 var speed, speedSlider;
@@ -29,14 +30,6 @@ var yWaver = 0;
 var yWaveChecked = 0;
 var yWavezRot, yWavezRotSlider;
 var yWavezRoter = 0;
-var yWavexStr, yWavexStrSlider;
-var yWavexStrer = 0;
-var xStrechWave, xStrechWaveSlider, xStrechWaveCheck;
-var xStrechWave = 0;
-var xStrechWaveChecked = 0;
-var yStrechWave, yStrechWaveSlider, yStrechWaveCheck;
-var yStrechWave = 0;
-var yStrechWaveChecked = 0;
 
 // CAMERA
 var xRotCamera, yRotCamera, zRotCamera;
@@ -52,7 +45,6 @@ var fullTextCheck, fullText;
 // COLOR
 var radioBkgd;
 var radioStroke;
-
 
 var strkColor = 0;
 var bkgdColor = 255;
@@ -98,11 +90,6 @@ function setup(){
   yWaveSlider = createSlider(0,200,0); yWaveSlider.position(25,407); yWaveSlider.style('width','100px');
   yWaveCheck = createCheckbox('',false); yWaveCheck.position(130,406);
   	yWavezRotSlider = createSlider(0,60,0); yWavezRotSlider.position(45,436); yWavezRotSlider.style('width','50px');  
-  	yWavexStrSlider = createSlider(0,60,0); yWavexStrSlider.position(110,436); yWavexStrSlider.style('width','50px');  
-  xStrechWaveSlider = createSlider(0,100,0); xStrechWaveSlider.position(25,467); xStrechWaveSlider.style('width','100px');
-  xStrechWaveCheck = createCheckbox('',false); xStrechWaveCheck.position(130,466);  
-  yStrechWaveSlider = createSlider(0,100,0); yStrechWaveSlider.position(25,497); yStrechWaveSlider.style('width','100px');
-  yStrechWaveCheck = createCheckbox('',false); yStrechWaveCheck.position(130,496);
   
   invertCheck = createCheckbox('',false); invertCheck.position(140,60);
   fullTextCheck = createCheckbox('',true); fullTextCheck.position(140,90);
@@ -143,8 +130,6 @@ function setup(){
 	zWaveCheck.changed(zWaveChecker);
 	xWaveCheck.changed(xWaveChecker);
 	yWaveCheck.changed(yWaveChecker);
-	xStrechWaveCheck.changed(xStrechWaveChecker);
-	yStrechWaveCheck.changed(yStrechWaveChecker);
   fullTextCheck.changed(fullTexter);
   invertCheck.changed(inverter);
 }
@@ -192,9 +177,6 @@ function draw(){
   xWave = xWaveSlider.value();
   yWave = yWaveSlider.value();
   yWavezRot = yWavezRotSlider.value();
-	yWavexStr = yWavexStrSlider.value();
-	xStrechWave = xStrechWaveSlider.value() 
-	yStrechWave = yStrechWaveSlider.value() 
   
   xOffset = xOffsetSlider.value();
   yOffset = yOffsetSlider.value();
@@ -209,7 +191,8 @@ function draw(){
   zoomCamera = zoomCameraSlider.value();
   
 	xSpace = typeX + tracking;
-	ySpace = typeY + lineSpace + yStrechWave/2;
+	ySpace = typeY + lineSpace;
+  SA = typeStroke/2;
   
   if(mouseX>145 && mouseX<220 && mouseY>18 && mouseY<45){
   } else {
@@ -256,11 +239,6 @@ function draw(){
     text("AMPLITUDE: Y Axis " + yWave,25,406);
     text("OFFSET",150,420);  
     text("Z Smooth " + yWavezRot,45,435);
-    text("X Stretch " + yWavexStr,110,435);
-    text("AMPLITUDE: X Stretch " + xStrechWave,25,466);
-    text("OFFSET",150,480); 
-    text("AMPLITUDE: Y Stretch " + yStrechWave,25,496);
-    text("OFFSET",150,510); 
 
     text("INVERT",158,74);  
     text("FULL TEXT",158,104);
@@ -343,23 +321,10 @@ function draw(){
 //  if(yWavezRot != 0){
 		yWavezRoter = cosEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWavezRot;
 //  }
-//  if(yWavexStr != 0){
-		yWavexStrer = map(cosEngine2(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,yWavexStr);
-//  }
-//  if(xStrechWave != 0 || yWavexStr != 0){
-    strecherX = map(sinEngine(xStrechWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,xStrechWave)+yWavexStrer;
-//  }
-//  if(yStrechWave != 0){
-    if(floor(i/column)%2==1){
-	    strecherY = map(sinEngine(yStrechWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,yStrechWave);
-    } else {
-	    strecherY = map(sinEngine(yStrechWaveChecked+PI,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,yStrechWave);   
-    }
-//  }
     
     push();
     translate((i%column)*xSpace + xWaver,floor(i/column)*ySpace + yWaver,zWaver);
-    translate(-(typeX+strecherX)/2,-(typeY+strecherY)/2);
+    translate(-(typeX)/2,-(typeY)/2);
 
         // rotation adjustments
         var preZAnchX = sinEngine(zWaveChecked,xOffset,(i%column)-1,yOffset,floor((i)/column),speed,1)*zWave;
@@ -435,21 +400,6 @@ function yWaveChecker() {
   }
 }
 
-function xStrechWaveChecker() {
-	if(this.checked()){
-		xStrechWaveChecked = PI/2;
-  } else {
-		xStrechWaveChecked = 0;
-  }
-}
-
-function yStrechWaveChecker() {
-	if(this.checked()){
-		yStrechWaveChecked = PI/2;
-  } else {
-		yStrechWaveChecked = 0;
-  }
-}
 
 function inverter() {
 	if(this.checked()){
@@ -469,11 +419,10 @@ function reSetting() {
 	yWaver = 0;
 	columnSlider.value(33); rowSlider.value(7); trackingSlider.value(5); lineSpaceSlider.value(5); typeXSlider.value(20); typeYSlider.value(40);typeStrokeSlider.value(2);
   speedSlider.value(-2); xOffsetSlider.value(3.1); yOffsetSlider.value(3.1);
-  xWaveSlider.value(0); zWaveSlider.value(0); xStrechWaveSlider.value(0); yStrechWaveSlider.value(0);
-  yWaveSlider.value(0); yWavezRotSlider.value(0); yWavexStrSlider.value(0);
+  xWaveSlider.value(0); zWaveSlider.value(0);
+  yWaveSlider.value(0); yWavezRotSlider.value(0);
 	xRotCameraSlider.value(0); yRotCameraSlider.value(0); zRotCameraSlider.value(0); zoomCameraSlider.value(0); 
 
-  xStrechWaveCheck.checked(false); xStrechWaveChecked = 0;    
   fullTextCheck.checked(false); fullText = false;
   invertCheck.checked(false);
   strkColor = color(0);
@@ -483,7 +432,7 @@ function reSetting() {
 function stackSet() {
 	reSetting();
 	columnSlider.value(22); rowSlider.value(8); trackingSlider.value(4); lineSpaceSlider.value(12); typeXSlider.value(20); typeYSlider.value(18);
-  speedSlider.value(-3); xOffsetSlider.value(5.1); yOffsetSlider.value(59.1); yWaveSlider.value(100); yWavezRotSlider.value(35); yWavexStrSlider.value(7);
+  speedSlider.value(-3); xOffsetSlider.value(5.1); yOffsetSlider.value(59.1); yWaveSlider.value(100); yWavezRotSlider.value(35);
 	
   fullTextCheck.checked(true); fullText = true;
 }
@@ -491,9 +440,8 @@ function stackSet() {
 function brickSet() {
 	reSetting();
 	columnSlider.value(20); rowSlider.value(9); trackingSlider.value(17); lineSpaceSlider.value(7); typeXSlider.value(13); typeYSlider.value(20);
-  speedSlider.value(-4); xWaveSlider.value(86); xStrechWaveSlider.value(25);
-
-  xStrechWaveCheck.checked(true); xStrechWaveChecked = PI/2;  
+  speedSlider.value(-4); xWaveSlider.value(86);
+  
   fullTextCheck.checked(true); fullText = true;
   invertCheck.checked(true);
   strkColor = color(255);
@@ -524,7 +472,7 @@ function complexZSet() {
 function zebraSet() {
 	reSetting();
 	columnSlider.value(50); rowSlider.value(8); trackingSlider.value(7); lineSpaceSlider.value(18.5); typeXSlider.value(6); typeYSlider.value(20); typeStrokeSlider.value(1);
-  speedSlider.value(-4); xOffsetSlider.value(6.1); yOffsetSlider.value(5.1); yWaveSlider.value(33); yWavezRotSlider.value(18); yStrechWaveSlider.value(35);
+  speedSlider.value(-4); xOffsetSlider.value(6.1); yOffsetSlider.value(5.1); yWaveSlider.value(33); yWavezRotSlider.value(18);
 
   fullTextCheck.checked(true); fullText = true;
 }
@@ -532,7 +480,7 @@ function zebraSet() {
 function harlequinSet() {
 	reSetting();
 	columnSlider.value(40); rowSlider.value(7); trackingSlider.value(5); lineSpaceSlider.value(11); typeXSlider.value(9); typeYSlider.value(19); typeStrokeSlider.value(1.1);
-  speedSlider.value(2); xOffsetSlider.value(2.1); yOffsetSlider.value(59.1); yStrechWaveSlider.value(58);
+  speedSlider.value(2); xOffsetSlider.value(2.1); yOffsetSlider.value(59.1);
 
   fullTextCheck.checked(true); fullText = true;
   invertCheck.checked(true);
