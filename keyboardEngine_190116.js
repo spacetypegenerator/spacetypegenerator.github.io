@@ -80,30 +80,26 @@ function keyboardEngine() {
     } else if (c1 == '&') {
       letter_amp();
     } else if (c1 == '1') {
-      one( strecherX,  strecherY);
+      one();
     } else if (c1 == '2') {
-      two( strecherX,  strecherY);
+      two();
     } else if (c1 == '3') {
-      three( strecherX,  strecherY);
+      three();
     } else if (c1 == '4') {
-      four( strecherX,  strecherY);
+      four();
     } else if (c1 == '5') {
-      five( strecherX,  strecherY);
+      five();
     } else if (c1 == '6') {
-      six( strecherX,  strecherY);
+      six();
     } else if (c1 == '7') {
-      seven( strecherX,  strecherY);
+      seven();
     } else if (c1 == '8') {
-      eight( strecherX,  strecherY);
+      eight();
     } else if (c1 == '9') {
-      nine( strecherX,  strecherY);
+      nine();
     } else if (c1 == '0') {
-      zero(strecherX,  strecherY);
-    } else if (c1 == '(') {
-      frameStroke(strecherX,  strecherY);
-    } else if (c1 == ')') {
-      frameFill(strecherX,  strecherY);
-    }
+      zero();
+    } 
 //  }
 }
 /////////////////////////////////////////////////// LETTERS
@@ -114,10 +110,13 @@ function letter_A () {
   beginShape();
 		vertex(SA,typeY);
   	vertex(SA,typeY-SA);
-  	vertex(typeX/2-SA/2,SA);
-  	vertex(typeX/2+SA/2,SA);
-  	vertex(typeX-SA,typeY-SA);
-  	vertex(typeX-SA,typeY);
+  	vertex(SA,typeY-SA/2);
+  
+  	vertex(typeX/2,0);
+  	
+    vertex(typeX-SA,typeY-SA/2);
+    vertex(typeX-SA,typeY-SA);
+    vertex(typeX-SA,typeY);
   endShape();
 
    ang = atan((typeX/2)/(typeY));
@@ -162,9 +161,9 @@ function letter_C () {
 function letter_D () {
   beginShape();
     vertex(0,SA);
-  	vertex(2*typeX/3,SA);
-  	bezierVertex(5*typeX/6,SA,  typeX-SA,typeY/6,  typeX-SA,typeY/3);
-  	vertex(typeX-SA,2*typeY/3);
+    vertex(typeX/2,SA);
+    bezierVertex(5*typeX/6,SA,  typeX-SA,typeY/6,  typeX-SA,typeY/3);
+    vertex(typeX-SA,2*typeY/3);
 		bezierVertex(typeX-SA,5*typeY/6,  5*typeX/6,typeY-SA,  typeX/2,typeY-SA);
     vertex(0,typeY-SA);
   endShape();
@@ -225,15 +224,17 @@ function letter_K () {
   line(SA, 0, SA, typeY);
   beginShape();
     vertex(SA, 2*typeY/3);
+    vertex(27*typeX/28-SA, SA/2);
     vertex(27*typeX/28-SA, SA);
     vertex(27*typeX/28-SA, 0);
   endShape();
   
    ang = atan((2*typeY/3)/(typeX));
-   angX = (typeY/2)/tan(ang);
+   angX = (13/28*typeY)/tan(ang);
 
   beginShape();
-	  vertex(typeX-angX, typeY/2);
+	  vertex(typeX-angX, 13/28*typeY);
+    vertex(typeX-SA, typeY-SA/2);
     vertex(typeX-SA, typeY-SA);
     vertex(typeX-SA, typeY);
   endShape();
@@ -251,8 +252,7 @@ function letter_M () {
   beginShape();
     vertex(0,SA);
     vertex(SA,SA);
-  	vertex(typeX/2-SA/2,22*typeY/28);
-  	vertex(typeX/2+SA/2,22*typeY/28);
+  	vertex(typeX/2,22*typeY/28);
     vertex(typeX-SA,SA);
   	vertex(typeX,SA);
   endShape();
@@ -265,6 +265,8 @@ function letter_N () {
   beginShape();
 		vertex(0,SA);
   	vertex(SA,SA);
+  	vertex(SA,SA/2);
+  	vertex(typeX-SA,typeY-SA/2);
   	vertex(typeX-SA,typeY-SA);
   	vertex(typeX,typeY-SA);
   endShape();
@@ -327,7 +329,8 @@ function letter_R () {
   
   beginShape();
   	vertex(typeX/2,15*typeY/28);
-  	vertex(typeX-SA,typeY-SA);
+  	vertex(typeX-SA,typeY-SA/2);
+	  vertex(typeX-SA,typeY-SA);
   	vertex(typeX-SA,typeY);
   endShape();
 }
@@ -340,8 +343,8 @@ function letter_S () {
     bezierVertex(typeX/4,SA,  typeX/28+SA,2*typeY/28,  typeX/28+SA,11*typeY/56);
     vertex(typeX/28+SA,6*typeY/28);
   	bezierVertex(typeX/28+SA,17*typeY/56,  typeX/8,21*typeY/56,  typeX/3,12*typeY/28);
-  	vertex(19*typeX/28,29*typeY/56);
-  	bezierVertex(23*typeX/28,16*typeY/28,  typeX-SA,18*typeY/28,	typeX-SA,41*typeY/56);
+  	vertex(20*typeX/28,29*typeY/56);
+  	bezierVertex(26*typeX/28,16*typeY/28,  typeX-SA,18*typeY/28,	typeX-SA,41*typeY/56);
     vertex(typeX-SA,3*typeY/4);
   	bezierVertex(typeX-SA,26*typeY/28,  22*typeX/28,typeY-SA,  typeX/2,typeY-SA);
   	bezierVertex(typeX/4,typeY-SA,  SA,53*typeY/56,  SA,3*typeY/4);
@@ -368,8 +371,9 @@ function letter_V () {
 	beginShape();
     vertex(SA,0);
     vertex(SA,SA);
-    vertex(typeX/2-SA/2,typeY-SA);
-    vertex(typeX/2+SA/2,typeY-SA);
+    vertex(SA,SA/2)
+    vertex(typeX/2,typeY);
+    vertex(typeX-SA,SA/2);
   	vertex(typeX-SA,SA);
     vertex(typeX-SA,0);
   endShape();
@@ -379,12 +383,11 @@ function letter_W () {
 	beginShape();
     vertex(SA,0);
     vertex(SA,SA);
-    vertex(typeX/4-SA/2,typeY-SA);
-    vertex(typeX/4+SA/2,typeY-SA);
-  	vertex(typeX/2-SA/2,8*typeY/28);
-  	vertex(typeX/2+SA/2,8*typeY/28);
-    vertex(3*typeX/4-SA/2,typeY-SA);
-    vertex(3*typeX/4+SA/2,typeY-SA);
+    vertex(SA,SA/2)
+    vertex(typeX/4,typeY);
+  	vertex(typeX/2,8*typeY/28);
+    vertex(3*typeX/4,typeY);
+    vertex(typeX-SA,SA/2);
   	vertex(typeX-SA,SA);
   	vertex(typeX-SA,0);
   endShape();
@@ -394,13 +397,17 @@ function letter_X () {
 	beginShape();
   	vertex(SA,0);
     vertex(SA,SA);
+    vertex(SA,SA/2);
+    vertex(typeX-SA,typeY-SA/2);
     vertex(typeX-SA,typeY-SA);
     vertex(typeX-SA,typeY);
   endShape();
   beginShape();
     vertex(typeX-SA,0);
     vertex(typeX-SA,SA);
-  	vertex(SA,typeY-SA);
+    vertex(typeX-SA,SA/2);
+  	vertex(SA,typeY-SA/2);
+    vertex(SA,typeY-SA);
     vertex(SA,typeY);
   endShape();
 }
@@ -409,7 +416,9 @@ function letter_Y () {
 	beginShape();
   	vertex(SA,0);
   	vertex(SA,SA);
+  	vertex(SA,SA/2);
     vertex(typeX/2,2*typeY/3);
+    vertex(typeX-SA,SA/2);
     vertex(typeX-SA,SA);
     vertex(typeX-SA,0);
   endShape();
@@ -498,7 +507,7 @@ function letter_space () {
 
 }
 
-function one (Y) {
+function one () {
     beginShape();
       vertex(0,typeY/4);
 	  	vertex(0,typeY/4+SA);
@@ -511,206 +520,135 @@ function one (Y) {
 }
 
 function two () {
-  push();
+  beginShape();
+    vertex(SA,typeY/4);
+		bezierVertex(SA,typeY/8,	typeX/6,SA,  typeX/2,SA);
+  	bezierVertex(5*typeX/6,SA,  typeX-SA,typeY/8,  typeX-SA,typeY/4);
+    bezierVertex(typeX-SA,5*typeY/8,  SA,2*typeY/3,  SA,typeY);
+  endShape();
 
-    beginShape();
-    vertex(0,typeY/3);
-    quadraticVertex(0,0,typeX/2,0);
-    vertex(typeX/2+strX,0);
-    quadraticVertex(typeX+strX,0,typeX+strX,typeY/3);
-    vertex(typeX+strX,typeY/3+strY);
-    bezierVertex(typeX+strX,2*typeY/3+strY,0,2*typeY/3+strY,0,typeY+strY);
-    vertex(typeX+strX,typeY+strY);
-    endShape();
-  pop();
+  line(0,typeY-SA,  typeX,typeY-SA);
 }
 
-function three (strX,  strY) {
-  push();
-
-    beginShape();
-    vertex(0,0);
-    vertex(typeX+strX,0);
-    vertex(typeX/2+strX/2,typeY/3);
-    quadraticVertex(typeX+strX,typeY/3,typeX+strX,2*typeY/3);
-    vertex(typeX+strX,2*typeY/3+strY);
-    quadraticVertex(typeX+strX,typeY+strY,typeX/2+strX,typeY+strY);
-    vertex(typeX/2,typeY+strY);
-    bezierVertex(0,typeY+strY,0,2*typeY/3+strY,0,2*typeY/3+strY);
-    endShape();
-  pop();
+function three () {
+	line(0,SA,  typeX,SA);
+  beginShape();
+		vertex(typeX-SA,0);
+  	vertex(typeX-SA,SA);
+    vertex(typeX/2-SA,1/3*typeY);
+    bezierVertex(24/28*typeX,1/3*typeY,  typeX-SA,13/28*typeY,  typeX-SA,17/28*typeY);
+  	vertex(typeX-SA,3/4*typeY);
+    bezierVertex(typeX-SA,24/28*typeY,  24/28*typeX,typeY-SA,  typeX/2,typeY-SA);
+    bezierVertex(4/28*typeX,typeY-SA,  SA,24/28*typeY,	SA,3/4*typeY);
+  endShape();
 }
 
-function four (strX,  strY) {
-  push();
+function four () {
 
-    beginShape();
+  beginShape();
     vertex(typeX/3,0);
-    vertex(0,2*typeY/3+strY);
-    vertex(typeX+strX,2*typeY/3+strY);
-    endShape();
-    line(2*typeX/3+strX,0,2*typeX/3+strX,typeY);
-  pop();
+    vertex(typeX/3,SA);
+    vertex(SA,2*typeY/3-SA);
+    vertex(SA,2*typeY/3);
+    vertex(typeX,2*typeY/3);
+  endShape();
+    line(2*typeX/3,0,  2*typeX/3,typeY);
 }
 
-function five (strX,  strY) {
-  push();
-
-    beginShape();
-    vertex(typeX+strX,0);
-    vertex(0,0);
-    vertex(0,typeY/3);
-    vertex(typeX/2+strX,typeY/3);
-    quadraticVertex(typeX+strX,typeY/3,typeX+strX,2*typeY/3);
-    vertex(typeX+strX,2*typeY/3+strY);
-    quadraticVertex(typeX+strX,typeY+strY,typeX/2+strX,typeY+strY);
-    bezierVertex(0,typeY+strY,0,2*typeY/3+strY,0,2*typeY/3+strY);
-    endShape();
-  pop();
+function five () {
+	line(0,SA,  typeX,SA);
+  line(SA,0,  SA,1/3*typeY);
+  beginShape();
+  	vertex(0,1/3*typeY);
+    vertex(1/2*typeX,1/3*typeY);
+    bezierVertex(24/28*typeX,1/3*typeY,  typeX-SA,13/28*typeY,  typeX-SA,17/28*typeY);
+  	vertex(typeX-SA,3/4*typeY);
+    bezierVertex(typeX-SA,24/28*typeY,  24/28*typeX,typeY-SA,  typeX/2,typeY-SA);
+    bezierVertex(4/28*typeX,typeY-SA,  SA,24/28*typeY,	SA,3/4*typeY);
+  endShape();
 }
 
-function six (strX,  strY) {
-  push();
-
-    beginShape();
-    vertex(typeX+strX,2*typeY/3+strY);
-    quadraticVertex(typeX+strX,typeY+strY,typeX/2+strX,typeY+strY);
-    vertex(typeX/2,typeY+strY);
-    bezierVertex(0,typeY+strY,0,2*typeY/3+strY,0,2*typeY/3+strY);
-    vertex(0,2*typeY/3);
-    quadraticVertex(0,typeY/3,typeX/2,typeY/3);
-    vertex(typeX/2+strX,typeY/3);
-    bezierVertex(typeX+strX,typeY/3,typeX+strX,2*typeY/3,typeX+strX,2*typeY/3);
-    vertex(typeX+strX,2*typeY/3+strY);
-    endShape();
-    
-    beginShape();
-    vertex(0,2*typeY/3);
-    quadraticVertex(0,0,2*typeX/3,0);
-    endShape();
-  pop();
-}
-
-function seven (strX,  strY) {
-  push();
-
-    beginShape();
-    vertex(0,0);
-    vertex(typeX+strX,0);
-    vertex(typeX/2+strX/2,typeY+strY);
-    endShape();
-  pop();
-}
-
-function eight (strX,  strY) {
-  push();
-
-    beginShape();
-    vertex(0,typeY/4);
-    quadraticVertex(0,0,typeX/2,0);
-    vertex(typeX/2+strX,0);
-    bezierVertex(typeX+strX,0,typeX+strX,typeY/4,typeX+strX,typeY/4);
-    vertex(typeX+strX,typeY/4+strY/2);
-    quadraticVertex(typeX+strX,typeY/2+strY/2,typeX/2+strX,typeY/2+strY/2);
-    vertex(typeX/2,typeY/2+strY/2);
-    bezierVertex(0,typeY/2+strY/2,0,typeY/4+strY/2,0,typeY/4+strY/2);
-    vertex(0,typeY/4);
-    endShape();
-    
-    translate(0,typeY/2+strY/2);//bottom hump
-    beginShape();
-    vertex(0,typeY/4);
-    quadraticVertex(0,0,typeX/2,0);
-    vertex(typeX/2+strX,0);
-    bezierVertex(typeX+strX,0,typeX+strX,typeY/4,typeX+strX,typeY/4);
-    vertex(typeX+strX,typeY/4+strY/2);
-    quadraticVertex(typeX+strX,typeY/2+strY/2,typeX/2+strX,typeY/2+strY/2);
-    vertex(typeX/2,typeY/2+strY/2);
-    bezierVertex(0,typeY/2+strY/2,0,typeY/4+strY/2,0,typeY/4+strY/2);
-    vertex(0,typeY/4);
-    endShape();
-    
-  pop();
-}
-
-function nine (strX,  strY) {
-  push();
-
-    beginShape();
-    vertex(0,typeY/3);
-    quadraticVertex(0,0,typeX/2,0);
-    vertex(typeX/2+strX,0);
-    bezierVertex(typeX+strX,0,typeX+strX,typeY/3,typeX+strX,typeY/3);
-    vertex(typeX+strX,typeY/3+strY);
-    quadraticVertex(typeX+strX,2*typeY/3+strY,typeX/2+strX,2*typeY/3+strY);
-    vertex(typeX/2,2*typeY/3+strY);
-    bezierVertex(0,2*typeY/3+strY,0,typeY/3+strY,0,typeY/3+strY);
-    vertex(0,typeY/3);
-    endShape();
-    
-    line(typeX+strX,typeY/3+strY,typeX+strX,typeY+strY);
-  pop();
-}
-
-function zero (strX,  strY) {
-  push();
-
-    beginShape();
-    vertex(typeX/2+strX,0);
-    quadraticVertex(typeX+strX,0,  typeX+strX,typeY/3);
-    vertex(typeX+strX,2*typeY/3+strY);
-    quadraticVertex(typeX+strX,typeY+strY,  typeX/2+strX,typeY+strY);
-    vertex(typeX/2,typeY+strY);
-    quadraticVertex(0,typeY+strY,  0,2*typeY/3+strY);
-    vertex(0,typeY/3);
-    quadraticVertex(0,0,  typeX/2,0);
-    vertex(typeX/2+strX,0);
-    endShape();
-    
-    line(2*typeX/3 + strX,typeY/3,typeX/3,2*typeY/3+strY);
-  pop();
-}
-
-function frameStroke (strX,  strY) {
+function six () {
+  beginShape();
+    vertex(1/2*typeX,SA);
+    quadraticVertex(SA,1/4*typeY,  SA,3/4*typeY);
+  endShape();
 	beginShape();
-		vertex(0,0);
-  	vertex(typeX+strX,0);
-  	vertex(typeX+strX,typeY+strY);
-  	vertex(0,typeY+strY);
-  	vertex(0,0);
-	endShape();
+    vertex(typeX/2,13/28*typeY);
+    bezierVertex(24/28*typeX,13/28*typeY,  typeX-SA,16/28*typeY,  typeX-SA,20/28*typeY);
+  	vertex(typeX-SA,3/4*typeY);
+    bezierVertex(typeX-SA,24/28*typeY,  24/28*typeX,typeY-SA,  typeX/2,typeY-SA);
+    bezierVertex(4/28*typeX,typeY-SA,  SA,24/28*typeY,	SA,3/4*typeY);
+    vertex(SA,20/28*typeY);
+    bezierVertex(SA,16/28*typeY,  4/28*typeX,13/28*typeY,  typeX/2,13/28*typeY);
+  endShape();
 }
 
-function frameFill (strX,  strY) {
-//	fill(strkColor);
-//  noStroke();
+function seven () {
+	line(0,SA,  typeX,SA);
   
+  beginShape();
+    vertex(typeX-SA,0);
+    vertex(typeX-SA,SA);
+  	vertex(typeX/2,typeY-SA);
+    vertex(typeX/2,typeY);
+  endShape();
+}
+
+function eight () {
+  beginShape();
+    vertex(typeX/2,SA);
+  	bezierVertex(23*typeX/28,SA,  27*typeX/28-SA,3*typeY/28, 27*typeX/28-SA,6*typeY/28);
+  	vertex(27*typeX/28-SA,typeY/4);
+  	bezierVertex(27*typeX/28-SA,10*typeY/28,  23*typeX/28,13*typeY/28,  typeX/2,13*typeY/28);
+  	bezierVertex(5*typeX/28,13*typeY/28,  typeX/28+SA,10*typeY/28,  typeX/28+SA,typeY/4);
+  	vertex(typeX/28+SA,6*typeY/28);
+  	bezierVertex(typeX/28+SA,3*typeY/28,  5*typeX/28,SA,  typeX/2,SA);
+  endShape();
 	beginShape();
-  	vertex(0,0);
-		quadraticVertex(typeX+strX,0,typeX+strX,typeY+strY);
-  	vertex(typeX+strX-typeStroke,typeY+strY);
-  	quadraticVertex(typeX+strX-typeStroke,typeStroke,0,typeStroke);
-  	vertex(0,typeStroke);
-  	vertex(0,0);
+    vertex(typeX/2,13/28*typeY);
+    bezierVertex(24/28*typeX,13/28*typeY,  typeX-SA,16/28*typeY,  typeX-SA,20/28*typeY);
+  	vertex(typeX-SA,3/4*typeY);
+    bezierVertex(typeX-SA,24/28*typeY,  24/28*typeX,typeY-SA,  typeX/2,typeY-SA);
+    bezierVertex(4/28*typeX,typeY-SA,  SA,24/28*typeY,	SA,3/4*typeY);
+    vertex(SA,20/28*typeY);
+    bezierVertex(SA,16/28*typeY,  4/28*typeX,13/28*typeY,  typeX/2,13/28*typeY);
+  endShape();
+    
+}
+
+function nine () {
+  push();
+  translate(typeX,typeY);
+  rotateZ(PI);
+  
+  beginShape();
+    vertex(1/2*typeX,SA);
+    quadraticVertex(SA,1/4*typeY,  SA,3/4*typeY);
+  endShape();
+	beginShape();
+    vertex(typeX/2,13/28*typeY);
+    bezierVertex(24/28*typeX,13/28*typeY,  typeX-SA,16/28*typeY,  typeX-SA,20/28*typeY);
+  	vertex(typeX-SA,3/4*typeY);
+    bezierVertex(typeX-SA,24/28*typeY,  24/28*typeX,typeY-SA,  typeX/2,typeY-SA);
+    bezierVertex(4/28*typeX,typeY-SA,  SA,24/28*typeY,	SA,3/4*typeY);
+    vertex(SA,20/28*typeY);
+    bezierVertex(SA,16/28*typeY,  4/28*typeX,13/28*typeY,  typeX/2,13/28*typeY);
   endShape();
   
-  noFill();
-  strokeWeight(typeStroke);
-	stroke(strkColor);
+  pop();
 }
 
-/*
-function frameFill (strX,  strY) {
-	fill(strkColor);
-  noStroke();
-  
-	rect(0,0,typeX+strX,typeStroke);
-  rect(0,0,typeStroke,typeY+strY);
-	rect(typeX+strX-typeStroke,0,typeStroke,typeY+strY);
-  rect(0,typeY+strY-typeStroke,typeX+strX,typeStroke);
-  
-  noFill();
-  strokeWeight(typeStroke);
-	stroke(strkColor);
+function zero () {
+  beginShape();
+    vertex(typeX-SA, typeY/3);
+    vertex(typeX-SA,2*typeY/3);
+		bezierVertex(typeX-SA,5*typeY/6,  5*typeX/6,typeY-SA,  typeX/2,typeY-SA);
+  	bezierVertex(typeX/6,typeY-SA,  SA,5*typeY/6,  SA,2*typeY/3);
+    vertex(SA,typeY/3);
+  	bezierVertex(SA,typeY/6,  typeX/6,SA,  typeX/2,SA);
+    bezierVertex(5*typeX/6,SA,  typeX-SA,typeY/6,  typeX-SA,typeY/3);
+  endShape();
+
+  line(2*typeX/3,typeY/3,typeX/3,2*typeY/3);
 }
-*/
