@@ -99,6 +99,22 @@ function keyboardEngine() {
       nine();
     } else if (c1 == '0') {
       zero();
+    } else if (c1 == '\"') {
+      double_quote();
+    } else if (c1 == '\'') {
+      single_quote();
+    } else if (c1 == '#') {
+      hash();
+    } else if (c1 == '$') {
+      cash();
+    } else if (c1 == '%') {
+      percentage();
+    } else if (c1 == '=') {
+      equal();
+    } else if (c1 == '+') {
+      plus();
+    } else if (c1 == '*') {
+      asterisk();
     } 
 //  }
 }
@@ -438,75 +454,6 @@ function letter_Z () {
   endShape();
 }
 
-function letter_underscore () {
-  line(0, typeY-SA, typeX, typeY-SA);
-}
-
-function letter_dash () {
-  line(0, typeY/2, typeX, typeY/2);
-}
-
-function letter_question () {
-  beginShape();
-  vertex(SA, typeY/3);
-  bezierVertex(SA,typeY/3,  SA,SA, typeX/2, SA);
-  vertex(typeX/2,SA);
-  bezierVertex(typeX-SA, SA, typeX-SA, typeY/3, typeX-SA, typeY/3);
-  vertex(typeX-SA, typeY/3);
-  bezierVertex(typeX-SA, typeY/3, typeX-SA, typeY/3+typeY/4, typeX/2, typeY/3+typeY/4);
-  vertex(typeX/2, 3*typeY/4);
-  endShape();
-
-  line(typeX/2, 7*typeY/8, typeX/2, typeY);
-}
-
-function letter_period () {
-  line(typeX/2, 7*typeY/8-SA, typeX/2, typeY);
-}
-
-function letter_colon () {
-  line(typeX/2, typeY/2-typeY/8-SA, typeX/2, typeY/2);
-  line(typeX/2, 7*typeY/8-SA, typeX/2, typeY);
-}
-
-function letter_semicolon () {
-  line(typeX/2, typeY/2-typeY/8-SA, typeX/2, typeY/2);
-  line(typeX/2, 7*typeY/8-SA, typeX/2 - typeX/4, typeY);
-}
-
-function letter_comma () {
-  line(typeX/2, 7*typeY/8-SA, typeX/2 - typeX/4, typeY);
-}
-
-function letter_exclaim () {
-  line(typeX/2, 0, typeX/2, 3*typeY/4);
-
-  line(typeX/2, 7*typeY/8-SA, typeX/2, typeY);
-}
-
-function letter_slash () {
-  line(0, typeY, typeX, 0);
-}
-
-function letter_amp () {
-    beginShape();
-      vertex(typeX,typeY);
-      quadraticVertex(typeX/8,typeY/4,  typeX/8,typeY/8);
-      quadraticVertex(typeX/8,0,  3*typeX/8,0);
-      vertex(3*typeX/8,0);
-      bezierVertex(5*typeX/8,0,  5*typeX/8,typeY/8,  5*typeX/8,typeY/8);
-      bezierVertex(5*typeX/8,0,  0,typeY/2,  0,3*typeY/4);
-      quadraticVertex(0,typeY,  typeX/2,typeY);
-      vertex(typeX/2,typeY);
-      bezierVertex(typeX,typeY,  typeX,typeY/2, typeX,typeY/2);
-      vertex(3*typeX/4,typeY/2);
-    endShape();
-}
-
-function letter_space () {
-
-}
-
 function one () {
     beginShape();
       vertex(0,typeY/4);
@@ -651,4 +598,216 @@ function zero () {
   endShape();
 
   line(2*typeX/3,typeY/3,typeX/3,2*typeY/3);
+}
+
+function letter_underscore () {
+  line(0, typeY-SA, typeX, typeY-SA);
+}
+
+function letter_dash () {
+  line(0, typeY/2, typeX, typeY/2);
+}
+
+function letter_question () {
+  beginShape();
+  vertex(SA, typeY/3);
+  bezierVertex(SA,typeY/3,  SA,SA, typeX/2, SA);
+  vertex(typeX/2,SA);
+  bezierVertex(typeX-SA, SA, typeX-SA, typeY/3, typeX-SA, typeY/3);
+  vertex(typeX-SA, typeY/3);
+  bezierVertex(typeX-SA, typeY/3, typeX-SA, typeY/3+typeY/4, typeX/2, typeY/3+typeY/4);
+  vertex(typeX/2, 3*typeY/4);
+  endShape();
+
+  line(typeX/2, 7*typeY/8, typeX/2, typeY);
+}
+
+function letter_period () {
+  line(typeX/2, 7*typeY/8-SA, typeX/2, typeY);
+}
+
+function letter_colon () {
+  line(typeX/2, typeY/2-typeY/8-SA, typeX/2, typeY/2);
+  line(typeX/2, 7*typeY/8-SA, typeX/2, typeY);
+}
+
+function letter_semicolon () {
+  line(typeX/2, typeY/2-typeY/8-SA, typeX/2, typeY/2);
+  line(typeX/2, 7*typeY/8-SA, typeX/2 - typeX/4, typeY);
+}
+
+function letter_comma () {
+  line(typeX/2, 7*typeY/8-SA, typeX/2 - typeX/4, typeY);
+}
+
+function letter_exclaim () {
+  line(typeX/2, 0, typeX/2, 3*typeY/4);
+
+  line(typeX/2, 7*typeY/8-SA, typeX/2, typeY);
+}
+
+function letter_slash () {
+  line(0, typeY, typeX, 0);
+}
+
+function double_quote () {
+  if(doubleQuoteSwitch == 1){
+  	beginShape();
+      vertex(typeX/3-SA/2,typeY/4);
+      vertex(typeX/3-SA/2,5*typeY/28);
+      vertex(typeX/3-SA/2,5*typeY/28+SA/2);
+      vertex(typeX/2-SA/2,SA);
+    endShape();
+    beginShape();
+      vertex(typeX/2+SA/2,typeY/4);
+      vertex(typeX/2+SA/2,5*typeY/28);
+      vertex(typeX/2+SA/2,5*typeY/28+SA/2);
+      vertex(typeX*2/3+SA/2,SA);
+    endShape();
+  } else if(doubleQuoteSwitch == -1){
+    beginShape();
+      vertex(typeX/3-SA/2,typeY/4);
+  	  vertex(typeX/2-SA/2,typeY*2/28-SA/2);
+      vertex(typeX/2-SA/2,typeY*2/28);
+    	vertex(typeX/2-SA/2,0);
+    endShape();
+    beginShape();
+      vertex(typeX/2+SA/2,typeY/4);
+  	  vertex(typeX*2/3+SA/2,typeY*2/28-SA/2);
+      vertex(typeX*2/3+SA/2,typeY*2/28);
+    	vertex(typeX*2/3+SA/2,0);
+    endShape();
+  }
+  doubleQuoteSwitch *= -1;
+}
+
+function single_quote () {
+  if(singleQuoteSwitch == 1){
+  	beginShape();
+      vertex(typeX*3/8-SA/2,typeY/4);
+      vertex(typeX*3/8-SA/2,5*typeY/28);
+      vertex(typeX*3/8-SA/2,5*typeY/28+SA/2);
+      vertex(typeX*5/8-SA/2,SA);
+    endShape();
+  } else if(singleQuoteSwitch == -1){
+    beginShape();
+      vertex(typeX*3/8-SA/2,typeY/4);
+  	  vertex(typeX*5/8-SA/2,typeY*2/28-SA/2);
+      vertex(typeX*5/8-SA/2,typeY*2/28);
+    	vertex(typeX*5/8-SA/2,0);
+    endShape();
+  }
+  singleQuoteSwitch *= -1;
+}
+
+function hash () {
+	beginShape();
+  	vertex(typeX/8,typeY);
+  	vertex(typeX/8,typeY-SA);
+  	vertex(typeX/8,typeY-SA/2);
+  	vertex(typeX/2,SA/2);
+  	vertex(typeX/2,SA);
+  	vertex(typeX/2,0);
+  endShape();
+  beginShape();
+  	vertex(typeX/2,typeY);
+  	vertex(typeX/2,typeY-SA);
+  	vertex(typeX/2,typeY-SA/2);
+  	vertex(typeX*7/8,SA/2);
+  	vertex(typeX*7/8,SA);
+  	vertex(typeX*7/8,0);
+  endShape();
+  
+  line(typeX*2/28,typeY/3,	typeX,typeY/3);
+  line(0,typeY*2/3,	26/28*typeX,typeY*2/3);
+}
+
+function cash() {
+  beginShape();
+    vertex(27*typeX/28-SA,typeY/4);
+  	vertex(27*typeX/28-SA,13*typeY/56);
+  	bezierVertex(27*typeX/28-SA,4*typeY/28,  7*typeX/8,SA,  typeX/2,SA);
+    bezierVertex(typeX/4,SA,  typeX/28+SA,2*typeY/28,  typeX/28+SA,11*typeY/56);
+    vertex(typeX/28+SA,6*typeY/28);
+  	bezierVertex(typeX/28+SA,17*typeY/56,  typeX/8,21*typeY/56,  typeX/3,12*typeY/28);
+  	vertex(20*typeX/28,29*typeY/56);
+  	bezierVertex(26*typeX/28,16*typeY/28,  typeX-SA,18*typeY/28,	typeX-SA,41*typeY/56);
+    vertex(typeX-SA,3*typeY/4);
+  	bezierVertex(typeX-SA,26*typeY/28,  22*typeX/28,typeY-SA,  typeX/2,typeY-SA);
+  	bezierVertex(typeX/4,typeY-SA,  SA,53*typeY/56,  SA,3*typeY/4);
+  	vertex(SA,41*typeY/56);
+  endShape();
+  
+  line(typeX/2,-typeY/16-SA,typeX/2,typeY*17/16+SA);
+}
+
+function letter_amp () {
+    beginShape();
+      vertex(typeX,typeY);
+      quadraticVertex(typeX/8,typeY/4,  typeX/8,typeY/8);
+      quadraticVertex(typeX/8,0,  3*typeX/8,0);
+      vertex(3*typeX/8,0);
+      bezierVertex(5*typeX/8,0,  5*typeX/8,typeY/8,  5*typeX/8,typeY/8);
+      bezierVertex(5*typeX/8,0,  0,typeY/2,  0,3*typeY/4);
+      quadraticVertex(0,typeY,  typeX/2,typeY);
+      vertex(typeX/2,typeY);
+      bezierVertex(typeX,typeY,  typeX,typeY/2, typeX,typeY/2);
+      vertex(3*typeX/4,typeY/2);
+    endShape();
+}
+
+function percentage() {
+  beginShape();
+  	vertex(SA,typeY);
+  	vertex(SA,typeY-SA);
+  	vertex(SA,typeY-SA/2);
+  	vertex(typeX-SA,SA/2);
+  	vertex(typeX-SA,SA);
+  	vertex(typeX-SA,0);
+  endShape();
+  
+  beginShape();
+		vertex(typeX/4,SA);
+  	bezierVertex(typeX*3/8,SA,	typeX/2-SA,typeY/12, 	typeX/2-SA,typeY/6);
+  	bezierVertex(typeX/2-SA,3/12*typeY,	typeX*3/8,typeY/3-SA,  typeX/4,typeY/3-SA);
+  	bezierVertex(typeX/8,typeY/3-SA,  SA,3/12*typeY,	SA,typeY/6);
+  	bezierVertex(SA,typeY/12,  typeX/8,SA,	typeX/4,SA);
+  endShape();
+  
+  push();
+	translate(typeX,typeY);
+	rotateZ(PI);
+    beginShape();
+      vertex(typeX/4,SA);
+      bezierVertex(typeX*3/8,SA,	typeX/2-SA,typeY/12, 	typeX/2-SA,typeY/6);
+      bezierVertex(typeX/2-SA,3/12*typeY,	typeX*3/8,typeY/3-SA,  typeX/4,typeY/3-SA);
+      bezierVertex(typeX/8,typeY/3-SA,  SA,3/12*typeY,	SA,typeY/6);
+      bezierVertex(SA,typeY/12,  typeX/8,SA,	typeX/4,SA);
+    endShape();
+	pop();
+}
+
+
+function equal() {
+	line(0,typeY*3/8,	typeX,typeY*3/8);
+  line(0,typeY*5/8,	typeX,typeY*5/8);
+}
+
+function plus() {
+	line(0,typeY/2,	typeX,typeY/2);
+  line(typeX/2,typeY/4,	typeX/2,typeY*3/4);
+}
+
+function asterisk() {
+	push();
+  translate(typeX/2,typeY/6);
+  for(var i=0; i<5; i++){
+  	rotateZ(2*PI/5);
+    line(0,0,0,typeY/6);
+  }
+  pop();
+}
+
+function letter_space () {
+
 }
