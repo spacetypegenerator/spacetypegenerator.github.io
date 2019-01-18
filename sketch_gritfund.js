@@ -41,6 +41,8 @@ var letter_select, inp, inpText;
 var myText = [];
 var runLength;
 var fullTextCheck, fullText;
+var doubleQuoteSwitch = 1;
+var singleQuoteSwitch = 1;
 
 // COLOR
 var radioBkgd;
@@ -75,8 +77,8 @@ function setup(){
   trackingSlider = createSlider(-10,100,5); trackingSlider.position(25,77); trackingSlider.style('width','100px');
   lineSpaceSlider = createSlider(-10,100,5); lineSpaceSlider.position(25,107); lineSpaceSlider.style('width','100px');
 
-  typeXSlider = createSlider(0,100,20); typeXSlider.position(25,147); typeXSlider.style('width','100px');
-	typeYSlider = createSlider(0,100,40); typeYSlider.position(25,177); typeYSlider.style('width','100px');
+  typeXSlider = createSlider(0,100,40); typeXSlider.position(25,147); typeXSlider.style('width','100px');
+	typeYSlider = createSlider(0,100,80); typeYSlider.position(25,177); typeYSlider.style('width','100px');
 	typeStrokeSlider = createSlider(0,10,2,0.1); typeStrokeSlider.position(25,207); typeStrokeSlider.style('width','100px');
   
   speedSlider = createSlider(-10,10,2); speedSlider.position(25,247); speedSlider.style('width','100px');    
@@ -193,6 +195,8 @@ function draw(){
 	xSpace = typeX + tracking;
 	ySpace = typeY + lineSpace;
   SA = typeStroke/2;
+  doubleQuoteSwitch =1;
+  singleQuoteSwitch =1;
   
   if(mouseX>145 && mouseX<220 && mouseY>18 && mouseY<45){
   } else {
@@ -302,7 +306,8 @@ function draw(){
   }
   
   // THE TYPE
-  for(var i=0;i<runLength;i++){
+  for(var i=0;i<runLength;i++){    
+
     if(fullText==true){
       letter_select = i%inpText.length;
     } else {
