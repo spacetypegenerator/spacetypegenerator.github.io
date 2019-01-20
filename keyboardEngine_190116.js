@@ -772,7 +772,7 @@ function letter_amp () {
   		vertex(typeX-SA,typeY-SA);
   		vertex(typeX-SA,typeY-SA/2);
       quadraticVertex(typeX/8+SA,typeY*11/28,  typeX/8+SA,typeY*6/28);
-      bezierVertex(typeX/8,typeY/8,  typeX/4,SA,  3*typeX/8,SA);
+      bezierVertex(typeX/8+SA,typeY/8,  typeX/4,SA,  3*typeX/8,SA);
       bezierVertex(5*typeX/8,SA,  typeX*2/3,typeY/8,  typeX*2/3,typeY*6/28);
       bezierVertex(typeX*2/3,typeY*11/28,	 SA,typeY/2,		SA,3*typeY/4);
       quadraticVertex(SA,typeY,  typeX/2,typeY-SA);
