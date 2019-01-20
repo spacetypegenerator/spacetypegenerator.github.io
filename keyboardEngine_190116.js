@@ -128,7 +128,10 @@ function letter_A () {
   	vertex(SA,typeY-SA);
   	vertex(SA,typeY-SA/2);
   
-  	vertex(typeX/2,0);
+  	vertex(typeX/2,SA);
+  	vertex(typeX/2-SA,SA);
+  	vertex(typeX/2+SA,SA);
+  	vertex(typeX/2,SA);
   	
     vertex(typeX-SA,typeY-SA/2);
     vertex(typeX-SA,typeY-SA);
@@ -268,8 +271,14 @@ function letter_M () {
   beginShape();
     vertex(0,SA);
     vertex(SA,SA);
-  	vertex(typeX/2,22*typeY/28);
-    vertex(typeX-SA,SA);
+
+  	vertex(typeX/2,22*typeY/28-SA);
+  	vertex(typeX/2-SA,22*typeY/28-SA);
+  	vertex(typeX/2+SA,22*typeY/28-SA);
+  	vertex(typeX/2,22*typeY/28-SA);
+    
+  
+  	vertex(typeX-SA,SA);
   	vertex(typeX,SA);
   endShape();
 }
@@ -325,8 +334,9 @@ function letter_Q () {
   endShape();
 
   beginShape();
-	  vertex(typeX/2,typeY/2);
-  	vertex(typeX-SA,typeY-SA);
+  	vertex(typeX/2,15*typeY/28);
+  	vertex(typeX-SA,typeY-SA/2);
+	  vertex(typeX-SA,typeY-SA);
   	vertex(typeX-SA,typeY);
   endShape();
 }
@@ -388,8 +398,13 @@ function letter_V () {
     vertex(SA,0);
     vertex(SA,SA);
     vertex(SA,SA/2)
-    vertex(typeX/2,typeY);
-    vertex(typeX-SA,SA/2);
+  
+    vertex(typeX/2,typeY-SA);
+  	vertex(typeX/2-SA,typeY-SA);
+  	vertex(typeX/2+SA,typeY-SA);
+  	vertex(typeX/2,typeY-SA);
+  
+  	vertex(typeX-SA,SA/2);
   	vertex(typeX-SA,SA);
     vertex(typeX-SA,0);
   endShape();
@@ -400,10 +415,23 @@ function letter_W () {
     vertex(SA,0);
     vertex(SA,SA);
     vertex(SA,SA/2)
-    vertex(typeX/4,typeY);
+  
+    vertex(typeX/4,typeY-SA);
+    vertex(typeX/4-SA,typeY-SA);  
+    vertex(typeX/4+SA,typeY-SA);  
+    vertex(typeX/4,typeY-SA);
+  
   	vertex(typeX/2,8*typeY/28);
-    vertex(3*typeX/4,typeY);
-    vertex(typeX-SA,SA/2);
+  	vertex(typeX/2-SA,8*typeY/28);
+  	vertex(typeX/2+SA,8*typeY/28);
+  	vertex(typeX/2,8*typeY/28);
+  
+  	vertex(3*typeX/4,typeY-SA);
+  	vertex(3*typeX/4-SA,typeY-SA);
+  	vertex(3*typeX/4+SA,typeY-SA);
+  	vertex(3*typeX/4,typeY-SA);
+    
+  	vertex(typeX-SA,SA/2);
   	vertex(typeX-SA,SA);
   	vertex(typeX-SA,0);
   endShape();
@@ -455,15 +483,14 @@ function letter_Z () {
 }
 
 function one () {
-    beginShape();
-      vertex(0,typeY/4);
-	  	vertex(0,typeY/4+SA);
-      vertex(typeX/2-SA/2,0);
-      vertex(typeX/2+SA/2,0);
-  		vertex(typeX/2+SA/2,typeY);
-    endShape();
-    
-    line(0,typeY-SA,typeX,typeY-SA);
+	beginShape();
+//  	vertex(typeX/8,6/28*typeY+SA);
+  	vertex(typeX/8,6/28*typeY);
+  	vertex(typeX/2-SA/4,SA);
+  endShape();
+  
+  line(typeX/2,0,  typeX/2,typeY);
+  line(0,typeY-SA,typeX,typeY-SA);
 }
 
 function two () {
@@ -482,8 +509,9 @@ function three () {
   beginShape();
 		vertex(typeX-SA,0);
   	vertex(typeX-SA,SA);
-    vertex(typeX/2-SA,1/3*typeY);
-    bezierVertex(24/28*typeX,1/3*typeY,  typeX-SA,13/28*typeY,  typeX-SA,17/28*typeY);
+    vertex(typeX*12/28+SA,typeY*10/28);
+    vertex(typeX*12/28,typeY*10/28);
+    bezierVertex(24/28*typeX,typeY*10/28,  typeX-SA,15/28*typeY,  typeX-SA,19/28*typeY);
   	vertex(typeX-SA,3/4*typeY);
     bezierVertex(typeX-SA,24/28*typeY,  24/28*typeX,typeY-SA,  typeX/2,typeY-SA);
     bezierVertex(4/28*typeX,typeY-SA,  SA,24/28*typeY,	SA,3/4*typeY);
@@ -491,24 +519,24 @@ function three () {
 }
 
 function four () {
-
   beginShape();
     vertex(typeX/3,0);
     vertex(typeX/3,SA);
+    vertex(typeX/3,SA/2);
+  	vertex(SA,2*typeY/3);
     vertex(SA,2*typeY/3-SA);
-    vertex(SA,2*typeY/3);
-    vertex(typeX,2*typeY/3);
+    vertex(typeX,2*typeY/3-SA);
   endShape();
-    line(2*typeX/3,0,  2*typeX/3,typeY);
+    line(20/28*typeX,0,  20/28*typeX,typeY);
 }
 
 function five () {
-	line(0,SA,  typeX,SA);
-  line(SA,0,  SA,1/3*typeY);
-  beginShape();
-  	vertex(0,1/3*typeY);
-    vertex(1/2*typeX,1/3*typeY);
-    bezierVertex(24/28*typeX,1/3*typeY,  typeX-SA,13/28*typeY,  typeX-SA,17/28*typeY);
+	line(typeX/8+SA,SA,  typeX*7/8,SA);
+  line(typeX/8+SA,0,  typeX/8+SA,11/28*typeY);
+	beginShape();
+  	vertex(typeX/8,11/28*typeY);
+    vertex(typeX/2,11/28*typeY);
+    bezierVertex(24/28*typeX,11/28*typeY,  typeX-SA,15/28*typeY,  typeX-SA,19/28*typeY);
   	vertex(typeX-SA,3/4*typeY);
     bezierVertex(typeX-SA,24/28*typeY,  24/28*typeX,typeY-SA,  typeX/2,typeY-SA);
     bezierVertex(4/28*typeX,typeY-SA,  SA,24/28*typeY,	SA,3/4*typeY);
@@ -521,13 +549,13 @@ function six () {
     quadraticVertex(SA,1/4*typeY,  SA,3/4*typeY);
   endShape();
 	beginShape();
-    vertex(typeX/2,13/28*typeY);
-    bezierVertex(24/28*typeX,13/28*typeY,  typeX-SA,16/28*typeY,  typeX-SA,20/28*typeY);
+    vertex(typeX/2,12/28*typeY);
+    bezierVertex(24/28*typeX,12/28*typeY,  typeX-SA,16/28*typeY,  typeX-SA,20/28*typeY);
   	vertex(typeX-SA,3/4*typeY);
     bezierVertex(typeX-SA,24/28*typeY,  24/28*typeX,typeY-SA,  typeX/2,typeY-SA);
     bezierVertex(4/28*typeX,typeY-SA,  SA,24/28*typeY,	SA,3/4*typeY);
     vertex(SA,20/28*typeY);
-    bezierVertex(SA,16/28*typeY,  4/28*typeX,13/28*typeY,  typeX/2,13/28*typeY);
+    bezierVertex(SA,16/28*typeY,  4/28*typeX,12/28*typeY,  typeX/2,12/28*typeY);
   endShape();
 }
 
@@ -574,13 +602,13 @@ function nine () {
     quadraticVertex(SA,1/4*typeY,  SA,3/4*typeY);
   endShape();
 	beginShape();
-    vertex(typeX/2,13/28*typeY);
-    bezierVertex(24/28*typeX,13/28*typeY,  typeX-SA,16/28*typeY,  typeX-SA,20/28*typeY);
+    vertex(typeX/2,12/28*typeY);
+    bezierVertex(24/28*typeX,12/28*typeY,  typeX-SA,16/28*typeY,  typeX-SA,20/28*typeY);
   	vertex(typeX-SA,3/4*typeY);
     bezierVertex(typeX-SA,24/28*typeY,  24/28*typeX,typeY-SA,  typeX/2,typeY-SA);
     bezierVertex(4/28*typeX,typeY-SA,  SA,24/28*typeY,	SA,3/4*typeY);
     vertex(SA,20/28*typeY);
-    bezierVertex(SA,16/28*typeY,  4/28*typeX,13/28*typeY,  typeX/2,13/28*typeY);
+    bezierVertex(SA,16/28*typeY,  4/28*typeX,12/28*typeY,  typeX/2,12/28*typeY);
   endShape();
   
   pop();
@@ -610,16 +638,13 @@ function letter_dash () {
 
 function letter_question () {
   beginShape();
-  vertex(SA, typeY/3);
-  bezierVertex(SA,typeY/3,  SA,SA, typeX/2, SA);
-  vertex(typeX/2,SA);
-  bezierVertex(typeX-SA, SA, typeX-SA, typeY/3, typeX-SA, typeY/3);
-  vertex(typeX-SA, typeY/3);
-  bezierVertex(typeX-SA, typeY/3, typeX-SA, typeY/3+typeY/4, typeX/2, typeY/3+typeY/4);
-  vertex(typeX/2, 3*typeY/4);
+    vertex(SA,typeY/4);
+		bezierVertex(SA,typeY/8,	typeX/6,SA,  typeX/2,SA);
+  	bezierVertex(5*typeX/6,SA,  typeX-SA,typeY/8,  typeX-SA,typeY/4);
+		bezierVertex(typeX-SA,typeY/2,	typeX/2, 12/28*typeY,	typeX/2,3/4*typeY);
   endShape();
 
-  line(typeX/2, 7*typeY/8, typeX/2, typeY);
+  line(typeX/2, 7*typeY/8-SA, typeX/2, typeY);
 }
 
 function letter_period () {
@@ -743,17 +768,19 @@ function cash() {
 
 function letter_amp () {
     beginShape();
-      vertex(typeX,typeY);
-      quadraticVertex(typeX/8,typeY/4,  typeX/8,typeY/8);
-      quadraticVertex(typeX/8,0,  3*typeX/8,0);
-      vertex(3*typeX/8,0);
-      bezierVertex(5*typeX/8,0,  5*typeX/8,typeY/8,  5*typeX/8,typeY/8);
-      bezierVertex(5*typeX/8,0,  0,typeY/2,  0,3*typeY/4);
-      quadraticVertex(0,typeY,  typeX/2,typeY);
-      vertex(typeX/2,typeY);
-      bezierVertex(typeX,typeY,  typeX,typeY/2, typeX,typeY/2);
-      vertex(3*typeX/4,typeY/2);
+      vertex(typeX-SA,typeY);
+  		vertex(typeX-SA,typeY-SA);
+  		vertex(typeX-SA,typeY-SA/2);
+      quadraticVertex(typeX/8+SA,typeY*11/28,  typeX/8+SA,typeY*6/28);
+      bezierVertex(typeX/8,typeY/8,  typeX/4,SA,  3*typeX/8,SA);
+      bezierVertex(5*typeX/8,SA,  typeX*2/3,typeY/8,  typeX*2/3,typeY*6/28);
+      bezierVertex(typeX*2/3,typeY*11/28,	 SA,typeY/2,		SA,3*typeY/4);
+      quadraticVertex(SA,typeY,  typeX/2,typeY-SA);
+      vertex(typeX/2,typeY-SA);
+      quadraticVertex(typeX-SA,typeY-SA,  typeX-SA,typeY/2);
     endShape();
+  
+  line(typeX,typeY/2,	typeX*3/4,typeY/2);
 }
 
 function percentage() {
