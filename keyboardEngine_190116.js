@@ -527,14 +527,14 @@ function four () {
     vertex(SA,2*typeY/3-SA);
     vertex(typeX,2*typeY/3-SA);
   endShape();
-    line(20/28*typeX,0,  20/28*typeX,typeY);
+    line(21/28*typeX,0,  21/28*typeX,typeY);
 }
 
 function five () {
-	line(typeX/8+SA,SA,  typeX*7/8,SA);
-  line(typeX/8+SA,0,  typeX/8+SA,11/28*typeY);
+	line(typeX*2/28+SA,SA,  typeX*7/8,SA);
+  line(typeX*2/28+SA,0,  typeX*2/28+SA,11/28*typeY);
 	beginShape();
-  	vertex(typeX/8,11/28*typeY);
+  	vertex(typeX*2/28,11/28*typeY);
     vertex(typeX/2,11/28*typeY);
     bezierVertex(24/28*typeX,11/28*typeY,  typeX-SA,15/28*typeY,  typeX-SA,19/28*typeY);
   	vertex(typeX-SA,3/4*typeY);
@@ -772,8 +772,8 @@ function letter_amp () {
   		vertex(typeX-SA,typeY-SA);
   		vertex(typeX-SA,typeY-SA/2);
       quadraticVertex(typeX/8+SA,typeY*11/28,  typeX/8+SA,typeY*6/28);
-      bezierVertex(typeX/8+SA,typeY/8,  typeX/4,SA,  3*typeX/8,SA);
-      bezierVertex(5*typeX/8,SA,  typeX*2/3,typeY/8,  typeX*2/3,typeY*6/28);
+      bezierVertex(typeX/8+SA,typeY/8,  typeX/4,SA,  12/28*typeX,SA);
+      bezierVertex(5*typeX/8,SA,  typeX*2/3,typeY/8,  typeX*2/3,typeY*5/28);
       bezierVertex(typeX*2/3,typeY*11/28,	 SA,typeY/2,		SA,3*typeY/4);
       quadraticVertex(SA,typeY,  typeX/2,typeY-SA);
       vertex(typeX/2,typeY-SA);
