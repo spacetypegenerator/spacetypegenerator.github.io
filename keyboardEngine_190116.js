@@ -836,6 +836,29 @@ function asterisk() {
   pop();
 }
 
+
+function at() {
+  push();
+  translate(0,4/28*typeY);
+  beginShape();
+		vertex(typeX/2,typeY-SA);
+  	bezierVertex(typeX/6,typeY-SA,  SA,5*typeY/6,  SA,2*typeY/3);
+    vertex(SA,typeY/3);
+  	bezierVertex(SA,typeY/6,  typeX/6,SA,  typeX/2,SA);
+    bezierVertex(5*typeX/6,SA,  typeX-SA,typeY/6,  typeX-SA,typeY/3);
+ 	  vertex(typeX-SA, typeY/3);
+    vertex(typeX-SA,23*typeY/28);
+  endShape();
+  beginShape();
+	  vertex(17/28*typeX,9/28*typeY);
+    bezierVertex(23/28*typeX,9/28*typeY,  typeX-SA,12/28*typeY,	typeX-SA,16/28*typeY);
+  	bezierVertex(typeX-SA,20/28*typeY,  23/28*typeX,23/28*typeY,  17/28*typeX,23/28*typeY);
+  	bezierVertex(11/28*typeX,23/28*typeY,  6/28*typeX,20/28*typeY,	6/28*typeX,16/28*typeY);
+  	bezierVertex(6/28*typeX,12/28*typeY,  11/28*typeX,9/28*typeY,		17/28*typeX,9/28*typeY);
+  endShape();
+  pop();
+}
+/*
 function at() {
   beginShape();
 		vertex(typeX/2,typeY-SA);
@@ -858,7 +881,7 @@ function at() {
   	bezierVertex(typeX/4,13/28*typeY,  10/28*typeX,11/28*typeY,  typeX/2,11/28*typeY);
   endShape();
 }
-
+*/
 function letter_space () {
 }
 
