@@ -143,7 +143,7 @@ function letter_A () {
    ang = atan((typeX/2)/(typeY));
    angX = tan(ang)*(typeY/3);
 
-  line(angX-SA/2, 22*typeY/28, typeX-angX+SA/2, 22*typeY/28);
+  line(angX-SA/2, 21*typeY/28, typeX-angX+SA/2, 21*typeY/28);
   pop();
 }
 
@@ -838,25 +838,22 @@ function asterisk() {
 
 
 function at() {
-  push();
-  translate(0,4/28*typeY);
   beginShape();
-		vertex(typeX/2,typeY-SA);
+		vertex(17/28*typeX,typeY-SA);
+  	vertex(typeX/2,typeY-SA);
   	bezierVertex(typeX/6,typeY-SA,  SA,5*typeY/6,  SA,2*typeY/3);
-    vertex(SA,typeY/3);
-  	bezierVertex(SA,typeY/6,  typeX/6,SA,  typeX/2,SA);
-    bezierVertex(5*typeX/6,SA,  typeX-SA,typeY/6,  typeX-SA,typeY/3);
- 	  vertex(typeX-SA, typeY/3);
-    vertex(typeX-SA,23*typeY/28);
+    vertex(SA,12/28*typeY);
+  	bezierVertex(SA,typeY/4,  typeX/6,2/28*typeY+SA,  typeX/2,2/28*typeY+SA);
+    bezierVertex(5*typeX/6,2/28*typeY+SA,  typeX-SA,typeY/4,  typeX-SA,12/28*typeY);
+    vertex(typeX-SA,23/28*typeY);
   endShape();
   beginShape();
-	  vertex(17/28*typeX,9/28*typeY);
-    bezierVertex(23/28*typeX,9/28*typeY,  typeX-SA,12/28*typeY,	typeX-SA,16/28*typeY);
-  	bezierVertex(typeX-SA,20/28*typeY,  23/28*typeX,23/28*typeY,  17/28*typeX,23/28*typeY);
-  	bezierVertex(11/28*typeX,23/28*typeY,  6/28*typeX,20/28*typeY,	6/28*typeX,16/28*typeY);
-  	bezierVertex(6/28*typeX,12/28*typeY,  11/28*typeX,9/28*typeY,		17/28*typeX,9/28*typeY);
+		vertex(typeX-SA,17/28*typeY);
+  	bezierVertex(typeX-SA,21/28*typeY,  3/4*typeX,24/28*typeY,	16/28*typeX,24/28*typeY);
+  	bezierVertex(11/28*typeX,24/28*typeY,  8/28*typeX,3/4*typeY,  8/28*typeX,17/28*typeY);
+  	bezierVertex(8/28*typeX,13/28*typeY,  11/28*typeX,10/28*typeY,  16/28*typeX,10/28*typeY);
+  	bezierVertex(3/4*typeX,10/28*typeY,  typeX-SA,13/28*typeY,  typeX-SA,17/28*typeY);
   endShape();
-  pop();
 }
 /*
 function at() {
