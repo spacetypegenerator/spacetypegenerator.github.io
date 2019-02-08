@@ -74,7 +74,7 @@ function setup(){
   
   inp = select("#textfield");
   
-  columnSlider = createSlider(1,200,33); columnSlider.position(25,17); columnSlider.style('width','100px');
+  columnSlider = createSlider(1,200,11); columnSlider.position(25,17); columnSlider.style('width','100px');
   rowSlider = createSlider(1,200,7); rowSlider.position(25,47); rowSlider.style('width','100px');
   trackingSlider = createSlider(-10,100,5); trackingSlider.position(25,77); trackingSlider.style('width','100px');
   lineSpaceSlider = createSlider(-10,100,5); lineSpaceSlider.position(25,107); lineSpaceSlider.style('width','100px');
