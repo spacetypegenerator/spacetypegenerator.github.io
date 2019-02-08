@@ -1,24 +1,24 @@
 // LETTER
-var typeX, typeXSlider;
-var typeY, typeYSlider;
+var typeX = 20;
+var typeY = 40;
 var typeStroke, typeStrokeSlider;
 var strecherXslider, strecherXsize;
 var strecherX = 0;
 var strecherYslider, strecherYsize;
 var strecherY = 0;
+var SA;
 
 // FIELD
-var column, columnSlider;
+var column;
 var row, rowSlider;
 var tracking, trackSlider;
 var lineSpace, lineSpaceSlider;
 var xSpace, ySpace;
-var SA;
 
 // WAVE
 var speed, speedSlider;
-var xOffset, xOffsetSlider;
-var yOffset, yOffsetSlider;
+var xOffset = 3.14;
+var yOffset = 3.14;
 var zWave, zWaveSlider, zWaveCheck;
 var zWaver = 0;
 var zWaveChecked = 0;
@@ -28,8 +28,10 @@ var xWaveChecked = 0;
 var yWave, yWaveSlider, yWaveCheck;
 var yWaver = 0;
 var yWaveChecked = 0;
-var yWavezRot, yWavezRotSlider;
+var yWavezRot = 0;
 var yWavezRoter = 0;
+var yWavexStr, yWavexStrSlider;
+var yWavexStrer = 0;
 
 // CAMERA
 var xRotCamera, yRotCamera, zRotCamera;
@@ -41,12 +43,11 @@ var letter_select, inp, inpText;
 var myText = [];
 var runLength;
 var fullTextCheck, fullText;
-var doubleQuoteSwitch = 1;
-var singleQuoteSwitch = 1;
 
 // COLOR
 var radioBkgd;
 var radioStroke;
+var invertCheck = false;
 
 var strkColor = 0;
 var bkgdColor = 255;
@@ -55,7 +56,8 @@ var bkgdColor = 255;
 var exportButton;
 
 // PRESETS
-var presetStacks, presetBricks, presetSimpleZ, presetComplexZ, presetZebra, presetHarlequin;
+var presetWobbly, presetDriftin, presetSkyDancer, presetFlag1, presetFlag2, presetLava;
+var presetWeavin, presetPopNLock, presetShuffle, presetRollin, presetWiggle, presetGritFund;
 
 function preload() {
  font = loadFont('assets/IBMPlexMono-Regular.otf');
@@ -77,23 +79,17 @@ function setup(){
   trackingSlider = createSlider(-10,100,5); trackingSlider.position(25,77); trackingSlider.style('width','100px');
   lineSpaceSlider = createSlider(-10,100,5); lineSpaceSlider.position(25,107); lineSpaceSlider.style('width','100px');
 
-  typeXSlider = createSlider(0,100,20); typeXSlider.position(25,147); typeXSlider.style('width','100px');
-	typeYSlider = createSlider(0,100,40); typeYSlider.position(25,177); typeYSlider.style('width','100px');
-	typeStrokeSlider = createSlider(0,10,2,0.1); typeStrokeSlider.position(25,207); typeStrokeSlider.style('width','100px');
+  typeStrokeSlider = createSlider(1,5,2,0.5); typeStrokeSlider.position(25,147); typeStrokeSlider.style('width','100px');
   
-  speedSlider = createSlider(-10,10,2); speedSlider.position(25,247); speedSlider.style('width','100px');    
-  xOffsetSlider = createSlider(0.1,60,PI); xOffsetSlider.position(25,277); xOffsetSlider.style('width','100px');
-  yOffsetSlider = createSlider(0.1,60,PI); yOffsetSlider.position(25,307); yOffsetSlider.style('width','100px');
-  
-  zWaveSlider = createSlider(0,200,0); zWaveSlider.position(25,347); zWaveSlider.style('width','100px');
-  zWaveCheck = createCheckbox('',false); zWaveCheck.position(130,346);
-  xWaveSlider = createSlider(0,200,0); xWaveSlider.position(25,377); xWaveSlider.style('width','100px');
-  xWaveCheck = createCheckbox('',false); xWaveCheck.position(130,376);
-  yWaveSlider = createSlider(0,200,0); yWaveSlider.position(25,407); yWaveSlider.style('width','100px');
-  yWaveCheck = createCheckbox('',false); yWaveCheck.position(130,406);
-  	yWavezRotSlider = createSlider(0,60,0); yWavezRotSlider.position(45,436); yWavezRotSlider.style('width','50px');  
-  
-  invertCheck = createCheckbox('',false); invertCheck.position(140,60);
+  speedSlider = createSlider(-2,2,2); speedSlider.position(25,187); speedSlider.style('width','100px');    
+
+  zWaveSlider = createSlider(0,200,0); zWaveSlider.position(25,227); zWaveSlider.style('width','100px');
+  zWaveCheck = createCheckbox('',false); zWaveCheck.position(130,226);
+  xWaveSlider = createSlider(0,200,0); xWaveSlider.position(25,257); xWaveSlider.style('width','100px');
+  xWaveCheck = createCheckbox('',false); xWaveCheck.position(130,256);
+  yWaveSlider = createSlider(0,200,0); yWaveSlider.position(25,287); yWaveSlider.style('width','100px');
+  yWaveCheck = createCheckbox('',false); yWaveCheck.position(130,286);
+
   fullTextCheck = createCheckbox('',true); fullTextCheck.position(140,90);
   fullText = true;
   xRotCameraSlider = createSlider(-180,180,0); xRotCameraSlider.position(-20,height-107); xRotCameraSlider.style('width','100px'); xRotCameraSlider.style('rotate',270);
@@ -102,13 +98,19 @@ function setup(){
 	zoomCameraSlider = createSlider(-500,500,0); zoomCameraSlider.position(15,height-20); zoomCameraSlider.style('width','100px');
 
   exportButton = createButton('Export PNG'); exportButton.position(140,20); exportButton.mousePressed(exportPNG);
-  presetStacks = createButton('Stacks'); presetStacks.position(140,height-30); presetStacks.mousePressed(stackSet);
-  presetBricks = createButton('Bricks'); presetBricks.position(200,height-30); presetBricks.mousePressed(brickSet);
-  presetSimpleZ = createButton('Simple Z'); presetSimpleZ.position(260,height-30); presetSimpleZ.mousePressed(simpleZSet);
-  presetComplexZ = createButton('Complex Z'); presetComplexZ.position(335,height-30); presetComplexZ.mousePressed(complexZSet);
-  presetZebra = createButton('Zebra'); presetZebra.position(420,height-30); presetZebra.mousePressed(zebraSet);
-  presetHarlequin = createButton('Harlequin'); presetHarlequin.position(480,height-30); presetHarlequin.mousePressed(harlequinSet);
-	
+  presetWobbly = createButton('Wobbly'); presetWobbly.position(140,height-50); presetWobbly.mousePressed(wobblySet);
+  presetDriftin = createButton('Driftin\''); presetDriftin.position(200,height-50); presetDriftin.mousePressed(driftinSet);
+  presetSkyDancer = createButton('Sky Dancer'); presetSkyDancer.position(260,height-50); presetSkyDancer.mousePressed(skydancerSet);
+  presetFlag1 = createButton('Flag1'); presetFlag1.position(345,height-50); presetFlag1.mousePressed(flag1Set);
+  presetFlag2 = createButton('Flag2'); presetFlag2.position(395,height-50); presetFlag2.mousePressed(flag2Set);
+  presetLava = createButton('Lava'); presetLava.position(445,height-50); presetLava.mousePressed(lavaSet);
+  presetWeavin = createButton('Weavin\''); presetWeavin.position(140,height-30); presetWeavin.mousePressed(weavinSet);
+  presetPopNLock = createButton('Pop n\' Lock'); presetPopNLock.position(200,height-30); presetPopNLock.mousePressed(popnlockSet);
+  presetShuffle = createButton('Shuffle'); presetShuffle.position(280,height-30); presetShuffle.mousePressed(shuffleSet);
+  presetRollin = createButton('Rollin\''); presetRollin.position(340,height-30); presetRollin.mousePressed(rollinSet);
+  presetWiggle = createButton('Wiggle'); presetWiggle.position(395,height-30); presetWiggle.mousePressed(wiggleSet);
+  presetGritFund = createButton('Grit Fund'); presetGritFund.position(455,height-30); presetGritFund.mousePressed(gritfundSet);  
+  
   radioBkgd = createRadio();
   radioBkgd.position(660,height-60);
   radioBkgd.option(' ', 1);
@@ -117,6 +119,7 @@ function setup(){
   radioBkgd.option(' ', 4);
   radioBkgd.option(' ', 5);
   radioBkgd.option(' ', 6);
+  radioBkgd.option(' ', 7);
   radioBkgd.value('1').checked = true;
   
   radioStroke = createRadio();
@@ -127,48 +130,55 @@ function setup(){
   radioStroke.option(' ', 4);
   radioStroke.option(' ', 5);
   radioStroke.option(' ', 6);
+  radioStroke.option(' ', 7);
   radioStroke.value('3').checked = true;
   
 	zWaveCheck.changed(zWaveChecker);
 	xWaveCheck.changed(xWaveChecker);
 	yWaveCheck.changed(yWaveChecker);
   fullTextCheck.changed(fullTexter);
-  invertCheck.changed(inverter);
+//    inpText = String(inp.value());  
+  columnSlider.value(String(inp.value()).length);
 }
 
 function draw(){
   if(radioBkgd.value() == 1){
     bkgdColor = color(255);
   } else if(radioBkgd.value() == 2){
-    bkgdColor = color('#787eff');
+    bkgdColor = color('#797fff'); // indigo
   } else if(radioBkgd.value() == 3){
-    bkgdColor = color('#eb008b');
+    bkgdColor = color('#ec238c'); // magenta
   } else if(radioBkgd.value() == 4){
-    bkgdColor = color('#fbaf3f');
+    bkgdColor = color('#fbb040'); // orange
   } else if(radioBkgd.value() == 5){
-    bkgdColor = color('#ff6427');
+    bkgdColor = color('#ff6528'); // red
   } else if(radioBkgd.value() == 6){
-    bkgdColor = color('#d67aff');
+    bkgdColor = color('#d77bff'); // purple
+  } else if(radioBkgd.value() == 7){
+    bkgdColor = color('#30dbee'); // cyan
   }
   
   if(radioStroke.value() == 1){
     strkColor = color(255);
   } else if(radioStroke.value() == 2){
-    strkColor = color('#787eff');
+    strkColor = color('#797fff');
   } else if(radioStroke.value() == 3){
-    strkColor = color('#eb008b');
+    strkColor = color('#ec238c');
   } else if(radioStroke.value() == 4){
-    strkColor = color('#fbaf3f');
+    strkColor = color('#fbb040');
   } else if(radioStroke.value() == 5){
-    strkColor = color('#ff6427');
+    strkColor = color('#ff6528');
   } else if(radioStroke.value() == 6){
-    strkColor = color('#d67aff');
+    strkColor = color('#d77bff');
+  } else if(radioStroke.value() == 7){
+    strkColor = color('#30dbee');
   }
-  
+
   background(bkgdColor);
   letter_select = 0;
   inpText = String(inp.value());  
 
+  if(keyIsPressed) {  columnSlider.value(inpText.length); }
   column = columnSlider.value(); 
   row = rowSlider.value();
   tracking = trackingSlider.value();
@@ -178,13 +188,7 @@ function draw(){
   zWave = zWaveSlider.value();
   xWave = xWaveSlider.value();
   yWave = yWaveSlider.value();
-  yWavezRot = yWavezRotSlider.value();
   
-  xOffset = xOffsetSlider.value();
-  yOffset = yOffsetSlider.value();
-  
-  typeX = typeXSlider.value();
-  typeY = typeYSlider.value();
   typeStroke = typeStrokeSlider.value();
   
   xRotCamera = xRotCameraSlider.value();
@@ -192,11 +196,10 @@ function draw(){
   zRotCamera = zRotCameraSlider.value();
   zoomCamera = zoomCameraSlider.value();
   
+  SA = typeStroke/2;
+  
 	xSpace = typeX + tracking;
 	ySpace = typeY + lineSpace;
-  SA = typeStroke/2;
-  doubleQuoteSwitch =1;
-  singleQuoteSwitch =1;
   
   if(mouseX>145 && mouseX<220 && mouseY>18 && mouseY<45){
   } else {
@@ -206,10 +209,10 @@ function draw(){
     stroke(strkColor);
     strokeWeight(1);
     line(10,130,130,130);
-    line(10,230,130,230);  	
-    line(10,330,130,330);  	
-    line(10,520,130,520);  
-    line(185,height-43,500,height-43); 
+    line(10,170,130,170);  	
+    line(10,210,130,210);  	
+    line(10,315,130,315);  
+    line(185,height-63,500,height-63); 
     
     fill(strkColor);
     textAlign(LEFT);
@@ -217,9 +220,9 @@ function draw(){
     textSize(13);
     rotateZ(-PI/2);
     text("GRID",-120,17);
-    text("TYPE",-220,17);
-    text("WAVE",-320,17);
-    text("AMPLITUDE",-510,17);
+//    text("TYPE",-170,17);
+//    text("WAVE",-320,17);
+    text("AMPLITUDE",-305,17);
     rotateZ(PI/2);
 
     textSize(9);    
@@ -228,26 +231,20 @@ function draw(){
     text("GRID: Tracking " + tracking,25,76);
     text("GRID: Line Space " + lineSpace,25,106);
 
-    text("TYPE: X-Scale " + typeX,25,146);
-    text("TYPE: Y-Scale " + typeY,25,176);
-    text("TYPE: Weight " + typeStroke,25,206);
+    text("TYPE: Weight " + typeStroke,25,146);
 
-    text("WAVE: Speed " + speed,25,246);  
-    text("WAVE: X Size" + xOffset,25,276);
-    text("WAVE: Y Size " + yOffset,25,306);
+    text("WAVE: Speed " + speed,25,186);  
 
-    text("AMPLITUDE: Z Axis " + zWave,25,346);
-    text("OFFSET",150,360);  
-    text("AMPLITUDE: X Axis " + xWave,25,376);
-    text("OFFSET",150,390);  
-    text("AMPLITUDE: Y Axis " + yWave,25,406);
-    text("OFFSET",150,420);  
-    text("Z Smooth " + yWavezRot,45,435);
+    text("AMPLITUDE: Z Axis " + zWave,25,226);
+    text("OFFSET",150,240);  
+    text("AMPLITUDE: X Axis " + xWave,25,256);
+    text("OFFSET",150,270);  
+    text("AMPLITUDE: Y Axis " + yWave,25,286);
+    text("OFFSET",150,300);  
 
-    text("INVERT",158,74);  
     text("FULL TEXT",158,104);
     text("CAMERA: Zoom",15,height-22);
-		text("PRESETS", 145,height-40);
+		text("PRESETS", 145,height-60);
 
     textAlign(RIGHT);
 		text("BACKGROUND", 650,height-48);
@@ -259,19 +256,22 @@ function draw(){
       translate(40,j*30);
         fill(255);
         ellipse(629,height-50,23,23);
-        fill('#787eff');
+        fill('#797fff');
         ellipse(650,height-50,23,23);
-        fill('#eb008b');
+        fill('#ec238c');
         ellipse(672,height-50,23,23);
-        fill('#fbaf3f');
+        fill('#fbb040');
         ellipse(694,height-50,23,23);
-        fill('#ff6427');
+        fill('#ff6528');
         ellipse(716,height-50,23,23);
-        fill('#d67aff');
+        fill('#d77bff');
         ellipse(738,height-50,23,23);
+        fill('#30dbee');
+        ellipse(760,height-50,23,23);
       pop();
     }
-
+		
+    fill(strkColor);
     textAlign(LEFT);    
     translate(0,height);
     rotateZ(-PI/2);
@@ -306,8 +306,7 @@ function draw(){
   }
   
   // THE TYPE
-  for(var i=0;i<runLength;i++){    
-
+  for(var i=0;i<runLength;i++){
     if(fullText==true){
       letter_select = i%inpText.length;
     } else {
@@ -325,6 +324,9 @@ function draw(){
   }
 //  if(yWavezRot != 0){
 		yWavezRoter = cosEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWavezRot;
+//  }
+//  if(yWavexStr != 0){
+		yWavexStrer = map(cosEngine2(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,yWavexStr);
 //  }
     
     push();
@@ -405,7 +407,6 @@ function yWaveChecker() {
   }
 }
 
-
 function inverter() {
 	if(this.checked()){
 		strkColor = color(255);
@@ -422,73 +423,230 @@ function exportPNG() {
 
 function reSetting() {
 	yWaver = 0;
-	columnSlider.value(33); rowSlider.value(7); trackingSlider.value(5); lineSpaceSlider.value(5); typeXSlider.value(20); typeYSlider.value(40);typeStrokeSlider.value(2);
-  speedSlider.value(-2); xOffsetSlider.value(3.1); yOffsetSlider.value(3.1);
-  xWaveSlider.value(0); zWaveSlider.value(0);
-  yWaveSlider.value(0); yWavezRotSlider.value(0);
+  typeX = 20; typeY = 40; xOffset = 3.1; yOffset = 3.1; yWavezRot = 0;
+	columnSlider.value(33); rowSlider.value(7); trackingSlider.value(5); lineSpaceSlider.value(5); typeStrokeSlider.value(2);
+  speedSlider.value(-2); 
+  xWaveSlider.value(0); zWaveSlider.value(0); yWaveSlider.value(0);
 	xRotCameraSlider.value(0); yRotCameraSlider.value(0); zRotCameraSlider.value(0); zoomCameraSlider.value(0); 
-
+  xWaveCheck.checked(false); yWaveCheck.checked(false); zWaveCheck.checked(false);
+  
   fullTextCheck.checked(false); fullText = false;
-  invertCheck.checked(false);
   strkColor = color(0);
   bkgdColor = color(255);  
 }
 
-function stackSet() {
+function wobblySet() {
 	reSetting();
-	columnSlider.value(22); rowSlider.value(8); trackingSlider.value(4); lineSpaceSlider.value(12); typeXSlider.value(20); typeYSlider.value(18);
-  speedSlider.value(-3); xOffsetSlider.value(5.1); yOffsetSlider.value(59.1); yWaveSlider.value(100); yWavezRotSlider.value(35);
+  typeX = 72; typeY = 94;
+	columnSlider.value(13); rowSlider.value(4); trackingSlider.value(14); lineSpaceSlider.value(41);
+	typeStrokeSlider.value(4.8);
+  xOffset = 5.1; yOffset = 0.1;
+  speedSlider.value(1);
+  zWaveSlider.value(103); zWaveCheck.checked(true);
+  xWaveSlider.value(10);
+  yWaveSlider.value(32); yWaveCheck.checked(true);
+	xRotCameraSlider.value(4); yRotCameraSlider.value(52); zRotCameraSlider.value(-2); zoomCameraSlider.value(-500);
+  radioBkgd.value('2'); radioStroke.value('1');
 	
-  fullTextCheck.checked(true); fullText = true;
-}
-
-function brickSet() {
-	reSetting();
-	columnSlider.value(20); rowSlider.value(9); trackingSlider.value(17); lineSpaceSlider.value(7); typeXSlider.value(13); typeYSlider.value(20);
-  speedSlider.value(-4); xWaveSlider.value(86);
+  inp.value("Applications Now Open     ");
   
   fullTextCheck.checked(true); fullText = true;
-  invertCheck.checked(true);
-  strkColor = color(255);
-  bkgdColor = color(0);  
 }
 
-function simpleZSet() {
+function driftinSet() {
 	reSetting();
-	columnSlider.value(28); rowSlider.value(15); trackingSlider.value(5); lineSpaceSlider.value(5); typeXSlider.value(20); typeYSlider.value(40);
-  speedSlider.value(-4); xOffsetSlider.value(9.1); zWaveSlider.value(90); xRotCameraSlider.value(33); yRotCameraSlider.value(-27); zRotCameraSlider.value(24);
-
+  typeX = 84; typeY = 94;
+	columnSlider.value(5); rowSlider.value(5); trackingSlider.value(15); lineSpaceSlider.value(39);
+	typeStrokeSlider.value(4.3);
+  xOffset = 8.1; yOffset = 0.1;
+  speedSlider.value(-1);
+  zWaveSlider.value(165);
+  xWaveSlider.value(30);
+  yWaveSlider.value(0);
+	xRotCameraSlider.value(8); yRotCameraSlider.value(44); zRotCameraSlider.value(8); zoomCameraSlider.value(-165);
+  radioBkgd.value('7'); radioStroke.value('1');
+	
+  inp.value("ApplyToday");
+  
   fullTextCheck.checked(true); fullText = true;
 }
 
-function complexZSet() {
+function skydancerSet() {
 	reSetting();
-	columnSlider.value(38); rowSlider.value(10); trackingSlider.value(5); lineSpaceSlider.value(6); typeXSlider.value(8); typeYSlider.value(21); typeStrokeSlider.value(.9);
-  speedSlider.value(2); xOffsetSlider.value(4.1); yOffsetSlider.value(3.1); zWaveSlider.value(41); xWaveSlider.value(63); yWaveSlider.value(25); yWavezRotSlider.value(22);
-	xRotCameraSlider.value(26); yRotCameraSlider.value(-39); zRotCameraSlider.value(15); zoomCameraSlider.value(200); 
-
-  yWaveCheck.checked(true); yWaveChecked = PI;  
-  fullTextCheck.checked(true); fullText = true;
-  invertCheck.checked(true);
-  strkColor = color(255);
-  bkgdColor = color(0);
-}
-
-function zebraSet() {
-	reSetting();
-	columnSlider.value(50); rowSlider.value(8); trackingSlider.value(7); lineSpaceSlider.value(18.5); typeXSlider.value(6); typeYSlider.value(20); typeStrokeSlider.value(1);
-  speedSlider.value(-4); xOffsetSlider.value(6.1); yOffsetSlider.value(5.1); yWaveSlider.value(33); yWavezRotSlider.value(18);
-
+  typeX = 84; typeY = 94;
+	columnSlider.value(8); rowSlider.value(4); trackingSlider.value(15); lineSpaceSlider.value(42);
+	typeStrokeSlider.value(4.34);
+  xOffset = 39.1; yOffset = 1.31;
+  speedSlider.value(1); 
+  zWaveSlider.value(200); zWaveCheck.checked(true);
+  xWaveSlider.value(200);
+  yWaveSlider.value(70);
+	xRotCameraSlider.value(-36); yRotCameraSlider.value(8); zRotCameraSlider.value(-30); zoomCameraSlider.value(-165);
+  radioBkgd.value('3'); radioStroke.value('1');
+	
+  inp.value("workshop");
+  
   fullTextCheck.checked(true); fullText = true;
 }
 
-function harlequinSet() {
+function flag1Set() {
 	reSetting();
-	columnSlider.value(40); rowSlider.value(7); trackingSlider.value(5); lineSpaceSlider.value(11); typeXSlider.value(9); typeYSlider.value(19); typeStrokeSlider.value(1.1);
-  speedSlider.value(2); xOffsetSlider.value(2.1); yOffsetSlider.value(59.1);
-
+  typeX = 72; typeY = 94;
+	columnSlider.value(10); rowSlider.value(3); trackingSlider.value(12); lineSpaceSlider.value(66);
+	typeStrokeSlider.value(4.74);
+  xOffset = 8.1; yOffset = 2.51;
+  speedSlider.value(-2); 
+  zWaveSlider.value(135); zWaveCheck.checked(true);
+  xWaveSlider.value(16);
+  yWaveSlider.value(20);
+	xRotCameraSlider.value(58); yRotCameraSlider.value(-24); zRotCameraSlider.value(16); zoomCameraSlider.value(-245);
+  radioBkgd.value('7'); radioStroke.value('1');
+	
+  inp.value("Guidelines");
+  
   fullTextCheck.checked(true); fullText = true;
-  invertCheck.checked(true);
-  strkColor = color(255);
-  bkgdColor = color(0);
+}
+
+function flag2Set() {
+	reSetting();
+  typeX = 80; typeY = 95;
+	columnSlider.value(12); rowSlider.value(4); trackingSlider.value(14); lineSpaceSlider.value(35);
+	typeStrokeSlider.value(4.74);
+  xOffset = 12.1; yOffset = 2.51;
+  speedSlider.value(-2); 
+  zWaveSlider.value(170);
+  xWaveSlider.value(18);
+  yWaveSlider.value(58);
+	xRotCameraSlider.value(28); yRotCameraSlider.value(42); zRotCameraSlider.value(-8); zoomCameraSlider.value(-355);
+  radioBkgd.value('2'); radioStroke.value('1');
+	
+  inp.value("ApplicationsNow Open.   ");
+  
+  fullTextCheck.checked(true); fullText = true;
+}
+
+function lavaSet() {
+	reSetting();
+  typeX = 72; typeY = 94;
+	columnSlider.value(12); rowSlider.value(3); trackingSlider.value(12); lineSpaceSlider.value(41);
+	typeStrokeSlider.value(4.74);
+  xOffset = 1.31; yOffset = 15.2;
+  speedSlider.value(-1); 
+  zWaveSlider.value(56.5);
+  xWaveSlider.value(18); xWaveCheck.checked(true);
+  yWaveSlider.value(42.4);
+	xRotCameraSlider.value(-30); yRotCameraSlider.value(14); zRotCameraSlider.value(2); zoomCameraSlider.value(-500);
+  radioBkgd.value('5'); radioStroke.value('1');
+	
+  inp.value("Experimental");
+  
+  fullTextCheck.checked(true); fullText = true;
+}
+
+function weavinSet() {
+	reSetting();
+  typeX = 80; typeY = 95;
+	columnSlider.value(12); rowSlider.value(5); trackingSlider.value(14); lineSpaceSlider.value(43);
+	typeStrokeSlider.value(4.74);
+  xOffset = 3.73; yOffset = 0.1;
+  speedSlider.value(-1.5); 
+  zWaveSlider.value(141); zWaveCheck.checked(true);
+  xWaveSlider.value(0); 
+  yWaveSlider.value(24.2);
+	xRotCameraSlider.value(50); yRotCameraSlider.value(48); zRotCameraSlider.value(-44); zoomCameraSlider.value(-420);
+  radioBkgd.value('6'); radioStroke.value('1');
+	
+  inp.value("Now Open.   Applications");
+  
+  fullTextCheck.checked(true); fullText = true;
+}
+
+function popnlockSet() {
+	reSetting();
+  typeX = 70; typeY = 104;
+	columnSlider.value(17); rowSlider.value(3); trackingSlider.value(15); lineSpaceSlider.value(33);
+	typeStrokeSlider.value(4.74);
+  xOffset = 3.71; yOffset = 1.31;
+  speedSlider.value(-2.3); 
+  zWaveSlider.value(133); 
+  xWaveSlider.value(40); 
+  yWaveSlider.value(40); yWaveCheck.checked(true);
+	xRotCameraSlider.value(10); yRotCameraSlider.value(-22); zRotCameraSlider.value(6); zoomCameraSlider.value(-500);
+  radioBkgd.value('1'); radioStroke.value('2');
+	
+  inp.value("   New Website   Gritfundbmore.org");
+  
+  fullTextCheck.checked(true); fullText = true;
+}
+
+function shuffleSet() {
+	reSetting();
+  typeX = 70; typeY = 104;
+	columnSlider.value(12); rowSlider.value(4); trackingSlider.value(15); lineSpaceSlider.value(33);
+	typeStrokeSlider.value(4.74);
+  xOffset = 9.81; yOffset = 0.1;
+  speedSlider.value(-1.5); 
+  zWaveSlider.value(96); zWaveCheck.checked(true);
+  xWaveSlider.value(48); 
+  yWaveSlider.value(18); 
+	xRotCameraSlider.value(8); yRotCameraSlider.value(-22); zRotCameraSlider.value(6); zoomCameraSlider.value(-500);
+  radioBkgd.value('5'); radioStroke.value('1');
+	
+  inp.value("New Website ");
+  
+  fullTextCheck.checked(true); fullText = true;
+}
+
+function rollinSet() {
+	reSetting();
+  typeX = 103; typeY = 130;
+	columnSlider.value(4); rowSlider.value(3); trackingSlider.value(11); lineSpaceSlider.value(46);
+	typeStrokeSlider.value(5.1);
+  xOffset = 4.3; yOffset = 0.1;
+  speedSlider.value(-2); 
+  zWaveSlider.value(123);
+  xWaveSlider.value(0); 
+  yWaveSlider.value(30); 
+	xRotCameraSlider.value(52); yRotCameraSlider.value(30); zRotCameraSlider.value(-24); zoomCameraSlider.value(-95);
+  radioBkgd.value('4'); radioStroke.value('1');
+	
+  inp.value("GritFundOpen");
+  
+  fullTextCheck.checked(true); fullText = true;
+}
+
+function wiggleSet() {
+	reSetting();
+  typeX = 80; typeY = 94;
+	columnSlider.value(9); rowSlider.value(3); trackingSlider.value(12); lineSpaceSlider.value(65);
+	typeStrokeSlider.value(4.34);
+  xOffset = 1.31; yOffset = 0.1;
+  speedSlider.value(1); 
+  zWaveSlider.value(54);
+  xWaveSlider.value(20); xWaveCheck.checked(true);
+  yWaveSlider.value(36); 
+	xRotCameraSlider.value(26); yRotCameraSlider.value(16); zRotCameraSlider.value(-16); zoomCameraSlider.value(-165);
+  radioBkgd.value('5'); radioStroke.value('1');
+	
+  inp.value("Grantees ");
+  
+  fullTextCheck.checked(true); fullText = true;
+}
+
+function gritfundSet() {
+	reSetting();
+  typeX = 90; typeY = 100;
+	columnSlider.value(5); rowSlider.value(2); trackingSlider.value(20); lineSpaceSlider.value(18);
+	typeStrokeSlider.value(4.1);
+  xOffset = 17.1; yOffset = 0.1;
+  speedSlider.value(-2); 
+  zWaveSlider.value(131);
+  xWaveSlider.value(131);
+  yWaveSlider.value(0); 
+	xRotCameraSlider.value(20); yRotCameraSlider.value(-58); zRotCameraSlider.value(20); zoomCameraSlider.value(0);
+  radioBkgd.value('1'); radioStroke.value('2');
+	
+  inp.value("Grit Fund ");
+  
+  fullTextCheck.checked(true); fullText = true;
 }
