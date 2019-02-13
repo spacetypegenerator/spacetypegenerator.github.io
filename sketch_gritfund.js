@@ -74,7 +74,7 @@ function setup(){
   
   inp = select("#textfield");
   
-  columnSlider = createSlider(1,200,11); columnSlider.position(25,17); columnSlider.style('width','100px');
+  columnSlider = createSlider(1,200,33); columnSlider.position(25,17); columnSlider.style('width','100px');
   rowSlider = createSlider(1,200,7); rowSlider.position(25,47); rowSlider.style('width','100px');
   trackingSlider = createSlider(-10,100,5); trackingSlider.position(25,77); trackingSlider.style('width','100px');
   lineSpaceSlider = createSlider(-10,100,5); lineSpaceSlider.position(25,107); lineSpaceSlider.style('width','100px');
@@ -95,7 +95,7 @@ function setup(){
   xRotCameraSlider = createSlider(-180,180,0); xRotCameraSlider.position(-20,height-107); xRotCameraSlider.style('width','100px'); xRotCameraSlider.style('rotate',270);
   yRotCameraSlider = createSlider(-180,180,0); yRotCameraSlider.position(20,height-107); yRotCameraSlider.style('width','100px'); yRotCameraSlider.style('rotate',270);
   zRotCameraSlider = createSlider(-180,180,0); zRotCameraSlider.position(60,height-107); zRotCameraSlider.style('width','100px'); zRotCameraSlider.style('rotate',270);
-	zoomCameraSlider = createSlider(-500,500,0); zoomCameraSlider.position(15,height-20); zoomCameraSlider.style('width','100px');
+	zoomCameraSlider = createSlider(-800,800,0); zoomCameraSlider.position(15,height-20); zoomCameraSlider.style('width','100px');
 
   exportButton = createButton('Export PNG'); exportButton.position(140,20); exportButton.mousePressed(exportPNG);
   presetWobbly = createButton('Wobbly'); presetWobbly.position(140,height-50); presetWobbly.mousePressed(wobblySet);
@@ -473,7 +473,7 @@ function driftinSet() {
 
 function skydancerSet() {
 	reSetting();
-  typeX = 84; typeY = 94;
+  typeX = 84 * 0.8; typeY = 94 * 0.8;
 	columnSlider.value(8); rowSlider.value(4); trackingSlider.value(15); lineSpaceSlider.value(42);
 	typeStrokeSlider.value(4.34);
   xOffset = 39.1; yOffset = 1.31;
@@ -545,7 +545,7 @@ function lavaSet() {
 
 function weavinSet() {
 	reSetting();
-  typeX = 80; typeY = 95;
+  typeX = 80 * 0.8; typeY = 95 * 0.8;
 	columnSlider.value(12); rowSlider.value(5); trackingSlider.value(14); lineSpaceSlider.value(43);
 	typeStrokeSlider.value(4.74);
   xOffset = 3.73; yOffset = 0.1;
@@ -563,7 +563,7 @@ function weavinSet() {
 
 function popnlockSet() {
 	reSetting();
-  typeX = 70; typeY = 104;
+  typeX = 70 * 0.8; typeY = 104 * 0.8;
 	columnSlider.value(17); rowSlider.value(3); trackingSlider.value(15); lineSpaceSlider.value(33);
 	typeStrokeSlider.value(4.74);
   xOffset = 3.71; yOffset = 1.31;
@@ -599,7 +599,7 @@ function shuffleSet() {
 
 function rollinSet() {
 	reSetting();
-  typeX = 103; typeY = 130;
+  typeX = 103 * 0.8; typeY = 130 * 0.8;
 	columnSlider.value(4); rowSlider.value(3); trackingSlider.value(11); lineSpaceSlider.value(46);
 	typeStrokeSlider.value(5.1);
   xOffset = 4.3; yOffset = 0.1;
