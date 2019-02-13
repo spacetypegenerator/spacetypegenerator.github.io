@@ -43,6 +43,8 @@ var letter_select, inp, inpText;
 var myText = [];
 var runLength;
 var fullTextCheck, fullText;
+var doubleQuoteSwitch = 1;
+var singleQuoteSwitch = 1;
 
 // COLOR
 var radioBkgd;
@@ -197,6 +199,8 @@ function draw(){
   zoomCamera = zoomCameraSlider.value();
   
   SA = typeStroke/2;
+  doubleQuoteSwitch =1;
+  singleQuoteSwitch =1;
   
 	xSpace = typeX + tracking;
 	ySpace = typeY + lineSpace;
