@@ -775,7 +775,7 @@ function plus() {
 
 function asterisk() {
 	push();
-  translate(typeX/2,typeY/6);
+  translate(typeX/2,typeY/2);
   rotate(float(frameCount)*0.05);
   for(var i=0; i<5; i++){
   	rotate(2*PI/5);
