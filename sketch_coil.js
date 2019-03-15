@@ -79,7 +79,7 @@ function setup() {
   
   hourglassSet = createButton('Hourglass'); hourglassSet.position(25,height-35); hourglassSet.mousePressed(hourglass);	
   starSet = createButton('Star'); starSet.position(100,height-35); starSet.mousePressed(star);	
-  star2Set = createButton('Star II'); star2Set.position(145,height-35); star2Set.mousePressed(star2);	
+  star2Set = createButton('ZZtar'); star2Set.position(145,height-35); star2Set.mousePressed(star2);	
   pretzelSet = createButton('Pretzel'); pretzelSet.position(200,height-35); pretzelSet.mousePressed(pretzel);	
   lemniscateSet = createButton('Lemniscate'); lemniscateSet.position(260,height-35); lemniscateSet.mousePressed(lemniscate);	
 
@@ -528,13 +528,13 @@ function star2() {
   waveSizeSlider.value(31); waveCountSlider.value(6); waveSpeedSlider.value(7); slopeSlider.value(1);
   radioEnd.value('1').checked = true;
   
-  inp1.value('#ff0000');inp2.value('#ffffff');inp3.value('#0000ff');inp4.value('#ffffff');inp5.value('#000000');
+  inp1.value('#ff0000');inp2.value('#FF9300');inp3.value('#ffff00');inp4.value('#00ff00');inp5.value('#0000ff');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
 
   inp.value(" ");
 
   inpNumber = 5;
-  bkgdColorPicker.value('#00ffff');
+  bkgdColorPicker.value('#ff0000');
 } 
 
 function pretzel() {
