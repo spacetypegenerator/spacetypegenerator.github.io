@@ -55,7 +55,7 @@ function preload() {
 
 function setup() {
   var p5SaveCanvas = createCanvas(500, 500);
-//  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
   canvas = p5SaveCanvas.canvas;
     
   background(bkgdColor);
