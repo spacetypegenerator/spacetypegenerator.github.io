@@ -54,7 +54,7 @@ function preload() {
 }
 
 function setup() {
-  var p5SaveCanvas = createCanvas(1080, 1080);
+  var p5SaveCanvas = createCanvas(540, 540);
 //  createCanvas(windowWidth, windowHeight);
   canvas = p5SaveCanvas.canvas;
     
