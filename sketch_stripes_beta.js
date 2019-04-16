@@ -109,7 +109,7 @@ function setup() {
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
     
-  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(150,height-60); saveLoopSet.mousePressed(saveLoop);
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(width/2-50,50); saveLoopSet.mousePressed(saveLoop);
 
 }
 
