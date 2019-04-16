@@ -1,0 +1,56 @@
+.bottom {
+  position: fixed;
+  bottom:0;
+  right:0;
+  text-align:left;
+  padding-right:25px;
+  padding-bottom:20px;
+}
+
+h1 {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 18px;
+  font-weight: 100;
+  text-align:center;
+  color: #fff;
+  background-color:#000;
+  text-decoration: underline;
+}
+
+h2 {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 8px;
+  font-style: italic;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 5px;
+  color: #000;
+  margin-top:-6px;
+  text-transform:uppercase;
+}
+
+b {
+  font-weight:400;
+}
+
+p {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: #000;
+}
+
+.slug {
+  color:#0000FF;
+}
+
+a {
+  color: #FFF;
+  font-weight:400;
+  background: #000;
+  text-decoration: none;
+}
+
+textarea {
+	width: 100%;
+}
