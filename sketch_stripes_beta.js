@@ -54,8 +54,9 @@ function preload() {
 }
 
 function setup() {
-  var p5Canvas = createCanvas(windowWidth, windowHeight);
-  canvas = p5Canvas.canvas;
+  var p5SaveCanvas = createCanvas(windowWidth/2, windowHeight/2,WEBGL);
+  createCanvas(windowWidth, windowHeight);
+  canvas = p5SaveCanvas.canvas;
     
   background(bkgdColor);
   smooth();
@@ -109,8 +110,7 @@ function setup() {
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
     
-  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(width/2-50,50); saveLoopSet.mousePressed(saveLoop);
-
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(width-150,height/2); saveLoopSet.mousePressed(saveLoop);
 }
 
 function draw() {
