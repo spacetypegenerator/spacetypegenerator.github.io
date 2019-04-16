@@ -42,7 +42,7 @@ function draw() {
         print("record");
     } else if (gifRecord == true && frameCount==gifEnd) {
         capturer.stop();
- //       capturer.save();
+       capturer.save();
         print("stop");
     }
 
