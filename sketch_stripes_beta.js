@@ -519,7 +519,7 @@ function simpleWave2() {
 }
 
 function saveLoop() {
-    let newSpeed = 3.14/gifLength;
+    let newSpeed = 2*3.14/gifLength;
     speedSlider.value(newSpeed);
     gifStart = frameCount;
     gifEnd = gifStart + gifLength;
