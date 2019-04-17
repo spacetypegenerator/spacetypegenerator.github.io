@@ -37,7 +37,7 @@ var inpNumber = 3;
 var presetStacks;
 
 // SAVE BETA
-var gifLength = 125;
+var gifLength = 157;
 var gifStart, gifEnd;
 var gifRecord = false;
 var canvas;
@@ -59,7 +59,6 @@ function setup() {
   canvas = p5SaveCanvas.canvas;
 
   pixelDensity(1);
-  frameRate(60);
     
   background(bkgdColor);
   smooth();
@@ -105,7 +104,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 140);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 142);
 
-  bkgdColorPicker = createColorPicker('#ffff00'); bkgdColorPicker.position(25, 510); bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#0000ff'); bkgdColorPicker.position(25, 510); bkgdColorPicker.style('width', '90px');
   
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
@@ -519,7 +518,8 @@ function simpleWave2() {
 }
 
 function saveLoop() {
-    speedSlider.value(0.05);
+//  2*PI/0.04 = gifLength;  
+    speedSlider.value(0.04);
     gifStart = frameCount;
     gifEnd = gifStart + gifLength;
     gifRecord = true;
