@@ -37,13 +37,13 @@ var inpNumber = 3;
 var presetStacks;
 
 // SAVE BETA
-var gifLength = 120;
+var gifLength = 125;
 var gifStart, gifEnd;
 var gifRecord = false;
 var canvas;
 
 var capturer = new CCapture( {
-     framerate: 30,
+     framerate: 60,
      format:'gif',
      workersPath: 'js/',
     verbose: true
@@ -59,7 +59,7 @@ function setup() {
   canvas = p5SaveCanvas.canvas;
 
   pixelDensity(1);
-  frameRate(30);
+  frameRate(60);
     
   background(bkgdColor);
   smooth();
@@ -105,7 +105,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 140);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 142);
 
-  bkgdColorPicker = createColorPicker('#000000'); bkgdColorPicker.position(25, 510); bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#ffff00'); bkgdColorPicker.position(25, 510); bkgdColorPicker.style('width', '90px');
   
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
@@ -519,8 +519,7 @@ function simpleWave2() {
 }
 
 function saveLoop() {
-    let newSpeed = 2*PI/gifLength;
-    speedSlider.value(newSpeed);
+    speedSlider.value(0.05);
     gifStart = frameCount;
     gifEnd = gifStart + gifLength;
     gifRecord = true;
