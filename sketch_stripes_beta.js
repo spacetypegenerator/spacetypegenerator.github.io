@@ -113,7 +113,7 @@ function setup() {
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
     
-  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(width/2,height/2); saveLoopSet.mousePressed(saveLoop);
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(width/2,50); saveLoopSet.mousePressed(saveLoop);
 }
 
 function draw() {
@@ -235,7 +235,7 @@ function draw() {
       capturer.start();
       capturer.capture(canvas);
       print("start");
-    } else if(gifRecord == true && frameCount<gifEnd){
+    } else if(gifRecord == true && frameCount<=gifEnd){
       capturer.capture(canvas);
       print("record");
     } else if (gifRecord == true && frameCount==gifEnd+1) {
