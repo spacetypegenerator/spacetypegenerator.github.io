@@ -105,7 +105,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 140);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 142);
 
-  bkgdColorPicker = createColorPicker('#FFFFFF'); bkgdColorPicker.position(25, 510); bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#000000'); bkgdColorPicker.position(25, 510); bkgdColorPicker.style('width', '90px');
   
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
@@ -519,7 +519,7 @@ function simpleWave2() {
 }
 
 function saveLoop() {
-    let newSpeed = 2*3.14/gifLength;
+    let newSpeed = 2*PI/gifLength;
     speedSlider.value(newSpeed);
     gifStart = frameCount;
     gifEnd = gifStart + gifLength;
