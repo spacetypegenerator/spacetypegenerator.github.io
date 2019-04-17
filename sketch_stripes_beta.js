@@ -37,13 +37,13 @@ var inpNumber = 3;
 var presetStacks;
 
 // SAVE BETA
-var gifLength = 90;
+var gifLength = 120;
 var gifStart, gifEnd;
 var gifRecord = false;
 var canvas;
 
 var capturer = new CCapture( {
-     framerate: 60,
+     framerate: 30,
      format:'gif',
      workersPath: 'js/',
     verbose: true
@@ -59,6 +59,7 @@ function setup() {
   canvas = p5SaveCanvas.canvas;
 
   pixelDensity(1);
+  frameRate(30);
     
   background(bkgdColor);
   smooth();
@@ -518,6 +519,8 @@ function simpleWave2() {
 }
 
 function saveLoop() {
+    let newSpeed = 3.14/gifLength;
+    speedSlider.value(newSpeed);
     gifStart = frameCount;
     gifEnd = gifStart + gifLength;
     gifRecord = true;
