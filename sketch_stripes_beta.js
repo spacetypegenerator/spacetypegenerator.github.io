@@ -360,7 +360,7 @@ function reset() {
 	ribbonCountSlider.value(9); ribbonSpaceXSlider.value(-17); ribbonSpaceYSlider.value(-35); ribbonSizeSlider.value(35); ribbonOffsetSlider.value(0.2);    
 	yWaveSlider.value(95); speedSlider.value(0.01); offsetSlider.value(0.26); slopeSlider.value(1);
 
-  inp1.value('#ff0000');inp2.value('#0000ff');inp3.value('#ffffoo');inp4.value('#ffff00');inp5.value('#000');
+  inp1.value('#ff0000');inp2.value('#0000ff');inp3.value('#ffff00');inp4.value('#ffff00');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(false); inp5check.checked(false);
 
   inpNumber = 3;
@@ -463,7 +463,7 @@ function stacks() {
 	ribbonCountSlider.value(34); ribbonSpaceXSlider.value(-2); ribbonSpaceYSlider.value(-2); ribbonSizeSlider.value(57); ribbonOffsetSlider.value(0.1);    
 	yWaveSlider.value(34); speedSlider.value(0.06); offsetSlider.value(0.2); slopeSlider.value(1);
 
-  inp1.value('#ff0000');inp2.value('#FFFFFF');inp3.value('#0000ff');inp4.value('#ffff00');inp5.value('#00000');
+  inp1.value('#ff0000');inp2.value('#FFFFFF');inp3.value('#0000ff');inp4.value('#ffff00');inp5.value('#000000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
 
   inp.value("Stacks on Stacks");
