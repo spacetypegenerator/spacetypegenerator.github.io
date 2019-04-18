@@ -140,10 +140,13 @@ function draw() {
       text("WAVE: Wavelength " + offset, 25, 410);
       text("WAVE: Slope " + slope, 25, 440);
 
-        text("PRESETS", 25,height-70);
+      text("PRESETS", 25,height-70);
 
       text("Background Color", 25, 500);
-
+        
+      text("May take up to a minute", 145, 205);
+      text("Be patient, plz!", 145, 220);
+        
       push();
       translate(145, 25);
       rotate(PI/2);
