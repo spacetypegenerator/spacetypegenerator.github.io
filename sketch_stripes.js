@@ -36,12 +36,29 @@ var inpNumber = 3;
 
 var presetStacks;
 
+// SAVE BETA
+var gifLength = 157;
+var gifStart, gifEnd;
+var gifRecord = false;
+var canvas;
+
+var capturer = new CCapture( {
+     framerate: 60,
+     format:'gif',
+     workersPath: 'js/',
+    verbose: true
+} );
+
 function preload() {
   font = loadFont('assets/IBMPlexMono-Regular.otf');
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  var p5SaveCanvas = createCanvas(windowWidth, windowHeight);
+  canvas = p5SaveCanvas.canvas;
+
+  pixelDensity(1);
+    
   background(bkgdColor);
   smooth();
   textFont(font);
@@ -93,6 +110,8 @@ function setup() {
   inp3check.changed(inp3checker);
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
+    
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(145, 180); saveLoopSet.mousePressed(saveLoop);
 }
 
 function draw() {
@@ -103,31 +122,34 @@ function draw() {
   fill(50,200,250);
   noStroke();
   textSize(9);
-  text("TYPE: X-Scale " + typeX, 25, 20);
-  text("TYPE: Y-Scale " + typeY, 25, 50);
-  text("TYPE: Weight " + typeStroke, 25, 80);
-  text("TYPE: Tracking " + tracking, 25, 110);
+    
+    if(gifRecord == false){
+      text("TYPE: X-Scale " + typeX, 25, 20);
+      text("TYPE: Y-Scale " + typeY, 25, 50);
+      text("TYPE: Weight " + typeStroke, 25, 80);
+      text("TYPE: Tracking " + tracking, 25, 110);
 
-  text("RIBBON: Count " + ribbonCount, 25, 170);
-  text("RIBBON: X Space " + ribbonSpaceX, 25, 200);
-  text("RIBBON: Y Space " + ribbonSpaceY, 25, 230);
-  text("RIBBON: Size " + ribbonSize, 25, 260);
-  text("RIBBON: Offset " + ribbonOffset, 25, 290);
-  
-  text("WAVE: Size " + yWave, 25, 350);
-  text("WAVE: Speed " + speed, 25, 380);
-  text("WAVE: Wavelength " + offset, 25, 410);
-  text("WAVE: Slope " + slope, 25, 440);
+      text("RIBBON: Count " + ribbonCount, 25, 170);
+      text("RIBBON: X Space " + ribbonSpaceX, 25, 200);
+      text("RIBBON: Y Space " + ribbonSpaceY, 25, 230);
+      text("RIBBON: Size " + ribbonSize, 25, 260);
+      text("RIBBON: Offset " + ribbonOffset, 25, 290);
 
-	text("PRESETS", 25,height-70);
-  
-  text("Background Color", 25, 500);
-  
-  push();
-  translate(145, 25);
-  rotate(PI/2);
-	text("STRIPE TOGGLES AND COLORS", 0,0);
-  pop();
+      text("WAVE: Size " + yWave, 25, 350);
+      text("WAVE: Speed " + speed, 25, 380);
+      text("WAVE: Wavelength " + offset, 25, 410);
+      text("WAVE: Slope " + slope, 25, 440);
+
+        text("PRESETS", 25,height-70);
+
+      text("Background Color", 25, 500);
+
+      push();
+      translate(145, 25);
+      rotate(PI/2);
+        text("STRIPE TOGGLES AND COLORS", 0,0);
+      pop();
+    }
   
   inpText = String(inp.value());
   runLength = inpText.length;
@@ -206,6 +228,19 @@ function draw() {
     }
   }
   pop();
+    
+    if(gifRecord == true && frameCount==(gifStart+1)){
+      capturer.start();
+      capturer.capture(canvas);
+      print("start");
+    } else if(gifRecord == true && frameCount<=gifEnd){
+      capturer.capture(canvas);
+//      print("record");
+    } else if (gifRecord == true && frameCount==gifEnd+1) {
+      capturer.stop();
+      capturer.save();
+      print("stop");
+    }
 }
 
 function sinEngine(xLength, xCounter, yLength, yCounter, Speed, slopeN) {
@@ -479,4 +514,14 @@ function simpleWave2() {
 
   inpNumber = 5;
   bkgdColorPicker.value('#000000');
+}
+
+function saveLoop() {
+//  2*PI/0.04 = gifLength;  
+    speedSlider.value(0.04);
+    gifStart = frameCount;
+    gifEnd = gifStart + gifLength;
+    gifRecord = true;
+    print(frameCount);
+    print(gifEnd);
 }

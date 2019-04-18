@@ -112,7 +112,7 @@ function setup() {
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
     
-  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(180, 200); saveLoopSet.mousePressed(saveLoop);
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(145, 180); saveLoopSet.mousePressed(saveLoop);
 }
 
 function draw() {
@@ -236,7 +236,7 @@ function draw() {
       print("start");
     } else if(gifRecord == true && frameCount<=gifEnd){
       capturer.capture(canvas);
-      print("record");
+ //     print("record");
     } else if (gifRecord == true && frameCount==gifEnd+1) {
       capturer.stop();
       capturer.save();
