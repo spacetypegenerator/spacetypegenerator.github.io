@@ -119,9 +119,9 @@ function draw() {
   bkgdColor = bkgdColorPicker.value();
   background(bkgdColor);
   
-  fill(50,200,250);
+  fill(0);
   noStroke();
-  textSize(9);
+  textSize(10);
     
     if(gifRecord == false){
       text("TYPE: X-Scale " + typeX, 25, 20);
@@ -144,8 +144,8 @@ function draw() {
 
       text("Background Color", 25, 500);
         
-      text("Be patient", 145, 208);
-      text("May take a minute", 145, 221);
+      text("BE PATIENT", 145, 210);
+      text("Will a minute", 145, 223);
         
       push();
       translate(145, 25);
