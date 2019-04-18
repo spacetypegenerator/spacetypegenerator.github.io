@@ -144,8 +144,8 @@ function draw() {
 
       text("Background Color", 25, 500);
         
-//      text("BE PATIENT", 147, 210);
-//      text("Will a minute", 147, 223);
+      text("It'll take a minute...", 147, 210);
+  //    text("Will a minute", 147, 223);
         
       push();
       translate(145, 25);
