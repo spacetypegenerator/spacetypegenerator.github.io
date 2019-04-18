@@ -111,7 +111,7 @@ function setup() {
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
     
-  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(145, 180); saveLoopSet.mousePressed(saveLoop);
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(147, 180); saveLoopSet.mousePressed(saveLoop);
 }
 
 function draw() {
@@ -121,7 +121,7 @@ function draw() {
   
   fill(0);
   noStroke();
-  textSize(10);
+  textSize(9);
     
     if(gifRecord == false){
       text("TYPE: X-Scale " + typeX, 25, 20);
@@ -144,13 +144,13 @@ function draw() {
 
       text("Background Color", 25, 500);
         
-      text("BE PATIENT", 145, 210);
-      text("Will a minute", 145, 223);
+//      text("BE PATIENT", 147, 210);
+//      text("Will a minute", 147, 223);
         
       push();
       translate(145, 25);
       rotate(PI/2);
-        text("STRIPE TOGGLES AND COLORS", 0,0);
+        text("STRIPE TOGGLES/COLORS", 0,0);
       pop();
     }
   
