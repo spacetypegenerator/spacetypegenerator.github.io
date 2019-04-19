@@ -37,12 +37,29 @@ var inpNumber = 2;
 var strkColor, ribbonColor;
 var backSide = true;
 
+// SAVE BETA
+var gifLength = 157;
+var gifStart, gifEnd;
+var gifRecord = false;
+var canvas;
+
+var capturer = new CCapture( {
+     framerate: 60,
+     format:'gif',
+     workersPath: 'js/',
+    verbose: true
+} );
+
 function preload() {
   font = loadFont('assets/IBMPlexMono-Regular.otf');
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
+  var p5SaveCanvas = createCanvas(windowWidth, windowHeight);
+  canvas = p5SaveCanvas.canvas;
+
+  pixelDensity(1);
+    
   background(bkgdColor);
   smooth();
   textFont(font);
@@ -106,6 +123,8 @@ function setup() {
   inp3check.changed(inp3checker);
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
+    
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(147, 210); saveLoopSet.mousePressed(saveLoop);
 }
 
 function draw() {
@@ -146,35 +165,39 @@ function draw() {
   fill(50, 150, 150);
   textSize(10);
   textAlign(LEFT);
-  text("TEXT: Type X " + typeX, 15, 30);
-  text("TEXT: Type Y " + typeY, 15, 60);
-  text("TEXT: Weight " + typeStroke, 15, 90);
-  text("GRID: Rows  " + rows, 15, 120);
+    if(gifRecord == false){
+      text("TEXT: Type X " + typeX, 15, 30);
+      text("TEXT: Type Y " + typeY, 15, 60);
+      text("TEXT: Weight " + typeStroke, 15, 90);
+      text("GRID: Rows  " + rows, 15, 120);
 
-  text("TEXT: Padding " + paddingSlider.value(), 15, 150);
+      text("TEXT: Padding " + paddingSlider.value(), 15, 150);
 
-  text("WAVE: X Size  " + xWaveSlider.value(), 15, 210);
-  text("WAVE: Y Size  " + yWaveSlider.value(), 15, 240);
-  text("WAVE: Z Size  " + zWave, 15, 270);
-  text("WAVE: Offset  " + offset, 15, 300);  
-  text("WAVE: Speed  " + -speed, 15, 330);
-  text("WAVE: Row Offset  " + rowOffset, 15, 360);
-  text("Slope " + slope, 15, 390);
+      text("WAVE: X Size  " + xWaveSlider.value(), 15, 210);
+      text("WAVE: Y Size  " + yWaveSlider.value(), 15, 240);
+      text("WAVE: Z Size  " + zWave, 15, 270);
+      text("WAVE: Offset  " + offset, 15, 300);  
+      text("WAVE: Speed  " + -speed, 15, 330);
+      text("WAVE: Row Offset  " + rowOffset, 15, 360);
+      text("Slope " + slope, 15, 390);
 
-  text("Type & Stripe adjust " + typePush, 15, 510);
-  text("Camera Zoom " + zoomCamera, 15, height - 20);
+      text("Type & Stripe adjust " + typePush, 15, 510);
+      text("Camera Zoom " + zoomCamera, 15, height - 20);
+        
+      text("It'll take a minute...", 147, 240);
 
-  text("Background Color", 15, 440);
-  text("PRESETS", 150,height-70);
-  text("No stripes", 182,35);
-  
-  translate(0, height);
-  rotateZ(-PI / 2);
-  text("CAMERA: X-Rotation " + xRotCamera, 45, 20);
-  text("CAMERA: Y-Rotation " + yRotCamera, 45, 60);
-  text("CAMERA: Z-Rotation " + zRotCamera, 45, 100);
-  text("SEGMENT TOGGLES AND COLORS", 45+(height-240),150);
-  pop();
+      text("Background Color", 15, 440);
+      text("PRESETS", 150,height-70);
+      text("No stripes", 182,35);
+
+      translate(0, height);
+      rotateZ(-PI / 2);
+      text("CAMERA: X-Rotation " + xRotCamera, 45, 20);
+      text("CAMERA: Y-Rotation " + yRotCamera, 45, 60);
+      text("CAMERA: Z-Rotation " + zRotCamera, 45, 100);
+      text("SEGMENT TOGGLES AND COLORS", 45+(height-240),150);
+      pop();
+    }
 
   
   push();
@@ -261,6 +284,19 @@ function draw() {
     }
   }
   pop();
+    
+    if(gifRecord == true && frameCount==(gifStart+1)){
+      capturer.start();
+      capturer.capture(canvas);
+      print("start");
+    } else if(gifRecord == true && frameCount<=gifEnd){
+      capturer.capture(canvas);
+//      print("record");
+    } else if (gifRecord == true && frameCount==gifEnd+1) {
+      capturer.stop();
+      capturer.save();
+      print("stop");
+    }
 }
 
 function inp1checker() {
@@ -669,4 +705,14 @@ function mystery() {
   
   inpNumber = 1;
   bkgdColorPicker.value('#ffffff');
+}
+
+function saveLoop() {
+//  2*PI/0.04 = gifLength;  
+    speedSlider.value(0.04);
+    gifStart = frameCount;
+    gifEnd = gifStart + gifLength;
+    gifRecord = true;
+    print(frameCount);
+    print(gifEnd);
 }
