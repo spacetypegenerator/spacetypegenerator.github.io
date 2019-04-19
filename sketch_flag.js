@@ -295,6 +295,7 @@ function draw() {
       capturer.stop();
       capturer.save();
       print("stop");
+      gifRecord = false;
     }
 }
 
