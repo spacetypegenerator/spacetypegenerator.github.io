@@ -196,9 +196,8 @@ function draw() {
       text("CAMERA: Y-Rotation " + yRotCamera, 45, 60);
       text("CAMERA: Z-Rotation " + zRotCamera, 45, 100);
       text("SEGMENT TOGGLES AND COLORS", 45+(height-240),150);
-      pop();
     }
-
+  pop();
   
   push();
   // camera
