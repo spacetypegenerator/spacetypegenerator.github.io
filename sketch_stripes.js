@@ -144,8 +144,7 @@ function draw() {
 
       text("Background Color", 25, 500);
         
-      text("It'll take a minute...", 147, 210);
-  //    text("Will a minute", 147, 223);
+//      text("It'll take a minute...", 147, 210);
         
       push();
       translate(145, 25);
@@ -522,10 +521,12 @@ function simpleWave2() {
 
 function saveLoop() {
 //  2*PI/0.04 = gifLength;  
-    speedSlider.value(0.04);
-    gifStart = frameCount;
-    gifEnd = gifStart + gifLength;
-    gifRecord = true;
-    print(frameCount);
-    print(gifEnd);
+    if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
+        speedSlider.value(0.04); 
+        gifStart = frameCount;
+        gifEnd = gifStart + gifLength;
+        gifRecord = true;       
+    } else {
+        gifRecord = false;
+    }
 }

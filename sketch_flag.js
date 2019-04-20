@@ -709,7 +709,7 @@ function mystery() {
 
 function saveLoop() {
 //  2*PI/0.04 = gifLength;  
-    if(confirm('Click OK to generate your gif. The process will take a minute. Be patient, plz!')){
+    if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
         speedSlider.value(0.04); 
         gifStart = frameCount;
         gifEnd = gifStart + gifLength;
@@ -717,5 +717,4 @@ function saveLoop() {
     } else {
         gifRecord = false;
     }
-
 }
