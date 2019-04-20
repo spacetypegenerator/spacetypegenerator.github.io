@@ -184,7 +184,7 @@ function draw() {
       text("Type & Stripe adjust " + typePush, 15, 510);
       text("Camera Zoom " + zoomCamera, 15, height - 20);
         
-      text("It'll take a minute...", 147, 240);
+//      text("It'll take a minute...", 147, 240);
 
       text("Background Color", 15, 440);
       text("PRESETS", 150,height-70);
@@ -713,6 +713,5 @@ function saveLoop() {
     gifStart = frameCount;
     gifEnd = gifStart + gifLength;
     gifRecord = true;
-    print(frameCount);
-    print(gifEnd);
+    alert('Creating gif! Please be patient; this may take a minute.');
 }
