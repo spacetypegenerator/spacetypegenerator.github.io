@@ -114,7 +114,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 172);
 
-  bkgdColorPicker = createColorPicker('#000000');
+  bkgdColorPicker = createColorPicker('#ff0000');
   bkgdColorPicker.position(15, 450);
   bkgdColorPicker.style('width', '90px');
 
@@ -453,7 +453,7 @@ function reset() {
   inp.value(" THIS & THEN ");
   
   inpNumber = 2;
-  bkgdColorPicker.value('#000000');
+  bkgdColorPicker.value('#ff0000');
 }
 
 function oneBanner() {
@@ -709,9 +709,13 @@ function mystery() {
 
 function saveLoop() {
 //  2*PI/0.04 = gifLength;  
-    speedSlider.value(0.04);
-    gifStart = frameCount;
-    gifEnd = gifStart + gifLength;
-    gifRecord = true;
-    alert('Your gif is being generated!\nPlease be patient; this may take a minute.\nYou can follow along by viewing the JavaScript Console.');
+    if(confirm('Click OK to generate your gif. The process will take a minute. Be patient, plz!')){
+        speedSlider.value(0.04); 
+        gifStart = frameCount;
+        gifEnd = gifStart + gifLength;
+        gifRecord = true;       
+    } else {
+        gifRecord = false;
+    }
+
 }
