@@ -114,7 +114,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 172);
 
-  bkgdColorPicker = createColorPicker('#ff0000');
+  bkgdColorPicker = createColorPicker('#000000');
   bkgdColorPicker.position(15, 450);
   bkgdColorPicker.style('width', '90px');
 
@@ -453,7 +453,7 @@ function reset() {
   inp.value(" THIS & THEN ");
   
   inpNumber = 2;
-  bkgdColorPicker.value('#ff0000');
+  bkgdColorPicker.value('#000000');
 }
 
 function oneBanner() {
