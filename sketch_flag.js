@@ -713,5 +713,5 @@ function saveLoop() {
     gifStart = frameCount;
     gifEnd = gifStart + gifLength;
     gifRecord = true;
-    alert('Creating gif! Please be patient; this may take a minute.');
+    alert('Your gif is being generated!\nPlease be patient; this may take a minute.\nYou can follow along by viewing the JavaScript Console.');
 }
