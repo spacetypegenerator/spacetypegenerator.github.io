@@ -43,10 +43,10 @@ var gifRecord = false;
 var canvas;
 
 var capturer = new CCapture( {
-     framerate: 60,
+     framerate: 30,
      format:'gif',
      workersPath: 'js/',
-    verbose: true
+     verbose: true
 } );
 
 function preload() {
@@ -112,7 +112,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 172);
 
-  bkgdColorPicker = createColorPicker('#000000'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#FFFFFF'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
   
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
@@ -132,35 +132,37 @@ function draw() {
   fill(50,200,250);
   noStroke();
   textSize(9);
-  text("TYPE: X-Scale " + typeX, 25, 20);
-  text("TYPE: Y-Scale " + typeY, 25, 50);
-  text("TYPE: Weight " + typeStroke, 25, 80);
+    if(gifRecord == false){
+      text("TYPE: X-Scale " + typeX, 25, 20);
+      text("TYPE: Y-Scale " + typeY, 25, 50);
+      text("TYPE: Weight " + typeStroke, 25, 80);
 
-  text("RIBBON: Count " + ribbonCount, 25, 130);
-  text("RIBBON: Size " + ribbonSize, 25, 160);
-  text("RIBBON: Caps", 25, 190);
-  text("Round", 55, 207);
-  text("Flat", 55, 228);
-  
-  text("SPIRAL: Radius " + radius, 25, 260);
-  text("SPIRAL: Spacing " + tracker, 25, 290);
-  text("SPIRAL: Start " + spiralStart, 25, 320);
-  text("SPIRAL: Spin " + spin, 25, 350);
+      text("RIBBON: Count " + ribbonCount, 25, 130);
+      text("RIBBON: Size " + ribbonSize, 25, 160);
+      text("RIBBON: Caps", 25, 190);
+      text("Round", 55, 207);
+      text("Flat", 55, 228);
 
-  text("WAVE: Size " + waveSize, 25, 410);
-  text("WAVE: Count " + waveCount, 25, 440);
-  text("WAVE: Speed " + waveSpeed, 25, 470);
-  text("WAVE: Slope " + slope, 25, 500);  
-  
-  text("Background Color", 25, 570);
-  
-	text("PRESETS", 25,height-70);
-  
-  push();
-  translate(145, 25);
-  rotate(PI/2);
-	text("SEGMENT TOGGLES AND COLORS", 0,0);
-  pop();
+      text("SPIRAL: Radius " + radius, 25, 260);
+      text("SPIRAL: Spacing " + tracker, 25, 290);
+      text("SPIRAL: Start " + spiralStart, 25, 320);
+      text("SPIRAL: Spin " + spin, 25, 350);
+
+      text("WAVE: Size " + waveSize, 25, 410);
+      text("WAVE: Count " + waveCount, 25, 440);
+      text("WAVE: Speed " + waveSpeed, 25, 470);
+      text("WAVE: Slope " + slope, 25, 500);  
+
+      text("Background Color", 25, 570);
+
+        text("PRESETS", 25,height-70);
+
+      push();
+      translate(145, 25);
+      rotate(PI/2);
+        text("SEGMENT TOGGLES AND COLORS", 0,0);
+      pop();
+    }
   
   noFill();
   strokeWeight(1); strokeJoin(ROUND);
@@ -201,9 +203,15 @@ function draw() {
   singleQuoteSwitch = 1;
 
   push();
-  translate(width / 2, height / 2);
-	rotate(frameCount*-(spin/200));
   
+  translate(width / 2, height / 2);
+  
+  if(gifRecord == true){
+    rotate(frameCount*waveSpeed);
+  } else {
+    rotate(frameCount*-(spin/200));
+  }
+      
   radiusAdjusted = map(radius,0,50,typeY/6,typeY*2);
   tracking = map(tracker,0,50,typeX*3/14,typeX*4);
 	for(var k = 0; k<ribbonCount; k++){
