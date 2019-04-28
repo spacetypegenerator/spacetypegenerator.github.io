@@ -54,7 +54,7 @@ function preload() {
 }
 
 function setup() {
-  var p5SaveCanvas = createCanvas(windowWidth, windowHeight,WEBGL);
+  var p5SaveCanvas = createCanvas(windowWidth, windowHeight);
   canvas = p5SaveCanvas.canvas;
 
   pixelDensity(1);
