@@ -112,7 +112,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 172);
 
-  bkgdColorPicker = createColorPicker('#ff0000'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#0000ff'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
   
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
@@ -209,7 +209,7 @@ function draw() {
   translate(width / 2, height / 2);
   
   if(gifRecord == true){
-//    rotate(frameCount*waveSpeed);
+    rotate(frameCount*-waveSpeed);
   } else {
     rotate(frameCount*-(spin/200));
   }
@@ -423,7 +423,7 @@ function reset() {
 	ribbonCountSlider.value(40); ribbonSizeSlider.value(10);
 	radiusSlider.value(3); trackerSlider.value(10); spiralStartSlider.value(50); spinSlider.value(1);
   
-  waveSizeSlider.value(0); waveCountSlider.value(2); waveSpeedSlider.value(1); slopeSlider.value(1);
+  waveSizeSlider.value(0); waveCountSlider.value(2); waveSpeedSlider.value(0.01); slopeSlider.value(1);
   radioEnd.value('1').checked = true;
   
   inp0check.checked(false);
@@ -442,7 +442,7 @@ function wide() {
 	ribbonCountSlider.value(100); ribbonSizeSlider.value(15);
 	radiusSlider.value(15); trackerSlider.value(2); spiralStartSlider.value(40); spinSlider.value(1);
   
-  waveSizeSlider.value(0); waveCountSlider.value(2); waveSpeedSlider.value(1); slopeSlider.value(1);
+  waveSizeSlider.value(0); waveCountSlider.value(2); waveSpeedSlider.value(0.01); slopeSlider.value(1);
   radioEnd.value('2').checked = true;
   
   inp1.value('#ffffff');inp2.value('#0000ff');inp3.value('#ff0000');inp4.value('#000000');inp5.value('#000000');
@@ -460,7 +460,7 @@ function tall() {
 	ribbonCountSlider.value(40); ribbonSizeSlider.value(25);
 	radiusSlider.value(1); trackerSlider.value(4); spiralStartSlider.value(6); spinSlider.value(1);
   
-  waveSizeSlider.value(0); waveCountSlider.value(2); waveSpeedSlider.value(1); slopeSlider.value(1);
+  waveSizeSlider.value(0); waveCountSlider.value(2); waveSpeedSlider.value(0.01); slopeSlider.value(1);
   radioEnd.value('2').checked = true;
   
   inp1.value('#ff0000');inp2.value('#ffff00');inp3.value('#0000ff');inp4.value('#ffffff');inp5.value('#000000');
@@ -478,7 +478,7 @@ function amoeba() {
 	ribbonCountSlider.value(25); ribbonSizeSlider.value(22);
 	radiusSlider.value(6); trackerSlider.value(10); spiralStartSlider.value(32); spinSlider.value(1);
   
-  waveSizeSlider.value(100); waveCountSlider.value(2); waveSpeedSlider.value(1); slopeSlider.value(1);
+  waveSizeSlider.value(100); waveCountSlider.value(2); waveSpeedSlider.value(0.01); slopeSlider.value(1);
   radioEnd.value('2').checked = true;
   
   inp1.value('#ffff00');inp2.value('#ff0000');inp3.value('#011993');inp4.value('#ffffff');inp5.value('#000000');
@@ -551,7 +551,7 @@ function hourglass() {
 	ribbonCountSlider.value(337); ribbonSizeSlider.value(30);
 	radiusSlider.value(3); trackerSlider.value(3); spiralStartSlider.value(96); spinSlider.value(1);
   
-  waveSizeSlider.value(83); waveCountSlider.value(2); waveSpeedSlider.value(4); slopeSlider.value(3.14);
+  waveSizeSlider.value(83); waveCountSlider.value(2); waveSpeedSlider.value(0.04); slopeSlider.value(3.14);
   radioEnd.value('1').checked = true;
   
   inp1.value('#ff0000');inp2.value('#ffff00');inp3.value('#0000ff');inp4.value('#ffffff');inp5.value('#000000');
@@ -569,7 +569,7 @@ function star2() {
 	ribbonCountSlider.value(400); ribbonSizeSlider.value(43);
 	radiusSlider.value(12.5); trackerSlider.value(0); spiralStartSlider.value(30); spinSlider.value(1);
   
-  waveSizeSlider.value(31); waveCountSlider.value(6); waveSpeedSlider.value(7); slopeSlider.value(1);
+  waveSizeSlider.value(31); waveCountSlider.value(6); waveSpeedSlider.value(0.07); slopeSlider.value(1);
   radioEnd.value('1').checked = true;
   
   inp1.value('#ff0000');inp2.value('#FF9300');inp3.value('#ffff00');inp4.value('#00ff00');inp5.value('#0000ff');
@@ -587,7 +587,7 @@ function pretzel() {
 	ribbonCountSlider.value(400); ribbonSizeSlider.value(31);
 	radiusSlider.value(3); trackerSlider.value(1); spiralStartSlider.value(0); spinSlider.value(1);
   
-  waveSizeSlider.value(200); waveCountSlider.value(1); waveSpeedSlider.value(3); slopeSlider.value(1);
+  waveSizeSlider.value(200); waveCountSlider.value(1); waveSpeedSlider.value(0.03); slopeSlider.value(1);
   radioEnd.value('1').checked = true;
   
   inp1.value('#ff0000');inp2.value('#ffff00');inp3.value('#0000ff');inp4.value('#ffffff');inp5.value('#000000');
@@ -605,7 +605,7 @@ function lemniscate() {
 	ribbonCountSlider.value(400); ribbonSizeSlider.value(50);
 	radiusSlider.value(0); trackerSlider.value(21); spiralStartSlider.value(84); spinSlider.value(1);
   
-  waveSizeSlider.value(200); waveCountSlider.value(2); waveSpeedSlider.value(3); slopeSlider.value(1);
+  waveSizeSlider.value(200); waveCountSlider.value(2); waveSpeedSlider.value(0.03); slopeSlider.value(1);
   radioEnd.value('2').checked = true;
   
   inp1.value('#ff0000');inp2.value('#ffff00');inp3.value('#0000ff');inp4.value('#ffffff');inp5.value('#000000');
