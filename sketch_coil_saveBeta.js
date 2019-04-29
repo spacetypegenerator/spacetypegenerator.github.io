@@ -112,7 +112,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 172);
 
-  bkgdColorPicker = createColorPicker('#0000ff'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#ffff00'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
   
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
@@ -162,22 +162,22 @@ function draw() {
       rotate(PI/2);
         text("SEGMENT TOGGLES AND COLORS", 0,0);
       pop();
+
+      noFill();
+      strokeWeight(1); strokeJoin(ROUND);
+      stroke(50,200,250);
+      push();
+      translate(186, 24);
+        beginShape();
+        vertex(0,0);
+        vertex(15,0);
+        vertex(15,15);
+        vertex(0,15);
+        vertex(0,0);
+        vertex(15,15);
+        endShape();
+      pop();
     }
-  
-  noFill();
-  strokeWeight(1); strokeJoin(ROUND);
-  stroke(50,200,250);
-  push();
-  translate(186, 24);
-  	beginShape();
-  	vertex(0,0);
-  	vertex(15,0);
-  	vertex(15,15);
-  	vertex(0,15);
-  	vertex(0,0);
-  	vertex(15,15);
-  	endShape();
-  pop();
   
   inpText = String(inp.value()) + " ";
   runLength = inpText.length;
@@ -207,7 +207,7 @@ function draw() {
   translate(width / 2, height / 2);
   
   if(gifRecord == true){
-    rotate(frameCount*waveSpeed);
+//    rotate(frameCount*waveSpeed);
   } else {
     rotate(frameCount*-(spin/200));
   }
