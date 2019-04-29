@@ -112,7 +112,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 172);
 
-  bkgdColorPicker = createColorPicker('#000000'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#ff0000'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
   
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
@@ -620,7 +620,7 @@ function lemniscate() {
 function saveLoop() {
 //  2*PI/0.04 = gifLength;  
     if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
-        waveSpeed = 0.04;
+        waveSpeedSlider.value(0.04); 
         gifStart = frameCount;
         gifEnd = gifStart + gifLength;
         gifRecord = true;       
