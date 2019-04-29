@@ -177,10 +177,10 @@ function draw() {
         vertex(15,15);
         endShape();
       pop();
-      fill(50,200,250);
-      noStroke();
     }
-  
+  fill(50,200,250);
+  noStroke();
+    
   inpText = String(inp.value()) + " ";
   runLength = inpText.length;
 
