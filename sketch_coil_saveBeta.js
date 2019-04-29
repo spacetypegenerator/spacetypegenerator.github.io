@@ -178,9 +178,9 @@ function draw() {
         endShape();
       pop();
     }
-  fill(50,200,250);
-  noStroke();
-    
+  stroke(50,200,250);
+  noFill();
+
   inpText = String(inp.value()) + " ";
   runLength = inpText.length;
 
