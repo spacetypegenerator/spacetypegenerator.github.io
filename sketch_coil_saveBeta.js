@@ -84,7 +84,7 @@ function setup() {
   
   waveSizeSlider = createSlider(0, 200, 0); waveSizeSlider.position(25, 410);waveSizeSlider.style('width', '100px');
   waveCountSlider = createSlider(0, 12, 1); waveCountSlider.position(25, 440); waveCountSlider.style('width', '100px');
-  waveSpeedSlider = createSlider(0, 10, 1); waveSpeedSlider.position(25, 470); waveSpeedSlider.style('width', '100px');
+  waveSpeedSlider = createSlider(0, .1, .01); waveSpeedSlider.position(25, 470); waveSpeedSlider.style('width', '100px');
   slopeSlider = createSlider(0, PI, 1, 0.1); slopeSlider.position(25, 500); slopeSlider.style('width', '100px');
 
 //  resetSet = createButton('Reset'); resetSet.position(25,height-60); resetSet.mousePressed(reset);
@@ -112,7 +112,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 172);
 
-  bkgdColorPicker = createColorPicker('#FFFFFF'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#ff0000'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
   
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
@@ -150,7 +150,7 @@ function draw() {
 
       text("WAVE: Size " + waveSize, 25, 410);
       text("WAVE: Count " + waveCount, 25, 440);
-      text("WAVE: Speed " + waveSpeed, 25, 470);
+      text("WAVE: Speed " + waveSpeed*100, 25, 470);
       text("WAVE: Slope " + slope, 25, 500);  
 
       text("Background Color", 25, 570);
@@ -195,7 +195,7 @@ function draw() {
   
   waveSize = waveSizeSlider.value();
   waveCount = waveCountSlider.value();
-  waveSpeed = waveSpeedSlider.value()/100;
+  waveSpeed = waveSpeedSlider.value();
   slope = slopeSlider.value();
   
   SA = typeStroke/2;
