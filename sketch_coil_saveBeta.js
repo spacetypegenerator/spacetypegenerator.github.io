@@ -43,7 +43,7 @@ var gifRecord = false;
 var canvas;
 
 var capturer = new CCapture( {
-     framerate: 60,
+     framerate: 30,
      format:'gif',
      workersPath: 'js/',
      verbose: true
@@ -112,7 +112,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(160, 172);
 
-  bkgdColorPicker = createColorPicker('#0000ff'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#ffffff'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
   
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
