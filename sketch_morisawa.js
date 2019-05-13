@@ -88,7 +88,7 @@ function draw() {
   lineSpace = lineSpaceSlider.value();
   padding = paddingSlider.value();
   
-  background(bkgdColor);
+  background(125);
   
   fill(textColor);
   noStroke();
@@ -230,8 +230,10 @@ function draw() {
   noStroke(); fill(bkgdColor);
   rect(-1,-1,padding,height-110);
   rect(width+1,-1,-padding,height-110);
+  
+  mover++;
     
-    if(fluxSave == true && mover==1){
+    if(fluxSave == true && mover==2){
       capturer.start();
       capturer.capture(canvas);
       print("start");
@@ -244,8 +246,6 @@ function draw() {
       print("stop");
       fluxSave = false;
     }
-    
-  mover++;
 }
 
 function sinEngine(speed, slope) {
