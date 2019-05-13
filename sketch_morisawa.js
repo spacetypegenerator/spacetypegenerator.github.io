@@ -88,7 +88,7 @@ function draw() {
   lineSpace = lineSpaceSlider.value();
   padding = paddingSlider.value();
   
-  background(125);
+  background(bkgdColor);
   
   fill(textColor);
   noStroke();
@@ -340,6 +340,7 @@ function xFlux() {
 function fluxLoop() {
     if(confirm('Click OK to generate a looped gif of the flux motion.\nThe process will take a minute. Be patient, plz!')){
       speedSlider.value(0);
+      fluxCheck.checked(true); 
       mover = 1;
       fluxSave = true;      
     } else {
