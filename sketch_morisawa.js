@@ -93,7 +93,7 @@ function draw() {
   fill(textColor);
   noStroke();
   textSize(9);
-    if(gifRecord == false){
+    if(fluxSave == false){
       text("Rows " + rows, 25, height-85);
       text("Weight " + typeStroke, 25, height-55);  
       text("Tracking " + tracking, 150, height-85);
