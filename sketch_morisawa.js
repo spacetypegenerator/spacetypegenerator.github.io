@@ -230,8 +230,6 @@ function draw() {
   noStroke(); fill(bkgdColor);
   rect(-1,-1,padding,height-110);
   rect(width+1,-1,-padding,height-110);
-  
-  mover++;
     
     if(fluxSave == true && mover==1){
       capturer.start();
@@ -246,6 +244,8 @@ function draw() {
       print("stop");
       fluxSave = false;
     }
+    
+  mover++;
 }
 
 function sinEngine(speed, slope) {
