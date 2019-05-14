@@ -4,7 +4,7 @@
   right:0;
   text-align:left;
   padding-right:25px;
-  padding-bottom:20px;
+  padding-bottom:15px;
 }
 
 .top {
@@ -50,6 +50,18 @@ h3 {
   background-color:#FFF;
 }
 
+h4 {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 18px;
+  font-weight: 100;
+  text-align:center;
+  color: #000;
+  background-color:#FFF;
+  text-decoration: underline;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
 b {
   font-weight:400;
 }
@@ -77,9 +89,9 @@ a:active {
 }
 
 textarea {
-	width: 100%;
+  width: 100%;
+  resize: none;
 }
-
 
 /* Dropdown Button */
 .dropbtn {

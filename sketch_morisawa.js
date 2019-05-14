@@ -26,9 +26,14 @@ var singleQuoteSwitch = 1;
 // COLOR
 var bkgdColor, textColor;
 
-// SAVE BETA
+// SAVE FLUX
 var fluxLength = 126;
 var fluxSave = false;
+// SAVE SCROLL
+var scrollLength = 150;
+var scrollSave = false;
+
+
 var canvas;
 
 var capturer = new CCapture( {
@@ -54,29 +59,30 @@ function setup() {
   
   inp = select("#textfield");
 
-  rowsSlider = createSlider(1, 60, 10);rowsSlider.position(25, height-85);rowsSlider.style('width', '100px');  
-  typeStrokeSlider = createSlider(0, 4, 1, 0.5);typeStrokeSlider.position(25, height-55);typeStrokeSlider.style('width', '100px');
-  trackingSlider = createSlider(0, 500, 200);trackingSlider.position(150, height-85);trackingSlider.style('width', '100px');
-  speedSlider = createSlider(0, 2, 0.3, 0.01);speedSlider.position(150, height-55);speedSlider.style('width', '100px');
-  lineSpaceSlider = createSlider(0, 40, 5);lineSpaceSlider.position(275, height-85);lineSpaceSlider.style('width', '100px');
-  paddingSlider = createSlider(0, windowWidth/2, 20);paddingSlider.position(275, height-55);paddingSlider.style('width', '100px');
+  rowsSlider = createSlider(1, 60, 13);rowsSlider.position(10, height-55);rowsSlider.style('width', '100px');  
+  typeStrokeSlider = createSlider(0, 4, 1, 0.5);typeStrokeSlider.position(10, height-25);typeStrokeSlider.style('width', '100px');
+  trackingSlider = createSlider(0, 500, 200);trackingSlider.position(125, height-55);trackingSlider.style('width', '100px');
+  speedSlider = createSlider(0, 2, 0.3, 0.01);speedSlider.position(125, height-25);speedSlider.style('width', '100px');
+  lineSpaceSlider = createSlider(0, 40, 5);lineSpaceSlider.position(235, height-55);lineSpaceSlider.style('width', '100px');
+  paddingSlider = createSlider(0, windowWidth/2, 0);paddingSlider.position(235, height-25);paddingSlider.style('width', '100px');
   
-  mirrorCheck = createCheckbox('', true);mirrorCheck.position(390, height-88);
-  mirrorSpeedCheck = createCheckbox('', false);mirrorSpeedCheck.position(390, height-72);
-  fluxCheck = createCheckbox('', false);fluxCheck.position(390, height-56);
+  mirrorCheck = createCheckbox('', true);mirrorCheck.position(350, height-58);
+  mirrorSpeedCheck = createCheckbox('', false);mirrorSpeedCheck.position(350, height-42);
+  fluxCheck = createCheckbox('', false);fluxCheck.position(350, height-26);
   
-  textColorPicker = createColorPicker('#FFFFFF'); textColorPicker.position(490, height-89); textColorPicker.style('width', '20px');
-  bkgdColorPicker = createColorPicker('#000000'); bkgdColorPicker.position(490, height-59); bkgdColorPicker.style('width', '20px');
+  textColorPicker = createColorPicker('#FFFFFF'); textColorPicker.position(450, height-59); textColorPicker.style('width', '20px');
+  bkgdColorPicker = createColorPicker('#000000'); bkgdColorPicker.position(450, height-29); bkgdColorPicker.style('width', '20px');
 
-  moonSet = createButton('MOON'); moonSet.position(70,height-30); moonSet.mousePressed(moon);
-  postSpaceSet = createButton('Post Space'); postSpaceSet.position(125,height-30); postSpaceSet.mousePressed(postSpace);
-  crossSet = createButton('  X  '); crossSet.position(205,height-30); crossSet.mousePressed(cross);
-  bridgeSet = createButton('Bridge'); bridgeSet.position(235,height-30); bridgeSet.mousePressed(bridge);
-  whitneySet = createButton('Whitney'); whitneySet.position(290,height-30); whitneySet.mousePressed(whitney);
-  beachSet = createButton('Beach'); beachSet.position(355,height-30); beachSet.mousePressed(beach);
-  xFluxSet = createButton('Recede'); xFluxSet.position(410,height-30); xFluxSet.mousePressed(xFlux);
+  moonSet = createButton('MOON'); moonSet.position(530,height-30); moonSet.mousePressed(moon);
+  postSpaceSet = createButton('Post Space'); postSpaceSet.position(530,height-50); postSpaceSet.mousePressed(postSpace);
+  crossSet = createButton('  X  '); crossSet.position(588,height-30); crossSet.mousePressed(cross);
+  bridgeSet = createButton('Bridge'); bridgeSet.position(615,height-50); bridgeSet.mousePressed(bridge);
+  whitneySet = createButton('Whitney'); whitneySet.position(620,height-30); whitneySet.mousePressed(whitney);
+  beachSet = createButton('Beach'); beachSet.position(670,height-50); beachSet.mousePressed(beach);
+  xFluxSet = createButton('Recede'); xFluxSet.position(685,height-30); xFluxSet.mousePressed(xFlux);
 
-  fluxLoopSave = createButton('Save Flux'); fluxLoopSave.position(550,height-30); fluxLoopSave.mousePressed(fluxLoop);
+  fluxLoopSave = createButton('Flux Loop'); fluxLoopSave.position(770,height-50); fluxLoopSave.mousePressed(fluxLoop);
+  scrollSave = createButton('Scroll'); scrollSave.position(770,height-30); scrollSave.mousePressed(scroll);
 }
 
 function draw() {
@@ -88,27 +94,29 @@ function draw() {
   lineSpace = lineSpaceSlider.value();
   padding = paddingSlider.value();
   
-  background(bkgdColor);
+  background('#0000FF');
   
   fill(textColor);
   noStroke();
   textSize(9);
-    if(fluxSave == false){
-      text("Rows " + rows, 25, height-85);
-      text("Weight " + typeStroke, 25, height-55);  
-      text("Tracking " + tracking, 150, height-85);
-      text("Scroll Speed " + speed, 150, height-55);
-      text("Line space " + lineSpace, 275, height-85);
-      text("Matte " + padding, 275, height-55);
+    if(fluxSave == true || scrollSave == true){
+    } else {
+      text("Rows " + rows, 10, height-55);
+      text("Weight " + typeStroke, 10, height-25);  
+      text("Tracking " + tracking, 125, height-55);
+      text("Scroll Speed " + speed, 125, height-25);
+      text("Line space " + lineSpace, 235, height-55);
+      text("Matte " + padding, 235, height-25);
 
-      text("MIRROR", 411, height-74);
-      text("FLIP SPEED", 411, height-58);
-      text("ROW FLUX", 411, height-42);
+      text("MIRROR", 375, height-44);
+      text("FLIP SPEED", 375, height-28);
+      text("ROW FLUX", 375, height-12);
 
-      text("Type Color", 522, height-73);
-      text("Background", 522, height-43);
+      text("TYPE", 480, height-43);
+      text("BKGD", 480, height-13);
 
-      text("PRESETS", 25, height-18);
+      text("PRESETS", 530, height-57);
+      text("SAVE", 770, height-57);
     }
   
   inpText = String(inp.value());
@@ -130,7 +138,7 @@ function draw() {
 
   if(fluxCheck.checked() == true){
     rowMax = rowsSlider.value();
-    rows = map(sinEngine(0.05, 2),-1,1,rowMax,0.99);
+    rows = map(sinEngine(0.06, 2),-1,1,rowMax,0.99);
   }
     
   let xField = width-(2*padding);
@@ -246,6 +254,20 @@ function draw() {
       print("stop");
       fluxSave = false;
     }
+    
+    if(scrollSave == true && mover==2){
+      capturer.start();
+      capturer.capture(canvas);
+      print("start");
+    } else if(scrollSave == true && mover<=scrollLength){
+      capturer.capture(canvas);
+//      print("record");
+    } else if (scrollSave == true && mover==scrollLength+1) {
+      capturer.stop();
+      capturer.save();
+      print("stop");
+      scrollSave = false;
+    }
 }
 
 function sinEngine(speed, slope) {
@@ -345,5 +367,17 @@ function fluxLoop() {
       fluxSave = true;      
     } else {
       fluxSave = false;
+    }
+}
+
+function scroll() {
+    if(confirm('Click OK to record a section of the scrolling motion.\nThe process will take a minute. Be patient, plz!')){
+      mover = 1;
+        if(speedSlider.value()== 0){
+            speedSlider.value(0.3);
+        }
+      scrollSave = true;      
+    } else {
+      scrollSave = false;
     }
 }
