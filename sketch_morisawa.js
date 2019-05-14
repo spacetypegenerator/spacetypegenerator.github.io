@@ -30,9 +30,8 @@ var bkgdColor, textColor;
 var fluxLength = 126;
 var fluxSave = false;
 // SAVE SCROLL
-var scrollLength = 150;
+var scrollLength = 175;
 var scrollSave = false;
-
 
 var canvas;
 
@@ -94,7 +93,7 @@ function draw() {
   lineSpace = lineSpaceSlider.value();
   padding = paddingSlider.value();
   
-  background('#0000FF');
+  background('#FF0000');
   
   fill(textColor);
   noStroke();
@@ -134,11 +133,11 @@ function draw() {
   strokeCap(ROUND);strokeJoin(ROUND);
 
   push();
-  translate(padding,20);
+  translate(padding,60);
 
   if(fluxCheck.checked() == true){
     rowMax = rowsSlider.value();
-    rows = map(sinEngine(0.06, 2),-1,1,rowMax,0.99);
+    rows = map(sinEngine(0.05, 2),-1,1,rowMax,0.99);
   }
     
   let xField = width-(2*padding);
@@ -190,7 +189,7 @@ function draw() {
     
     pop();
     push();
-    translate(padding,20);
+    translate(padding,60);
     translate(0,yField);
     
     for (var m = 0; m < rows; m++){
@@ -236,8 +235,8 @@ function draw() {
   
   pop();
   noStroke(); fill(bkgdColor);
-  rect(-1,-1,padding,height-110);
-  rect(width+1,-1,-padding,height-110);
+  rect(-1,-1,padding,height-60);
+  rect(width+1,-1,-padding,height-60);
   
   mover++;
     
@@ -372,7 +371,7 @@ function fluxLoop() {
 
 function scroll() {
     if(confirm('Click OK to record a section of the scrolling motion.\nThe process will take a minute. Be patient, plz!')){
-      mover = 1;
+      mover = 10;
         if(speedSlider.value()== 0){
             speedSlider.value(0.3);
         }
