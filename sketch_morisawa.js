@@ -63,7 +63,7 @@ function setup() {
   trackingSlider = createSlider(0, 500, 200);trackingSlider.position(125, height-55);trackingSlider.style('width', '100px');
   speedSlider = createSlider(0, 2, 0.3, 0.01);speedSlider.position(125, height-25);speedSlider.style('width', '100px');
   lineSpaceSlider = createSlider(0, 40, 5);lineSpaceSlider.position(235, height-55);lineSpaceSlider.style('width', '100px');
-  paddingSlider = createSlider(0, windowWidth/2, 0);paddingSlider.position(235, height-25);paddingSlider.style('width', '100px');
+  paddingSlider = createSlider(0, windowWidth/2, 40);paddingSlider.position(235, height-25);paddingSlider.style('width', '100px');
   
   mirrorCheck = createCheckbox('', true);mirrorCheck.position(350, height-58);
   mirrorSpeedCheck = createCheckbox('', false);mirrorSpeedCheck.position(350, height-42);
@@ -93,7 +93,7 @@ function draw() {
   lineSpace = lineSpaceSlider.value();
   padding = paddingSlider.value();
   
-  background('#FF0000');
+  background(bkgdColor);
   
   fill(textColor);
   noStroke();
@@ -254,14 +254,14 @@ function draw() {
       fluxSave = false;
     }
     
-    if(scrollSave == true && mover==2){
+    if(scrollSave == true && mover==21){
       capturer.start();
       capturer.capture(canvas);
       print("start");
-    } else if(scrollSave == true && mover<=scrollLength){
+    } else if(scrollSave == true && mover<=scrollLength+19){
       capturer.capture(canvas);
 //      print("record");
-    } else if (scrollSave == true && mover==scrollLength+1) {
+    } else if (scrollSave == true && mover==scrollLength+20) {
       capturer.stop();
       capturer.save();
       print("stop");
@@ -371,7 +371,7 @@ function fluxLoop() {
 
 function scroll() {
     if(confirm('Click OK to record a section of the scrolling motion.\nThe process will take a minute. Be patient, plz!')){
-      mover = 10;
+      mover = 20;
         if(speedSlider.value()== 0){
             speedSlider.value(0.3);
         }
