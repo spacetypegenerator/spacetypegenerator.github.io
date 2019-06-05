@@ -36,10 +36,11 @@ var myText = [];
 var exportButton;
 
 // COLOR
-var invertCheck;
 var strkColor = 0;
 var bkgdColor = 255;
-var bkgdStrokeColor = 235;
+var bkgdStrokeColor = 255;
+var inp1, inp2, inp3, inp4, inp5, inp6;
+var inpNumber = 1;
 
 // PRESETS
 var presetSimple, presetJellyfish, presetCrown, presetComplex, presetWeave, presetZebra, presetHoops;
@@ -53,6 +54,7 @@ function setup(){
   background(bkgdColor);
   smooth();
   textFont(font);
+  frameRate(30);
   
   inp = select("#textfield");
   
@@ -77,13 +79,13 @@ function setup(){
   yRotTweakSlider = createSlider(0,45,0); yRotTweakSlider.position(15,547); yRotTweakSlider.style('width','100px');
   zRotTweakSlider = createSlider(0,45,0); zRotTweakSlider.position(15,577); zRotTweakSlider.style('width','100px');
   
-  invertCheck = createCheckbox('',false); invertCheck.position(140,60);
   xRotCameraSlider = createSlider(-180,180,15); xRotCameraSlider.position(-20,height-107); xRotCameraSlider.style('width','100px'); xRotCameraSlider.style('rotate',270);
   yRotCameraSlider = createSlider(-180,180,0); yRotCameraSlider.position(20,height-107); yRotCameraSlider.style('width','100px'); yRotCameraSlider.style('rotate',270);
   zRotCameraSlider = createSlider(-180,180,0); zRotCameraSlider.position(60,height-107); zRotCameraSlider.style('width','100px'); zRotCameraSlider.style('rotate',270);
 	zoomCameraSlider = createSlider(-500,500,0); zoomCameraSlider.position(15,height-20); zoomCameraSlider.style('width','100px');
 
-  exportButton = createButton('Export PNG'); exportButton.position(140,20); exportButton.mousePressed(exportPNG);  
+  exportButton = createButton('Save Loop'); exportButton.position(140,10); exportButton.mousePressed(saveLoop);
+  prideButton = createButton('PRIDE!'); prideButton.position(140,35); prideButton.mousePressed(pride);
 
   presetSimple = createButton('Simple'); presetSimple.position(140,height-30); presetSimple.mousePressed(simpleSet);
   presetJellyfish = createButton('Jellyfish'); presetJellyfish.position(200,height-30); presetJellyfish.mousePressed(jellyfishSet);
@@ -93,12 +95,25 @@ function setup(){
   presetZebra = createButton('Zebra'); presetZebra.position(465,height-30); presetZebra.mousePressed(zebraSet);
   presetHoops = createButton('Hoops'); presetHoops.position(515,height-30); presetHoops.mousePressed(hoopsSet);
   
-  invertCheck.changed(inverter);
+  inp1 = createColorPicker('#000');inp1.position(140, 80);inp1.style('height', '20px');
+ /*
+  inp1check = createCheckbox('', true);inp1check.position(160, 82);
+  inp2 = createColorPicker('#ff0000');inp2.position(180, 110);inp2.style('width', '20px');
+  inp2check = createCheckbox('', false);inp2check.position(160, 112);
+  inp3 = createColorPicker('#0000ff');inp3.position(180, 140);inp3.style('width', '20px');
+  inp3check = createCheckbox('', false);inp3check.position(160, 142);
+  inp4 = createColorPicker('#ffff00');inp4.position(180, 170);inp4.style('width', '20px');
+  inp4check = createCheckbox('', false);inp4check.position(160, 172);
+  inp5 = createColorPicker('#ffffff');inp5.position(180, 200);inp5.style('width', '20px');
+  inp5check = createCheckbox('', false);inp5check.position(160, 202);
+*/
+  bkgdColorPicker = createColorPicker('#FFFFFF'); bkgdColorPicker.position(140, 120); bkgdColorPicker.style('height', '20px');
+//  bkgdStrokeColorPicker = createColorPicker('#FFFFFF'); bkgdStrokeColorPicker.position(160, 310); bkgdStrokeColorPicker.style('height', '20px');
 }
 
 function draw(){
+  bkgdColor = bkgdColorPicker.value();
   background(bkgdColor);
-  letter_select = 0;
   inpText = String(inp.value());  
 
   radius = rSlider.value();
@@ -127,20 +142,24 @@ function draw(){
   pieSlice = 2*PI/inpText.length;
   rWaveOffset = 2*PI/inpText.length*rWaveCount;
 
-  if(mouseX>145 && mouseX<220 && mouseY>18 && mouseY<45){
-  } else {
     push();
     translate(-width/2,-height/2);
-    stroke(bkgdStrokeColor);
+    stroke(125);
     strokeWeight(1);
     line(10,130,130,130);
     line(10,350,130,350);
     rect(5,450,125,160);    
     line(185,height-43,500,height-43); 
 
-    fill(strkColor);
-    textSize(9);
+    fill(125);
     textAlign(LEFT);
+
+    textSize(9);
+    text("Type Color",140,75);
+    text("BACKGROUND",140,115);
+//    text("INNER",145,300);
+
+  
     text("CYLINDER: Radius " + radius,15,16);
     text("CYLINDER: Count " + stackNum,15,46);
     text("CYLINDER: Rotate " + rRotate,15,76);
@@ -163,7 +182,6 @@ function draw(){
     text("TWEAK: Y Rotation " + yRotTweak,15,546);
     text("TWEAK: Z Rotation " + zRotTweak,15,576);
 
-    text("INVERT",158,74);  
     text("CAMERA: Zoom",15,height-22);
 		text("PRESETS", 145,height-40);
     
@@ -174,7 +192,6 @@ function draw(){
     text("CAMERA: Z-Rotation " + zRotCamera,45,100);
 
     pop();
-  }
   
   noFill();
   strokeWeight(typeStroke);
@@ -194,22 +211,15 @@ function draw(){
                	
   for(var i =0; i<inpText.length*stackNum; i++) {
     var ringSpot = i%inpText.length;
-    
     letter_select = ringSpot;  
     
-//    if(strecherYsize!=0){
       if(floor(i/inpText.length)%2 === 1){
         strecherY = map(sin(ringSpot*rWaveOffset + frameCount*(rWaveSpeed/1000)),-1,1,0,strecherYsize);
       } else {
         strecherY = map(sin(ringSpot*rWaveOffset + frameCount*(rWaveSpeed/1000) + PI),-1,1,0,strecherYsize);
       }
-//    }
-//		if(strecherXsize!=0){
-	    // Longitudinal
-//    	strecherX = map(sin(ringSpot*rWaveOffset + frameCount*(rWaveSpeed/1000)),-1,1,0,strecherXsize);
-			// Latitudinal
+
 	    strecherX = map(sin(floor(i/inpText.length)*rWaveOffset+frameCount*(rWaveSpeed/1000)),-1,1,0,strecherXsize);
-//    }
     
     push();
     // stack translates
@@ -252,7 +262,13 @@ function draw(){
         
     translate(-(typeX+strecherX)/2,-(typeY+strecherY)/2,0);
     	// outer surface
-    	stroke(strkColor);
+    if(inpNumber == 6){
+      setTextColor(floor(i/inpText.length));
+    } else {
+      strkColor = color(inp1.value())
+      bkgdStrokeColor = lerpColor(strkColor, color(bkgdColorPicker.value()), 0.75);
+    }
+      stroke(strkColor);    
      	keyboardEngine();
     translate(0,0,-1);
    		// inner surface
@@ -263,20 +279,32 @@ function draw(){
 	pop();
 }
 
-function exportPNG() {
-	saveCanvas('STG_cylinder', 'png');
-}
-
-function inverter() {
-	if(this.checked()){
-		strkColor = color(255);
-    bkgdColor = color(0);
-    bkgdStrokeColor = color(25); 
-  } else {
-  	strkColor = color(0);
-    bkgdColor = color(255);
-    bkgdStrokeColor = color(235);
-  }
+function setTextColor(switcher) {
+  let backgroundColor = color(bkgdColorPicker.value());
+    if (switcher % 6 == 0) {
+      strkColor = inp1;
+      bkgdStrokeColor = lerpColor(strkColor, backgroundColor, 0.75);
+    }
+    if (switcher % 6 == 1) {
+      strkColor = inp2;
+      bkgdStrokeColor = lerpColor(strkColor, backgroundColor, 0.75);
+    }
+    if (switcher % 6 == 2) {
+      strkColor = inp3;
+      bkgdStrokeColor = lerpColor(strkColor, backgroundColor, 0.75);
+    }
+    if (switcher % 6 == 3) {
+      strkColor = inp4;
+      bkgdStrokeColor = lerpColor(strkColor, backgroundColor, 0.75);
+    }
+    if (switcher % 6 == 4) {
+      strkColor = inp5;
+      bkgdStrokeColor = lerpColor(strkColor, backgroundColor, 0.75);
+    }
+    if (switcher % 6 == 5) {
+      strkColor = inp6;
+      bkgdStrokeColor = lerpColor(strkColor, backgroundColor, 0.75);
+    }
 }
 
 function reSetting() {
@@ -286,7 +314,7 @@ function reSetting() {
   xRotTweakSlider.value(0); yRotTweakSlider.value(0); zRotTweakSlider.value(0);
   xRotCameraSlider.value(15);  yRotCameraSlider.value(0);  zRotCameraSlider.value(0); zoomCameraSlider.value(0);
   
-  invertCheck.checked(false);
+//  invertCheck.checked(false);
   strkColor = color(0);
 	bkgdColor = color(255);
   bkgdStrokeColor = color(235);
@@ -305,8 +333,8 @@ function jellyfishSet() {
   rLongSlider.value(80); strecherXslider.value(23); typeXSlider.value(13); typeYSlider.value(64); typeStrokeSlider.value(.5);
   xRotCameraSlider.value(25);
   
-  invertCheck.checked(true);
-		strkColor = color(255);
+//  invertCheck.checked(true);
+	strkColor = color(255);
     bkgdColor = color(0);
     bkgdStrokeColor = color(25); 
 }
@@ -325,8 +353,7 @@ function complexSet() {
   xRotTweakSlider.value(15); yRotTweakSlider.value(35); zRotTweakSlider.value(0);
   xRotCameraSlider.value(-34);  yRotCameraSlider.value(10);  zRotCameraSlider.value(25);
   
-  invertCheck.checked(true);
-		strkColor = color(255);
+//  invertCheck.checked(true);
     bkgdColor = color(0);
     bkgdStrokeColor = color(25); 
 }
@@ -349,8 +376,7 @@ function zebraSet() {
   xRotTweakSlider.value(9); yRotTweakSlider.value(24); zRotTweakSlider.value(22);
   xRotCameraSlider.value(15);  yRotCameraSlider.value(0);  zRotCameraSlider.value(0); zoomCameraSlider.value(0);
   
-  invertCheck.checked(true);
-		strkColor = color(255);
+//  invertCheck.checked(true);
     bkgdColor = color(0);
     bkgdStrokeColor = color(25); 
 }
@@ -363,8 +389,17 @@ function hoopsSet() {
   zRotTweakSlider.value(28);
   xRotCameraSlider.value(-10);
 
-  invertCheck.checked(true);
-		strkColor = color(255);
+//  invertCheck.checked(true);
     bkgdColor = color(0);
     bkgdStrokeColor = color(25); 
+}
+
+function pride() {
+  stackNumSlider.value(6);
+  inpNumber = 6;
+  
+  inp1 = color('#e70000');inp2 = color('#ff8c00'); inp3 = color('#ffef00');inp4 = color('#00811f'); inp5 = color('#0044ff'); inp6 = color('#760089');
+}
+
+function saveLoop(){
 }

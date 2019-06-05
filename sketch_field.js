@@ -108,7 +108,9 @@ function setup(){
   zRotCameraSlider = createSlider(-180,180,0); zRotCameraSlider.position(60,height-107); zRotCameraSlider.style('width','100px'); zRotCameraSlider.style('rotate',270);
 	zoomCameraSlider = createSlider(-500,500,0); zoomCameraSlider.position(15,height-20); zoomCameraSlider.style('width','100px');
 
-  exportButton = createButton('Export PNG'); exportButton.position(140,20); exportButton.mousePressed(exportPNG);
+//  exportButton = createButton('Save Loop'); exportButton.position(140,10); exportButton.mousePressed(saveLoop);
+  prideButton = createButton('PRIDE!'); prideButton.position(140,35); prideButton.mousePressed(pride);
+      
   presetStacks = createButton('Stacks'); presetStacks.position(140,height-30); presetStacks.mousePressed(stackSet);
   presetBricks = createButton('Bricks'); presetBricks.position(200,height-30); presetBricks.mousePressed(brickSet);
   presetSimpleZ = createButton('Simple Z'); presetSimpleZ.position(260,height-30); presetSimpleZ.mousePressed(simpleZSet);
@@ -122,7 +124,25 @@ function setup(){
 	xStrechWaveCheck.changed(xStrechWaveChecker);
 	yStrechWaveCheck.changed(yStrechWaveChecker);
   fullTextCheck.changed(fullTexter);
-  invertCheck.changed(inverter);
+
+  inp1 = createColorPicker('#000');inp1.position(180, 80);inp1.style('width', '20px');
+  inp1check = createCheckbox('', true);inp1check.position(160, 82);
+  inp2 = createColorPicker('#ff0000');inp2.position(180, 110);inp2.style('width', '20px');
+  inp2check = createCheckbox('', false);inp2check.position(160, 112);
+  inp3 = createColorPicker('#0000ff');inp3.position(180, 140);inp3.style('width', '20px');
+  inp3check = createCheckbox('', false);inp3check.position(160, 142);
+  inp4 = createColorPicker('#ffff00');inp4.position(180, 170);inp4.style('width', '20px');
+  inp4check = createCheckbox('', false);inp4check.position(160, 172);
+  inp5 = createColorPicker('#ffffff');inp5.position(180, 200);inp5.style('width', '20px');
+  inp5check = createCheckbox('', false);inp5check.position(160, 202);
+
+  bkgdColorPicker = createColorPicker('#FFFFFF'); bkgdColorPicker.position(160, 265); bkgdColorPicker.style('height', '50px');
+  
+  inp1check.changed(inp1checker);
+  inp2check.changed(inp2checker);
+  inp3check.changed(inp3checker);
+  inp4check.changed(inp4checker);
+  inp5check.changed(inp5checker);
 }
 
 function draw(){
@@ -168,6 +188,7 @@ function draw(){
     strokeWeight(1);
     line(10,130,130,130);
     line(10,230,130,230);  	
+    line(150,240,220,240);  	
     line(10,330,130,330);  	
     line(10,520,130,520);  
     line(185,height-43,500,height-43); 
@@ -179,6 +200,8 @@ function draw(){
     rotateZ(-PI/2);
     text("GRID",-120,17);
     text("TYPE",-220,17);
+    text("TYPE COLOR",-220,150);
+    text("BKGD COLOR",-330,150);
     text("WAVE",-320,17);
     text("AMPLITUDE",-510,17);
     rotateZ(PI/2);
@@ -210,10 +233,10 @@ function draw(){
     text("AMPLITUDE: Y Stretch " + yStrechWave,25,496);
     text("OFFSET",150,510); 
 
-    text("INVERT",158,74);  
-    text("FULL TEXT",158,104);
+    text("FULL TEXT",160,70);
+
     text("CAMERA: Zoom",15,height-22);
-		text("PRESETS", 145,height-40);
+	text("PRESETS", 145,height-40);
     
     translate(0,height);
     rotateZ(-PI/2);
@@ -254,32 +277,27 @@ function draw(){
     } else {
       letter_select = i;
     }
+
+    setTextColor(floor(i/column));
+    stroke(strkColor);
     
-  if(zWave != 0){
   	zWaver = sinEngine(zWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*zWave;
-  }
-  if(xWave != 0){
+
   	xWaver = map(sinEngine(xWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,xWave);
-  }
-  if(yWave != 0){
-  	yWaver = sinEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWave;
-  }
-//  if(yWavezRot != 0){
-		yWavezRoter = cosEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWavezRot;
-//  }
-//  if(yWavexStr != 0){
+
+      yWaver = sinEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWave;
+
+      yWavezRoter = cosEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWavezRot;
+
 		yWavexStrer = map(cosEngine2(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,yWavexStr);
-//  }
-//  if(xStrechWave != 0 || yWavexStr != 0){
+
     strecherX = map(sinEngine(xStrechWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,xStrechWave)+yWavexStrer;
-//  }
-//  if(yStrechWave != 0){
+
     if(floor(i/column)%2==1){
 	    strecherY = map(sinEngine(yStrechWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,yStrechWave);
     } else {
 	    strecherY = map(sinEngine(yStrechWaveChecked+PI,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,yStrechWave);   
     }
-//  }
     
     push();
     translate((i%column)*xSpace + xWaver,floor(i/column)*ySpace + yWaver,zWaver);
@@ -375,18 +393,92 @@ function yStrechWaveChecker() {
   }
 }
 
-function inverter() {
-	if(this.checked()){
-		strkColor = color(255);
-    bkgdColor = color(0);
+
+function inp1checker() {
+  inp2check.checked(false);
+  inp3check.checked(false);
+  inp4check.checked(false);
+  inp5check.checked(false);
+  inpNumber = 1;
+}
+
+function inp2checker() {
+    inp1check.checked(true);
+    inp3check.checked(false);
+    inp4check.checked(false);
+    inp5check.checked(false);
+	if(this.checked()) {
+    inpNumber = 2;
   } else {
-  	strkColor = color(0);
-    bkgdColor = color(255);
+  	inpNumber = 1;
   }
 }
 
-function exportPNG() {
-	saveCanvas('STG_field', 'png');
+function inp3checker() {
+    inp1check.checked(true);
+    inp2check.checked(true);
+    inp4check.checked(false);
+    inp5check.checked(false);
+	if(this.checked()) {
+    inpNumber = 3;
+  } else {
+    inpNumber = 2;
+  }
+}
+
+function inp4checker() {
+  	inp1check.checked(true);
+    inp2check.checked(true);
+    inp3check.checked(true);
+    inp5check.checked(false);
+	if(this.checked()) {
+	  inpNumber = 4;
+  } else {
+    inpNumber = 3;
+  }
+}
+
+function inp5checker() {
+  	inp1check.checked(true);
+    inp2check.checked(true);
+    inp3check.checked(true);
+    inp4check.checked(true);
+	if(this.checked()){
+	  inpNumber = 5;
+  } else {
+    inpNumber = 4;
+  }
+}
+
+function setTextColor(switcher) {
+  if (inpNumber == 6) {
+    if (switcher % 6 == 0) {strkColor = inp1.value();}
+    if (switcher % 6 == 1) {strkColor = inp2.value();}
+    if (switcher % 6 == 2) {strkColor = inp3.value();}
+    if (switcher % 6 == 3) {strkColor = inp4.value();}
+    if (switcher % 6 == 4) {strkColor = inp5.value();}
+    if (switcher % 6 == 5) {strkColor = inp6;}
+  }if (inpNumber == 5) {
+    if (switcher % 5 == 0) {strkColor = inp1.value();}
+    if (switcher % 5 == 1) {strkColor = inp2.value();}
+    if (switcher % 5 == 2) {strkColor = inp3.value();}
+    if (switcher % 5 == 3) {strkColor = inp4.value();}
+    if (switcher % 5 == 4) {strkColor = inp5.value();}
+  } else if (inpNumber == 4) {
+    if (switcher % 4 == 0) {strkColor = inp1.value();}
+    if (switcher % 4 == 1) {strkColor = inp2.value();}
+    if (switcher % 4 == 2) {strkColor = inp3.value();}
+    if (switcher % 4 == 3) {strkColor = inp4.value();}
+  } else if (inpNumber == 3) {
+    if (switcher % 3 == 0) {strkColor = inp1.value();}
+    if (switcher % 3 == 1) {strkColor = inp2.value();}
+    if (switcher % 3 == 2) {strkColor = inp3.value();}
+  } else if (inpNumber == 2) {
+    if (switcher % 2 == 0) {strkColor = inp1.value();}
+    if (switcher % 2 == 1) {strkColor = inp2.value();}
+  } else if (inpNumber == 1) {
+    strkColor = inp1.value();
+  }
 }
 
 function reSetting() {
@@ -462,4 +554,14 @@ function harlequinSet() {
   invertCheck.checked(true);
   strkColor = color(255);
   bkgdColor = color(0);
+}
+
+function pride() {
+  inpNumber = 6;
+  
+  inp1.value('#e70000');inp2.value('#ff8c00');inp3.value('#ffef00');inp4.value('#00811f');inp5.value('#0044ff'); inp6 = color('#760089');
+  inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
+}
+
+function saveLoop(){
 }

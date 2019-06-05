@@ -86,7 +86,9 @@ function setup() {
   yRotCameraSlider = createSlider(-90, 90, 65);yRotCameraSlider.position(20, height - 107);yRotCameraSlider.style('width', '100px');yRotCameraSlider.style('rotate', 270);
   zRotCameraSlider = createSlider(-90, 90, 11);zRotCameraSlider.position(60, height - 107);zRotCameraSlider.style('width', '100px');zRotCameraSlider.style('rotate', 270);
   zoomCameraSlider = createSlider(-500, 500, -40);zoomCameraSlider.position(15, height - 20);zoomCameraSlider.style('width', '100px');
-
+  
+  prideButton = createButton('PRIDE!'); prideButton.position(140,45); prideButton.mousePressed(pride);
+  
   oneBannerSet = createButton('A Banner'); oneBannerSet.position(150,height-60); oneBannerSet.mousePressed(oneBanner);
   twistSet = createButton('A Twist'); twistSet.position(220,height-60); twistSet.mousePressed(twist);
   foldsSet = createButton('Folds'); foldsSet.position(280,height-60); foldsSet.mousePressed(folds);
@@ -102,21 +104,19 @@ function setup() {
   newsprintSet = createButton('Newsprint'); newsprintSet.position(415,height-40); newsprintSet.mousePressed(newsprint);
   edgeSet = createButton('Edge Case'); edgeSet.position(490,height-40); edgeSet.mousePressed(edge);
   
-  inp0check = createCheckbox('', false);inp0check.position(160, 22);
-  inp1 = createColorPicker('#ffffff');inp1.position(180, 50);inp1.style('width', '20px');
-  inp1check = createCheckbox('', true);inp1check.position(160, 52);
-  inp2 = createColorPicker('#0000ff');inp2.position(180, 80);inp2.style('width', '20px');
-  inp2check = createCheckbox('', true);inp2check.position(160, 82);
-  inp3 = createColorPicker('#ff0000');inp3.position(180, 110);inp3.style('width', '20px');
-  inp3check = createCheckbox('', false);inp3check.position(160, 112);
-  inp4 = createColorPicker('#ffff00');inp4.position(180, 140);inp4.style('width', '20px');
-  inp4check = createCheckbox('', false);inp4check.position(160, 142);
-  inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
-  inp5check = createCheckbox('', false);inp5check.position(160, 172);
+  inp0check = createCheckbox('', false);inp0check.position(150, 65);
+  inp1 = createColorPicker('#ffffff');inp1.position(170, 93);inp1.style('width', '20px');
+  inp1check = createCheckbox('', true);inp1check.position(150, 95);
+  inp2 = createColorPicker('#0000ff');inp2.position(170, 123);inp2.style('width', '20px');
+  inp2check = createCheckbox('', true);inp2check.position(150, 125);
+  inp3 = createColorPicker('#ff0000');inp3.position(170, 153);inp3.style('width', '20px');
+  inp3check = createCheckbox('', false);inp3check.position(150, 155);
+  inp4 = createColorPicker('#ffff00');inp4.position(170, 183);inp4.style('width', '20px');
+  inp4check = createCheckbox('', false);inp4check.position(150, 185);
+  inp5 = createColorPicker('#000');inp5.position(170, 213);inp5.style('width', '20px');
+  inp5check = createCheckbox('', false);inp5check.position(150, 215);
 
-  bkgdColorPicker = createColorPicker('#000000');
-  bkgdColorPicker.position(15, 450);
-  bkgdColorPicker.style('width', '90px');
+  bkgdColorPicker = createColorPicker('#000');bkgdColorPicker.position(150, 255);bkgdColorPicker.style('height', '50px');
 
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
@@ -184,18 +184,16 @@ function draw() {
       text("Type & Stripe adjust " + typePush, 15, 510);
       text("Camera Zoom " + zoomCamera, 15, height - 20);
         
-//      text("It'll take a minute...", 147, 240);
-
-      text("Background Color", 15, 440);
       text("PRESETS", 150,height-70);
-      text("No stripes", 182,35);
+      text("No stripes", 170,79);
 
       translate(0, height);
       rotateZ(-PI / 2);
       text("CAMERA: X-Rotation " + xRotCamera, 45, 20);
       text("CAMERA: Y-Rotation " + yRotCamera, 45, 60);
       text("CAMERA: Z-Rotation " + zRotCamera, 45, 100);
-      text("SEGMENT TOGGLES AND COLORS", 45+(height-240),150);
+      text("SEGMENT TOGGLES AND COLORS", (height-230),140);
+      text("BKGD COLORS", (height-315),140);
     }
   pop();
   
@@ -259,7 +257,7 @@ function draw() {
         keyboardEngine_corners();
       if(inp0check.checked() == false){
         translate(0, 0, -typePush);
-            fill(ribbonColor); stroke(ribbonColor); strokeWeight(1);
+            fill(ribbonColor); noStroke();
             beginShape();
             vertex(TLbox.x, TLbox.y, TLbox.z);
             vertex(TRbox.x, TRbox.y, TRbox.z);
@@ -269,7 +267,7 @@ function draw() {
             endShape();
           if(backSide == true) {
             translate(0, 0, -1);
-            fill(strkColor); stroke(strkColor);
+            fill(strkColor);
             beginShape();
             vertex(TLbox.x, TLbox.y, TLbox.z);
             vertex(TRbox.x, TRbox.y, TRbox.z);
@@ -356,7 +354,14 @@ function inp5checker() {
 }
 
 function setRibbonColor(switcher) {
-  if (inpNumber == 5) {
+  if (inpNumber == 6) {
+    if (switcher % 6 == 0) {ribbonColor = inp1.value();}
+    if (switcher % 6 == 1) {ribbonColor = inp2.value();}
+    if (switcher % 6 == 2) {ribbonColor = inp3.value();}
+    if (switcher % 6 == 3) {ribbonColor = inp4.value();}
+    if (switcher % 6 == 4) {ribbonColor = inp5.value();}
+    if (switcher % 6 == 5) {ribbonColor = inp6;}
+  } if (inpNumber == 5) {
     if (switcher % 5 == 0) {ribbonColor = inp1.value();}
     if (switcher % 5 == 1) {ribbonColor = inp2.value();}
     if (switcher % 5 == 2) {ribbonColor = inp3.value();}
@@ -380,7 +385,14 @@ function setRibbonColor(switcher) {
 }
 
 function setTextColor(switcher) {
-  if (inpNumber == 5) {
+  if (inpNumber == 6) {
+    if (switcher % 6 == 0) {strkColor = inp6;}
+    if (switcher % 6 == 1) {strkColor = inp1.value();}
+    if (switcher % 6 == 2) {strkColor = inp4.value();}
+    if (switcher % 6 == 3) {strkColor = inp3.value();}
+    if (switcher % 6 == 4) {strkColor = inp2.value();}
+    if (switcher % 6 == 5) {strkColor = inp5.value();}
+  } else if (inpNumber == 5) {
     if (switcher % 5 == 0) {strkColor = inp5.value();}
     if (switcher % 5 == 1) {strkColor = inp1.value();}
     if (switcher % 5 == 2) {strkColor = inp2.value();}
@@ -404,9 +416,15 @@ function setTextColor(switcher) {
   }
 }
 
-
 function setTextOnlyColor(switcher) {
-  if (inpNumber == 5) {
+  if (inpNumber == 6) {
+    if (switcher % 6 == 0) {strkColor = inp1.value();}
+    if (switcher % 6 == 1) {strkColor = inp2.value();}
+    if (switcher % 6 == 2) {strkColor = inp3.value();}
+    if (switcher % 6 == 3) {strkColor = inp4.value();}
+    if (switcher % 6 == 4) {strkColor = inp5.value();}
+    if (switcher % 6 == 5) {strkColor = inp6;}
+  } else if (inpNumber == 5) {
     if (switcher % 5 == 0) {strkColor = inp1.value();}
     if (switcher % 5 == 1) {strkColor = inp2.value();}
     if (switcher % 5 == 2) {strkColor = inp3.value();}
@@ -705,6 +723,13 @@ function mystery() {
   
   inpNumber = 1;
   bkgdColorPicker.value('#ffffff');
+}
+
+function pride() {
+  inpNumber = 6;
+  
+  inp1.value('#e70000');inp2.value('#ff8c00');inp3.value('#ffef00');inp4.value('#00811f');inp5.value('#0044ff'); inp6 = color('#760089');
+  inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
 }
 
 function saveLoop() {

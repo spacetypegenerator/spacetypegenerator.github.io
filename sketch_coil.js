@@ -70,6 +70,9 @@ function setup() {
   waveSpeedSlider = createSlider(0, 10, 1); waveSpeedSlider.position(25, 470); waveSpeedSlider.style('width', '100px');
   slopeSlider = createSlider(0, PI, 1, 0.1); slopeSlider.position(25, 500); slopeSlider.style('width', '100px');
 
+  //exportButton = createButton('Save Loop'); exportButton.position(140,20); exportButton.mousePressed(saveLoop);
+  prideButton = createButton('PRIDE!'); prideButton.position(140,45); prideButton.mousePressed(pride);
+    
 //  resetSet = createButton('Reset'); resetSet.position(25,height-60); resetSet.mousePressed(reset);
   wideSet = createButton('Wide'); wideSet.position(25,height-60); wideSet.mousePressed(wide);
   superSet = createButton('Super'); superSet.position(75,height-60); superSet.mousePressed(tall);
@@ -83,20 +86,20 @@ function setup() {
   pretzelSet = createButton('Pretzel'); pretzelSet.position(200,height-35); pretzelSet.mousePressed(pretzel);	
   lemniscateSet = createButton('Lemniscate'); lemniscateSet.position(260,height-35); lemniscateSet.mousePressed(lemniscate);	
 
-  inp0check = createCheckbox('', false);inp0check.position(160, 22);
-  inp1 = createColorPicker('#ff0000');inp1.position(180, 50);inp1.style('width', '20px');
-  inp1check = createCheckbox('', true);inp1check.position(160, 52);
-  inp2 = createColorPicker('#ffff00');inp2.position(180, 80);inp2.style('width', '20px');
-  inp2check = createCheckbox('', true);inp2check.position(160, 82);
-  inp3 = createColorPicker('#0000ff');inp3.position(180, 110);inp3.style('width', '20px');
-  inp3check = createCheckbox('', true);inp3check.position(160, 112);
-  inp4 = createColorPicker('#ffffff');inp4.position(180, 140);inp4.style('width', '20px');
-  inp4check = createCheckbox('', true);inp4check.position(160, 142);
-  inp5 = createColorPicker('#000');inp5.position(180, 170);inp5.style('width', '20px');
-  inp5check = createCheckbox('', false);inp5check.position(160, 172);
+  inp0check = createCheckbox('', false);inp0check.position(150, 77);
+  inp1 = createColorPicker('#ff0000');inp1.position(170, 105);inp1.style('width', '20px');
+  inp1check = createCheckbox('', true);inp1check.position(150, 107);
+  inp2 = createColorPicker('#ffff00');inp2.position(170, 135);inp2.style('width', '20px');
+  inp2check = createCheckbox('', true);inp2check.position(150, 137);
+  inp3 = createColorPicker('#0000ff');inp3.position(170, 165);inp3.style('width', '20px');
+  inp3check = createCheckbox('', true);inp3check.position(150, 167);
+  inp4 = createColorPicker('#ffffff');inp4.position(170, 195);inp4.style('width', '20px');
+  inp4check = createCheckbox('', true);inp4check.position(150, 197);
+  inp5 = createColorPicker('#000');inp5.position(170, 225);inp5.style('width', '20px');
+  inp5check = createCheckbox('', false);inp5check.position(150, 227);
 
-  bkgdColorPicker = createColorPicker('#000000'); bkgdColorPicker.position(25, 580); bkgdColorPicker.style('width', '90px');
-  
+  bkgdColorPicker = createColorPicker('#000');bkgdColorPicker.position(152, 270);bkgdColorPicker.style('height', '50px');
+
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
   inp3check.changed(inp3checker);
@@ -132,14 +135,14 @@ function draw() {
   text("WAVE: Speed " + waveSpeed, 25, 470);
   text("WAVE: Slope " + slope, 25, 500);  
   
-  text("Background Color", 25, 570);
-  
+  text("No stripes", 172,90);    
+    
 	text("PRESETS", 25,height-70);
   
   push();
-  translate(145, 25);
-  rotate(PI/2);
-	text("SEGMENT TOGGLES AND COLORS", 0,0);
+  rotate(-PI/2);
+  text("SEGMENT TOGGLES AND COLORS",-250,144);
+  text("BKGD COLORS", -325,144);
   pop();
   
   noFill();
@@ -327,7 +330,14 @@ function inp5checker() {
 }
 
 function setRibbonColor(switcher) {
-  if (inpNumber == 5) {
+  if (inpNumber == 6) {
+    if (switcher % 6 == 0) {ribbonColor = inp1.value();}
+    if (switcher % 6 == 1) {ribbonColor = inp2.value();}
+    if (switcher % 6 == 2) {ribbonColor = inp3.value();}
+    if (switcher % 6 == 3) {ribbonColor = inp4.value();}
+    if (switcher % 6 == 4) {ribbonColor = inp5.value();}
+    if (switcher % 6 == 5) {ribbonColor = inp6;}
+  } if (inpNumber == 5) {
     if (switcher % 5 == 0) {ribbonColor = inp1.value();}
     if (switcher % 5 == 1) {ribbonColor = inp2.value();}
     if (switcher % 5 == 2) {ribbonColor = inp3.value();}
@@ -351,7 +361,14 @@ function setRibbonColor(switcher) {
 }
 
 function setTextColor(switcher) {
-  if (inpNumber == 5) {
+  if (inpNumber == 6) {
+    if (switcher % 6 == 0) {strkColor = inp6;}
+    if (switcher % 6 == 1) {strkColor = inp1.value();}
+    if (switcher % 6 == 2) {strkColor = inp4.value();}
+    if (switcher % 6 == 3) {strkColor = inp3.value();}
+    if (switcher % 6 == 4) {strkColor = inp2.value();}
+    if (switcher % 6 == 5) {strkColor = inp5.value();}
+  } else if (inpNumber == 5) {
     if (switcher % 5 == 0) {strkColor = inp5.value();}
     if (switcher % 5 == 1) {strkColor = inp1.value();}
     if (switcher % 5 == 2) {strkColor = inp2.value();}
@@ -368,9 +385,42 @@ function setTextColor(switcher) {
     if (switcher % 3 == 2) {strkColor = inp2.value();}
   } else if (inpNumber == 2) {
     if (switcher % 2 == 0) {strkColor = inp2.value();}
-    if (switcher % 2 == 1) {strkColor = inp1.value();}
+    if (switcher % 2 == 1) {strkColor = inp1.value();
+    }
   } else if (inpNumber == 1) {
     strkColor = bkgdColor;
+  }
+}
+
+function setTextOnlyColor(switcher) {
+  if (inpNumber == 6) {
+    if (switcher % 6 == 0) {strkColor = inp1.value();}
+    if (switcher % 6 == 1) {strkColor = inp2.value();}
+    if (switcher % 6 == 2) {strkColor = inp3.value();}
+    if (switcher % 6 == 3) {strkColor = inp4.value();}
+    if (switcher % 6 == 4) {strkColor = inp5.value();}
+    if (switcher % 6 == 5) {strkColor = inp6;}
+  } else if (inpNumber == 5) {
+    if (switcher % 5 == 0) {strkColor = inp1.value();}
+    if (switcher % 5 == 1) {strkColor = inp2.value();}
+    if (switcher % 5 == 2) {strkColor = inp3.value();}
+    if (switcher % 5 == 3) {strkColor = inp4.value();}
+    if (switcher % 5 == 4) {strkColor = inp5.value();}
+  } else if (inpNumber == 4) {
+    if (switcher % 4 == 0) {strkColor = inp1.value();}
+    if (switcher % 4 == 1) {strkColor = inp2.value();}
+    if (switcher % 4 == 2) {strkColor = inp3.value();}
+    if (switcher % 4 == 3) {strkColor = inp4.value();}
+  } else if (inpNumber == 3) {
+    if (switcher % 3 == 0) {strkColor = inp1.value();}
+    if (switcher % 3 == 1) {strkColor = inp2.value();}
+    if (switcher % 3 == 2) {strkColor = inp3.value();}
+  } else if (inpNumber == 2) {
+    if (switcher % 2 == 0) {strkColor = inp1.value();}
+    if (switcher % 2 == 1) {strkColor = inp2.value();
+    }
+  } else if (inpNumber == 1) {
+    strkColor = inp1.value();
   }
 }
 
@@ -572,3 +622,15 @@ function lemniscate() {
   inpNumber = 4;
   bkgdColorPicker.value('#000000');
 } 
+
+function pride() {
+  inpNumber = 6;
+  
+  inp1.value('#e70000');inp2.value('#ff8c00');inp3.value('#ffef00');inp4.value('#00811f');inp5.value('#0044ff'); inp6 = color('#760089');
+  inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
+  
+  bkgdColorPicker.value('#ffffff');
+}
+
+function saveLoop() {
+}

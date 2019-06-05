@@ -69,6 +69,8 @@ function setup() {
   mirrorSpeedCheck = createCheckbox('', false);mirrorSpeedCheck.position(350, height-42);
   fluxCheck = createCheckbox('', false);fluxCheck.position(350, height-26);
   
+  prideButton = createButton('PRIDE!'); prideButton.position(15,15); prideButton.mousePressed(pride);
+    
   textColorPicker = createColorPicker('#FFFFFF'); textColorPicker.position(450, height-59); textColorPicker.style('width', '20px');
   bkgdColorPicker = createColorPicker('#000000'); bkgdColorPicker.position(450, height-29); bkgdColorPicker.style('width', '20px');
 
@@ -164,7 +166,12 @@ function draw() {
       for (var k = 0; k < inpText.length; k++) {
         letter_select = k;
         typeY = yBlock*(rows-j);
-      
+        
+        if(inpNumber == 6){
+          setTextColor(j);
+          stroke(strkColor);
+        }
+        
         push();
           translate(k*typeX + k*track,0);
           translate(inpText.length*typeX*i + inpText.length*track*i,0);
@@ -202,7 +209,12 @@ function draw() {
       for (var n = 0; n < m+1; n++){    
         for (var p = 0; p < inpText.length; p++) {
           letter_select = p;
-              
+          
+          if(inpNumber == 6){
+            setTextColor(m);
+            stroke(strkColor);
+          }
+            
           push();
             translate(p*typeX + p*track,0);
             translate(inpText.length*typeX*n + inpText.length*track*n,0);
@@ -274,6 +286,15 @@ function sinEngine(speed, slope) {
   var sign = (sinus >= 0 ? 1: -1);
   var sinerSquare = sign * (1-pow(1-abs(sinus),slope));
   return sinerSquare;
+}
+
+function setTextColor(switcher) {
+    if (switcher % 6 == 0) {strkColor = inp1;}
+    if (switcher % 6 == 1) {strkColor = inp2;}
+    if (switcher % 6 == 2) {strkColor = inp3;}
+    if (switcher % 6 == 3) {strkColor = inp4;}
+    if (switcher % 6 == 4) {strkColor = inp5;}
+    if (switcher % 6 == 5) {strkColor = inp6;}
 }
 
 function reset() {
@@ -379,4 +400,12 @@ function scroll() {
     } else {
       scrollSave = false;
     }
+}
+
+function pride() {
+  inpNumber = 6;
+  
+  inp1 = color('#e70000');inp2 = color('#ff8c00'); inp3 = color('#ffef00');inp4 = color('#00811f'); inp5 = color('#0044ff'); inp6 = color('#760089');
+  
+  bkgdColorPicker.value('#FFFFFF');
 }
