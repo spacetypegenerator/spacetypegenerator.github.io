@@ -121,7 +121,7 @@ function draw() {
   bkgdColor = bkgdColorPicker.value();
   background(bkgdColor);
   
-  fill(0);
+  fill(125);
   noStroke();
   textSize(9);
     
