@@ -145,6 +145,8 @@ function draw() {
   text("BKGD COLORS", -325,144);
   pop();
   
+  noFill();
+    
   inpText = String(inp.value()) + " ";
   runLength = inpText.length;
 

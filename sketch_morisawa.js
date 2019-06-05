@@ -409,5 +409,4 @@ function pride() {
   
   inp1 = color('#e70000');inp2 = color('#ff8c00'); inp3 = color('#ffef00');inp4 = color('#00811f'); inp5 = color('#0044ff'); inp6 = color('#760089');
   
-  bkgdColorPicker.value('#FFFFFF');
 }
