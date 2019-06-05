@@ -81,7 +81,7 @@ function setup() {
   offsetSlider = createSlider(0, PI, .26, 0.01);offsetSlider.position(25, 410);offsetSlider.style('width', '100px');
   slopeSlider = createSlider(0, 4, 1, 0.1);slopeSlider.position(25, 440);slopeSlider.style('width', '100px');
 
-  exportButton = createButton('Save Loop'); exportButton.position(140,10); exportButton.mousePressed(saveLoop);
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(140, 10); saveLoopSet.mousePressed(saveLoop);
   prideButton = createButton('PRIDE!'); prideButton.position(140,35); prideButton.mousePressed(pride);
     
   marqueeSet = createButton('Marquee'); marqueeSet.position(25,height-60); marqueeSet.mousePressed(marquee);
@@ -114,7 +114,6 @@ function setup() {
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
     
-  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(147, 180); saveLoopSet.mousePressed(saveLoop);
 }
 
 function draw() {

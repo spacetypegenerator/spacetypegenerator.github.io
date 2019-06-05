@@ -25,6 +25,8 @@ var singleQuoteSwitch = 1;
 
 // COLOR
 var bkgdColor, textColor;
+var inp1, inp2, inp3, inp4, inp5, inp6;
+var inpNumber;
 
 // SAVE FLUX
 var fluxLength = 126;

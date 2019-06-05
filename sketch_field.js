@@ -50,9 +50,10 @@ var runLength;
 var fullTextCheck, fullText;
 
 // COLOR
-var invertCheck;
 var strkColor = 0;
 var bkgdColor = 255;
+var inp1, inp2, inp3, inp4, inp5, inp6;
+var inpNumber = 1;
 
 // SAVE
 var exportButton;
@@ -72,6 +73,7 @@ function setup(){
   background(bkgdColor);
   smooth();
   textFont(font);
+  frameRate(30);
   
   inp = select("#textfield");
   
@@ -101,8 +103,7 @@ function setup(){
   yStrechWaveSlider = createSlider(0,100,0); yStrechWaveSlider.position(25,497); yStrechWaveSlider.style('width','100px');
   yStrechWaveCheck = createCheckbox('',false); yStrechWaveCheck.position(130,496);
   
-  invertCheck = createCheckbox('',false); invertCheck.position(140,60);
-  fullTextCheck = createCheckbox('',false); fullTextCheck.position(140,90);
+  fullTextCheck = createCheckbox('',false); fullTextCheck.position(140,57);
   xRotCameraSlider = createSlider(-180,180,0); xRotCameraSlider.position(-20,height-107); xRotCameraSlider.style('width','100px'); xRotCameraSlider.style('rotate',270);
   yRotCameraSlider = createSlider(-180,180,0); yRotCameraSlider.position(20,height-107); yRotCameraSlider.style('width','100px'); yRotCameraSlider.style('rotate',270);
   zRotCameraSlider = createSlider(-180,180,0); zRotCameraSlider.position(60,height-107); zRotCameraSlider.style('width','100px'); zRotCameraSlider.style('rotate',270);
@@ -110,7 +111,7 @@ function setup(){
 
 //  exportButton = createButton('Save Loop'); exportButton.position(140,10); exportButton.mousePressed(saveLoop);
   prideButton = createButton('PRIDE!'); prideButton.position(140,35); prideButton.mousePressed(pride);
-      
+  
   presetStacks = createButton('Stacks'); presetStacks.position(140,height-30); presetStacks.mousePressed(stackSet);
   presetBricks = createButton('Bricks'); presetBricks.position(200,height-30); presetBricks.mousePressed(brickSet);
   presetSimpleZ = createButton('Simple Z'); presetSimpleZ.position(260,height-30); presetSimpleZ.mousePressed(simpleZSet);
@@ -118,13 +119,13 @@ function setup(){
   presetZebra = createButton('Zebra'); presetZebra.position(420,height-30); presetZebra.mousePressed(zebraSet);
   presetHarlequin = createButton('Harlequin'); presetHarlequin.position(480,height-30); presetHarlequin.mousePressed(harlequinSet);
 	
-	zWaveCheck.changed(zWaveChecker);
-	xWaveCheck.changed(xWaveChecker);
-	yWaveCheck.changed(yWaveChecker);
-	xStrechWaveCheck.changed(xStrechWaveChecker);
-	yStrechWaveCheck.changed(yStrechWaveChecker);
+  zWaveCheck.changed(zWaveChecker);
+  xWaveCheck.changed(xWaveChecker);
+  yWaveCheck.changed(yWaveChecker);
+  xStrechWaveCheck.changed(xStrechWaveChecker);
+  yStrechWaveCheck.changed(yStrechWaveChecker);
   fullTextCheck.changed(fullTexter);
-
+  
   inp1 = createColorPicker('#000');inp1.position(180, 80);inp1.style('width', '20px');
   inp1check = createCheckbox('', true);inp1check.position(160, 82);
   inp2 = createColorPicker('#ff0000');inp2.position(180, 110);inp2.style('width', '20px');
@@ -146,8 +147,8 @@ function setup(){
 }
 
 function draw(){
+  bkgdColor = bkgdColorPicker.value();
   background(bkgdColor);
-  letter_select = 0;
   inpText = String(inp.value());  
 
   column = columnSlider.value(); 
@@ -179,12 +180,10 @@ function draw(){
 	xSpace = typeX + tracking;
 	ySpace = typeY + lineSpace + yStrechWave/2;
   
-  if(mouseX>145 && mouseX<220 && mouseY>18 && mouseY<45){
-  } else {
     push();
     translate(-width/2,-height/2);
     
-    stroke(strkColor);
+    stroke(125);
     strokeWeight(1);
     line(10,130,130,130);
     line(10,230,130,230);  	
@@ -193,7 +192,7 @@ function draw(){
     line(10,520,130,520);  
     line(185,height-43,500,height-43); 
     
-    fill(strkColor);
+    fill(125);
     textAlign(LEFT);
     
     textSize(13);
@@ -245,11 +244,10 @@ function draw(){
     text("CAMERA: Z-Rotation " + zRotCamera,45,100);
     
     pop();
-  }
   
   noFill();
   strokeWeight(typeStroke);
-	stroke(strkColor);
+  
 
   push();
   // camera
@@ -277,19 +275,17 @@ function draw(){
     } else {
       letter_select = i;
     }
-
+    
     setTextColor(floor(i/column));
     stroke(strkColor);
     
   	zWaver = sinEngine(zWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*zWave;
-
   	xWaver = map(sinEngine(xWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,xWave);
+  	yWaver = sinEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWave;
 
-      yWaver = sinEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWave;
+	yWavezRoter = cosEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWavezRot;
 
-      yWavezRoter = cosEngine(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1)*yWavezRot;
-
-		yWavexStrer = map(cosEngine2(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,yWavexStr);
+	yWavexStrer = map(cosEngine2(yWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,yWavexStr);
 
     strecherX = map(sinEngine(xStrechWaveChecked,xOffset,i%column,yOffset,floor(i/column),speed,1),-1,1,0,xStrechWave)+yWavexStrer;
 
@@ -393,7 +389,6 @@ function yStrechWaveChecker() {
   }
 }
 
-
 function inp1checker() {
   inp2check.checked(false);
   inp3check.checked(false);
@@ -491,7 +486,6 @@ function reSetting() {
 
   xStrechWaveCheck.checked(false); xStrechWaveChecked = 0;    
   fullTextCheck.checked(false); fullText = false;
-  invertCheck.checked(false);
   strkColor = color(0);
   bkgdColor = color(255);  
 }
@@ -511,7 +505,6 @@ function brickSet() {
 
   xStrechWaveCheck.checked(true); xStrechWaveChecked = PI/2;  
   fullTextCheck.checked(true); fullText = true;
-  invertCheck.checked(true);
   strkColor = color(255);
   bkgdColor = color(0);  
 }
@@ -532,7 +525,6 @@ function complexZSet() {
 
   yWaveCheck.checked(true); yWaveChecked = PI;  
   fullTextCheck.checked(true); fullText = true;
-  invertCheck.checked(true);
   strkColor = color(255);
   bkgdColor = color(0);
 }
@@ -551,7 +543,6 @@ function harlequinSet() {
   speedSlider.value(2); xOffsetSlider.value(2.1); yOffsetSlider.value(59.1); yStrechWaveSlider.value(58);
 
   fullTextCheck.checked(true); fullText = true;
-  invertCheck.checked(true);
   strkColor = color(255);
   bkgdColor = color(0);
 }

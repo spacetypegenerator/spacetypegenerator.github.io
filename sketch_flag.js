@@ -86,8 +86,9 @@ function setup() {
   yRotCameraSlider = createSlider(-90, 90, 65);yRotCameraSlider.position(20, height - 107);yRotCameraSlider.style('width', '100px');yRotCameraSlider.style('rotate', 270);
   zRotCameraSlider = createSlider(-90, 90, 11);zRotCameraSlider.position(60, height - 107);zRotCameraSlider.style('width', '100px');zRotCameraSlider.style('rotate', 270);
   zoomCameraSlider = createSlider(-500, 500, -40);zoomCameraSlider.position(15, height - 20);zoomCameraSlider.style('width', '100px');
-  
-  prideButton = createButton('PRIDE!'); prideButton.position(140,45); prideButton.mousePressed(pride);
+
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(140, 10); saveLoopSet.mousePressed(saveLoop);    
+  prideButton = createButton('PRIDE!'); prideButton.position(140,35); prideButton.mousePressed(pride);
   
   oneBannerSet = createButton('A Banner'); oneBannerSet.position(150,height-60); oneBannerSet.mousePressed(oneBanner);
   twistSet = createButton('A Twist'); twistSet.position(220,height-60); twistSet.mousePressed(twist);
@@ -124,7 +125,6 @@ function setup() {
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
     
-  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(147, 210); saveLoopSet.mousePressed(saveLoop);
 }
 
 function draw() {

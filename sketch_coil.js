@@ -145,21 +145,6 @@ function draw() {
   text("BKGD COLORS", -325,144);
   pop();
   
-  noFill();
-  strokeWeight(1); strokeJoin(ROUND);
-  stroke(50,200,250);
-  push();
-  translate(186, 24);
-  	beginShape();
-  	vertex(0,0);
-  	vertex(15,0);
-  	vertex(15,15);
-  	vertex(0,15);
-  	vertex(0,0);
-  	vertex(15,15);
-  	endShape();
-  pop();
-  
   inpText = String(inp.value()) + " ";
   runLength = inpText.length;
 
