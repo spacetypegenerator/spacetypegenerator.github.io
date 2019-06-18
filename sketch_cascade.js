@@ -702,7 +702,7 @@ function pixelGradient() {
 function saveLoop() {
 //  2*PI/0.04 = gifLength;  
     if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
-        speedSlider.value(4); 
+        waveSpeedSlider.value(4); 
         gifStart = frameCount;
         gifEnd = gifStart + gifLength;
         gifRecord = true;       
