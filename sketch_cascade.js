@@ -54,7 +54,6 @@ function setup() {
   pixelDensity(1);
       background(bkgdColor);
   smooth();
-  frameRate(30);
   textFont(font);
 
   inp = select("#textfield");
