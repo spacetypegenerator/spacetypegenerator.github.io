@@ -51,8 +51,8 @@ function setup() {
   var p5SaveCanvas = createCanvas(windowWidth, windowHeight);
   canvas = p5SaveCanvas.canvas;
 
-  pixelDensity(1);
-      background(bkgdColor);
+//  pixelDensity(1);
+  background(bkgdColor);
   smooth();
   textFont(font);
 
@@ -70,7 +70,7 @@ function setup() {
   waveSpeedSlider = createSlider(0, 10, 1); waveSpeedSlider.position(25, 250); waveSpeedSlider.style('width', '100px');
   slopeSlider = createSlider(0, PI, 1, 0.1); slopeSlider.position(25, 280); slopeSlider.style('width', '100px');
 
-  exportButton = createButton('Save Loop'); exportButton.position(140,10); exportButton.mousePressed(saveLoop);
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(140,10); saveLoopSet.mousePressed(saveLoop);
   prideButton = createButton('PRIDE!'); prideButton.position(140,35); prideButton.mousePressed(pride);
   
   gradientCheck = createCheckbox('', false);gradientCheck.position(150, 77);
