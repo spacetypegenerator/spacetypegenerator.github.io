@@ -5,10 +5,7 @@ var lineSpace = 10;
 
 var yBlock;
 var yField;
-
 var typeYfigure;
-
-// FIELD
 var rows = 4;
 var SA;
 
@@ -35,6 +32,7 @@ var gifLength = 157;
 var gifStart, gifEnd;
 var gifRecord = false;
 var canvas;
+var pdSave;
 
 var capturer = new CCapture( {
      framerate: 60,
@@ -107,10 +105,16 @@ function setup() {
   pixelGradientSet = createButton('Pixel Gradient'); pixelGradientSet.position(25,height-110); pixelGradientSet.mousePressed(pixelGradient);
   
   yField = height-50;
+  pdSave = pixelDensity();
 }
 
 function draw() {
-  //  strkColor = inp1.value();  
+  if(gifRecord == true){
+    pixelDensity(1);
+  } else {
+    pixelDensity(pdSave);
+  } 
+    
   bkgdColor = bkgdColorPicker.value();
   background(bkgdColor);
   
