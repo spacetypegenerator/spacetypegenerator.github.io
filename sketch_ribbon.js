@@ -674,11 +674,11 @@ function track2() {
 }
 
 function saveLoop() {
-    var newSpeed = (2*segmentCount + 2*segmentCount*middleStretch)/gifLength;    
-    print(newSpeed);
+//    var newSpeed = (2*segmentCount + 2*segmentCount*middleStretch)/gifLength;    
+//    print(newSpeed);
     
     if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
-        speedSlider.value(newSpeed); 
+        speedSlider.value(0.75); 
         gifStart = frameCount;
         print(gifStart);
         gifEnd = gifStart + gifLength;
