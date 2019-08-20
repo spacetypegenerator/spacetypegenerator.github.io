@@ -192,7 +192,8 @@ function draw() {
         text("Gradient Steps",0,0);
       pop();
   }    
-    
+
+  push();  
   scale(scaler);
   rotateX(rotX);
   rotateY(rotY);
@@ -297,6 +298,7 @@ function draw() {
       pop();
     }
   }
+  pop();
     
     if(gifRecord == true && frameCount==(gifStart+1)){
       capturer.start();
@@ -674,11 +676,11 @@ function track2() {
 }
 
 function saveLoop() {
-//    var newSpeed = (2*segmentCount + 2*segmentCount*middleStretch)/gifLength;    
-//    print(newSpeed);
+    var newSpeed = (2*segmentCount + 2*segmentCount*middleStretch)/gifLength;    
+    print(newSpeed);
     
     if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
-        speedSlider.value(0.75); 
+        speedSlider.value(newSpeed); 
         gifStart = frameCount;
         print(gifStart);
         gifEnd = gifStart + gifLength;
