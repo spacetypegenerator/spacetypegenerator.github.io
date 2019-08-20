@@ -307,7 +307,7 @@ function draw() {
       print("start");
     } else if(gifRecord == true && frameCount<=gifEnd){
       capturer.capture(canvas);
-//      print("record");
+      print("record");
     } else if (gifRecord == true && frameCount==gifEnd+1) {
       capturer.stop();
       capturer.save();
@@ -682,7 +682,9 @@ function saveLoop() {
     if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
         speedSlider.value(newSpeed); 
         gifStart = frameCount;
+        print(gifStart);
         gifEnd = gifStart + gifLength;
+        print(gifEnd)
         gifRecord = true;       
     } else {
         gifRecord = false;
