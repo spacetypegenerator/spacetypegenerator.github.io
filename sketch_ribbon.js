@@ -154,44 +154,6 @@ function draw() {
 //  ellipse(0,0,5,5);
   
   textColorAdjust = lerpColor(bkgdColor,textColor,0.01);
-  fill(textColor);
-  
-  if(gifRecord == false){
-      push();
-        translate(-width/2,-height/2);
-        text("Segment Space " + segmentSpace,25,30);
-        text("Segment Count " + segmentCount,25,60);
-        text("Type Height " + typeHeight,25,90);
-        text("Tracking " + tracking,25,120);
-        text("Type Stroke " + typeStroke,25,150);
-
-        text("Speed " + speed,25,210);
-
-        text("Ribbon Height " + depth,25,270);
-        text("Ribbon Stretch " + middleStretchSlider.value(),25,300);
-        text("Ribbon Count " + count,25,330);
-        text("Ribbon Spacing " + zSpace,25,360);
-        text("Ribbon Offset " + xSpace,25,390);
-        text("Alternate ",70,420);
-        text("Scale " + scalerSlider.value(),25,440);
-
-        text("Rotate X " + rotX,25,height-170);
-        text("Rotate Y " + rotY,25,height-140);
-        text("Rotate Z " + rotZ,25,height-110);
-
-        text("PRESETS", 25,height-70);
-
-        text("No stripes", 172,70);
-        text("Gradient Mode", 172,90);
-        text("B-Side Color", 172,110);
-        text("A-Side", 205,143);
-        text("BACKGROUND", 152,335);
-        text("B-SIDE/TEXT", 152,290);
-        translate(205,165);
-        rotateZ(PI/2);
-        text("Gradient Steps",0,0);
-      pop();
-  }    
 
   push();  
   scale(scaler);
@@ -299,6 +261,44 @@ function draw() {
     }
   }
   pop();
+
+fill(textColor);
+  if(gifRecord == false){
+      push();
+        translate(-width/2,-height/2);
+        text("Segment Space " + segmentSpace,25,30);
+        text("Segment Count " + segmentCount,25,60);
+        text("Type Height " + typeHeight,25,90);
+        text("Tracking " + tracking,25,120);
+        text("Type Stroke " + typeStroke,25,150);
+
+        text("Speed " + speed,25,210);
+
+        text("Ribbon Height " + depth,25,270);
+        text("Ribbon Stretch " + middleStretchSlider.value(),25,300);
+        text("Ribbon Count " + count,25,330);
+        text("Ribbon Spacing " + zSpace,25,360);
+        text("Ribbon Offset " + xSpace,25,390);
+        text("Alternate ",70,420);
+        text("Scale " + scalerSlider.value(),25,440);
+
+        text("Rotate X " + rotX,25,height-170);
+        text("Rotate Y " + rotY,25,height-140);
+        text("Rotate Z " + rotZ,25,height-110);
+
+        text("PRESETS", 25,height-70);
+
+        text("No stripes", 172,70);
+        text("Gradient Mode", 172,90);
+        text("B-Side Color", 172,110);
+        text("A-Side", 205,143);
+        text("BACKGROUND", 152,335);
+        text("B-SIDE/TEXT", 152,290);
+        translate(205,165);
+        rotateZ(PI/2);
+        text("Gradient Steps",0,0);
+      pop();
+  }    
     
     if(gifRecord == true && frameCount==(gifStart+1)){
       capturer.start();
