@@ -47,7 +47,7 @@ function setup() {
     
   background(0);
 //  frameRate(30);
-  smooth();
+//  noSmooth();
   textFont(font);
 
   inp = select("#textfield");
