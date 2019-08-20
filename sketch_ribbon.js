@@ -46,7 +46,7 @@ function setup() {
   canvas = p5SaveCanvas.canvas;
     
   background(0);
-  frameRate(30);
+//  frameRate(30);
 //  noSmooth();
   textFont(font);
 
@@ -118,6 +118,8 @@ function draw() {
   } else {
     pixelDensity();
   } 
+
+  ortho(-width/2, width/2, -height/2, height/2,-5000,5000);  
     
   bkgdColor = color(bkgdColorPicker.value());
   textColor = color(textColorPicker.value());
@@ -152,9 +154,9 @@ function draw() {
 //  ellipse(0,0,5,5);
   
   textColorAdjust = lerpColor(bkgdColor,textColor,0.01);
+  fill(textColor);
   
   if(gifRecord == false){
-      fill(textColor);
       push();
         translate(-width/2,-height/2);
         text("Segment Space " + segmentSpace,25,30);
@@ -192,7 +194,6 @@ function draw() {
   }    
 
   push();  
-//  ortho(-width/2, width/2, -height/2, height/2,-5000,5000);  
   scale(scaler);
   rotateX(rotX);
   rotateY(rotY);
