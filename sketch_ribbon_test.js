@@ -19,7 +19,9 @@ var SA;
 
 var latX;
 var letXspeed;
-let speed = 0.1;
+let speed;
+
+var canvas;
 
 // STRING
 let letter_select, inp, inpText, runLength;
@@ -30,7 +32,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight,WEBGL);
+  var p5SaveCanvas = createCanvas(windowWidth, windowHeight);
+  canvas = p5SaveCanvas.canvas;
+    
   background(0);
   frameRate(30);
 //  noSmooth();
