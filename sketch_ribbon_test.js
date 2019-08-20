@@ -26,7 +26,6 @@ var gifLength = 180;
 var gifStart, gifEnd;
 var gifRecord = false;
 var canvas;
-var pdSave;
 
 var capturer = new CCapture( {
      framerate: 60,
@@ -111,17 +110,15 @@ function setup() {
   track2Set = createButton('Track II'); track2Set.position(330,height-35); track2Set.mousePressed(track2);
   
   inp0check.changed(inp0checker);
-  gradientCheck.changed(gradientChecker);
-    
-  pdSave = pixelDensity();
+  gradientCheck.changed(gradientChecker);    
 }
 
 function draw() {
-//  if(gifRecord == true){
-//    pixelDensity(1);
-//  } else {
-//    pixelDensity(pdSave);
-//  } 
+  if(gifRecord == true){
+    pixelDensity(1);
+  } else {
+    pixelDensity();
+  } 
     
   bkgdColor = color(bkgdColorPicker.value());
   textColor = color(textColorPicker.value());
