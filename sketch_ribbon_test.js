@@ -112,9 +112,17 @@ function setup() {
   
   inp0check.changed(inp0checker);
   gradientCheck.changed(gradientChecker);
+    
+  pdSave = pixelDensity();
 }
 
 function draw() {
+  if(gifRecord == true){
+    pixelDensity(1);
+  } else {
+    pixelDensity(pdSave);
+  } 
+    
   bkgdColor = color(bkgdColorPicker.value());
   textColor = color(textColorPicker.value());
   background(bkgdColor);
@@ -292,6 +300,20 @@ function draw() {
     rotateZ(PI/2);
     text("Gradient Steps",0,0);
   pop();
+    
+    if(gifRecord == true && frameCount==(gifStart+1)){
+      capturer.start();
+      capturer.capture(canvas);
+      print("start");
+    } else if(gifRecord == true && frameCount<=gifEnd){
+      capturer.capture(canvas);
+//      print("record");
+    } else if (gifRecord == true && frameCount==gifEnd+1) {
+      capturer.stop();
+      capturer.save();
+      print("stop");
+      gifRecord = false;
+    }
 }
 
 function inp1checker() {
@@ -655,4 +677,16 @@ function track2() {
   
   inpNumber = 1;
   bkgdColorPicker.value('#FF7E79'); textColorPicker.value('#ffffff');
+}
+
+function saveLoop() {
+//  2*PI/0.04 = gifLength;  
+    if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
+        speedSlider.value(0.04); 
+        gifStart = frameCount;
+        gifEnd = gifStart + gifLength;
+        gifRecord = true;       
+    } else {
+        gifRecord = false;
+    }
 }
