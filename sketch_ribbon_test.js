@@ -21,7 +21,19 @@ var latX;
 var letXspeed;
 let speed;
 
+// SAVE BETA
+var gifLength = 180;
+var gifStart, gifEnd;
+var gifRecord = false;
 var canvas;
+var pdSave;
+
+var capturer = new CCapture( {
+     framerate: 60,
+     format:'gif',
+     workersPath: 'js/',
+    verbose: true
+} );
 
 // STRING
 let letter_select, inp, inpText, runLength;
