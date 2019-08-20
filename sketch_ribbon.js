@@ -119,8 +119,6 @@ function draw() {
     pixelDensity();
   } 
     
-  ortho(-width/2, width/2, -height/2, height/2,-5000,5000);
-    
   bkgdColor = color(bkgdColorPicker.value());
   textColor = color(textColorPicker.value());
   background(bkgdColor);
@@ -194,6 +192,7 @@ function draw() {
   }    
 
   push();  
+  ortho(-width/2, width/2, -height/2, height/2,-5000,5000);  
   scale(scaler);
   rotateX(rotX);
   rotateY(rotY);
