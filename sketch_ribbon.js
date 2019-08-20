@@ -40,7 +40,7 @@ var capturer = new CCapture( {
 } );
 
 function preload() {
-  font = loadFont('IBMPlexMono-Regular.otf');
+  font = loadFont('assets/IBMPlexMono-Regular.otf');
 }
 
 function setup() {
