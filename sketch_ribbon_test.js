@@ -32,7 +32,7 @@ function preload() {
 }
 
 function setup() {
-  var p5SaveCanvas = createCanvas(windowWidth, windowHeight);
+  var p5SaveCanvas = createCanvas(windowWidth, windowHeight, WEBGL);
   canvas = p5SaveCanvas.canvas;
     
   background(0);
