@@ -26,7 +26,7 @@ let letter_select, inp, inpText, runLength;
 let myText = [];
 
 function preload() {
-  font = loadFont('IBMPlexMono-Regular.otf');
+  font = loadFont('assets/IBMPlexMono-Regular.otf');
 }
 
 function setup() {
