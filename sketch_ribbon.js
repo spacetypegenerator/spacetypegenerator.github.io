@@ -84,7 +84,7 @@ function setup() {
   inp3check = createCheckbox('', true);inp3check.position(150, 187);
   inp4 = createColorPicker('#fff');inp4.position(170, 215);inp4.style('width', '20px');
   inp4check = createCheckbox('', false);inp4check.position(150, 217);
-  inp5 = createColorPicker('#0000');inp5.position(170, 245);inp5.style('width', '20px');
+  inp5 = createColorPicker('#000000');inp5.position(170, 245);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(150, 247);
   
   bkgdColorPicker = createColorPicker('#ffffff');bkgdColorPicker.position(152, 340);bkgdColorPicker.style('width', '40px');
@@ -119,7 +119,7 @@ function draw() {
     pixelDensity();
   } 
     
-  ortho(-width/2, width/2, -height/2, height/2,-5000,5000);
+//  ortho(-width/2, width/2, -height/2, height/2,-5000,5000);
     
   bkgdColor = color(bkgdColorPicker.value());
   textColor = color(textColorPicker.value());
@@ -421,7 +421,7 @@ function reset() {
   
   inp0check.checked(false); gradientCheck.checked(true); bSideCheck.checked(false); altCheck.checked(false);
   
-  inp1.value('#0000ff');inp2.value('#ff0000');inp3.value('#ffff00');inp4.value('#ffffff');inp5.value('#000');
+  inp1.value('#0000ff');inp2.value('#ff0000');inp3.value('#ffff00');inp4.value('#ffffff');inp5.value('#000000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(false); inp5check.checked(false);
 
   inp.value(" Somewhere something incredible is waiting to be known. Somewhere something incredible is waiting to be known. ");
