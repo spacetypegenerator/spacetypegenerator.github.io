@@ -25,7 +25,7 @@ var letter_select, inp, inpText, runLength;
 var myText = [];
 
 // SAVE BETA
-var gifLength = 180;
+var gifLength = 300;
 var gifStart, gifEnd;
 var gifRecord = false;
 var canvas;
@@ -47,7 +47,7 @@ function setup() {
     
   background(0);
 //  frameRate(30);
-//  noSmooth();
+  smooth();
   textFont(font);
 
   inp = select("#textfield");
