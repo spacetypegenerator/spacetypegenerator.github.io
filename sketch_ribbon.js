@@ -8,7 +8,6 @@ var jumper = 0;
 var count = 1;
 var zSpace, xSpace;
 var middleStretch = 2;
-var counter = 0;
 
 var bkgdColor, textColor, textColorAdjust;
 var inp1, inp2, inp3, inp4, inp5;
@@ -159,13 +158,50 @@ function draw() {
   
   textColorAdjust = lerpColor(bkgdColor,textColor,0.01);
   
-  push();
+  if(gifRecord == false){
+      fill(textColor);
+      push();
+        translate(-width/2,-height/2);
+        text("Segment Space " + segmentSpace,25,30);
+        text("Segment Count " + segmentCount,25,60);
+        text("Type Height " + typeHeight,25,90);
+        text("Tracking " + tracking,25,120);
+        text("Type Stroke " + typeStroke,25,150);
+
+        text("Speed " + speed,25,210);
+
+        text("Ribbon Height " + depth,25,270);
+        text("Ribbon Stretch " + middleStretchSlider.value(),25,300);
+        text("Ribbon Count " + count,25,330);
+        text("Ribbon Spacing " + zSpace,25,360);
+        text("Ribbon Offset " + xSpace,25,390);
+        text("Alternate ",70,420);
+        text("Scale " + scalerSlider.value(),25,440);
+
+        text("Rotate X " + rotX,25,height-170);
+        text("Rotate Y " + rotY,25,height-140);
+        text("Rotate Z " + rotZ,25,height-110);
+
+        text("PRESETS", 25,height-70);
+
+        text("No stripes", 172,70);
+        text("Gradient Mode", 172,90);
+        text("B-Side Color", 172,110);
+        text("A-Side", 205,143);
+        text("BACKGROUND", 152,335);
+        text("B-SIDE/TEXT", 152,290);
+        translate(205,165);
+        rotateZ(PI/2);
+        text("Gradient Steps",0,0);
+      pop();
+  }    
+    
   scale(scaler);
   rotateX(rotX);
   rotateY(rotY);
   rotateZ(rotZ + PI);
 
-  let yCrawl = (runLength+counter*speed)/(segmentCount + segmentCount*middleStretch) * radius*2;
+  let yCrawl = (runLength+frameCount*speed)/(segmentCount + segmentCount*middleStretch) * radius*2;
   let ribbonHeight = runLength/(segmentCount + segmentCount*middleStretch) * radius*2.25;
   let ribbonHeight2 = (count-1)*xSpace*radius*2;
 
@@ -180,16 +216,16 @@ function draw() {
   rectMode(CENTER);
   
   for(var j = 0; j<count; j++){
-    for(var i = counter*speed; i<runLength+counter*speed; i++){
+    for(var i = frameCount*speed; i<runLength+frameCount*speed; i++){
       step = i%(2*segmentCount + 2*segmentCount*middleStretch);
       
       if(gradientCheck.checked() == true){
-        setGradient(i - counter*speed);
+        setGradient(i - frameCount*speed);
       } else {
         ribbonColor = color(inp1.value());
       }
       
-      letter_select = runLength - round(i + 1 - counter*speed);
+      letter_select = runLength - round(i + 1 - frameCount*speed);
       jumper = floor(i/(segmentCount*2 + 2*segmentCount*middleStretch));
     
       xCenterPre = xCenter;
@@ -263,46 +299,6 @@ function draw() {
         }
       pop();
     }
-  }
-  counter ++;
-  pop();
-  
-  if(gifRecord == false){
-      fill(textColor);
-      push();
-        translate(-width/2,-height/2);
-        text("Segment Space " + segmentSpace,25,30);
-        text("Segment Count " + segmentCount,25,60);
-        text("Type Height " + typeHeight,25,90);
-        text("Tracking " + tracking,25,120);
-        text("Type Stroke " + typeStroke,25,150);
-
-        text("Speed " + speed,25,210);
-
-        text("Ribbon Height " + depth,25,270);
-        text("Ribbon Stretch " + middleStretchSlider.value(),25,300);
-        text("Ribbon Count " + count,25,330);
-        text("Ribbon Spacing " + zSpace,25,360);
-        text("Ribbon Offset " + xSpace,25,390);
-        text("Alternate ",70,420);
-        text("Scale " + scalerSlider.value(),25,440);
-
-        text("Rotate X " + rotX,25,height-170);
-        text("Rotate Y " + rotY,25,height-140);
-        text("Rotate Z " + rotZ,25,height-110);
-
-        text("PRESETS", 25,height-70);
-
-        text("No stripes", 172,70);
-        text("Gradient Mode", 172,90);
-        text("B-Side Color", 172,110);
-        text("A-Side", 205,143);
-        text("BACKGROUND", 152,335);
-        text("B-SIDE/TEXT", 152,290);
-        translate(205,165);
-        rotateZ(PI/2);
-        text("Gradient Steps",0,0);
-      pop();
   }
     
     if(gifRecord == true && frameCount==(gifStart+1)){
@@ -436,12 +432,10 @@ function reset() {
   inpNumber = 3;
   bkgdColorPicker.value('#212121'); textColorPicker.value('#ffffff');
   
-  counter = 0;
 }  
 
 function basic() {
   reset();
-  counter = 90;
   
   segmentSpaceSlider.value(8); segmentCountSlider.value(27); typeHeightSlider.value(56); trackingSlider.value(30);
   typeStrokeSlider.value(1.4); speedSlider.value(0.32); depthSlider.value(30); middleStretchSlider.value(0.2);
@@ -503,7 +497,6 @@ function streamer() {
 
 function terrace() {
   reset();
-  counter = 30;
   segmentSpaceSlider.value(14); segmentCountSlider.value(17); typeHeightSlider.value(30); trackingSlider.value(30);
   typeStrokeSlider.value(1); speedSlider.value(0.3); depthSlider.value(40); middleStretchSlider.value(0.7);
   
