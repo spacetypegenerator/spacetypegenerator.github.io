@@ -117,11 +117,11 @@ function setup() {
 }
 
 function draw() {
-  if(gifRecord == true){
-    pixelDensity(1);
-  } else {
-    pixelDensity(pdSave);
-  } 
+//  if(gifRecord == true){
+//    pixelDensity(1);
+//  } else {
+//    pixelDensity(pdSave);
+//  } 
     
   bkgdColor = color(bkgdColorPicker.value());
   textColor = color(textColorPicker.value());
