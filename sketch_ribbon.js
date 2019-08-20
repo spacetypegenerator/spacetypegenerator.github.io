@@ -29,7 +29,6 @@ var gifLength = 180;
 var gifStart, gifEnd;
 var gifRecord = false;
 var canvas;
-var pdSave;
 
 var capturer = new CCapture( {
      framerate: 60,
@@ -113,15 +112,13 @@ function setup() {
     
   inp0check.changed(inp0checker);
   gradientCheck.changed(gradientChecker);
-    
-  pdSave = pixelDensity();
 }
 
 function draw() {
   if(gifRecord == true){
     pixelDensity(1);
   } else {
-    pixelDensity(pdSave);
+    pixelDensity();
   } 
     
   bkgdColor = color(bkgdColorPicker.value());
@@ -678,6 +675,7 @@ function track2() {
 
 function saveLoop() {
     var newSpeed = (2*segmentCount + 2*segmentCount*middleStretch)/gifLength;    
+    print(newSpeed);
     
     if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
         speedSlider.value(newSpeed); 
