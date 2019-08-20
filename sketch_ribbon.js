@@ -50,8 +50,6 @@ function setup() {
 //  noSmooth();
   textFont(font);
 
-  ortho(-width/2, width/2, -height/2, height/2,-5000,5000);
-
   inp = select("#textfield");
 
   segmentSpaceSlider = createSlider(0,100,15);segmentSpaceSlider.position(25, 30);segmentSpaceSlider.style('width', '100px');  
@@ -120,6 +118,8 @@ function draw() {
   } else {
     pixelDensity();
   } 
+    
+  ortho(-width/2, width/2, -height/2, height/2,-5000,5000);
     
   bkgdColor = color(bkgdColorPicker.value());
   textColor = color(textColorPicker.value());
