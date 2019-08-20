@@ -25,7 +25,7 @@ var letter_select, inp, inpText, runLength;
 var myText = [];
 
 // SAVE BETA
-var gifLength = 300;
+var gifLength = 250;
 var gifStart, gifEnd;
 var gifRecord = false;
 var canvas;
@@ -106,7 +106,7 @@ function setup() {
   trackSet = createButton('Track'); trackSet.position(280,height-35); trackSet.mousePressed(track);
   track2Set = createButton('Track II'); track2Set.position(330,height-35); track2Set.mousePressed(track2);
   
-  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(140, 10); saveLoopSet.mousePressed(saveLoop); 
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(150, 20); saveLoopSet.mousePressed(saveLoop); 
     
   inp0check.changed(inp0checker);
   gradientCheck.changed(gradientChecker);
