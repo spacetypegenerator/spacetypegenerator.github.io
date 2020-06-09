@@ -63,20 +63,20 @@ function setup() {
   rowSlider = createSlider(0, 100, 14, 2);rowSlider.position(25, 160);rowSlider.style('width', '100px');
 
   mirrorCheck = createCheckbox('', false);mirrorCheck.position(25, 178);
-  
+
   waveLengthSlider = createSlider(0, 1, 0.13, 0.01); waveLengthSlider.position(25, 220); waveLengthSlider.style('width', '100px');
   waveSpeedSlider = createSlider(0, 10, 1); waveSpeedSlider.position(25, 250); waveSpeedSlider.style('width', '100px');
   slopeSlider = createSlider(0, PI, 1, 0.1); slopeSlider.position(25, 280); slopeSlider.style('width', '100px');
 
   saveLoopSet = createButton('Save Loop'); saveLoopSet.position(140,10); saveLoopSet.mousePressed(saveLoop);
   prideButton = createButton('PRIDE!'); prideButton.position(140,35); prideButton.mousePressed(pride);
-  
+
   gradientCheck = createCheckbox('', false);gradientCheck.position(150, 77);
   inp0check = createCheckbox('', false);inp0check.position(150, 57);
   inp1 = createColorPicker('#000000');inp1.position(170, 105);inp1.style('width', '20px');
   inp1check = createCheckbox('', true);inp1check.position(150, 107);
   inp2 = createColorPicker('#ffffff');inp2.position(170, 135);inp2.style('width', '20px');
-  inp2check = createCheckbox('', true);inp2check.position(150, 137);
+  inp2check = createCheckbox('', false);inp2check.position(150, 137);
   inp3 = createColorPicker('#ff0000');inp3.position(170, 165);inp3.style('width', '20px');
   inp3check = createCheckbox('', false);inp3check.position(150, 167);
   inp4 = createColorPicker('#ffff00');inp4.position(170, 195);inp4.style('width', '20px');
@@ -91,7 +91,7 @@ function setup() {
   inp3check.changed(inp3checker);
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
-  
+
   checkerSet = createButton('Checker'); checkerSet.position(25,height-210); checkerSet.mousePressed(checker);
   cascadeSet = createButton('Cascade'); cascadeSet.position(90,height-210); cascadeSet.mousePressed(cascade);
   classicSet = createButton('Classic'); classicSet.position(25,height-190); classicSet.mousePressed(classic);
@@ -103,7 +103,7 @@ function setup() {
   webartSet = createButton('Web Art'); webartSet.position(25,height-130); webartSet.mousePressed(webart);
   sparkleSet = createButton('Sparkle'); sparkleSet.position(90,height-130); sparkleSet.mousePressed(sparkle);
   pixelGradientSet = createButton('Pixel Gradient'); pixelGradientSet.position(25,height-110); pixelGradientSet.mousePressed(pixelGradient);
-  
+
   yField = height-50;
   pdSave = pixelDensity();
 }
@@ -113,27 +113,27 @@ function draw() {
     pixelDensity(1);
   } else {
     pixelDensity(pdSave);
-  } 
-    
+  }
+
   bkgdColor = bkgdColorPicker.value();
   background(bkgdColor);
-  
+
   fill(50,200,250);
   noStroke();
   textSize(9);
-  
+
   if(gifRecord==false){
       text("TYPE: X-Scale " + typeX, 25, 20);
       text("TYPE: Weight " + typeStroke, 25, 50);
       text("TYPE: Tracking " + tracking, 25, 80);
       text("TYPE: Line Space " + lineSpaceSlider.value(), 25, 110);
 
-      text("GRID: Rows " + rows, 25, 160);  
-      text("Mirror", 43,191);    
+      text("GRID: Rows " + rows, 25, 160);
+      text("Mirror", 43,191);
 
       text("WAVE: Length " + waveLength, 25, 220);
       text("WAVE: Speed " + waveSpeedSlider.value(), 25, 250);
-      text("WAVE: Slope " + slope, 25, 280);  
+      text("WAVE: Slope " + slope, 25, 280);
 
       text("Gradient Mode", 172,90);
       text("No stripes", 172,70);
@@ -146,11 +146,11 @@ function draw() {
       text("SEGMENT TOGGLES AND COLORS",-250,144);
       pop();
   }
-  
+
   noFill();
   strokeWeight(1); strokeJoin(ROUND);
   stroke(50,200,250);
-  
+
   inpText = String(inp.value());
   runLength = inpText.length;
 
@@ -163,39 +163,39 @@ function draw() {
   waveLength = waveLengthSlider.value();
   waveSpeed = waveSpeedSlider.value()/100;
   slope = slopeSlider.value();
-  
+
   SA = typeStroke/2;
   doubleQuoteSwitch = 1;
   singleQuoteSwitch = 1;
 
   let step = (sq(rows)+rows)/2;
-  
+
   if(mirrorCheck.checked() == true){
     yBlock = yField/(step*2);
   } else {
     yBlock = yField/step;
   }
-  
+
   let waveBlock = 2*PI/rows;
-  
+
   push();
   translate(width / 2, height / 2);
   translate(-(runLength*typeX + tracking*(runLength-1))/2,-yField/2);
-  
+
   for(var k = 0; k<runLength; k++){
     push();
     for(var i = 0; i<rows; i++){
       if(gradientCheck.checked() == true){
         setGradient(i);
-      } else if(inp0check.checked() == false){      
+      } else if(inp0check.checked() == false){
         setTextColor(i);
         setRibbonColor(i);
       } else {
         setTextOnlyColor(i);
       }
-      
+
       letter_select = k;
-      
+
       if(waveSpeed>0){
         typeYfigure = map(sinEngine(i,waveBlock,k,waveLength,waveSpeed,slope),-1,1,yBlock,rows*yBlock);
       } else {
@@ -203,8 +203,8 @@ function draw() {
       }
       typeY = typeYfigure - typeYfigure*(lineSpaceSlider.value()/100);
       lineSpace = typeYfigure*(lineSpaceSlider.value()/100);
-      
-      push();        
+
+      push();
         translate(typeX*k + tracking*k,0);
         if(inp0check.checked() == false){
           fill(ribbonColor); noStroke();
@@ -222,21 +222,21 @@ function draw() {
  if(mirrorCheck.checked() == true){
    push();
     translate(0,yField/2);
-    
+
     for(var m = 0; m<runLength; m++){
       push();
       for(var n = 1; n<rows+1; n++){
         if(gradientCheck.checked() == true){
           setGradient(rows-n);
-        } else if(inp0check.checked() == false){      
+        } else if(inp0check.checked() == false){
           setTextColor(rows-n);
           setRibbonColor(rows-n);
         } else {
           setTextOnlyColor(rows-n);
         }
-        
+
         letter_select = m;
-      
+
       if(waveSpeed>0){
         typeYfigure = map(sinEngine(rows-n,waveBlock,m,waveLength,waveSpeed,slope),-1,1,yBlock,rows*yBlock);
       } else {
@@ -244,8 +244,8 @@ function draw() {
       }
       typeY = typeYfigure - typeYfigure*(lineSpaceSlider.value()/100);
       lineSpace = typeYfigure*(lineSpaceSlider.value()/100);
-        
-       push();        
+
+       push();
           translate(typeX*m + tracking*m,0);
           if(inp0check.checked() == false){
             fill(ribbonColor); noStroke();
@@ -260,7 +260,7 @@ function draw() {
       pop();
     }
   }
-  
+
   pop();
 
     if(gifRecord == true && frameCount==(gifStart+1)){
@@ -442,7 +442,7 @@ function setGradient(switcher) {
     let mid = color(inp2.value());
     let mid2 = color(inp3.value());
     let mid3 = color(inp4.value());
-    let to = color(inp5.value());    
+    let to = color(inp5.value());
     if(switcher<=(rows/4)) {
       ribbonColor = lerpColor(from,mid,switcher/(rows/4));
       strkColor = from;
@@ -497,10 +497,10 @@ function setGradient(switcher) {
 
 function pride() {
   inpNumber = 6;
-  
+
   inp1.value('#e70000');inp2.value('#ff8c00');inp3.value('#ffef00');inp4.value('#00811f');inp5.value('#0044ff'); inp6 = color('#760089');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
-  
+
   bkgdColorPicker.value('#ffffff');
 }
 
@@ -508,12 +508,12 @@ function reset() {
   typeXSlider.value(20); typeStrokeSlider.value(2); trackingSlider.value(10);
   lineSpaceSlider.value(20); rowSlider.value(14);
   waveLengthSlider.value(0.13); waveSpeedSlider.value(1); slopeSlider.value(1);
-  
+
   mirrorCheck.checked(false); gradientCheck.checked(false); inp0check.checked(false);
-  
+
   inp1.value('#000000');inp2.value('#ffffff');inp3.value('#ff0000');inp4.value('#ffff00');inp5.value('#0000ff');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
-    
+
   bkgdColorPicker.value('#ffffff');
   inp.value(" HERE TODAY & GONE TOMORROW ");
   inpNumber = 2;
@@ -524,12 +524,12 @@ function cascade() {
   typeXSlider.value(20); typeStrokeSlider.value(2); trackingSlider.value(3);
   lineSpaceSlider.value(22); rowSlider.value(80);
   waveLengthSlider.value(0.59); waveSpeedSlider.value(2); slopeSlider.value(1.5);
-  
+
   mirrorCheck.checked(false); gradientCheck.checked(false); inp0check.checked(true);
-  
+
   inp1.value('#ffffff');
   inp1check.checked(true); inp2check.checked(false); inp3check.checked(false);
-    
+
   bkgdColorPicker.value('#0000ff');
   inp.value("CASCADE");
   inpNumber = 1;
@@ -540,12 +540,12 @@ function checker() {
   typeXSlider.value(17); typeStrokeSlider.value(2); trackingSlider.value(10);
   lineSpaceSlider.value(20); rowSlider.value(18);
   waveLengthSlider.value(0.37); waveSpeedSlider.value(2); slopeSlider.value(3.14);
-  
+
   mirrorCheck.checked(true); gradientCheck.checked(false); inp0check.checked(false);
-  
+
   inp1.value('#ffffff');inp2.value('#000000');
   inp1check.checked(true); inp2check.checked(true);
-    
+
   bkgdColorPicker.value('#000000');
   inp.value("SPACE TYPE GENERATOR V.CASCADE");
   inpNumber = 2;
@@ -556,12 +556,12 @@ function mosaic() {
   typeXSlider.value(13); typeStrokeSlider.value(1.5); trackingSlider.value(13);
   lineSpaceSlider.value(12); rowSlider.value(6);
   waveLengthSlider.value(1.5); waveSpeedSlider.value(3); slopeSlider.value(3.14);
-  
+
   mirrorCheck.checked(false); gradientCheck.checked(false); inp0check.checked(true);
-  
+
   inp1.value('#ffffff');
   inp1check.checked(true);
-    
+
   bkgdColorPicker.value('#000000');
   inp.value("COLLECT THEM ALL");
   inpNumber = 1;
@@ -572,143 +572,143 @@ function running() {
   typeXSlider.value(20); typeStrokeSlider.value(2); trackingSlider.value(10);
   lineSpaceSlider.value(10); rowSlider.value(15);
   waveLengthSlider.value(0); waveSpeedSlider.value(5); slopeSlider.value(3.14);
-  
+
   mirrorCheck.checked(true); gradientCheck.checked(false); inp0check.checked(false);
-  
+
   inp1.value('#000000')
   inp1check.checked(true); inp2check.checked(false); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
-    
+
   bkgdColorPicker.value('#ffff00');
   inp.value("RUNNING UP THAT HILL");
   inpNumber = 1;
-} 
+}
 
 function gradientChecker() {
   reset();
   typeXSlider.value(20); typeStrokeSlider.value(2); trackingSlider.value(10);
   lineSpaceSlider.value(20); rowSlider.value(30);
   waveLengthSlider.value(1.5); waveSpeedSlider.value(4); slopeSlider.value(3.14);
-  
+
   mirrorCheck.checked(false); gradientCheck.checked(false); inp0check.checked(false);
-  
+
   inp1.value('#000000');inp2.value('#4d4d4d'); inp3.value('#808080');inp4.value('#cccccc'); inp5.value('#ffffff');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
-    
+
   bkgdColorPicker.value('#ffffff');
   inp.value("HERE TODAY. GONE TOMORROW.");
   inpNumber = 5;
-} 
+}
 
 function salmon() {
   reset();
   typeXSlider.value(40); typeStrokeSlider.value(2); trackingSlider.value(0);
   lineSpaceSlider.value(0); rowSlider.value(14);
   waveLengthSlider.value(0); waveSpeedSlider.value(5); slopeSlider.value(1);
-  
+
   mirrorCheck.checked(true); gradientCheck.checked(false); inp0check.checked(false);
-  
+
   inp1.value('#FF7E79');
   inp1check.checked(true); inp2check.checked(false); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
-    
+
   bkgdColorPicker.value('#ffffff');
   inp.value("////////////////////");
   inpNumber = 1;
-} 
+}
 
 function classic() {
   reset();
   typeXSlider.value(24); typeStrokeSlider.value(4); trackingSlider.value(20);
   lineSpaceSlider.value(38); rowSlider.value(14);
   waveLengthSlider.value(0.36); waveSpeedSlider.value(1); slopeSlider.value(2);
-  
+
   mirrorCheck.checked(true); gradientCheck.checked(false); inp0check.checked(false);
-  
+
   inp1.value('#0000ff');inp2.value('#ffff00'); inp3.value('#ff0000');inp4.value('#ffffff'); inp5.value('#000000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
-    
+
   bkgdColorPicker.value('#ffff00');
   inp.value(" I AM ROOTED. BUT I FLOW. ");
   inpNumber = 4;
-} 
+}
 
 function grid() {
   reset();
   typeXSlider.value(62); typeStrokeSlider.value(1); trackingSlider.value(0);
   lineSpaceSlider.value(0); rowSlider.value(18);
   waveLengthSlider.value(0); waveSpeedSlider.value(3); slopeSlider.value(3.14);
-  
+
   mirrorCheck.checked(true); gradientCheck.checked(false); inp0check.checked(false);
-  
+
   inp1.value('#ffffff');
   inp1check.checked(true); inp2check.checked(false); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
-    
+
   bkgdColorPicker.value('#0000ff');
   inp.value("IIIIIIIIIIIII");
   inpNumber = 1;
-} 
+}
 
 function webart() {
   reset();
-  
+
   let xBlock = (width-50)/30;
-  
+
   typeXSlider.value(xBlock); typeStrokeSlider.value(0); trackingSlider.value(0);
   lineSpaceSlider.value(0); rowSlider.value(50);
   waveLengthSlider.value(0.32); waveSpeedSlider.value(1); slopeSlider.value(3.14);
-  
+
   mirrorCheck.checked(true); gradientCheck.checked(true); inp0check.checked(false);
-  
+
   inp1.value('#000000');inp2.value('#ffffff'); inp3.value('#ff0000');inp4.value('#ffff00'); inp5.value('#0000ff');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
-    
+
   bkgdColorPicker.value('#ffffff');
   inp.value("                              ");
   inpNumber = 5;
-} 
+}
 
 function sparkle() {
   reset();
-  
+
   typeXSlider.value(17); typeStrokeSlider.value(2.5); trackingSlider.value(4);
   lineSpaceSlider.value(0); rowSlider.value(20);
   waveLengthSlider.value(0.25); waveSpeedSlider.value(6); slopeSlider.value(0.5);
-  
+
   mirrorCheck.checked(true); gradientCheck.checked(false); inp0check.checked(false);
-  
+
   inp1.value('#ffffff');inp2.value('#FF85FF'); inp3.value('#00FDFF');inp4.value('#0433FF'); inp5.value('#0000ff');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(false);
-    
+
   bkgdColorPicker.value('#0096FF');
   inp.value("***************");
   inpNumber = 4;
-} 
+}
 
 function pixelGradient() {
   reset();
-  
+
   let xBlock = (height-50)/20;
-  
+
   typeXSlider.value(xBlock); typeStrokeSlider.value(0); trackingSlider.value(0);
   lineSpaceSlider.value(0); rowSlider.value(46);
   waveLengthSlider.value(0.28); waveSpeedSlider.value(2); slopeSlider.value(0.8);
-  
+
   mirrorCheck.checked(false); gradientCheck.checked(true); inp0check.checked(false);
-  
+
   inp1.value('#2CFDFE');inp2.value('#FD8DD7'); inp3.value('#FC3692');inp4.value('#103FFB');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(false);
-    
+
   bkgdColorPicker.value('#ffffff');
   inp.value("                    ");
   inpNumber = 4;
-} 
+}
 
 function saveLoop() {
-//  2*PI/0.04 = gifLength;  
+//  2*PI/0.04 = gifLength;
     if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
-        waveSpeedSlider.value(4); 
+        waveSpeedSlider.value(4);
         gifStart = frameCount;
         gifEnd = gifStart + gifLength;
-        gifRecord = true;       
+        gifRecord = true;
     } else {
         gifRecord = false;
     }

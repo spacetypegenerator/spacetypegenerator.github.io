@@ -59,7 +59,7 @@ function setup() {
   canvas = p5SaveCanvas.canvas;
 
   pixelDensity(1);
-    
+
   background(bkgdColor);
   smooth();
   textFont(font);
@@ -81,15 +81,15 @@ function setup() {
   slopeSlider = createSlider(0, PI, 1, 0.1);slopeSlider.position(15, 390);slopeSlider.style('width', '100px');
 
   typePushSlider = createSlider(0, 10, 2);typePushSlider.position(15, 510);typePushSlider.style('width', '100px');
-  
+
   xRotCameraSlider = createSlider(-90, 90, -50);xRotCameraSlider.position(-20, height - 107);xRotCameraSlider.style('width', '100px');xRotCameraSlider.style('rotate', 270);
   yRotCameraSlider = createSlider(-90, 90, 65);yRotCameraSlider.position(20, height - 107);yRotCameraSlider.style('width', '100px');yRotCameraSlider.style('rotate', 270);
   zRotCameraSlider = createSlider(-90, 90, 11);zRotCameraSlider.position(60, height - 107);zRotCameraSlider.style('width', '100px');zRotCameraSlider.style('rotate', 270);
   zoomCameraSlider = createSlider(-500, 500, -40);zoomCameraSlider.position(15, height - 20);zoomCameraSlider.style('width', '100px');
 
-  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(140, 10); saveLoopSet.mousePressed(saveLoop);    
+  saveLoopSet = createButton('Save Loop'); saveLoopSet.position(140, 10); saveLoopSet.mousePressed(saveLoop);
   prideButton = createButton('PRIDE!'); prideButton.position(140,35); prideButton.mousePressed(pride);
-  
+
   oneBannerSet = createButton('A Banner'); oneBannerSet.position(150,height-60); oneBannerSet.mousePressed(oneBanner);
   twistSet = createButton('A Twist'); twistSet.position(220,height-60); twistSet.mousePressed(twist);
   foldsSet = createButton('Folds'); foldsSet.position(280,height-60); foldsSet.mousePressed(folds);
@@ -104,11 +104,11 @@ function setup() {
   blackwhiteSet = createButton('B&W'); blackwhiteSet.position(365,height-40); blackwhiteSet.mousePressed(blackwhite);
   newsprintSet = createButton('Newsprint'); newsprintSet.position(415,height-40); newsprintSet.mousePressed(newsprint);
   edgeSet = createButton('Edge Case'); edgeSet.position(490,height-40); edgeSet.mousePressed(edge);
-  
+
   inp0check = createCheckbox('', false);inp0check.position(150, 65);
-  inp1 = createColorPicker('#ffffff');inp1.position(170, 93);inp1.style('width', '20px');
+  inp1 = createColorPicker('#c9c9c9');inp1.position(170, 93);inp1.style('width', '20px');
   inp1check = createCheckbox('', true);inp1check.position(150, 95);
-  inp2 = createColorPicker('#0000ff');inp2.position(170, 123);inp2.style('width', '20px');
+  inp2 = createColorPicker('#000000');inp2.position(170, 123);inp2.style('width', '20px');
   inp2check = createCheckbox('', true);inp2check.position(150, 125);
   inp3 = createColorPicker('#ff0000');inp3.position(170, 153);inp3.style('width', '20px');
   inp3check = createCheckbox('', false);inp3check.position(150, 155);
@@ -124,7 +124,7 @@ function setup() {
   inp3check.changed(inp3checker);
   inp4check.changed(inp4checker);
   inp5check.changed(inp5checker);
-    
+
 }
 
 function draw() {
@@ -139,15 +139,15 @@ function draw() {
   typeY = typeYSlider.value();
   typeStroke = typeStrokeSlider.value();
   rows = rowSlider.value();
-  
+
   slope = slopeSlider.value();
-  
+
   padding = paddingSlider.value() / 100;
   typePush = typePushSlider.value();
 
   zWave = zWaveSlider.value();
 //  yWave = yWaveSlider.value();
-//  xWave = xWaveSlider.value(); 
+//  xWave = xWaveSlider.value();
   xWave = map(xWaveSlider.value(),0,200,0,2.5*typeX);
   yWave = map(yWaveSlider.value(),0,100,0,2*typeY);
   offset = offsetSlider.value();
@@ -158,7 +158,7 @@ function draw() {
   yRotCamera = yRotCameraSlider.value();
   zRotCamera = zRotCameraSlider.value();
   zoomCamera = zoomCameraSlider.value();
-  
+
   push();
   translate(-width / 2, -height / 2);
 
@@ -176,14 +176,14 @@ function draw() {
       text("WAVE: X Size  " + xWaveSlider.value(), 15, 210);
       text("WAVE: Y Size  " + yWaveSlider.value(), 15, 240);
       text("WAVE: Z Size  " + zWave, 15, 270);
-      text("WAVE: Offset  " + offset, 15, 300);  
+      text("WAVE: Offset  " + offset, 15, 300);
       text("WAVE: Speed  " + -speed, 15, 330);
       text("WAVE: Row Offset  " + rowOffset, 15, 360);
       text("Slope " + slope, 15, 390);
 
       text("Type & Stripe adjust " + typePush, 15, 510);
       text("Camera Zoom " + zoomCamera, 15, height - 20);
-        
+
       text("PRESETS", 150,height-70);
       text("No stripes", 170,79);
 
@@ -196,7 +196,7 @@ function draw() {
       text("BKGD COLORS", (height-315),140);
     }
   pop();
-  
+
   push();
   // camera
   translate(0, 0, zoomCamera);
@@ -208,48 +208,48 @@ function draw() {
   ySpace = typeY;
 
   translate(-typeX * inpText.length / 2, -typeY * rows / 2);
-    
+
   for (var j = 0; j < rows; j++) {
     for (var i = 0; i < inpText.length; i++) {
       letter_select = i;
       setRibbonColor(j);
-      
+
        if(inp0check.checked() == false){
          setTextColor(j);
        } else {
          setTextOnlyColor(j);
        }
-      
+
 //      sinEngine(aCount, aLength, bCount, bLength, Speed, slopeN)
       var yWaverTL = sinEngine(i,offset,j,rowOffset,speed, slope) * yWave;
       var yWaverTR = sinEngine((i+1),offset,j,rowOffset,speed, slope) * yWave;
       var yWaverBR = sinEngine((i+1),offset,(j+1),rowOffset,speed, slope) * yWave;
       var yWaverBL = sinEngine(i,offset,(j+1),rowOffset,speed, slope) * yWave;
-      
+
       var xWaverTL = sinEngine(i,offset,j,rowOffset,speed, slope) * xWave;
       var xWaverTR = sinEngine((i+1),offset,j,rowOffset,speed, slope) * xWave;
       var xWaverBR = sinEngine((i+1),offset,(j+1),rowOffset,speed, slope) * xWave;
       var xWaverBL = sinEngine(i,offset,(j+1),rowOffset,speed, slope) * xWave;
-      
+
       var zWaverTL = sinEngine(i,offset,j,rowOffset,speed, slope) * zWave;
       var zWaverTR = sinEngine((i+1),offset,j,rowOffset,speed, slope) * zWave;
       var zWaverBR = sinEngine((i+1),offset,(j+1),rowOffset,speed, slope) * zWave;
-      var zWaverBL = sinEngine(i,offset,(j+1),rowOffset,speed, slope) * zWave;     
+      var zWaverBL = sinEngine(i,offset,(j+1),rowOffset,speed, slope) * zWave;
 
       TLbox = createVector(xWaverTL, yWaverTL, zWaverTL);
       TRbox = createVector(typeX +xWaverTR, yWaverTR, zWaverTR);
       BRbox = createVector(typeX +xWaverBR, typeY+yWaverBR, zWaverBR);
       BLbox = createVector(xWaverBL, typeY+yWaverBL, zWaverBL);
-      
-      Thalf = p5.Vector.lerp(TLbox,TRbox,0.5);  
+
+      Thalf = p5.Vector.lerp(TLbox,TRbox,0.5);
       Bhalf = p5.Vector.lerp(BLbox,BRbox,0.5);
       center = p5.Vector.lerp(Thalf,Bhalf,0.5)
-      
+
       TL = p5.Vector.lerp(TLbox,center,padding);
       TR = p5.Vector.lerp(TRbox,center,padding);
       BR = p5.Vector.lerp(BRbox,center,padding);
       BL = p5.Vector.lerp(BLbox,center,padding);
-      
+
       push();
         translate(xSpace * i, ySpace * j);
         translate(-typeX / 2, -typeY / 2);
@@ -281,7 +281,7 @@ function draw() {
     }
   }
   pop();
-    
+
     if(gifRecord == true && frameCount==(gifStart+1)){
       capturer.start();
       capturer.capture(canvas);
@@ -458,10 +458,10 @@ function sinEngine(aCount, aLength, bCount, bLength, speed, slope) {
 function reset() {
   typeXSlider.value(20); typeYSlider.value(50); typeStrokeSlider.value(1.5);
   rowSlider.value(1); paddingSlider.value(20);   typePushSlider.value(2);
-  
+
   zWaveSlider.value(30); xWaveSlider.value(30); yWaveSlider.value(30); offsetSlider.value(0.3);
   slopeSlider.value(1); speedSlider.value(0.02); rowOffsetSlider.value(0.3);
-    
+
   xRotCameraSlider.value(30); yRotCameraSlider.value(30); zRotCameraSlider.value(-30); zoomCameraSlider.value(0);
 
   inp0check.checked(false); backSide = true;
@@ -469,7 +469,7 @@ function reset() {
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
 
   inp.value(" THIS & THEN ");
-  
+
   inpNumber = 2;
   bkgdColorPicker.value('#000000');
 }
@@ -478,34 +478,34 @@ function oneBanner() {
   reset();
   typeXSlider.value(20); typeYSlider.value(40); typeStrokeSlider.value(1);
   rowSlider.value(1); paddingSlider.value(20); typePushSlider.value(0);
-  
+
   zWaveSlider.value(70); xWaveSlider.value(0); yWaveSlider.value(0); offsetSlider.value(0.3); speedSlider.value(0.02); rowOffsetSlider.value(0);
-    
+
   xRotCameraSlider.value(25); yRotCameraSlider.value(75); zRotCameraSlider.value(-10); zoomCameraSlider.value(-150);
-  
+
   inp1.value('#FFFFFF');inp2.value('#ff0000');inp3.value('#0000ff');inp4.value('#ffff00');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
 
   inp.value(" -ALL THIS AND MORE // ALL THIS AND MORE- ");
-  
+
   inpNumber = 2;
   bkgdColorPicker.value('#00FDFF');
-}  
+}
 
 function folds() {
   reset();
   typeXSlider.value(45); typeYSlider.value(70); typeStrokeSlider.value(3);
   rowSlider.value(8); paddingSlider.value(20); typePushSlider.value(8.5);
-  
+
   zWaveSlider.value(90); xWaveSlider.value(0); yWaveSlider.value(0); offsetSlider.value(0.21); speedSlider.value(0.02); rowOffsetSlider.value(2.55);
-    
+
   xRotCameraSlider.value(51); yRotCameraSlider.value(37); zRotCameraSlider.value(-28); zoomCameraSlider.value(-300);
-  
+
   inp1.value('#FFFFFF');inp2.value('#0000ff');inp3.value('#ff0000');inp4.value('#ffff00');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
 
   inp.value(" I AM OUTSIDE TIME ");
-  
+
   inpNumber = 5;
   bkgdColorPicker.value('#ffff00');
 }
@@ -514,16 +514,16 @@ function twist() {
   reset();
   typeXSlider.value(30); typeYSlider.value(50); typeStrokeSlider.value(2);
   rowSlider.value(1); paddingSlider.value(70); typePushSlider.value(4);
-  
+
   zWaveSlider.value(30); xWaveSlider.value(0); yWaveSlider.value(0); offsetSlider.value(0.3); speedSlider.value(0.02); rowOffsetSlider.value(3.14);
-    
+
   xRotCameraSlider.value(-45); yRotCameraSlider.value(37); zRotCameraSlider.value(-15); zoomCameraSlider.value(-120);
-  
+
   inp1.value('#FFFFFF');inp2.value('#000000');inp3.value('#ff0000');inp4.value('#ffff00');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
 
   inp.value(" THERE ARE NO ENDINGS ");
-  
+
   inpNumber = 2;
   bkgdColorPicker.value('#0000FF');
 }
@@ -532,17 +532,17 @@ function flatSea() {
   reset();
   typeXSlider.value(25); typeYSlider.value(45); typeStrokeSlider.value(2);
   rowSlider.value(12); paddingSlider.value(40); typePushSlider.value(4);
-  
+
   zWaveSlider.value(75); xWaveSlider.value(0); yWaveSlider.value(200); offsetSlider.value(0.11); speedSlider.value(0.08); rowOffsetSlider.value(1.96);
-    
+
   xRotCameraSlider.value(0); yRotCameraSlider.value(0); zRotCameraSlider.value(0); zoomCameraSlider.value(-500);
-  
+
   backSide = true;
   inp1.value('#FFFFFF');inp2.value('#FF0000');inp3.value('#0000FF');inp4.value('#ffff00');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
 
   inp.value(" rolled by like scrolls of silver ");
-  
+
   inpNumber = 5;
   bkgdColorPicker.value('#000000');
 }
@@ -551,17 +551,17 @@ function barber() {
   reset();
   typeXSlider.value(20); typeYSlider.value(40); typeStrokeSlider.value(1.5);
   rowSlider.value(15); paddingSlider.value(20); typePushSlider.value(2);
-  
+
   zWaveSlider.value(0); xWaveSlider.value(0); yWaveSlider.value(30); offsetSlider.value(0.3); speedSlider.value(0.07); rowOffsetSlider.value(2.13);
-    
+
   xRotCameraSlider.value(0); yRotCameraSlider.value(0); zRotCameraSlider.value(-30); zoomCameraSlider.value(-150);
-  
+
   backSide = true;
   inp1.value('#FFFFFF');inp2.value('#0000ff');inp3.value('#ff0000');inp4.value('#000000');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(false);
 
   inp.value(" DOUBLE-STRIPES BREAK! ");
-  
+
   inpNumber = 4;
   bkgdColorPicker.value('#D6D6D6');
 }
@@ -570,17 +570,17 @@ function colaWave() {
   reset();
   typeXSlider.value(35); typeYSlider.value(100); typeStrokeSlider.value(3);
   rowSlider.value(4); paddingSlider.value(43); typePushSlider.value(0);
-  
-  zWaveSlider.value(0); xWaveSlider.value(0); yWaveSlider.value(150); offsetSlider.value(0.19); speedSlider.value(0.02); rowOffsetSlider.value(0.28); 
-    
+
+  zWaveSlider.value(0); xWaveSlider.value(0); yWaveSlider.value(150); offsetSlider.value(0.19); speedSlider.value(0.02); rowOffsetSlider.value(0.28);
+
   xRotCameraSlider.value(0); yRotCameraSlider.value(0); zRotCameraSlider.value(0); zoomCameraSlider.value(-500);
-  
+
   backSide = true;
   inp1.value('#FFFFFF');inp2.value('#ff0000');inp3.value('#D6D6D6');inp4.value('#0000ff');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(false);
 
   inp.value(" ------ENTIRE FUTURES ARE BORN------ ");
-  
+
   inpNumber = 4;
   bkgdColorPicker.value('#FF0000');
 }
@@ -589,17 +589,17 @@ function origami() {
   reset();
   typeXSlider.value(87); typeYSlider.value(83); typeStrokeSlider.value(3);
   rowSlider.value(18); paddingSlider.value(43); typePushSlider.value(10);
-  
+
   zWaveSlider.value(75); xWaveSlider.value(0); yWaveSlider.value(0); offsetSlider.value(0.21); speedSlider.value(0.12); rowOffsetSlider.value(3.14);
-    
+
   xRotCameraSlider.value(42); yRotCameraSlider.value(20); zRotCameraSlider.value(-23); zoomCameraSlider.value(-500);
-  
+
   backSide = true;
   inp1.value('#FFFFFF');inp2.value('#ff0000');inp3.value('#ffff00');inp4.value('#0000ff');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(false);
 
   inp.value(" Forever Future Landscapes ");
-  
+
   inpNumber = 4;
   bkgdColorPicker.value('#011993');
 }
@@ -608,17 +608,17 @@ function blackwhite() {
   reset();
   typeXSlider.value(17); typeYSlider.value(43); typeStrokeSlider.value(2);
   rowSlider.value(10); paddingSlider.value(28); typePushSlider.value(2);
-  
+
   zWaveSlider.value(0); xWaveSlider.value(200); yWaveSlider.value(55); offsetSlider.value(0.3); speedSlider.value(0.06); rowOffsetSlider.value(0.3);
-    
+
   xRotCameraSlider.value(30); yRotCameraSlider.value(30); zRotCameraSlider.value(0); zoomCameraSlider.value(-250);
-  
+
   backSide = true;
   inp1.value('#FFFFFF');inp2.value('#000000');inp3.value('#ff0000');inp4.value('#0000ff');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
 
   inp.value(" This and then that ");
-  
+
   inpNumber = 2;
   bkgdColorPicker.value('#000000');
 }
@@ -627,18 +627,18 @@ function newsprint() {
   reset();
   typeXSlider.value(42); typeYSlider.value(48); typeStrokeSlider.value(2);
   rowSlider.value(16); paddingSlider.value(48); typePushSlider.value(4);
-  
+
   zWaveSlider.value(83); xWaveSlider.value(200); yWaveSlider.value(200);
   slopeSlider.value(3.1); offsetSlider.value(0.11); speedSlider.value(0.08); rowOffsetSlider.value(1.96);
-    
+
   xRotCameraSlider.value(0); yRotCameraSlider.value(0); zRotCameraSlider.value(0); zoomCameraSlider.value(-500);
-  
+
   backSide = true;
   inp1.value('#FFFFFF');inp2.value('#000000');inp3.value('#ff0000');inp4.value('#0000ff');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
 
   inp.value(" Rolled by like scrolls over silver ");
-  
+
   inpNumber = 2;
   bkgdColorPicker.value('#5e5e5e');
 }
@@ -647,18 +647,18 @@ function silos() {
   reset();
   typeXSlider.value(15); typeYSlider.value(43); typeStrokeSlider.value(1.5);
   rowSlider.value(7); paddingSlider.value(20); typePushSlider.value(8);
-  
+
   zWaveSlider.value(200); xWaveSlider.value(0); yWaveSlider.value(0);
   slopeSlider.value(3.1); offsetSlider.value(0.37); speedSlider.value(0.1); rowOffsetSlider.value(0);
-    
+
   xRotCameraSlider.value(0); yRotCameraSlider.value(0); zRotCameraSlider.value(0); zoomCameraSlider.value(-90);
-  
+
   backSide = true;
   inp1.value('#FFFF00');inp2.value('#0000FF');inp3.value('#ff0000');inp4.value('#FFFFFF');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(false); inp5check.checked(false);
 
   inp.value(" BEFORE AND DURING AND AFTER ");
-  
+
   inpNumber = 3;
   bkgdColorPicker.value('#FFFFFF');
 }
@@ -667,18 +667,18 @@ function crane() {
   reset();
   typeXSlider.value(12); typeYSlider.value(40); typeStrokeSlider.value(1.75);
   rowSlider.value(10); paddingSlider.value(40); typePushSlider.value(3);
-  
+
   zWaveSlider.value(32); xWaveSlider.value(115); yWaveSlider.value(0);
   slopeSlider.value(0.8); offsetSlider.value(0.2); speedSlider.value(0.03); rowOffsetSlider.value(2.47);
-    
+
   xRotCameraSlider.value(40); yRotCameraSlider.value(0); zRotCameraSlider.value(0); zoomCameraSlider.value(0);
-  
+
   backSide = true;
   inp1.value('#FFFFFF');inp2.value('#0000FF');inp3.value('#ff0000');inp4.value('#FFFF00');inp5.value('#000');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(false); inp5check.checked(false);
 
   inp.value(" square possibilities ");
-  
+
   inpNumber = 3;
   bkgdColorPicker.value('#0000ff');
 }
@@ -688,10 +688,10 @@ function edge() {
   reset();
   typeXSlider.value(40); typeYSlider.value(70); typeStrokeSlider.value(2);
   rowSlider.value(5); paddingSlider.value(20); typePushSlider.value(0);
-  
-  xWaveSlider.value(200); yWaveSlider.value(0); zWaveSlider.value(0); 
+
+  xWaveSlider.value(200); yWaveSlider.value(0); zWaveSlider.value(0);
   slopeSlider.value(0.5); offsetSlider.value(0.42); speedSlider.value(0.02); rowOffsetSlider.value(0.46);
-    
+
   xRotCameraSlider.value(0); yRotCameraSlider.value(11); zRotCameraSlider.value(30); zoomCameraSlider.value(-500);
 
   inp0check.checked(true);
@@ -699,7 +699,7 @@ function edge() {
   inp1check.checked(true); inp2check.checked(false); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
 
   inp.value("harsh yet smooth angles");
-  
+
   inpNumber = 1;
   bkgdColorPicker.value('#000000');
 }
@@ -709,10 +709,10 @@ function mystery() {
   reset();
   typeXSlider.value(25); typeYSlider.value(45); typeStrokeSlider.value(2);
   rowSlider.value(15); paddingSlider.value(27); typePushSlider.value(0);
-  
-  xWaveSlider.value(0); yWaveSlider.value(71); zWaveSlider.value(73); 
+
+  xWaveSlider.value(0); yWaveSlider.value(71); zWaveSlider.value(73);
   slopeSlider.value(1); offsetSlider.value(0.22); speedSlider.value(0.08); rowOffsetSlider.value(1.96);
-    
+
   xRotCameraSlider.value(0); yRotCameraSlider.value(0); zRotCameraSlider.value(0); zoomCameraSlider.value(-500);
 
   inp0check.checked(true);
@@ -720,25 +720,25 @@ function mystery() {
   inp1check.checked(true); inp2check.checked(false); inp3check.checked(false); inp4check.checked(false); inp5check.checked(false);
 
   inp.value("A gentle flowing space");
-  
+
   inpNumber = 1;
   bkgdColorPicker.value('#ffffff');
 }
 
 function pride() {
   inpNumber = 6;
-  
+
   inp1.value('#e70000');inp2.value('#ff8c00');inp3.value('#ffef00');inp4.value('#00811f');inp5.value('#0044ff'); inp6 = color('#760089');
   inp1check.checked(true); inp2check.checked(true); inp3check.checked(true); inp4check.checked(true); inp5check.checked(true);
 }
 
 function saveLoop() {
-//  2*PI/0.04 = gifLength;  
+//  2*PI/0.04 = gifLength;
     if(confirm('Click OK to generate your gif.\nThe process will take a minute. Be patient, plz!')){
-        speedSlider.value(0.04); 
+        speedSlider.value(0.04);
         gifStart = frameCount;
         gifEnd = gifStart + gifLength;
-        gifRecord = true;       
+        gifRecord = true;
     } else {
         gifRecord = false;
     }
