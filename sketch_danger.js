@@ -172,7 +172,7 @@ function draw() {
   text("Invert",width/2 - 128,height-46);
   text("Columns",width/2+160,53);
   text("Rows",width/2+160,73);
-  text("Use horizontal bars ('|')\nto create line breaks.",width/2 + 20,height-115);
+  text("Use vertical bars ('|')\nto create line breaks.",width/2 + 20,height-115);
   noFill();
   stroke(foreCol);
   line(width/2 - 200, height - 90, width/2 + 200, height - 90);
