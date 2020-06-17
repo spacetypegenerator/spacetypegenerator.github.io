@@ -51,28 +51,28 @@ function preload() {
 function setup() {
   var p5SaveCanvas = createCanvas(windowWidth, windowHeight);
   canvas = p5SaveCanvas.canvas;
-    
+
   background(0);
   smooth();
   frameRate(30);
   textFont(font);
   pixelDensity(1);
-  
+
   inp = select("#textfield");
 
-  rowsSlider = createSlider(1, 60, 13);rowsSlider.position(10, height-55);rowsSlider.style('width', '100px');  
+  rowsSlider = createSlider(1, 60, 7);rowsSlider.position(10, height-55);rowsSlider.style('width', '100px');
   typeStrokeSlider = createSlider(0, 4, 1, 0.5);typeStrokeSlider.position(10, height-25);typeStrokeSlider.style('width', '100px');
-  trackingSlider = createSlider(0, 500, 200);trackingSlider.position(125, height-55);trackingSlider.style('width', '100px');
+  trackingSlider = createSlider(0, 500, 60);trackingSlider.position(125, height-55);trackingSlider.style('width', '100px');
   speedSlider = createSlider(0, 2, 0.3, 0.01);speedSlider.position(125, height-25);speedSlider.style('width', '100px');
   lineSpaceSlider = createSlider(0, 40, 5);lineSpaceSlider.position(235, height-55);lineSpaceSlider.style('width', '100px');
   paddingSlider = createSlider(0, windowWidth/2, 40);paddingSlider.position(235, height-25);paddingSlider.style('width', '100px');
-  
+
   mirrorCheck = createCheckbox('', true);mirrorCheck.position(350, height-58);
   mirrorSpeedCheck = createCheckbox('', false);mirrorSpeedCheck.position(350, height-42);
   fluxCheck = createCheckbox('', false);fluxCheck.position(350, height-26);
-  
+
   prideButton = createButton('PRIDE!'); prideButton.position(15,15); prideButton.mousePressed(pride);
-    
+
   textColorPicker = createColorPicker('#FFFFFF'); textColorPicker.position(450, height-59); textColorPicker.style('width', '20px');
   bkgdColorPicker = createColorPicker('#000000'); bkgdColorPicker.position(450, height-29); bkgdColorPicker.style('width', '20px');
 
@@ -89,23 +89,23 @@ function setup() {
 }
 
 function draw() {
-  //  strkColor = inp1.value();  
+  //  strkColor = inp1.value();
   bkgdColor = bkgdColorPicker.value();
   textColor = textColorPicker.value();
   rows = rowsSlider.value();
   speed = speedSlider.value();
   lineSpace = lineSpaceSlider.value();
   padding = paddingSlider.value();
-  
+
   background(bkgdColor);
-  
+
   fill(textColor);
   noStroke();
   textSize(9);
     if(fluxSave == true || scrollSave == true){
     } else {
       text("Rows " + rows, 10, height-55);
-      text("Weight " + typeStroke, 10, height-25);  
+      text("Weight " + typeStroke, 10, height-25);
       text("Tracking " + tracking, 125, height-55);
       text("Scroll Speed " + speed, 125, height-25);
       text("Line space " + lineSpace, 235, height-55);
@@ -121,13 +121,13 @@ function draw() {
       text("PRESETS", 530, height-57);
       text("SAVE", 770, height-57);
     }
-  
+
   inpText = String(inp.value());
   runLength = inpText.length;
 
   typeStroke = typeStrokeSlider.value();
   tracking = trackingSlider.value()/100;
-  
+
   SA = typeStroke/2;
   doubleQuoteSwitch = 1;
   singleQuoteSwitch = 1;
@@ -143,44 +143,44 @@ function draw() {
     rowMax = rowsSlider.value();
     rows = map(sinEngine(0.05, 2),-1,1,rowMax,0.99);
   }
-    
+
   let xField = width-(2*padding);
   let yField = height-140;
-  
+
   typeY = yField;
   let step = (sq(rows)+rows)/2;
-  
+
   if(mirrorCheck.checked() == true){
     yBlock = (yField-(rows)*lineSpace*2)/(step*2);
   } else {
     yBlock = (yField-(rows-1)*lineSpace)/(step);
   }
-  
+
   let speedBlock = speed;
-  
+
 //  rect(0,0,xField,yField);
-  
+
   for (var j = 0; j < rows; j++){
     typeX = xField/((j+1)*inpText.length + ((j+1)*inpText.length-1)*tracking);
     track = typeX*tracking;
     for (var i = 0; i < j+1; i++){
-      
+
       for (var k = 0; k < inpText.length; k++) {
         letter_select = k;
         typeY = yBlock*(rows-j);
-        
+
         if(inpNumber == 6){
           setTextColor(j);
           stroke(strkColor);
         }
-        
+
         push();
           translate(k*typeX + k*track,0);
           translate(inpText.length*typeX*i + inpText.length*track*i,0);
           translate(-(mover*speedBlock*(rows-j))%(xField+track),0);
           keyboardEngine();
         pop();
-        
+
         if(speed>0){
           push();
             translate(k*typeX + k*track,0);
@@ -193,14 +193,14 @@ function draw() {
     }
     translate(0,typeY+lineSpace);
   }
-    
+
   if(mirrorCheck.checked() == true){
-    
+
     pop();
     push();
     translate(padding,60);
     translate(0,yField);
-    
+
     for (var m = 0; m < rows; m++){
       typeX = xField/((m+1)*inpText.length + ((m+1)*inpText.length-1)*tracking);
       track = typeX*tracking;
@@ -208,33 +208,33 @@ function draw() {
 
       translate(0,-typeY-lineSpace);
 
-      for (var n = 0; n < m+1; n++){    
+      for (var n = 0; n < m+1; n++){
         for (var p = 0; p < inpText.length; p++) {
           letter_select = p;
-          
+
           if(inpNumber == 6){
             setTextColor(m);
             stroke(strkColor);
           }
-            
+
           push();
             translate(p*typeX + p*track,0);
             translate(inpText.length*typeX*n + inpText.length*track*n,0);
-          
-          if(mirrorSpeedCheck.checked()==true){         
+
+          if(mirrorSpeedCheck.checked()==true){
             translate((mover*speedBlock*(rows-m))%(xField+track),0);
-          } else {         
+          } else {
             translate(-(mover*speedBlock*(rows-m))%(xField+track),0);
           }
             keyboardEngine();
           pop();
-        
+
           if(speed>0){
             push();
               translate(p*typeX + p*track,0);
               translate(inpText.length*typeX*n + inpText.length*track*n,0);
-            
-            if(mirrorSpeedCheck.checked()==true){         
+
+            if(mirrorSpeedCheck.checked()==true){
               translate((mover*speedBlock*(rows-m))%(xField+track)-(xField+track),0);
             } else {
               translate(-(mover*speedBlock*(rows-m))%(xField+track)+(xField+track),0);
@@ -246,14 +246,14 @@ function draw() {
       }
     }
   }
-  
+
   pop();
   noStroke(); fill(bkgdColor);
   rect(-1,-1,padding,height-60);
   rect(width+1,-1,-padding,height-60);
-  
+
   mover++;
-    
+
     if(fluxSave == true && mover==2){
       capturer.start();
       capturer.capture(canvas);
@@ -267,7 +267,7 @@ function draw() {
       print("stop");
       fluxSave = false;
     }
-    
+
     if(scrollSave == true && mover==21){
       capturer.start();
       capturer.capture(canvas);
@@ -303,9 +303,9 @@ function reset() {
   rowsSlider.value(10); typeStrokeSlider.value(1); trackingSlider.value(200);
   speedSlider.value(0.3); lineSpaceSlider.value(5); paddingSlider.value(20);
   mirrorCheck.checked(true); mirrorSpeedCheck.checked(false); fluxCheck.checked(false);
-  
+
   textColorPicker.value('#FFFFFF'); bkgdColorPicker.value('#000000');
-  
+
   inp.value("SPACE ");
 }
 
@@ -314,27 +314,27 @@ function postSpace() {
   rowsSlider.value(23); typeStrokeSlider.value(1); trackingSlider.value(200);
   speedSlider.value(0); lineSpaceSlider.value(5); paddingSlider.value(20);
   mirrorCheck.checked(false); mirrorSpeedCheck.checked(false);
-  
+
   textColorPicker.value('#ffffff'); bkgdColorPicker.value('#000000');
   inp.value("POST    *    SPACE");
-} 
+}
 
 function moon() {
   reset();
   rowsSlider.value(20); typeStrokeSlider.value(1); trackingSlider.value(168);
   speedSlider.value(0); lineSpaceSlider.value(2); paddingSlider.value(100);
   mirrorCheck.checked(true); mirrorSpeedCheck.checked(false);
-  
+
   textColorPicker.value('#D8E9EF'); bkgdColorPicker.value('#000000');
   inp.value("MOON");
-} 
+}
 
 function cross() {
   reset();
   rowsSlider.value(22); typeStrokeSlider.value(1); trackingSlider.value(500);
   speedSlider.value(0); lineSpaceSlider.value(0); paddingSlider.value(width/4);
   mirrorCheck.checked(true); mirrorSpeedCheck.checked(false);
-  
+
   textColorPicker.value('#000000'); bkgdColorPicker.value('#FFFFFF');
   inp.value("X");
 }
@@ -344,7 +344,7 @@ function bridge() {
   rowsSlider.value(7); typeStrokeSlider.value(4); trackingSlider.value(0);
   speedSlider.value(0.66); lineSpaceSlider.value(11); paddingSlider.value(50);
   mirrorCheck.checked(true); mirrorSpeedCheck.checked(true);
-  
+
   textColorPicker.value('#000000'); bkgdColorPicker.value('#D6D6D6');
   inp.value("MMMMM");
 }
@@ -354,7 +354,7 @@ function whitney() {
   rowsSlider.value(17); typeStrokeSlider.value(1.5); trackingSlider.value(15);
   speedSlider.value(0.89); lineSpaceSlider.value(4); paddingSlider.value(0);
   mirrorCheck.checked(true); mirrorSpeedCheck.checked(false);
-  
+
   textColorPicker.value('#000000'); bkgdColorPicker.value('#FFFFFF');
   inp.value("W W");
 }
@@ -365,7 +365,7 @@ function beach() {
   rowsSlider.value(35); typeStrokeSlider.value(1); trackingSlider.value(208);
   speedSlider.value(0.3); lineSpaceSlider.value(5); paddingSlider.value(20);
   mirrorCheck.checked(true); mirrorSpeedCheck.checked(true);
-  
+
   textColorPicker.value('#000000'); bkgdColorPicker.value('#FFFFFF');
   inp.value("////");
 }
@@ -376,7 +376,7 @@ function xFlux() {
   rowsSlider.value(20); typeStrokeSlider.value(1); trackingSlider.value(0);
   speedSlider.value(0); lineSpaceSlider.value(7); paddingSlider.value(0);
   mirrorCheck.checked(true); mirrorSpeedCheck.checked(false); fluxCheck.checked(true);
-  
+
   textColorPicker.value('#FFFFFF'); bkgdColorPicker.value('#242424');
   inp.value("XXX");
 }
@@ -384,9 +384,9 @@ function xFlux() {
 function fluxLoop() {
     if(confirm('Click OK to generate a looped gif of the flux motion.\nThe process will take a minute. Be patient, plz!')){
       speedSlider.value(0);
-      fluxCheck.checked(true); 
+      fluxCheck.checked(true);
       mover = 1;
-      fluxSave = true;      
+      fluxSave = true;
     } else {
       fluxSave = false;
     }
@@ -398,7 +398,7 @@ function scroll() {
         if(speedSlider.value()== 0){
             speedSlider.value(0.3);
         }
-      scrollSave = true;      
+      scrollSave = true;
     } else {
       scrollSave = false;
     }
@@ -406,7 +406,7 @@ function scroll() {
 
 function pride() {
   inpNumber = 6;
-  
+
   inp1 = color('#e70000');inp2 = color('#ff8c00'); inp3 = color('#ffef00');inp4 = color('#00811f'); inp5 = color('#0044ff'); inp6 = color('#760089');
-  
+
 }

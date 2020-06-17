@@ -77,8 +77,8 @@ function setup(){
 
   inp = select("#textfield");
 
-  columnSlider = createSlider(1,200,33); columnSlider.position(25,17); columnSlider.style('width','100px');
-  rowSlider = createSlider(1,200,7); rowSlider.position(25,47); rowSlider.style('width','100px');
+  columnSlider = createSlider(1,200,21); columnSlider.position(25,17); columnSlider.style('width','100px');
+  rowSlider = createSlider(1,200,21); rowSlider.position(25,47); rowSlider.style('width','100px');
   trackingSlider = createSlider(-10,100,5); trackingSlider.position(25,77); trackingSlider.style('width','100px');
   lineSpaceSlider = createSlider(-10,100,5); lineSpaceSlider.position(25,107); lineSpaceSlider.style('width','100px');
 
@@ -103,7 +103,7 @@ function setup(){
   yStrechWaveSlider = createSlider(0,100,0); yStrechWaveSlider.position(25,497); yStrechWaveSlider.style('width','100px');
   yStrechWaveCheck = createCheckbox('',false); yStrechWaveCheck.position(130,496);
 
-  fullTextCheck = createCheckbox('',false); fullTextCheck.position(140,57);
+  fullTextCheck = createCheckbox('',true); fullTextCheck.position(140,57);
   xRotCameraSlider = createSlider(-180,180,0); xRotCameraSlider.position(-20,height-107); xRotCameraSlider.style('width','100px'); xRotCameraSlider.style('rotate',270);
   yRotCameraSlider = createSlider(-180,180,0); yRotCameraSlider.position(20,height-107); yRotCameraSlider.style('width','100px'); yRotCameraSlider.style('rotate',270);
   zRotCameraSlider = createSlider(-180,180,0); zRotCameraSlider.position(60,height-107); zRotCameraSlider.style('width','100px'); zRotCameraSlider.style('rotate',270);

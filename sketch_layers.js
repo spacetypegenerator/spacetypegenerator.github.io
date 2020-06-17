@@ -78,13 +78,13 @@ function setup() {
 
   inp = select("#textfield");
 
-  textColorPicker = createColorPicker('#000000');
+  textColorPicker = createColorPicker('#ffffff');
   textColorPicker.position(25, 240); textColorPicker.style('width', '20px');
-  blockColorPicker = createColorPicker('#ffffff');
+  blockColorPicker = createColorPicker('#000000');
   blockColorPicker.position(50, 240); blockColorPicker.style('width', '20px');
-  strokeColorPicker = createColorPicker('#000000');
+  strokeColorPicker = createColorPicker('#545454');
   strokeColorPicker.position(75, 240); strokeColorPicker.style('width', '20px');
-  bkgdColorPicker = createColorPicker('#0000ff');
+  bkgdColorPicker = createColorPicker('#000000');
   bkgdColorPicker.position(100, 240); bkgdColorPicker.style('width', '20px');
 
   speedRacerSet = createButton('Speed Racer'); speedRacerSet.position(25,height-160); speedRacerSet.mousePressed(speedRacer);
