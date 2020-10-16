@@ -61,7 +61,8 @@ function setup() {
 
   inp = createInput('YOU DON\'T UNDERSTAND THINGS, YOU JUST GET USED TO THEM.');
   inp.position(10,height-155); inp.style('width','300px');
-  sel = createSelect(); sel.position(10, height-120); sel.style('width','150px'); sel.style('height','20px');
+
+  sel = createSelect(); sel.position(340, height-155); sel.style('width','150px'); sel.style('height','20px');
   sel.option('NimbusSans-Regular Condensed',0);
   sel.option('ProximaNova-Black',1);
   sel.option('KeplerStd-Medium',2);
@@ -75,25 +76,23 @@ function setup() {
 
   handleColor = color(0,0,255);
 
-  stripHeightSlider = createSlider(10,300,70); stripHeightSlider.position(180,height-120); stripHeightSlider.style('width','100px');
-  stripCountSlider = createSlider(1,6,1); stripCountSlider.position(180 ,height-85); stripCountSlider.style('width','100px');
+  stripHeightSlider = createSlider(10,300,70); stripHeightSlider.position(10,height-120); stripHeightSlider.style('width','100px');
+  stripCountSlider = createSlider(1,6,1); stripCountSlider.position(10 ,height-85); stripCountSlider.style('width','100px');
   stripCountSlider.changed(setStripCountChoice);
 
-  outlineCheck = createCheckbox(' ',false); outlineCheck.position(180,height-45); outlineCheck.changed(drawTextures);
-  roundCapCheck = createCheckbox(' ',false); roundCapCheck.position(180,height-25);
+  outlineCheck = createCheckbox(' ',false); outlineCheck.position(10,height-45); outlineCheck.changed(drawTextures);
+  roundCapCheck = createCheckbox(' ',false); roundCapCheck.position(10,height-25);
 
-  backgroundPicker = createColorPicker('#0d0d0d'); backgroundPicker.position(390,height - 60);
+  backgroundPicker = createColorPicker('#0d0d0d'); backgroundPicker.position(220,height - 60);
   backgroundPicker.style('height','25px');backgroundPicker.style('width','65px'); backgroundPicker.input(drawTextures);
-  forePicker = createColorPicker('#ffffff'); forePicker.position(465,height - 60)
+  forePicker = createColorPicker('#ffffff'); forePicker.position(295,height - 60)
   forePicker.style('height','25px');forePicker.style('width','65px');forePicker.input(drawTextures);
 
-  gradient1pick = createColorPicker('#2955d9'); gradient1pick.position(390,height - 105); gradient1pick.style('height','40px'); gradient1pick.style('width','20px'); gradient1pick.input(drawTextures);
-  gradient2pick = createColorPicker('#2793f2'); gradient2pick.position(420,height - 105); gradient2pick.style('height','40px'); gradient2pick.style('width','20px'); gradient2pick.input(drawTextures);
-  gradient3pick = createColorPicker('#f2c12e'); gradient3pick.position(450,height - 105); gradient3pick.style('height','40px'); gradient3pick.style('width','20px'); gradient3pick.input(drawTextures);
-  gradient4pick = createColorPicker('#f23e2e'); gradient4pick.position(480,height - 105); gradient4pick.style('height','40px'); gradient4pick.style('width','20px'); gradient4pick.input(drawTextures);
-  gradient5pick = createColorPicker('#0d0d0d'); gradient5pick.position(510,height - 105); gradient5pick.style('height','40px'); gradient5pick.style('width','20px'); gradient5pick.input(drawTextures);
-
-  button = createButton('Reset Points'); button.position(10,height-60); button.mousePressed(resetPoints);
+  gradient1pick = createColorPicker('#2955d9'); gradient1pick.position(220,height - 105); gradient1pick.style('height','40px'); gradient1pick.style('width','20px'); gradient1pick.input(drawTextures);
+  gradient2pick = createColorPicker('#2793f2'); gradient2pick.position(250,height - 105); gradient2pick.style('height','40px'); gradient2pick.style('width','20px'); gradient2pick.input(drawTextures);
+  gradient3pick = createColorPicker('#f2c12e'); gradient3pick.position(280,height - 105); gradient3pick.style('height','40px'); gradient3pick.style('width','20px'); gradient3pick.input(drawTextures);
+  gradient4pick = createColorPicker('#f23e2e'); gradient4pick.position(310,height - 105); gradient4pick.style('height','40px'); gradient4pick.style('width','20px'); gradient4pick.input(drawTextures);
+  gradient5pick = createColorPicker('#0d0d0d'); gradient5pick.position(340,height - 105); gradient5pick.style('height','40px'); gradient5pick.style('width','20px'); gradient5pick.input(drawTextures);
 
   stripRadio = createRadio();
   stripRadio.option(' ');
@@ -102,7 +101,7 @@ function setup() {
   stripRadio.option('    ');
   stripRadio.option('     ');
   stripRadio.option('      ');
-  stripRadio.position(290,height-125); stripRadio.style('width','20px'); stripRadio.selected('   '); stripRadio.changed(setStripChoice);
+  stripRadio.position(120,height-125); stripRadio.style('width','20px'); stripRadio.selected('   '); stripRadio.changed(setStripChoice);
 
   mainText1 = inp.value();
   currentMainText1= inp.value();
@@ -122,17 +121,18 @@ function setup() {
   drawTextures();
 
   for(let r=0; r<20; r++){
-    var rs = random(10);
+    var rs = random(5,20);
     rSpeed[r] = rs/10;
   }
 
-  b4Buntton = createButton('Vote'); b4Buntton.position(550,height-105); b4Buntton.mousePressed(b4);
-  b2Buntton = createButton('Dream-ager'); b2Buntton.position(550,height-80); b2Buntton.mousePressed(b2);
-  b3Buntton = createButton('Tracks'); b3Buntton.position(550,height-55); b3Buntton.mousePressed(b3);
-  b1Buntton = createButton('Juicy'); b1Buntton.position(550,height-30); b1Buntton.mousePressed(b1);
-  b5Buntton = createButton('Yes &'); b5Buntton.position(650,height-105); b5Buntton.mousePressed(b5);
-  b6Buntton = createButton('Guts'); b6Buntton.position(650,height-80); b6Buntton.mousePressed(b6);
-  b7Buntton = createButton('Eels & wind'); b7Buntton.position(650,height-55); b7Buntton.mousePressed(b7);
+  b4Buntton = createButton('Vote'); b4Buntton.position(380,height-105); b4Buntton.mousePressed(b4);
+  b2Buntton = createButton('Dream-ager'); b2Buntton.position(380,height-80); b2Buntton.mousePressed(b2);
+  b3Buntton = createButton('Tracks'); b3Buntton.position(380,height-55); b3Buntton.mousePressed(b3);
+  b1Buntton = createButton('Juicy'); b1Buntton.position(380,height-30); b1Buntton.mousePressed(b1);
+  b5Buntton = createButton('Yes &'); b5Buntton.position(480,height-105); b5Buntton.mousePressed(b5);
+  b6Buntton = createButton('Guts'); b6Buntton.position(480,height-80); b6Buntton.mousePressed(b6);
+  b7Buntton = createButton('Eels & wind'); b7Buntton.position(480,height-55); b7Buntton.mousePressed(b7);
+  button = createButton('Reset Points'); button.position(480,height-30); button.mousePressed(resetPoints);
 
 }
 
@@ -162,22 +162,22 @@ function draw() {
   textAlign(LEFT);
   textSize(10);
   textFont(font0);
-  text("Strip Height " + stripHeight,185,height-90);
-  text("Strip Count " + stripCount,185,height-55);
-  text("Outlines",202,height-32);
-  text("Round Cap",202,height-12);
-  text("Text",315,height-113);
-  text("Gradient 1",315,height-93);
-  text("Gradient 2",315,height-73);
-  text("Stripes",315,height-53);
-  text("All",315,height-34);
-  text("Mixture",315,height-15);
+  text("Strip Height " + stripHeight,15,height-90);
+  text("Strip Count " + stripCount,15,height-55);
+  text("Outlines",32,height-32);
+  text("Round Cap",32,height-12);
+  text("Text",145,height-113);
+  text("Gradient 1",145,height-93);
+  text("Gradient 2",145,height-73);
+  text("Stripes",145,height-53);
+  text("All",145,height-34);
+  text("Mixture",145,height-15);
 
-  text("GRADIENT KNOTS",390,height-110);
-  text("Background",390,height-18);
-  text("Foreground",470,height-18);
+  text("GRADIENT KNOTS",220,height-110);
+  text("Background",220,height-18);
+  text("Foreground",300,height-18);
 
-  text("PRESETS",550,height-110);
+  text("PRESETS",380,height-110);
 
   textSize(12);
   text("Click & drag to lay down points. Press ENTER to start a new string.",10,height-170);
@@ -602,8 +602,8 @@ function b3(){
     let angleStep = map(j,0,28,0,19*PI) + PI/4;
 
     particles[0][j] = new Particle(
-      width/2 + cos(angleStep) * random(20,width*3/8),
-      height/2 - 100 + sin(angleStep) * random(20,height*3/8),
+      width/2 + cos(angleStep) * random(0,width/2),
+      height/2 - 100 + sin(angleStep/PI) * random(0,height/2),
       angleStep - PI/2,
       random(width*1/8,width/4));
   }
