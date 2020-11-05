@@ -19,7 +19,7 @@ let ribbonAmp, ribbonWave, ribbonLength;
 
 let mainText1 = "TRIENNELLE MILANO";
 
-let img1, img2;
+let img1, img2, img3;
 
 let stripAradio, stripBradio;
 
@@ -27,14 +27,18 @@ function preload(){
   font0 = loadFont('resources/IBMPlexMono-Regular.otf');
   font1 = loadFont('resources/nimbus-sans-l_regular-condensed.ttf');
 
-  img1 = loadImage('images/sm_strip1-01.png');
-  img2 = loadImage('images/sm_strip2-01.png');
+  img1 = loadImage('images/tk_tr_ribbon1.png');
+  img2 = loadImage('images/tk_tr_ribbon2.png');
+  img3 = loadImage('images/tk_tr_ribbon3.png');
+  img4_pat = loadImage('images/tk_tr_ribbon_pattern1.png');
+  img5_pat = loadImage('images/tk_tr_ribbon_pattern2.png');
+  img6_pat = loadImage('images/tk_tr_ribbon_pattern3.png');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight,WEBGL);
 
-  backgroundPicker = createColorPicker('#1c4aa6'); backgroundPicker.position(10,height - 60);
+  backgroundPicker = createColorPicker('#000000'); backgroundPicker.position(10,height - 60);
   backgroundPicker.style('height','50px');backgroundPicker.style('width','30px'); backgroundPicker.input(drawTextures);
 
   c1Picker = createColorPicker('#000000'); c1Picker.position(60,height - 60)
@@ -56,18 +60,22 @@ function setup() {
   spinOffsetPicker = createSlider(0,2*PI,0,0.01); spinOffsetPicker.position(10,height/2 + 30); spinOffsetPicker.style('width','100px');
 
   selA = createSelect(); selA.position(10, height/2 + 90); selA.style('width','150px'); selA.style('height','20px');
-  selA.option('Text',0);
-  selA.option('Stripes',1);
-  selA.option('Image 1',2);
-  selA.option('Image 2',3);
+  selA.option('Graphic 1',0);
+  selA.option('Graphic 2',1);
+  selA.option('Graphic 3',2);
+  selA.option('Pattern 1',3);
+  selA.option('Pattern 2',4);
+  selA.option('Pattern 3',5);
   selA.selected(0);
 
   selB = createSelect(); selB.position(10, height/2 + 120); selB.style('width','150px'); selB.style('height','20px');
-  selB.option('Text',0);
-  selB.option('Stripes',1);
-  selB.option('Image 1',2);
-  selB.option('Image 2',3);
-  selB.selected(1);
+  selB.option('Graphic 1',0);
+  selB.option('Graphic 2',1);
+  selB.option('Graphic 3',2);
+  selB.option('Pattern 1',3);
+  selB.option('Pattern 2',4);
+  selB.option('Pattern 3',5);
+  selB.selected(3);
 
   frameRate(30);
 
@@ -134,31 +142,39 @@ function draw() {
 
   textureMode(NORMAL);
   if(selA.value() == 0){
-    texture(pgT);
-  } else if(selA.value() == 1){
-    texture(pgStripes);
-  } else if(selA.value() == 2){
     texture(img1);
-  } else if(selA.value() == 3){
+  } else if(selA.value() == 1){
     texture(img2);
+  } else if(selA.value() == 2){
+    texture(img3);
+  } else if(selA.value() == 3){
+    texture(img4_pat);
+  } else if(selA.value() == 4){
+    texture(img5_pat);
+  } else if(selA.value() == 5){
+    texture(img6_pat);
   }
   ribbonEngine(false);
 
   radius -= 3;
   if(selB.value() == 0){
-    texture(pgT);
-  } else if(selB.value() == 1){
-    texture(pgStripes);
-  } else if(selB.value() == 2){
     texture(img1);
-  } else if(selB.value() == 3){
+  } else if(selB.value() == 1){
     texture(img2);
+  } else if(selB.value() == 2){
+    texture(img3);
+  } else if(selB.value() == 3){
+    texture(img4_pat);
+  } else if(selB.value() == 4){
+    texture(img5_pat);
+  } else if(selB.value() == 5){
+    texture(img6_pat);
   }
   ribbonEngine(true);
   radius += 3;
 
   blendMode(MULTIPLY);
-  translate(-5,0,0);
+  translate(-3,3,0);
   fill(125);
   ribbonEngine(true);
 
