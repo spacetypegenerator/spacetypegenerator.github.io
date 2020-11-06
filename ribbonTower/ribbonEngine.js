@@ -1,4 +1,4 @@
-function ribbonEngine(flip){
+function ribbonEngine(currentGraphic,flip){
   let culmDist = 0;
 
   beginShape(TRIANGLE_STRIP);
@@ -34,7 +34,7 @@ function ribbonEngine(flip){
     let perpV = v1.cross(v2);
     perpV.limit(stripHeight/2);
 
-    let heightRatio = pgT.width * stripHeight/pgT.height;
+    let heightRatio = currentGraphic.width * stripHeight/currentGraphic.height;
 
     let u;
     let v_1;
@@ -66,89 +66,3 @@ function ribbonEngine(flip){
   }
   endShape();
 }
-
-// create sliders for x,y,z waves along with radius of each
-// build circles on top of each other
-// create perpindicular for each
-
-
-// function ribbonEngine(){
-//   // let angleA = PI/count;
-//   let spinNum = 25;
-//   let foldFactor = 1;
-//
-//   beginShape(TRIANGLE_STRIP);
-//   for(var i = 0; i<count; i++){
-//     let angleA = map(i,0,count,PI/8,PI*7/8);
-//     let angleApre = map(i-1,0,count,PI/8,PI*7/8);
-//
-//     let radiusWave = map(sin(angleA*6),-1,1,radius * 3/4,radius * 5/4);
-//     let radiusWavePre = map(sin(angleApre*6),-1,1,radius * 3/4,radius * 5/4);
-//
-//     let x = radiusWave * sin(angleA) * cos(spinNum * angleA);
-//     let y = radiusWave * sin(angleA) * sin(spinNum * angleA);
-//     let z = radiusWave * cos(angleA);
-//
-//     let xPre = radiusWavePre * sin(angleApre) * cos(spinNum * angleApre);
-//     let yPre = radiusWavePre * sin(angleApre) * sin(spinNum * angleApre);
-//     let zPre = radiusWavePre * cos(angleApre);
-//
-//     let v1 = createVector(x,y,z);
-//     let v2 = createVector(xPre, yPre, zPre);
-//
-//     let perpV = p5.Vector.cross(v1,v2);
-//     perpV.limit(stripHeight);
-//
-//     vertex(v1.x + perpV.x,  v1.y + perpV.y,  v1.z + perpV.z);
-//     vertex(v1.x - perpV.x,  v1.y - perpV.y,  v1.z - perpV.z);
-//   }
-//
-//   endShape();
-// }
-
-
-// function ribbonEngine(scroll, flip, ribbonNumber) {
-//   let x1pre, y1pre, z1pre;
-//
-//   beginShape(TRIANGLE_STRIP);
-//   for(var i=0; i<count; i++){
-//     let u;
-////
-//     // let radiusN = map(sin(i*0.02),-1,1,radius1/2,radius1);
-//     // let radiusNpre = map(sin((i-1)*0.02),-1,1,radius1/2,radius1);
-//
-//     let radiusN = radius1;
-//
-//     let y0 = -i*stretch;
-//     let x0 = map(sin(frameCount*0.02 + i*0.1),-1,1,-100,100);
-//
-// //    let angle1 = frameCount*0.005 + i*0.03;
-//     let angle1 = frameCount*0.005 + i*0.02;
-//     let x1 = radiusN * sin(PI/foldFactor - (angle1)/4*7) * cos(angle1);
-//     let y1 = radiusN * sin(PI/foldFactor - (angle1)/4*5);
-//     let z1 = radiusN * cos(PI/foldFactor - (angle1)/4*7) * cos(angle1);
-//
-//     // let angle1 = frameCount*0.005 + i*0.03 + ribbonNumber*stagger;
-//     // let x1 = radiusN * sin(PI/foldFactor - (angle1)/4*7) * cos(angle1);
-//     // let y1 = radiusN * sin(PI/foldFactor - (angle1)/4*4) * sin(angle1);
-//     // let z1 = radiusN * cos(PI/foldFactor - (angle1)/4*7) * cos(angle1);
-//
-//     let v1 = createVector(x1,y1,z1);
-//     let v2 = createVector(x1pre,y1pre,z1pre);
-//
-//     if(frameCount==0){
-//       calculatedLength += v1.dist(v2);
-//     }
-//
-//     let perpV = p5.Vector.cross(v1,v2);
-//     perpV.limit(stripHeight*5);
-//
-//     vertex(x0 + x1 + perpV.x*ribbonCount - ribbonNumber*perpV.x, y0 + y1 + perpV.y*ribbonCount - ribbonNumber*perpV.y, z1 + perpV.z*ribbonCount - ribbonNumber*perpV.z,u,1);
-//     vertex(x0 + x1 + perpV.x*ribbonCount - (ribbonNumber+1)*perpV.x, y0 + y1 + perpV.y*ribbonCount - (ribbonNumber+1)*perpV.y, z1 + perpV.z*ribbonCount - (ribbonNumber+1)*perpV.z,u,0);
-//
-//     x1pre = x1;
-//     y1pre = y1;
-//     z1pre = z1;
-//   }
-//   endShape();
-// }

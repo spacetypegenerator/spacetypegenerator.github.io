@@ -92,6 +92,13 @@ function draw() {
   clear();
   orbitControl();
 
+  // let dirX = (width / width - 0.5) * 2;
+  // let dirY = (height/2 / height - 0.5) * 2;
+  // lightFalloff(1, 0, 0);
+  // ambientLight(150);
+  // specularMaterial(100);
+  // directionalLight(color(255), -dirX, -dirY, 0);
+
   factor1 = factor1picker.value();
   factor2 = factor2picker.value();
   factor2B = factor2Bpicker.value();
@@ -141,42 +148,51 @@ function draw() {
   scale(0.75)
 
   textureMode(NORMAL);
+
+  let currentG;
   if(selA.value() == 0){
-    texture(img1);
+    currentG = img1;
   } else if(selA.value() == 1){
-    texture(img2);
+    currentG = img2;
   } else if(selA.value() == 2){
-    texture(img3);
+    currentG = img3;
   } else if(selA.value() == 3){
-    texture(img4_pat);
+    currentG = img4_pat;
   } else if(selA.value() == 4){
-    texture(img5_pat);
+    currentG = img5_pat;
   } else if(selA.value() == 5){
-    texture(img6_pat);
+    currentG = img6_pat;
   }
-  ribbonEngine(false);
+  texture(currentG);
+  // fill(255);
+  ribbonEngine(currentG,false);
 
   radius -= 3;
+  // fill(255);
   if(selB.value() == 0){
-    texture(img1);
+    currentG = img1;
   } else if(selB.value() == 1){
-    texture(img2);
+    currentG = img2;
   } else if(selB.value() == 2){
-    texture(img3);
+    currentG = img3;
   } else if(selB.value() == 3){
-    texture(img4_pat);
+    currentG = img4_pat;
   } else if(selB.value() == 4){
-    texture(img5_pat);
+    currentG = img5_pat;
   } else if(selB.value() == 5){
-    texture(img6_pat);
+    currentG = img6_pat;
   }
-  ribbonEngine(true);
+  texture(currentG);
+  ribbonEngine(currentG,true);
   radius += 3;
 
   blendMode(MULTIPLY);
   translate(-3,3,0);
-  fill(125);
-  ribbonEngine(true);
+  fill(100);
+  ribbonEngine(currentG,true);
+
+  // fill(255);
+  // sphere(200);
 
   pop();
 }
