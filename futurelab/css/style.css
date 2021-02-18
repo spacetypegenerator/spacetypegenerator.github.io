@@ -1,15 +1,20 @@
+@font-face {
+  font-family: univers;
+  src: url("/resources/univers_light.otf");
+}
+
 body {
   color:white;
-  font-family:Arial;
-  font-size:10px;
+  font-family:univers;
+  font-size:12px;
 }
 
 h2 {
   color:white;
-  font-weight:normal;
-  font-family: Arial;
+  font-weight: normal;
+  font-family: univers;
   font-size: 12px;
-  line-height:0px;
+  margin-top:5px;
 }
 
 .tl-image {
@@ -19,8 +24,17 @@ h2 {
 
 .tr-info {
   position:absolute;
+  display:flex;
+  flex-direction: column;
+  width:200px;
   right:20px;
   top:20px;
+}
+
+.tr-info .tr-text{
+  padding-top: 20px;
+  font-family: univers;
+  font-size: 14px;
 }
 
 .br-image {
@@ -29,48 +43,64 @@ h2 {
   bottom:20px;
 }
 
+.bl-button {
+  position:absolute;
+  left:20px;
+  bottom:20px;
+}
+
+.bl-button #download {
+  width:250px;
+}
+
 .flex-container {
   padding-top: 20px;
   padding-left: 20px;
-  width:300px;
+  width:260px;
   align-items:left;
   margin-bottom:50px;
 }
 
 .flex-container > div {
-  margin-bottom:30px;
+  margin-bottom:10px;
 }
 
 .top-textbox {
   display: flex;
   flex-direction: column;
+  padding-bottom:10px;
 }
 
-input[type=text] {
+.mainTextInput {
+  color:white;
+  font-family:univers;
+  font-size:12px;
+
   color:white;
   width:100%;
-  height:100px;
+  height:50px;
   box-sizing:border-box;
   border:1px solid white;
-  background-color:black;
+  background-color:rgba(255, 255, 255, 0.0);
   resize:none;
   padding-left:5px;
+  padding-top:5px;
 }
 
 input[type=button] {
-  margin-top:10px;
   margin-right:5px;
   padding: 5px 10px 5px 10px;
   box-sizing:border-box;
   border:1px solid white;
-  background-color:black;
+  background-color:rgba(255, 255, 255, 0.0);
   color:white;
   transition-duration:0.4s;
 }
 
 input[type=button]:hover {
-  background-color: blue;
-  border:1px solid blue;
+  background-color: #7de1da;
+  border:1px solid #7de1da;
+  color:black;
 }
 
 input[type=button]:focus {
@@ -89,21 +119,17 @@ input[type=button]:focus {
 }
 
 .button-group-generators{
-  padding-top:10px;
 }
 
 #button-group-cylinder{
-  padding-top:10px;
   display:block;
 }
 
 #button-group-field{
-  padding-top:10px;
   display:none;
 }
 
 #button-group-cascade{
-  padding-top:10px;
   display:none;
 }
 
@@ -146,7 +172,7 @@ input[type=button]:focus {
 
 .button-container input[type="radio"] {
   opacity:0.011;
-  z-index:100;
+  z-index:10;
 }
 
 .button-container input[type="radio"]:checked + label {
@@ -158,12 +184,13 @@ input[type=button]:focus {
   padding:5px;
   border:1px solid white;
   cursor:pointer;
-  z-index:90;
+  z-index:9;
 }
 
 .button-container label:hover {
-  background: blue;
-  border:1px solid blue;
+  background: #7de1da;
+  border:1px solid #7de1da;
+  color:black;
 }
 
 .slider-container {
@@ -175,7 +202,7 @@ input[type=button]:focus {
   padding-left:0px;
   margin-right:0px;
   padding-top:5px;
-  width:140px;
+  width:120px;
 }
 
 .slider {
@@ -186,13 +213,16 @@ input[type=button]:focus {
 
 .color-toggles {
   border-top:1px solid white;
-  padding-top:5px;
+}
+
+.color-toggles img {
+  margin-top:-10px;
 }
 
 .type-color-container {
   position: relative;
   padding-left: 18px;
-  margin-right:-20px;
+  margin-right:-22px;
   cursor: pointer;
   font-size: 22px;
   -webkit-user-select: none;
@@ -215,7 +245,7 @@ input[type=button]:focus {
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
-  margin-top:-2px;
+  margin-top:-4px;
   top: 0;
   left: 0;
   height: 10px;
@@ -225,10 +255,57 @@ input[type=button]:focus {
   border-radius: 50%;
 }
 
-/* input[type="radio"] {
-    margin:0 0 0 0;
-    padding:0 0 0 0;
-} */
+.hide {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
+
+#about {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.65);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  z-index:11;
+
+}
+
+#about .card {
+  padding:8px 20px 20px 20px;
+  background-color: white;
+  width:550px;
+}
+
+#closebutton{
+  padding: 5px 15px 5px 15px;
+  box-sizing:border-box;
+  border:1px solid white;
+  background-color:black;
+  color:white;
+  transition-duration:0.4s;
+  font-family:univers;
+  font-size:12px;
+}
+
+.card h1 {
+  color:black;
+  font-weight: normal;
+  font-family:univers;
+  font-size:18px;
+}
+
+.card p {
+  color:black;
+  font-family:univers;
+  font-size:12px;
+  line-height:15px;
+}
 
 /* On mouse-over, add a grey background color */
 .type-color-container:hover input ~ .checkmark {
@@ -249,11 +326,60 @@ input[type=button]:focus {
 .bottom-slider-container {
   border-top:1px solid white;
   display:flex;
+  flex-direction:row;
 }
 
-.slider-container2 {
+.slider-container2a {
   list-style-type:none;
   padding-left:0;
-  margin-right:40px;
-  width:130px;
+  margin-right:10px;
+}
+
+.slider-container2b {
+  list-style-type:none;
+  padding-left:10px;
+}
+
+#inverter {
+  filter: invert(0%);
+}
+
+#invertertoggle1 {
+  filter: invert(0%);
+}
+
+#invertertoggle2 {
+  filter: invert(0%);
+}
+
+#invertertoggle3 {
+  filter: invert(0%);
+}
+
+#invertertoggle4 {
+  filter: invert(0%);
+}
+
+#invertertoggle5 {
+  filter: invert(0%);
+}
+
+#invertertoggle6 {
+  filter: invert(0%);
+}
+
+#invertertopleft {
+  filter: invert(0%);
+}
+
+#invertertopright {
+  filter: invert(0%);
+}
+
+#inverterbottomleft {
+  filter: invert(0%);
+}
+
+#inverterbottomright {
+  filter: invert(0%);
 }

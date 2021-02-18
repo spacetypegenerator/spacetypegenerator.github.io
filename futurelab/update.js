@@ -1,3 +1,39 @@
+///////////////////////////////////////////////////////////////////////////////// BUTTONS
+
+function change_showHideClass() {
+  var modalChange = document.getElementById("about");
+  var currentClass = modalChange.className; // Check the current class name
+  if (currentClass == "show") {
+    // if it is set to show,
+    modalChange.className = "hide"; // then now set it to hide
+  } else {
+    modalChange.className = "show"; // Otherwise, show it!
+  }
+}
+
+function initializeRecord(){
+  if(wWidth>(4096/2)){
+    wWidth = (4096/2);
+  }
+  if(wHeight>(2160/2)){
+    wHeight = (2160/2);
+  }
+
+  resizeCanvas(wWidth,wHeight);
+
+  recordSwitch = true;
+
+  if(generatorSelect==2){
+    recordStop = (2*PI)/((speedWave/2)/10.0) + frameCount + 2;
+  } else {
+    recordStop = (2*PI)/(speedWave/10.0) + frameCount + 2;
+  }
+
+  startRecording();
+}
+
+///////////////////////////////////////////////////////////////////////////////// RESETS
+
 function resetRadius(){
   let pgW = pgT.width; let pgH = pgT.height;
   let heightRatio = pgW * stackHeight/pgH;
@@ -49,7 +85,39 @@ function resetCascade(){
   drawInds();
 }
 
+function redrawStackCylinder(){
+  for(let r = 0; r<stackCount; r++){
+    createTextGradient(r,stackCount);
+    createTextGradientInside(r,stackCount);
+  }
+}
+
+function redrawStackField(){
+  for(let r = 0; r<fieldStackCount; r++){
+    createTextGradient(r,fieldStackCount);
+    createTextGradientInside(r,fieldStackCount);
+  }
+}
+
+function redrawStackCascade(){
+  drawInds();
+}
+
 ///////////////////////////////////////////////////////////////////////////////// CYLINDER PRESETS
+
+function setSingle(){
+  resetView();
+  resetCylinder();
+
+  textureRepeats = 3; document.getElementById('textureRepeats').value = 3;
+  stackCount = 1; document.getElementById('stackCount').value = 1;
+  stackSpace = 0; document.getElementById('stackSpace').value = 0;
+  waveCount = 0; document.getElementById('waveCount').value = 0;
+
+  cameraXrot = PI/16; document.getElementById('cameraX').value = PI/16;
+
+  redrawStackCylinder();
+}
 
 function setSimple(){
   resetView();
@@ -59,6 +127,8 @@ function setSimple(){
   stWaveOffset = map(40,0,100,0,1); document.getElementById('stWaveOffset').value = 40;
 
   cameraXrot = PI/8; document.getElementById('cameraX').value = PI/8;
+
+  redrawStackCylinder();
 }
 
 function setJellyfish(){
@@ -71,6 +141,8 @@ function setJellyfish(){
   stWaveOffset = map(33,0,100,0,1); document.getElementById('stWaveOffset').value = 33;
 
   cameraXrot = PI/8; document.getElementById('cameraX').value = PI/8;
+
+  redrawStackCylinder();
 }
 
 function setComplex(){
@@ -88,6 +160,8 @@ function setComplex(){
   cameraXrot = -0.44; document.getElementById('cameraX').value = -0.44;
   cameraZrot = 0.44; document.getElementById('cameraZ').value = 0.44;
   cameraZoom = -1500; document.getElementById('cameraZoom').value = -1500;
+
+  redrawStackCylinder();
 }
 
 function setWeave(){
@@ -103,6 +177,8 @@ function setWeave(){
   cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
 
   secretSwitch = 1;
+
+  redrawStackCylinder();
 }
 
 function setHoops(){
@@ -117,6 +193,8 @@ function setHoops(){
   stWaveOffset = map(95,0,100,0,1); document.getElementById('stWaveOffset').value = 95;
 
   cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
+
+  redrawStackCylinder();
 }
 
 ///////////////////////////////////////////////////////////////////////////////// FIELD PRESETS
@@ -135,6 +213,8 @@ function setStacks(){
   fieldLatOffset = map(25,0,100,0,0.05); document.getElementById('fieldLatOffset').value = 25;
 
   cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
+
+  redrawStackField();
 }
 
 function setSimpleField(){
@@ -154,6 +234,8 @@ function setSimpleField(){
   cameraXrot = 0.75; document.getElementById('cameraX').value = 0.75;
   cameraZrot = 0.75; document.getElementById('cameraZ').value = 0.75;
   cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
+
+  redrawStackField();
 }
 
 function setComplexField(){
@@ -173,6 +255,8 @@ function setComplexField(){
   cameraXrot = 0.65; document.getElementById('cameraX').value = 0.65;
   cameraZrot = 0.6; document.getElementById('cameraZ').value = 0.6;
   cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
+
+  redrawStackField();
 }
 
 function setHarlequin(){
@@ -191,9 +275,11 @@ function setHarlequin(){
   fieldLongOffset = map(0,0,100,0,5); document.getElementById('fieldLongOffset').value = 0;
 
   cameraZoom = -1000; document.getElementById('cameraZoom').value = -1000;
+
+  redrawStackField();
 }
 
-///////////////////////////////////////////////////////////////////////////////// FIELD PRESETS
+///////////////////////////////////////////////////////////////////////////////// CASCADE PRESETS
 
 function setCascade(){
   resetView();
@@ -208,6 +294,8 @@ function setCascade(){
   mirrorSwitch = false; document.getElementById('cascadeMirror').value = 1;
 
   cameraZoom = 0; document.getElementById('cameraZoom').value = 0;
+
+  redrawStackCascade();
 }
 
 function setRun(){
@@ -223,6 +311,8 @@ function setRun(){
   mirrorSwitch = true; document.getElementById('cascadeMirror').value = 2;
 
   cameraZoom = 0; document.getElementById('cameraZoom').value = 0;
+
+  redrawStackCascade();
 }
 
 ///////////////////////////////////////////////////////////////////////////////// UPDATE SLIDERS
@@ -288,6 +378,8 @@ function updateWaveOffset(val) {
 function updateFieldStackCount(val) {
     document.getElementById('fieldStackCount').innerHTML=val;
     fieldStackCount = val;
+
+    redrawStackField();
 }
 
 function updateFieldTextureRepeats(val) {
@@ -357,90 +449,98 @@ function updateCasSlope(val) {
 
 ///////////////////////////////////////////////////////////////////////////////// COLORS
 function setTC1(){
-  setBCblack();
-  backCselect = 5; document.getElementById("back5").checked = true;
-
   typeCselect = 1;
+
+  redrawAllStacks();
 }
 
 function setTC2(){
-  setBCblack();
-  backCselect = 5; document.getElementById("back5").checked = true;
-
   typeCselect = 2;
+
+  redrawAllStacks();
 }
 
 function setTC3(){
-  setBCblack();
-  backCselect = 5; document.getElementById("back5").checked = true;
-
   typeCselect = 3;
+
+  redrawAllStacks();
 }
 
 function setTC4(){
-  setBCblack();
-  backCselect = 5; document.getElementById("back5").checked = true;
-
   typeCselect = 4;
+
+  redrawAllStacks();
 }
 
 function setTC5(){
-  setBCwhite();
-  backCselect = 4; document.getElementById("back4").checked = true;
-
   typeCselect = 5;
+
+  redrawAllStacks();
+}
+
+function redrawAllStacks(){
+  if(generatorSelect==0){
+    redrawStackCylinder();
+  } else if(generatorSelect==1){
+    redrawStackField();
+  } else if(generatorSelect==2){
+    redrawStackCascade();
+  }
 }
 
 function setBC1(){
-  setBCblack();
-  typeCselect = 4; document.getElementById("type4").checked = true;
-
   backCselect = 1;
 }
 
 function setBC2(){
-  setBCblack();
-  typeCselect = 4; document.getElementById("type4").checked = true;
-
   backCselect = 2;
 }
 
 function setBC3(){
-  setBCblack();
-  typeCselect = 4; document.getElementById("type4").checked = true;
-
   backCselect = 3;
 }
 
 function setBC4(){
-  setBCwhite();
-  typeCselect = 5; document.getElementById("type5").checked = true;
+  invertCSS(0);
 
   backCselect = 4;
 }
 
 function setBC5(){
-  setBCblack();
-  typeCselect = 4; document.getElementById("type4").checked = true;
+  invertCSS(1);
 
   backCselect = 5;
 }
 
-function setBCblack(){
-  bkgdColor = color('#000000');
-  foreColor = color('#ffffff');
+function invertCSS(toggle){
+  if(toggle==0){
+    document.getElementById('inverter').style.filter = "invert(100%)";
+    document.getElementById('invertertopleft').style.filter = "invert(100%)";
+    document.getElementById('invertertopright').style.filter = "invert(100%)";
+    document.getElementById('inverterbottomleft').style.filter = "invert(100%)";
+    document.getElementById('inverterbottomright').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle1').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle2').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle3').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle4').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle5').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle6').style.filter = "invert(100%)";
+  } else if(toggle==1){
+    document.getElementById('inverter').style.filter = "invert(0%)";
+    document.getElementById('invertertopleft').style.filter = "invert(0%)";
+    document.getElementById('invertertopright').style.filter = "invert(0%)";
+    document.getElementById('inverterbottomleft').style.filter = "invert(0%)";
+    document.getElementById('inverterbottomright').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle1').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle2').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle3').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle4').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle5').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle6').style.filter = "invert(0%)";
+  }
 
-  drawTextures()
-  drawInds();
 }
 
-function setBCwhite(){
-  bkgdColor = color('#ffffff');
-  foreColor = color('#000000');
-
-  drawTextures()
-  drawInds();
-}
 ///////////////////////////////////////////////////////////////////////////////// CAMERA
 function updateXrot(val) {
     document.getElementById('cameraX').innerHTML=val;
