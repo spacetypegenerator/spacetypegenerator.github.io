@@ -49,6 +49,19 @@ h2 {
   bottom:20px;
 }
 
+.bl-button input[type=button]{
+  background:black;
+}
+
+.bl-button p {
+  text-align: center;
+}
+
+.bl-button #status {
+  font-size:15px;
+  color: red;
+}
+
 .bl-button #download {
   width:250px;
 }
@@ -98,8 +111,8 @@ input[type=button] {
 }
 
 input[type=button]:hover {
-  background-color: #7de1da;
-  border:1px solid #7de1da;
+  background-color: #dadada;
+  border:1px solid #dadada;
   color:black;
 }
 
@@ -188,8 +201,8 @@ input[type=button]:focus {
 }
 
 .button-container label:hover {
-  background: #7de1da;
-  border:1px solid #7de1da;
+  background: #dadada;
+  border:1px solid #dadada;
   color:black;
 }
 
@@ -338,6 +351,12 @@ input[type=button]:focus {
 .slider-container2b {
   list-style-type:none;
   padding-left:10px;
+}
+
+.slider-container2c{
+  list-style-type:none;
+  padding-left:0;
+  margin-right:10px;
 }
 
 #inverter {

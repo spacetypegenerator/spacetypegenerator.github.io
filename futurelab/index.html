@@ -14,6 +14,7 @@
     <script src="sketch.js" type="text/javascript"></script>
     <script src="textures.js" type="text/javascript"></script>
     <script src="update.js" type="text/javascript"></script>
+    <script src="glitcher.js" type="text/javascript"></script>
 
     <style> body {padding: 0; margin: 0;} canvas {
       padding: 0;
@@ -261,7 +262,7 @@
             <li class="slider">
               <div>
               CASCADE: Rows
-              <input type="range" min="1" max="50" value="14" class="slider" id="cascadeRows" onchange="updateCascadeRows(this.value)" oninput="updateCascadeRows(this.value)"/>
+              <input type="range" min="1" max="30" value="14" class="slider" id="cascadeRows" onchange="updateCascadeRows(this.value)" oninput="updateCascadeRows(this.value)"/>
               </div>
             </li>
             <li class="slider">
@@ -364,12 +365,25 @@
             </div>
           </li>
         </ul>
+      </div>
 
+      <div class="bottom-slider-container">
+        <ul class="slider-container2c">
+          <li class="slider">
+            <div>
+            G L I T C H
+            <input type="range" min="0" max="10" value="1" class="slider" id="glitch" onchange="updateGlitch(this.value)" oninput="updateGlitch(this.value)">
+            </div>
+          </li>
+        </ul>
       </div>
 
     </div>
     <div id="inverterbottomleft" class="bl-button">
       <input type="button" value="DOWNLOAD MP4" id="download" onclick="initializeRecord()">
+      <p id="status"></p>
+      <p id="warning">Please be patient as the MP4 is downloaded.</p>
+
     </div>
     <div id="inverterbottomright" class="br-image">
       <img src="resources/House_Future_Lab_Logo_Strapline_WO_RGB.png" style="height:50px">

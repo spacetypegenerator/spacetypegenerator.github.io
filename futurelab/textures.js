@@ -5,6 +5,7 @@ function drawTextures(){
   }
   createText();
   createTextInside();
+  createTransp();
   createGradient1();
   createGradient2();
   createGradient3();
@@ -14,7 +15,7 @@ function createTextGradient(r, rCount){
   textSize(pgTextSize);
 
   textFont(uFontReg);
-  repeatSize = round(textWidth(mainText1))*1.1;
+  repeatSize = round(textWidth(mainText1))*1.05;
 
   pgTG[r] = createGraphics(repeatSize,pgTextSize*0.8);
 
@@ -51,7 +52,7 @@ function createTextGradientInside(r, rCount){
   textSize(pgTextSize);
 
   textFont(uFontReg);
-  repeatSize = round(textWidth(mainText1))*1.1;
+  repeatSize = round(textWidth(mainText1))*1.05;
 
   pgTGI[r] = createGraphics(repeatSize,pgTextSize*0.8);
 
@@ -61,8 +62,8 @@ function createTextGradientInside(r, rCount){
     startCinner = color('#409939');
     endCinner = color('#01232d');
   } else if(typeCselect == 2){
-    startCinner = color('#cc8c25');
-    endCinner = color('#681100');
+    startCinner = color('#c46000');
+    endCinner = color('#751300');
   } else if(typeCselect == 3){
     startCinner = color('#3f8caa');
     endCinner = color('#080547')
@@ -90,7 +91,7 @@ function createText(){
   textSize(pgTextSize);
 
   textFont(uFontReg);
-  repeatSize = round(textWidth(mainText1))*1.1;
+  repeatSize = round(textWidth(mainText1))*1.05;
 
   pgT = createGraphics(repeatSize,pgTextSize*0.8);
   //pgT.background(foreColor);
@@ -105,11 +106,37 @@ function createText(){
   pgT.text(mainText1,pgT.width/2,pgT.height/2 + pgTextSize*0.7/2);
 }
 
+function createTransp(){
+  textSize(pgTextSize);
+
+  textFont(uFontReg);
+  repeatSize = round(textWidth(mainText1))*1.05;
+
+  pgTransp = createGraphics(repeatSize,pgTextSize*0.8);
+
+  var gridSize = 20;
+  var xC = repeatSize/gridSize;
+  var yC = pgTransp.height/gridSize;
+
+  pgTransp.background(255);
+
+  pgTransp.noStroke();
+  pgTransp.fill(200);
+  for(var z = 0; z<2; z++){
+    for(var x = 0; x<xC; x+=2){
+      for(var y = 0; y<yC; y+=2){
+
+        pgTransp.rect(x*gridSize + z*gridSize, y*gridSize + z*gridSize, gridSize, gridSize);
+      }
+    }
+  }
+}
+
 function createTextInside(){
   textSize(pgTextSize);
 
   textFont(uFontReg);
-  repeatSize = round(textWidth(mainText1))*1.1;
+  repeatSize = round(textWidth(mainText1))*1.05;
 
   pgTinside = createGraphics(repeatSize,pgTextSize*0.8);
   // pgT.background(foreColor);

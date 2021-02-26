@@ -24,12 +24,15 @@ function initializeRecord(){
   recordSwitch = true;
 
   if(generatorSelect==2){
-    recordStop = (2*PI)/((speedWave/2)/10.0) + frameCount + 2;
+    recordStop = (2*PI)/(speedWave/2) + frameCount + 2;
   } else {
-    recordStop = (2*PI)/(speedWave/10.0) + frameCount + 2;
+    recordStop = (2*PI)/speedWave + frameCount + 2;
   }
 
-  startRecording();
+  startRecording({
+    // we're passing in 'onProgress' as a parameter to get status feedback on-screen - this is completely optional and you'd also get this info on the console!
+    onProgress: (progress) => document.querySelector('#status').textContent = `progress: ${(100 * progress).toFixed(1)}% 🔄`
+  });
 }
 
 ///////////////////////////////////////////////////////////////////////////////// RESETS
@@ -329,14 +332,16 @@ function updateText(val) {
 
 ///////////////////////////////////////////////////////////////////////////////// CYLINDER
 
-function updateStackCount(val) {
-    document.getElementById('stackCount').innerHTML=val;
-    stackCount = val;
-}
-
 function updateTextureRepeats(val) {
     document.getElementById('textureRepeats').innerHTML=val;
     textureRepeats = val;
+}
+
+function updateStackCount(val) {
+    document.getElementById('stackCount').innerHTML=val;
+    stackCount = val;
+
+    redrawStackCylinder();
 }
 
 function updateStackSpace(val) {
@@ -426,6 +431,8 @@ function updateFieldYScale(val) {
 function updateCascadeRows(val) {
     document.getElementById('cascadeRows').innerHTML=val;
     cascadeRows = val;
+
+    drawInds();
 }
 
 function updateCascadeMirror(val) {
@@ -446,6 +453,7 @@ function updateCasSlope(val) {
     document.getElementById('casSlope').innerHTML=val;
     casSlope = map(val,0,100,0,2*PI);
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////// COLORS
 function setTC1(){
@@ -561,6 +569,24 @@ function updateZzoom(val) {
     document.getElementById('cameraZoom').innerHTML=val;
     cameraZoom = val;
 }
+
+///////////////////////////////////////////////////////////////////////////////// GLITCH
+function updateGlitch(val) {
+    document.getElementById('glitch').innerHTML=val;
+    glitch = val;
+
+    if(glitch==0){
+      glitchOn = false;
+    } else {
+      glitchOn = true;
+    }
+
+    glitchProb = map(glitch,0,10,20,85);
+    glitchWindow = map(glitch,0,10,80,20);
+
+    generateRandom();
+}
+
 
 function showPresets(element){
   if(element.value==0){

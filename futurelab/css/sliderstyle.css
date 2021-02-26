@@ -1,7 +1,6 @@
 /*Chrome*/
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     input[type='range'] {
-      overflow: hidden;
       width: 110px;
       -webkit-appearance: none;
       background-color: rgba(255, 255, 255, 0.0);
@@ -13,18 +12,17 @@
       height: 10px;
       -webkit-appearance: none;
       color: #000000;
-      margin-top: -1px;
     }
 
     input[type='range']::-webkit-slider-thumb {
-      width: 5px;
-      height:5px;
+      width: 16px;
+      height:16px;
       -webkit-appearance: none;
       cursor: ew-resize;
       border-radius: 100%;
       background: #ffffff;
-      box-shadow: -80px 0 0 80px #ffffff;
-      z-index:100;
+      margin-top:-3px;
+      /* box-shadow: -80px 0 0 80px #ffffff; */
     }
 
 }
@@ -41,4 +39,8 @@ input[type="range"]::-ms-fill-lower {
 }
 input[type="range"]::-ms-fill-upper {
   background-color: #9a905d;
+}
+
+input:focus {
+  outline:none;
 }
