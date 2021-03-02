@@ -58,7 +58,7 @@ let cameraZoom = -500;
 let secretSwitch = 1;
 
 let generatorSelect = 0;
-let typeCselect = 1;
+let typeCselect = 3;
 let backCselect = 5;
 
 let pgTG = [];
@@ -118,13 +118,14 @@ function setup() {
 }
 
 function draw() {
+  print(speedWave);
   clear();
 
   noFill(); noStroke();
   rectMode(CENTER);
 
   if(recordSwitch){
-    document.querySelector('#status').textContent = 'RECORDING';
+    document.querySelector('#download').textContent = 'RECORDING 🔴';
   }
 
   if(backCselect==4){
@@ -196,7 +197,7 @@ function draw() {
   if(recordSwitch && frameCount>recordStop){
     recordSwitch = false;
     stopRecording();
-    document.querySelector('#status').textContent = 'STARTING UP...';
+    document.querySelector('#download').textContent = 'STARTING UP...';
     // location.reload();
   }
 }

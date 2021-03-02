@@ -31,7 +31,7 @@
 
   <body>
       <div id="invertertopleft" class="tl-image">
-        <a href="https://www.urbansplash.co.uk/"><img src="resources/House_Future_Lab_Logo_WO_RGB.png" style="height:25px"></a>
+        <a href="https://www.urbansplash.co.uk/"><img src="resources/House_Future_Lab_Logo_Blue_RGB.png" style="height:25px"></a>
         <img src="resources/stg_x-01.png" style="height:25px">
         <a href="https://spacetypegenerator.com/"><img src="resources/stg_logo-01.png" style="height:25px"></a>
       </div>
@@ -159,6 +159,12 @@
               <input type="range" min="0" max="100" value="0" class="slider" id="stackOffset" onchange="updateStackOffset(this.value)" oninput="updateStackOffset(this.value)"/>
               </div>
             </li>
+            <li class="slider">
+              <div>
+              Glitch
+              <input type="range" min="0" max="10" value="1" class="slider" id="glitch" onchange="updateGlitch(this.value)" oninput="updateGlitch(this.value)">
+              </div>
+            </li>
           </ul>
 
           <ul class="slider-container">
@@ -221,6 +227,12 @@
               <input type="range" min="0" max="100" value="5" class="slider" id="fieldStackOffset" onchange="updateFieldStackOffset(this.value)" oninput="updateFieldStackOffset(this.value)"/>
               </div>
             </li>
+            <li class="slider">
+              <div>
+              Glitch
+              <input type="range" min="0" max="10" value="1" class="slider" id="glitch" onchange="updateGlitch(this.value)" oninput="updateGlitch(this.value)">
+              </div>
+            </li>
           </ul>
 
           <ul class="slider-container">
@@ -271,6 +283,12 @@
               <input type="range" min="1" max="2" value="1" class="slider" id="cascadeMirror" onchange="updateCascadeMirror(this.value)" oninput="updateCascadeMirror(this.value)"/>
               </div>
             </li>
+            <li class="slider">
+              <div>
+              Glitch
+              <input type="range" min="0" max="10" value="1" class="slider" id="glitch" onchange="updateGlitch(this.value)" oninput="updateGlitch(this.value)">
+              </div>
+            </li>
           </ul>
 
           <ul class="slider-container">
@@ -291,7 +309,7 @@
       <div class="color-toggles">
         <h2>TYPE COLOUR</h2>
           <label class="type-color-container"><img id="invertertoggle1" src="resources/gradient_green-01.png" style="width:27px">
-            <input type="radio" checked="checked" id="type1" name="type-radio" onchange="setTC1()">
+            <input type="radio" id="type1" name="type-radio" onchange="setTC1()">
             <span class="checkmark"></span>
           </label>
           <label class="type-color-container"><img id="invertertoggle2" src="resources/gradient_orange-01.png" style="width:27px">
@@ -299,7 +317,7 @@
             <span class="checkmark"></span>
           </label>
           <label class="type-color-container"><img id="invertertoggle3" src="resources/gradient_blue-01.png" style="width:27px">
-            <input type="radio" name="type-radio" id="type3" onchange="setTC3()">
+            <input type="radio" name="type-radio" checked="checked" id="type3" onchange="setTC3()">
             <span class="checkmark"></span>
           </label>
           <label class="type-color-container"><img src="resources/color_white-01.png" style="width:27px">
@@ -367,22 +385,12 @@
         </ul>
       </div>
 
-      <div class="bottom-slider-container">
-        <ul class="slider-container2c">
-          <li class="slider">
-            <div>
-            G L I T C H
-            <input type="range" min="0" max="10" value="1" class="slider" id="glitch" onchange="updateGlitch(this.value)" oninput="updateGlitch(this.value)">
-            </div>
-          </li>
-        </ul>
-      </div>
-
     </div>
     <div id="inverterbottomleft" class="bl-button">
-      <input type="button" value="DOWNLOAD MP4" id="download" onclick="initializeRecord()">
-      <p id="status"></p>
-      <p id="warning">Please be patient as the MP4 is downloaded.</p>
+      <!-- <input type="button" value="DOWNLOAD MP4" id="download" onclick="initializeRecord()"> -->
+      <button type="button" id="download" onclick="initializeRecord()">Download?</button>
+      <!-- <p id="status"></p> -->
+      <p id="warning">Please be patient as the MP4 is downloading.</p>
 
     </div>
     <div id="inverterbottomright" class="br-image">

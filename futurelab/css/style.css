@@ -1,18 +1,23 @@
 @font-face {
-  font-family: univers;
-  src: url("/resources/univers_light.otf");
+  font-family: 'Univers LT Std';
+  src: url('/resources/UniversLTStd-Light.woff2') format('woff2'),
+      url('/resources/UniversLTStd-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 body {
   color:white;
-  font-family:univers;
+  font-family:'Univers LT Std';
   font-size:12px;
+  background-color:black;
 }
 
 h2 {
   color:white;
   font-weight: normal;
-  font-family: univers;
+  font-family: 'Univers LT Std';
   font-size: 12px;
   margin-top:5px;
 }
@@ -33,7 +38,7 @@ h2 {
 
 .tr-info .tr-text{
   padding-top: 20px;
-  font-family: univers;
+  font-family: 'Univers LT Std';
   font-size: 14px;
 }
 
@@ -43,14 +48,32 @@ h2 {
   bottom:20px;
 }
 
+button[type=button] {
+  margin-right:5px;
+  padding: 5px 10px 5px 10px;
+  box-sizing:border-box;
+  border:1px solid white;
+  background-color:rgba(255, 255, 255, 0.0);
+  color:white;
+  transition-duration:0.4s;
+}
+
+button[type=button]:hover {
+  background-color: red;
+  border:1px solid white;
+  color:white;
+}
+
+button[type=button]:focus {
+  background-color: red;
+  color:white;
+  outline:none;
+}
+
 .bl-button {
   position:absolute;
   left:20px;
   bottom:20px;
-}
-
-.bl-button input[type=button]{
-  background:black;
 }
 
 .bl-button p {
@@ -64,6 +87,7 @@ h2 {
 
 .bl-button #download {
   width:250px;
+  background-color:black;
 }
 
 .flex-container {
@@ -85,7 +109,7 @@ h2 {
 
 .mainTextInput {
   color:white;
-  font-family:univers;
+  font-family:'Univers LT Std';
   font-size:12px;
 
   color:white;
@@ -127,9 +151,6 @@ input[type=button]:focus {
   list-style-type:none;
   display:flex;
   flex-direction: column;
-}
-
-.button-group-generators{
 }
 
 #button-group-cylinder{
@@ -303,20 +324,20 @@ div.color-toggles{
   background-color:black;
   color:white;
   transition-duration:0.4s;
-  font-family:univers;
+  font-family:'Univers LT Std';
   font-size:12px;
 }
 
 .card h1 {
   color:black;
   font-weight: normal;
-  font-family:univers;
+  font-family:'Univers LT Std';
   font-size:18px;
 }
 
 .card p {
   color:black;
-  font-family:univers;
+  font-family:'Univers LT Std';
   font-size:12px;
   line-height:15px;
 }
@@ -356,7 +377,7 @@ div.color-toggles{
   padding-left:10px;
 }
 
-.slider-container2c{
+.glitch-container{
   margin-top:2px;
   list-style-type:none;
   padding-left:0;
