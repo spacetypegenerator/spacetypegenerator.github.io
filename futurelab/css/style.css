@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Univers LT Std';
-  src: url('/resources/UniversLTStd-Light.woff2') format('woff2'),
-      url('/resources/UniversLTStd-Light.woff') format('woff');
+  src: url('UniversLTStd-Light.woff2') format('woff2'),
+      url('UniversLTStd-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
