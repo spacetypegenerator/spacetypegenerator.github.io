@@ -33,7 +33,7 @@ function initializeRecord(){
     // preset:"veryfast",
     crf:26,
     // we're passing in 'onProgress' as a parameter to get status feedback on-screen - this is completely optional and you'd also get this info on the console!
-    onProgress: (progress) => document.querySelector('#download').textContent = `progress: ${(100 * progress).toFixed(1)}% 🔄`,
+    onProgress: (progress) => document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`,
     // onFinish: (videoBuffer) => {location.reload();},
   });
 }
@@ -55,7 +55,7 @@ function resetView(){
 
 function resetCylinder(){
   stackCount = 8; document.getElementById('stackCount').value = 8;
-  textureRepeats = 3; document.getElementById('textureRepeats').value = 3;
+  textureRepeats = 2; document.getElementById('textureRepeats').value = 2;
   stackSpace = 0; document.getElementById('stackSpace').value = 0;
   stackOffset = map(5,0,100,0,pgT.width); document.getElementById('stackOffset').value = 5;
 
@@ -115,7 +115,12 @@ function setSingle(){
   resetView();
   resetCylinder();
 
-  textureRepeats = 3; document.getElementById('textureRepeats').value = 3;
+  document.getElementById('glitch1').value=glitch;
+
+  mainText1 = "BEYOND IMMEDIATE HORIZONS"; document.getElementById('mainText').value = "BEYOND IMMEDIATE HORIZONS";
+  drawTextures();
+
+  textureRepeats = 2; document.getElementById('textureRepeats').value = 2;
   stackCount = 1; document.getElementById('stackCount').value = 1;
   stackSpace = 0; document.getElementById('stackSpace').value = 0;
   waveCount = 0; document.getElementById('waveCount').value = 0;
@@ -210,13 +215,18 @@ function setStacks(){
   resetView();
   resetField();
 
-  fieldTextureRepeats = 3; document.getElementById('fieldTextureRepeats').value = 3;
+  document.getElementById('glitch2').value=glitch;
+
+  mainText1 = "BEYOND IMMEDIATE HORIZONS"; document.getElementById('mainText').value = "BEYOND IMMEDIATE HORIZONS";
+  drawTextures();
+
+  fieldTextureRepeats = 1; document.getElementById('fieldTextureRepeats').value = 1;
   fieldStackCount = 8; document.getElementById('fieldStackCount').value = 8;
   fieldStackSpace = 25; document.getElementById('fieldStackSpace').value = 25;
   fieldStackOffset = map(15,0,100,0,pgT.width); document.getElementById('fieldStackOffset').value = 15;
 
   yAxisWave = 250; document.getElementById('yAxisWave').value = 250;
-  fieldLatOffset = map(25,0,100,0,0.05); document.getElementById('fieldLatOffset').value = 25;
+  fieldLatOffset = map(60,0,100,0,0.05); document.getElementById('fieldLatOffset').value = 60;
 
   cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
 
@@ -227,7 +237,7 @@ function setSimpleField(){
   resetView();
   resetField();
 
-  fieldTextureRepeats = 2; document.getElementById('fieldTextureRepeats').value = 2;
+  fieldTextureRepeats = 1; document.getElementById('fieldTextureRepeats').value = 1;
   fieldStackCount = 16; document.getElementById('fieldStackCount').value = 16;
   fieldStackSpace = 0; document.getElementById('fieldStackSpace').value = 0;
   fieldStackOffset = map(50,0,100,0,pgT.width); document.getElementById('fieldStackOffset').value = 50;
@@ -248,8 +258,8 @@ function setComplexField(){
   resetView();
   resetField();
 
-  fieldTextureRepeats = 2; document.getElementById('fieldTextureRepeats').value = 2;
-  fieldStackCount = 8; document.getElementById('fieldStackCount').value = 8;
+  fieldTextureRepeats = 1; document.getElementById('fieldTextureRepeats').value = 1;
+  fieldStackCount = 12; document.getElementById('fieldStackCount').value = 12;
   fieldStackSpace = 25; document.getElementById('fieldStackSpace').value = 25;
   fieldStackOffset = map(10,0,100,0,pgT.width); document.getElementById('fieldStackOffset').value = 10;
 
@@ -293,6 +303,8 @@ function setCascade(){
   mainText1 = "FUTURE"; document.getElementById('mainText').value = "FUTURE";
   drawInds();
   drawTextures();
+
+  document.getElementById('glitch3').value=glitch;
 
   cascadeRows = 30; document.getElementById('cascadeRows').value = 30;
   casOffset = map(50,0,100,0,2); document.getElementById('casOffset').value = 50;
@@ -574,20 +586,38 @@ function updateZzoom(val) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////// GLITCH
-function updateGlitch(val) {
-    document.getElementById('glitch').innerHTML=val;
+function updateGlitch1(val) {
+    document.getElementById('glitch1').innerHTML=val;
     glitch = val;
 
-    if(glitch==0){
-      glitchOn = false;
-    } else {
-      glitchOn = true;
-    }
+    refreshGlitch();
+}
 
-    glitchProb = map(glitch,0,10,20,85);
-    glitchWindow = map(glitch,0,10,80,20);
+function updateGlitch2(val) {
+    document.getElementById('glitch2').innerHTML=val;
+    glitch = val;
 
-    generateRandom();
+    refreshGlitch();
+}
+
+function updateGlitch3(val) {
+    document.getElementById('glitch3').innerHTML=val;
+    glitch = val;
+
+    refreshGlitch();
+}
+
+function refreshGlitch(){
+  if(glitch==0){
+    glitchOn = false;
+  } else {
+    glitchOn = true;
+  }
+
+  glitchProb = map(glitch,0,10,50,85);
+  glitchWindow = map(glitch,0,10,80,20);
+
+  generateRandom();
 }
 
 

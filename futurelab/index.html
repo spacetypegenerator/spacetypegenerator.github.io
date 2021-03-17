@@ -31,7 +31,7 @@
 
   <body>
       <div id="invertertopleft" class="tl-image">
-        <a href="https://www.urbansplash.co.uk/"><img src="resources/House_Future_Lab_Logo_Blue_RGB.png" style="height:25px"></a>
+        <a href="https://www.urbansplash.co.uk/"><img src="resources/House_Future_Lab_Logo_WO_RGB.png" style="height:25px"></a>
         <img src="resources/stg_x-01.png" style="height:25px">
         <a href="https://spacetypegenerator.com/"><img src="resources/stg_logo-01.png" style="height:25px"></a>
       </div>
@@ -42,7 +42,6 @@
 
       <div id="about" class="hide">
         <div class="card">
-          <h1>About this project</h1>
           <p>Space Type Generator and Future Lab have worked closely together to create a tool that can bring life to Future Lab, the experimental arm of House by Urban Splash. This new tool is a visual representation of the brand itself; creating endless experimentation and infinite possibilities.</p>
           <button id ="closebutton" onclick="change_showHideClass()">CLOSE</button>
         </div>
@@ -50,7 +49,7 @@
 
       <div id="inverter" class="flex-container">
         <div class="top-textbox">
-          <textarea class="mainTextInput" id="mainText" onchange="updateText(this.value)" oninput="updateText(this.value)">FUTURE LAB</textarea>
+          <textarea class="mainTextInput" id="mainText" onchange="updateText(this.value)" oninput="updateText(this.value)">BEYOND IMMEDIATE HORIZONS</textarea>
         </div>
         <ul class="button-container">
           <h2>MOVEMENT</h2>
@@ -75,31 +74,33 @@
         </ul>
         <ul class="button-container">
           <h2>PRESETS</h2>
-          <div id="button-group-cylinder">
-            <li>
-              <input type="radio" id="cyl-single" name="cylinder-presets" checked="checked" onchange="setSingle()"/>
-              <label for="cyl-single">SINGLE</label>
-            </li>
-            <li>
-              <input type="radio" id="cyl-simple" name="cylinder-presets" onchange="setSimple()"/>
-              <label for="cyl-simple">SIMPLE</label>
-            </li>
-            <li>
-              <input type="radio" id="cyl-jellyfish" name="cylinder-presets" onchange="setJellyfish()"/>
-              <label for="cyl-jellyfish">JELLYFISH</label>
-            </li>
-            <li>
-              <input type="radio" id="cyl-complex" name="cylinder-presets" onchange="setComplex()"/>
-              <label for="cyl-complex">COMPLEX</label>
-            </li>
-            <li>
-              <input type="radio" id="cyl-weave" name="cylinder-presets" onchange="setWeave()"/>
-              <label for="cyl-weave">WEAVE</label>
-            </li>
-            <li>
-              <input type="radio" id="cyl-hoops" name="cylinder-presets" onchange="setHoops()"/>
-              <label for="cyl-hoops">HOOPS</label>
-            </li>
+          <div class="button-group-presets">
+            <div id="button-group-cylinder">
+              <li>
+                <input type="radio" id="cyl-single" name="cylinder-presets" checked="checked" onchange="setSingle()"/>
+                <label for="cyl-single">SINGLE</label>
+              </li>
+              <li>
+                <input type="radio" id="cyl-simple" name="cylinder-presets" onchange="setSimple()"/>
+                <label for="cyl-simple">SIMPLE</label>
+              </li>
+              <li>
+                <input type="radio" id="cyl-jellyfish" name="cylinder-presets" onchange="setJellyfish()"/>
+                <label for="cyl-jellyfish">JELLYFISH</label>
+              </li>
+              <li>
+                <input type="radio" id="cyl-complex" name="cylinder-presets" onchange="setComplex()"/>
+                <label for="cyl-complex">COMPLEX</label>
+              </li>
+              <li>
+                <input type="radio" id="cyl-weave" name="cylinder-presets" onchange="setWeave()"/>
+                <label for="cyl-weave">WEAVE</label>
+              </li>
+              <li>
+                <input type="radio" id="cyl-hoops" name="cylinder-presets" onchange="setHoops()"/>
+                <label for="cyl-hoops">HOOPS</label>
+              </li>
+            </div>
           </div>
 
           <div id="button-group-field">
@@ -138,7 +139,7 @@
             <li class="slider">
               <div>
               CYLINDER: Repeats
-              <input type="range" min="1" max="10" value="3" class="slider" id="textureRepeats" onchange="updateTextureRepeats(this.value)" oninput="updateTextureRepeats(this.value)"/>
+              <input type="range" min="1" max="10" value="2" class="slider" id="textureRepeats" onchange="updateTextureRepeats(this.value)" oninput="updateTextureRepeats(this.value)"/>
               </div>
             </li>
             <li class="slider">
@@ -161,8 +162,8 @@
             </li>
             <li class="slider">
               <div>
-              Glitch
-              <input type="range" min="0" max="10" value="1" class="slider" id="glitch" onchange="updateGlitch(this.value)" oninput="updateGlitch(this.value)">
+              GLITCH
+              <input type="range" min="0" max="10" value="1" class="slider" id="glitch1" onchange="updateGlitch1(this.value)" oninput="updateGlitch1(this.value)">
               </div>
             </li>
           </ul>
@@ -206,7 +207,7 @@
             <li class="slider">
               <div>
               FIELD: Repeats
-              <input type="range" min="1" max="10" value="3" class="slider" id="fieldTextureRepeats" onchange="updateFieldTextureRepeats(this.value)" oninput="updateFieldTextureRepeats(this.value)"/>
+              <input type="range" min="1" max="10" value="2" class="slider" id="fieldTextureRepeats" onchange="updateFieldTextureRepeats(this.value)" oninput="updateFieldTextureRepeats(this.value)"/>
               </div>
             </li>
             <li class="slider">
@@ -229,8 +230,8 @@
             </li>
             <li class="slider">
               <div>
-              Glitch
-              <input type="range" min="0" max="10" value="1" class="slider" id="glitch" onchange="updateGlitch(this.value)" oninput="updateGlitch(this.value)">
+              GLITCH
+              <input type="range" min="0" max="10" value="1" class="slider" id="glitch2" onchange="updateGlitch2(this.value)" oninput="updateGlitch2(this.value)">
               </div>
             </li>
           </ul>
@@ -285,8 +286,8 @@
             </li>
             <li class="slider">
               <div>
-              Glitch
-              <input type="range" min="0" max="10" value="1" class="slider" id="glitch" onchange="updateGlitch(this.value)" oninput="updateGlitch(this.value)">
+              GLITCH
+              <input type="range" min="0" max="10" value="1" class="slider" id="glitch3" onchange="updateGlitch3(this.value)" oninput="updateGlitch3(this.value)">
               </div>
             </li>
           </ul>
@@ -324,7 +325,7 @@
             <input type="radio" name="type-radio" id="type4" onchange="setTC4()">
             <span class="checkmark"></span>
           </label>
-          <label class="type-color-container"><img src="resources/color_black-01.png" style="width:27px">
+          <label class="type-color-container"><img src="resources/color_black2-01.png" style="width:27px">
             <input type="radio" name="type-radio" id="type5" onchange="setTC5()">
             <span class="checkmark"></span>
           </label>
@@ -347,7 +348,7 @@
             <input type="radio" name="bkgdradio" id="back4" onchange="setBC4()">
             <span class="checkmark"></span>
           </label>
-          <label class="type-color-container"><img src="resources/color_black-01.png" style="width:27px">
+          <label class="type-color-container"><img src="resources/color_black2-01.png" style="width:27px">
             <input type="radio" checked="checked" name="bkgdradio"  id="back5" onchange="setBC5()">
             <span class="checkmark"></span>
           </label>
@@ -388,13 +389,13 @@
     </div>
     <div id="inverterbottomleft" class="bl-button">
       <!-- <input type="button" value="DOWNLOAD MP4" id="download" onclick="initializeRecord()"> -->
-      <button type="button" id="download" onclick="initializeRecord()">Download?</button>
+      <button type="button" id="download" onclick="initializeRecord()">DOWNLOAD LOOP</button>
       <!-- <p id="status"></p> -->
-      <p id="warning">Please be patient as the MP4 is downloading.</p>
+      <p id="warning">Please be patient, sometimes the download can take a little longer than expected.</p>
 
     </div>
     <div id="inverterbottomright" class="br-image">
-      <img src="resources/House_Future_Lab_Logo_Strapline_WO_RGB.png" style="height:50px">
+      <a href="https://www.urbansplash.co.uk/"><img src="resources/House_Future_Lab_Logo_Strapline_WO_RGB.png" style="height:50px"></a>
     </div>
   </body>
 

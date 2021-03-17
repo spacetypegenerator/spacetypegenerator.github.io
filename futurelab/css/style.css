@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Univers LT Std';
-  src: url('UniversLTStd-Light.woff2') format('woff2'),
-      url('UniversLTStd-Light.woff') format('woff');
+  src: url('/resources/UniversLTStd-Light.woff2') format('woff2'),
+      url('/resources/UniversLTStd-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -37,9 +37,8 @@ h2 {
 }
 
 .tr-info .tr-text{
-  padding-top: 20px;
+  padding-top: 10px;
   font-family: 'Univers LT Std';
-  font-size: 14px;
 }
 
 .br-image {
@@ -73,11 +72,12 @@ button[type=button]:focus {
 .bl-button {
   position:absolute;
   left:20px;
-  bottom:20px;
+  bottom:10px;
 }
 
 .bl-button p {
-  text-align: center;
+  text-align: left;
+  width:250px;
 }
 
 .bl-button #status {
@@ -95,7 +95,7 @@ button[type=button]:focus {
   padding-left: 20px;
   width:260px;
   align-items:left;
-  margin-bottom:50px;
+  /* margin-bottom:50px; */
 }
 
 .flex-container > div {
@@ -120,6 +120,7 @@ button[type=button]:focus {
   background-color:rgba(255, 255, 255, 0.0);
   resize:none;
   padding-left:5px;
+  margin-bottom:6px;
 }
 
 input[type=button] {
@@ -147,10 +148,13 @@ input[type=button]:focus {
 .button-container {
   border-top:1px solid white;
   padding-left:0px;
-  padding-top:0px;
+  padding-bottom:0;
   list-style-type:none;
   display:flex;
   flex-direction: column;
+}
+
+.button-group-generators {
 }
 
 #button-group-cylinder{
@@ -187,7 +191,7 @@ input[type=button]:focus {
   text-align:center;
   font-size: 12px;
   float:left;
-  margin:0 5px 10px 0;
+  margin:0px 6.65px 6px 0px;
   width:80px;
   height:25px;
   position:relative;
@@ -234,6 +238,8 @@ input[type=button]:focus {
   padding-left:0px;
   margin-right:0px;
   width:120px;
+
+  margin-top:0px;
 }
 
 .slider {
@@ -243,7 +249,7 @@ input[type=button]:focus {
 }
 
 div.color-toggles{
-    height:70px;
+    height:65px;
 }
 
 .color-toggles {
@@ -338,8 +344,13 @@ div.color-toggles{
 .card p {
   color:black;
   font-family:'Univers LT Std';
-  font-size:12px;
-  line-height:15px;
+  font-size:15px;
+}
+
+#closebutton:hover {
+  background-color:white;
+  color:black;
+  border:1px solid black;
 }
 
 /* On mouse-over, add a grey background color */

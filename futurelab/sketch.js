@@ -1,4 +1,4 @@
-let mainText1 = "FUTURE LAB";
+let mainText1 = "BEYOND IMMEDIATE HORIZONS";
 let pgTextSize = 128;
 
 let uFontBol, uFontLig, uFontReg;
@@ -8,7 +8,7 @@ let pieAdjust;
 let stackHeight = 100;
 
 // CYLINDER
-let textureRepeats = 3;
+let textureRepeats = 2;
 let stackCount = 1;
 let stackSpace = 0;
 let stackOffset;
@@ -20,7 +20,7 @@ let stWaveOffset = 0;
 let radius;
 
 // FIELD
-let fieldTextureRepeats = 3;
+let fieldTextureRepeats = 2;
 let fieldStackCount = 7;
 let fieldStackSpace;
 let fieldStackOffset;
@@ -63,7 +63,6 @@ let backCselect = 5;
 
 let pgTG = [];
 let pgTGI = [];
-let pgTransp;
 let mainInd = [];
 let startC, endC;
 let bkgdColor, foreColor;
@@ -105,7 +104,7 @@ function setup() {
 
   noSmooth();
 
-  updateGlitch(1);
+  updateGlitch1(1);
 
   drawTextures();
   generateRandom();
@@ -118,14 +117,15 @@ function setup() {
 }
 
 function draw() {
-  print(speedWave);
   clear();
+
+  print(glitch);
 
   noFill(); noStroke();
   rectMode(CENTER);
 
   if(recordSwitch){
-    document.querySelector('#download').textContent = 'RECORDING 🔴';
+    document.querySelector('#download').textContent = 'RECORDING';
   }
 
   if(backCselect==4){
@@ -161,20 +161,20 @@ function draw() {
     if(glitchOn){
       cylinderGlitch();
     }
-    blendMode(BLEND);
+    // blendMode(BLEND);
     cylinderEngine();
   } else if(generatorSelect == 1){
     if(glitchOn){
       fieldGlitch();
     }
-    blendMode(BLEND);
+    // blendMode(BLEND);
     fieldEngine();
   } else {
-    blendMode(BLEND);
-    cascadeEngine();
     if(glitchOn){
       cascadeGlitch();
     }
+    // blendMode(BLEND);
+    cascadeEngine();
   }
 
   pop();
@@ -249,21 +249,13 @@ function cylinderEngine(){
           neuR = radius + 1;
         }
 
-        push();     ////////// GLITCH 1open
-        if(glitchOn && glitchClicker<glitchPace && glitchSelect[20][st]<glitchProb) {
-          let oX = map(glitchAmount[11][st],0,100,-radius/16,radius/16);
-          let oY = map(glitchAmount[12][st],0,100,-stackHeight/4,stackHeight/4);
-          let oZ = map(glitchAmount[13][st],0,100,-radius/16,radius/16);
-          translate(oX,oY,oZ);
-        }
-
         beginShape(TRIANGLE_STRIP);
 
         var neuStart = ((frameCount + 10)*speedWave)/pieAdjust - cameraYrot/pieAdjust;
         var neuEnd = 0;
 
         if(glitchOn && glitchClicker<glitchPace && glitchSelect[21][st]<glitchProb/2){
-          neuEnd += map(glitchAmount[21][st],0,100,0,pieSlices/2);
+          neuEnd += map(glitchAmount[21][st],0,100,0,pieSlices/16);
         }
 
         for(var ps = p*(pieSlices/2) + neuStart;  ps<= (p+1)*(pieSlices/2) + neuStart - neuEnd; ps++){
@@ -287,10 +279,10 @@ function cylinderEngine(){
           let vTop = 0;
           let vBot = 1;
 
-          if(glitchOn && glitchClicker<glitchPace && glitchSelect[22][st]<glitchProb){
-            vTop += map(glitchAmount[22][st] + glitchBuild,0,100,0,1);
-            vBot += map(glitchAmount[23][st] + glitchBuild,0,100,0,1);
-          }
+          // if(glitchOn && glitchClicker<glitchPace && glitchSelect[22][st]<glitchProb){
+          //   vTop += map(glitchAmount[22][st] + glitchBuild,0,100,0,1);
+          //   vBot += map(glitchAmount[23][st] + glitchBuild,0,100,0,1);
+          // }
 
           vertex(xTop,yTop,zTop,u,vTop);
           vertex(xBot,yBot,zBot,u,vBot);
@@ -301,8 +293,6 @@ function cylinderEngine(){
           }
         }
         endShape();
-
-        pop();     ////////// GLITCH 1close
       }
     }
   }
@@ -322,44 +312,14 @@ function fieldEngine(){
 
 
   for(var y = 0; y<fieldStackCount; y++){
-
-    push();     ////////// GLITCH 1open
-    if(glitchOn && glitchClicker<glitchPace && glitchSelect[20][y]<glitchProb){
-      let oX = map(glitchAmount[11][y],0,100,-stackHeight/16,stackHeight/16);
-      let oY = map(glitchAmount[12][y],0,100,-stackHeight/4,stackHeight/4);
-      let oZ = map(glitchAmount[13][y],0,100,-stackHeight/16,stackHeight/16);
-      translate(oX,oY,oZ);
-    }
-
     textureMode(NORMAL);
-
-    if(glitchSelect[23][y]<glitchProb/5){
-      texture(pgTG[y]);
-    } else if(glitchSelect[23][y]<glitchProb * 4/5){
-      fill(255);
-    } else if(glitchSelect[23][y]<glitchProb*3/5){
-      fill(0);
-    } else if(glitchSelect[23][y]<glitchProb*4/5){
-      texture(pgTransp);
-    } else {
-      texture(pgT);
-    }
-
 
     texture(pgTG[y]);
     beginShape(TRIANGLE_STRIP);
 
     var neuStart = 0;
-    if(glitchOn && glitchClicker<glitchPace && glitchSelect[22][y]<glitchProb/2){
-      neuStart += map(glitchAmount[22][y], 0, 100, 0, xCount/2);
-    }
 
-    var neuEnd = 0;
-    if(glitchOn && glitchClicker<glitchPace && glitchSelect[21][y]<glitchProb/2){
-      neuEnd += map(glitchAmount[21][y], 0, 100, 0, xCount/2);
-    }
-
-    for(var x = 0 + neuStart; x<=xCount - neuEnd; x++){
+    for(var x = 0 + neuStart; x<=xCount; x++){
 
       let yScaleWave = sinEngine2(x,fieldLatOffset,y,fieldLongOffset, (y%2)*secretSwitch, PI, speedWave, 1) * fieldYScale/2;
 
@@ -375,11 +335,6 @@ function fieldEngine(){
       let vTop = 0;
       let vBot = 1;
 
-      if(glitchOn && glitchClicker<glitchPace && glitchSelect[22][y]<glitchProb){
-        vTop += map(glitchAmount[22][y] + glitchBuild,0,100,0,1);
-        vBot += map(glitchAmount[23][y] + glitchBuild,0,100,0,1);
-      }
-
       vertex(mainX,mainY,mainZ, u, vTop);
       vertex(mainX,mainYbot,mainZbot, u, vBot);
 
@@ -389,8 +344,6 @@ function fieldEngine(){
       }
     }
     endShape();
-
-    pop();        ////////// GLITCH 1close
   }
   pop();
 }
@@ -414,17 +367,17 @@ function cascadeEngine(){
     for(var i = 0; i<rows; i++){
       typeYfigure = map(sinEngine(i,waveBlock,k,casOffset,speedWave/2,casSlope),-1,1,yBlock,rows*yBlock);
 
-      if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k*7)%30][(i*7)%30]<glitchProb){
-        push();
-        var bX = map(glitchAmount[(k*6)%30][(i*6)%30],0,100,-20,20);
-        translate(bX,0);
-      }
+      // if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k*7)%30][(i*7)%30]<glitchProb){
+      //   push();
+      //   var bX = map(glitchAmount[(k*6)%30][(i*6)%30],0,100,-20,20);
+      //   translate(bX,0);
+      // }
 
       image(mainInd[k][i],0,0,mainInd[k][i].width,typeYfigure);
 
-      if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k*7)%30][(i*7)%30]<glitchProb){
-        pop();
-      }
+      // if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k*7)%30][(i*7)%30]<glitchProb){
+      //   pop();
+      // }
 
       translate(0,typeYfigure);
     }
@@ -441,17 +394,17 @@ function cascadeEngine(){
       for(var n = 1; n<rows+1; n++){
         typeYfigure = map(sinEngine(rows-n,waveBlock,m,casOffset,speedWave/2,casSlope),-1,1,yBlock,rows*yBlock);
 
-        if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k+12)%30][(i+12)%30]<glitchProb){
-          push();
-          var bX = map(glitchAmount[(k*6)%30][(i*6)%30],0,100,-20,20);
-          translate(bX,0);
-        }
+        // if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k+12)%30][(i+12)%30]<glitchProb){
+        //   push();
+        //   var bX = map(glitchAmount[(k*6)%30][(i*6)%30],0,100,-20,20);
+        //   translate(bX,0);
+        // }
 
         image(mainInd[m][rows-n],0,0,mainInd[m][rows-n].width,typeYfigure);
 
-        if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k+12)%30][(i+12)%30]<glitchProb){
-          pop();
-        }
+        // if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k+12)%30][(i+12)%30]<glitchProb){
+        //   pop();
+        // }
 
         translate(0,typeYfigure);
       }

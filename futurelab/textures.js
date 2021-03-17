@@ -5,7 +5,6 @@ function drawTextures(){
   }
   createText();
   createTextInside();
-  createTransp();
   createGradient1();
   createGradient2();
   createGradient3();
@@ -104,32 +103,6 @@ function createText(){
 
   pgT.textFont(uFontReg);
   pgT.text(mainText1,pgT.width/2,pgT.height/2 + pgTextSize*0.7/2);
-}
-
-function createTransp(){
-  textSize(pgTextSize);
-
-  textFont(uFontReg);
-  repeatSize = round(textWidth(mainText1))*1.05;
-
-  pgTransp = createGraphics(repeatSize,pgTextSize*0.8);
-
-  var gridSize = 20;
-  var xC = repeatSize/gridSize;
-  var yC = pgTransp.height/gridSize;
-
-  pgTransp.background(255);
-
-  pgTransp.noStroke();
-  pgTransp.fill(200);
-  for(var z = 0; z<2; z++){
-    for(var x = 0; x<xC; x+=2){
-      for(var y = 0; y<yC; y+=2){
-
-        pgTransp.rect(x*gridSize + z*gridSize, y*gridSize + z*gridSize, gridSize, gridSize);
-      }
-    }
-  }
 }
 
 function createTextInside(){
