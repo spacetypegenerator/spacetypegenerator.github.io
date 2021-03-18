@@ -79,7 +79,7 @@ function preload(){
 }
 
 function setup() {
-  pixelDensity(2);
+  // pixelDensity(2);
   wWidth = int(windowWidth);
   if(wWidth%2 == 1){
     wWidth++;
@@ -92,7 +92,11 @@ function setup() {
 
   frameRate(30);
 
-  createCanvas(wWidth, wHeight, WEBGL);
+  canvas = createCanvas(wWidth, wHeight, WEBGL);
+  // const gl = canvas.GL;
+  //
+  // gl.enable(gl.CULL_FACE);
+  // gl.cullFace(gl.FRONT_AND_BACK);
 
   bkgdColor = color('#000000');
   foreColor = color('#ffffff');
@@ -102,8 +106,7 @@ function setup() {
 
   pieAdjust = 2*PI/pieSlices;
 
-  noSmooth();
-
+smooth();
   updateGlitch1(1);
 
   drawTextures();
@@ -118,8 +121,6 @@ function setup() {
 
 function draw() {
   clear();
-
-  print(glitch);
 
   noFill(); noStroke();
   rectMode(CENTER);
@@ -246,19 +247,14 @@ function cylinderEngine(){
           neuR = radius;
         } else {
           texture(pgTG[st]);
-          neuR = radius + 1;
+          neuR = radius + 0.1;
         }
 
         beginShape(TRIANGLE_STRIP);
 
-        var neuStart = ((frameCount + 10)*speedWave)/pieAdjust - cameraYrot/pieAdjust;
-        var neuEnd = 0;
+        var neuStart = ((frameCount)*speedWave)/pieAdjust - cameraYrot/pieAdjust;
 
-        if(glitchOn && glitchClicker<glitchPace && glitchSelect[21][st]<glitchProb/2){
-          neuEnd += map(glitchAmount[21][st],0,100,0,pieSlices/16);
-        }
-
-        for(var ps = p*(pieSlices/2) + neuStart;  ps<= (p+1)*(pieSlices/2) + neuStart - neuEnd; ps++){
+        for(var ps = p*(pieSlices/2) + neuStart;  ps<= (p+1)*(pieSlices/2) + neuStart; ps++){
           var waverTop = sinEngine(ps, latWaveOffset, st, stWaveOffset, speedWave, 1) * cylLatWave;
           var waverBot = sinEngine(ps, latWaveOffset, st+1, stWaveOffset, speedWave, 1) * cylLatWave;
 
