@@ -72,7 +72,7 @@ let recordLength;
 
 let speedWave = 0.02; // 0.03 // used for sample animations
 
-let saveSize = 1;
+let saveSize = 0;
 let alphaSave = 0;
 
 let wWidth, wHeight;

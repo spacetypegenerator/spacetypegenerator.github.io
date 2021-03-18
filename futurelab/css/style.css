@@ -58,15 +58,19 @@ button[type=button] {
 }
 
 button[type=button]:hover {
-  background-color: red;
-  border:1px solid white;
-  color:white;
+  /* background-color: red; */
+  cursor:pointer;
+
+  background-color: #dadada;
+  border:1px solid #dadada;
+  color:black;
 }
 
 button[type=button]:focus {
-  background-color: red;
-  color:white;
-  outline:none;
+  /* background-color: red; */
+  background-color: #dadada;
+  border:1px solid #dadada;
+  color:black;
 }
 
 .bl-button {
@@ -82,7 +86,7 @@ button[type=button]:focus {
 
 .bl-button #status {
   font-size:15px;
-  color: red;
+  /* color: red; */
 }
 
 .bl-button #download {
@@ -119,7 +123,7 @@ button[type=button]:focus {
   background-color:rgba(255, 255, 255, 0.0);
   resize:none;
   padding-left:5px;
-  margin-bottom:6px;
+  margin-bottom:5px;
 }
 
 input[type=button] {
@@ -147,7 +151,7 @@ input[type=button]:focus {
 .button-container {
   border-top:1px solid white;
   padding-left:0px;
-  padding-bottom:0;
+  margin:9px 0 9px 0;
   list-style-type:none;
   display:flex;
   flex-direction: column;
@@ -236,6 +240,7 @@ input[type=button]:focus {
   width:120px;
 
   margin-top:0px;
+  margin-bottom:5px;
 }
 
 .slider {
@@ -249,7 +254,8 @@ input[type=button]:focus {
 }
 
 div.color-toggles{
-    height:65px;
+  height:65px;
+  margin-bottom:5px;
 }
 
 .color-toggles {
@@ -440,8 +446,8 @@ div.color-toggles{
 }
 
 .button-container-sizes {
-  padding-left:0px;
-  padding-bottom:0;
+  padding-left: 0px;
+  margin-top: 7px;
   list-style-type:none;
   display:flex;
   flex-direction: column;

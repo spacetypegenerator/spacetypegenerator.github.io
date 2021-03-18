@@ -31,9 +31,9 @@
 
   <body>
       <div id="invertertopleft" class="tl-image">
-        <a href="https://www.housebyurbansplash.co.uk/future-lab"><img src="resources/House_Future_Lab_Logo_WO_RGB.png" style="height:25px"></a>
+        <a href="https://www.housebyurbansplash.co.uk/future-lab" target="_blank" rel="noopener noreferrer"><img id="fllogo" src="resources/houseBlue.png" style="height:25px"></a>
         <img src="resources/stg_x-01.png" style="height:25px">
-        <a href="https://spacetypegenerator.com/"><img src="resources/stg_logo-01.png" style="height:25px"></a>
+        <a href="https://spacetypegenerator.com/" target="_blank" rel="noopener noreferrer"><img src="resources/stg_logo-01.png" style="height:25px"></a>
       </div>
       <div id="invertertopright" class="tr-info">
         <input type="button" value="ABOUT THIS PROJECT" id="aboutBut" onclick="change_showHideClass()">
@@ -333,23 +333,23 @@
       <div class="color-toggles">
         <h2>BACKGROUND COLOUR</h2>
           <label class="type-color-container"><img id="invertertoggle4" src="resources/gradient_green-01.png" style="width:27px">
-            <input type="radio" name="bkgdradio" id="back1" onchange="setBC1()">
+            <input type="radio" name="bkgdradio" id="back1" onchange="setBC1()" onclick="changeLogo(1)">
             <span class="checkmark"></span>
           </label>
           <label class="type-color-container"><img id="invertertoggle5" src="resources/gradient_orange-01.png" style="width:27px">
-            <input type="radio" name="bkgdradio" id="back2" onchange="setBC2()">
+            <input type="radio" name="bkgdradio" id="back2" onchange="setBC2()" onclick="changeLogo(1)">
             <span class="checkmark"></span>
           </label>
           <label class="type-color-container"><img id="invertertoggle6" src="resources/gradient_blue-01.png" style="width:27px">
-            <input type="radio" name="bkgdradio" id="back3" onchange="setBC3()">
+            <input type="radio" name="bkgdradio" id="back3" onchange="setBC3()" onclick="changeLogo(1)">
             <span class="checkmark"></span>
           </label>
           <label class="type-color-container"><img src="resources/color_white-01.png" style="width:27px">
-            <input type="radio" name="bkgdradio" id="back4" onchange="setBC4()">
+            <input type="radio" name="bkgdradio" id="back4" onchange="setBC4()" onclick="changeLogo(2)">
             <span class="checkmark"></span>
           </label>
           <label class="type-color-container"><img src="resources/color_black2-01.png" style="width:27px">
-            <input type="radio" checked="checked" name="bkgdradio"  id="back5" onchange="setBC5()">
+            <input type="radio" checked="checked" name="bkgdradio"  id="back5" onchange="setBC5()" onclick="changeLogo(0)">
             <span class="checkmark"></span>
           </label>
       </div>
@@ -395,11 +395,11 @@
         <div class="button-group-sizes">
           <li>
             <input type="radio" id="size_sq" name="size" value="0" checked="checked" onchange="changeSizes(this)"/>
-            <label for="size_sq">1080x1080</label>
+            <label for="size_sq">SQUARE</label>
           </li>
           <li>
             <input type="radio" id="size_horz" name="size" value="1" onchange="changeSizes(this)"/>
-            <label for="size_horz">1920x1080</label>
+            <label for="size_horz">LANDSCAPE</label>
           </li>
         </div>
 
@@ -413,7 +413,7 @@
 
     </div>
     <div id="inverterbottomright" class="br-image">
-      <a href="https://www.housebyurbansplash.co.uk/ "><img src="resources/House_Future_Lab_Logo_Strapline_WO_RGB.png" style="height:50px"></a>
+      <a href="https://www.housebyurbansplash.co.uk/" target="_blank" rel="noopener noreferrer"><img src="resources/House_Future_Lab_Logo_Strapline_WO_RGB.png" style="height:50px"></a>
     </div>
   </body>
 

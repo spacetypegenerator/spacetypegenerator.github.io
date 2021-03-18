@@ -667,3 +667,13 @@ function changeSizes(element){
   print(saveSize);
   alphaSave = 200;
 }
+
+function changeLogo(a){
+  if(a==0){
+    document.getElementById("fllogo").src="resources/houseBlue.png";
+  } else if(a==1){
+    document.getElementById("fllogo").src="resources/houseWhite.png";
+  } else if(a==2){
+    document.getElementById("fllogo").src="resources/houseBlueInv.png";
+  }
+}
