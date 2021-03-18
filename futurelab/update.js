@@ -16,8 +16,8 @@ function initializeRecord(){
     wWidth = 1080;
     wHeight = 1080;
   } else if (saveSize==1){
-    wWidth = 1920;
-    wHeight = 1080;
+    wWidth = 1536;
+    wHeight = 864; //1536,864
   }
 
   resizeCanvas(wWidth,wHeight);

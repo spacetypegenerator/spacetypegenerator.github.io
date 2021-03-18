@@ -82,7 +82,7 @@ function preload(){
 }
 
 function setup() {
-  // pixelDensity(2);
+  pixelDensity(2);
   wWidth = int(windowWidth);
   if(wWidth%2 == 1){
     wWidth++;
@@ -93,6 +93,7 @@ function setup() {
     wHeight++;
   }
 
+  noSmooth();
   frameRate(30);
 
   canvas = createCanvas(wWidth, wHeight, WEBGL);
@@ -213,9 +214,9 @@ function draw() {
       rect(1,1,1080,1080);
     } else if(saveSize==1){
       noFill(); stroke(255,alphaSave);
-      rect(0,0,1920,1080);
+      rect(0,0,1536,864);
       noFill(); stroke(0,alphaSave);
-      rect(1,1,1920,1080);
+      rect(1,1,1536,864);
     }
     alphaSave -= 8;
   }
