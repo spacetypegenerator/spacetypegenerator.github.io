@@ -12,11 +12,12 @@ function change_showHideClass() {
 }
 
 function initializeRecord(){
-  if(wWidth>(4096/2)){
-    wWidth = (4096/2);
-  }
-  if(wHeight>(2160/2)){
-    wHeight = (2160/2);
+  if(saveSize==0){
+    wWidth = 1080;
+    wHeight = 1080;
+  } else if (saveSize==1){
+    wWidth = 1920;
+    wHeight = 1080;
   }
 
   resizeCanvas(wWidth,wHeight);
@@ -659,4 +660,10 @@ function showPresets(element){
 
     generatorSelect = 2;
   }
+}
+
+function changeSizes(element){
+  saveSize = element.value;
+  print(saveSize);
+  alphaSave = 200;
 }

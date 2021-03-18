@@ -390,6 +390,24 @@
     <div id="inverterbottomleft" class="bl-button">
       <!-- <input type="button" value="DOWNLOAD MP4" id="download" onclick="initializeRecord()"> -->
       <button type="button" id="download" onclick="initializeRecord()">DOWNLOAD LOOP</button>
+
+      <ul class="button-container-sizes">
+        <div class="button-group-sizes">
+          <li>
+            <input type="radio" id="size_sq" name="size" value="0" checked="checked" onchange="changeSizes(this)"/>
+            <label for="size_sq">1080x1080</label>
+          </li>
+          <li>
+            <input type="radio" id="size_horz" name="size" value="1" onchange="changeSizes(this)"/>
+            <label for="size_horz">1920x1080</label>
+          </li>
+        </div>
+
+        <!-- <input type="button" value="CYLINDER" checked="checked">
+        <input type="button" value="FIELD">
+        <input type="button" value="CASCADE"> -->
+      </ul>
+
       <!-- <p id="status"></p> -->
       <p id="warning">Please be patient, sometimes the download can take a little longer than expected</p>
 

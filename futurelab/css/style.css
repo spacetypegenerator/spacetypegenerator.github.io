@@ -113,7 +113,7 @@ button[type=button]:focus {
 
   color:white;
   width:100%;
-  height:50px;
+  height:40px;
   box-sizing:border-box;
   border:1px solid white;
   background-color:rgba(255, 255, 255, 0.0);
@@ -151,9 +151,6 @@ input[type=button]:focus {
   list-style-type:none;
   display:flex;
   flex-direction: column;
-}
-
-.button-group-generators {
 }
 
 #button-group-cylinder{
@@ -245,6 +242,10 @@ input[type=button]:focus {
   margin-top:5px;
   display: flex;
   flex-direction: column;
+}
+
+#button-group-sizes li {
+  list-style-type:none;
 }
 
 div.color-toggles{
@@ -436,4 +437,54 @@ div.color-toggles{
 
 #inverterbottomright {
   filter: invert(0%);
+}
+
+.button-container-sizes {
+  padding-left:0px;
+  padding-bottom:0;
+  list-style-type:none;
+  display:flex;
+  flex-direction: column;
+}
+
+.button-container-sizes li {
+  text-align:center;
+  font-size: 12px;
+  float:left;
+  margin:0px 6px 0px 0px;
+  width:122px;
+  height:25px;
+  position:relative;
+}
+
+.button-container-sizes label, .button-container-sizes input {
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+.button-container-sizes input[type="radio"] {
+  opacity:0.011;
+  z-index:10;
+}
+
+.button-container-sizes input[type="radio"]:checked + label {
+  background:white;
+  color:black;
+}
+
+.button-container-sizes label {
+  padding:5px;
+  border:1px solid white;
+  cursor:pointer;
+  z-index:9;
+}
+
+.button-container-sizes label:hover {
+  background: #dadada;
+  border:1px solid #dadada;
+  color:black;
 }

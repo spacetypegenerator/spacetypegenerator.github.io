@@ -72,6 +72,9 @@ let recordLength;
 
 let speedWave = 0.02; // 0.03 // used for sample animations
 
+let saveSize = 1;
+let alphaSave = 0;
+
 let wWidth, wHeight;
 
 function preload(){
@@ -201,6 +204,22 @@ function draw() {
     document.querySelector('#download').textContent = 'STARTING UP...';
     // location.reload();
   }
+
+  if(alphaSave>0){
+    if(saveSize==0){
+      noFill(); stroke(255,alphaSave);
+      rect(0,0,1080,1080);
+      noFill(); stroke(0,alphaSave);
+      rect(1,1,1080,1080);
+    } else if(saveSize==1){
+      noFill(); stroke(255,alphaSave);
+      rect(0,0,1920,1080);
+      noFill(); stroke(0,alphaSave);
+      rect(1,1,1920,1080);
+    }
+    alphaSave -= 8;
+  }
+
 }
 
 function windowResized(){
@@ -363,17 +382,7 @@ function cascadeEngine(){
     for(var i = 0; i<rows; i++){
       typeYfigure = map(sinEngine(i,waveBlock,k,casOffset,speedWave/2,casSlope),-1,1,yBlock,rows*yBlock);
 
-      // if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k*7)%30][(i*7)%30]<glitchProb){
-      //   push();
-      //   var bX = map(glitchAmount[(k*6)%30][(i*6)%30],0,100,-20,20);
-      //   translate(bX,0);
-      // }
-
       image(mainInd[k][i],0,0,mainInd[k][i].width,typeYfigure);
-
-      // if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k*7)%30][(i*7)%30]<glitchProb){
-      //   pop();
-      // }
 
       translate(0,typeYfigure);
     }
@@ -390,17 +399,7 @@ function cascadeEngine(){
       for(var n = 1; n<rows+1; n++){
         typeYfigure = map(sinEngine(rows-n,waveBlock,m,casOffset,speedWave/2,casSlope),-1,1,yBlock,rows*yBlock);
 
-        // if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k+12)%30][(i+12)%30]<glitchProb){
-        //   push();
-        //   var bX = map(glitchAmount[(k*6)%30][(i*6)%30],0,100,-20,20);
-        //   translate(bX,0);
-        // }
-
         image(mainInd[m][rows-n],0,0,mainInd[m][rows-n].width,typeYfigure);
-
-        // if(glitchOn && glitchClicker<glitchPace && glitchSelect[(k+12)%30][(i+12)%30]<glitchProb){
-        //   pop();
-        // }
 
         translate(0,typeYfigure);
       }
