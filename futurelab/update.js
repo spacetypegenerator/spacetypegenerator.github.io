@@ -118,7 +118,7 @@ function setSingle(){
 
   document.getElementById('glitch1').value=glitch;
 
-  mainText1 = "BEYOND IMMEDIATE HORIZONS"; document.getElementById('mainText').value = "BEYOND IMMEDIATE HORIZONS";
+  // mainText1 = "BEYOND IMMEDIATE HORIZONS"; document.getElementById('mainText').value = "BEYOND IMMEDIATE HORIZONS";
   drawTextures();
 
   textureRepeats = 2; document.getElementById('textureRepeats').value = 2;
@@ -218,7 +218,7 @@ function setStacks(){
 
   document.getElementById('glitch2').value=glitch;
 
-  mainText1 = "BEYOND IMMEDIATE HORIZONS"; document.getElementById('mainText').value = "BEYOND IMMEDIATE HORIZONS";
+  // mainText1 = "BEYOND IMMEDIATE HORIZONS"; document.getElementById('mainText').value = "BEYOND IMMEDIATE HORIZONS";
   drawTextures();
 
   fieldTextureRepeats = 1; document.getElementById('fieldTextureRepeats').value = 1;
@@ -280,8 +280,8 @@ function setHarlequin(){
   resetView();
   resetField();
 
-  fieldTextureRepeats = 2; document.getElementById('fieldTextureRepeats').value = 2;
-  fieldStackCount = 7; document.getElementById('fieldStackCount').value = 7;
+  fieldTextureRepeats = 1; document.getElementById('fieldTextureRepeats').value = 1;
+  fieldStackCount = 11; document.getElementById('fieldStackCount').value = 11;
   fieldStackSpace = 10; document.getElementById('fieldStackSpace').value = 10;
   fieldStackOffset = map(0,0,100,0,pgT.width); document.getElementById('fieldStackOffset').value = 0;
 
@@ -301,7 +301,7 @@ function setHarlequin(){
 function setCascade(){
   resetView();
 
-  mainText1 = "FUTURE"; document.getElementById('mainText').value = "FUTURE";
+  // mainText1 = "FUTURE"; document.getElementById('mainText').value = "FUTURE";
   drawInds();
   drawTextures();
 
@@ -312,7 +312,7 @@ function setCascade(){
   casSlope = map(80,0,100,0,2*PI); document.getElementById('casSlope').value = 80;
   mirrorSwitch = false; document.getElementById('cascadeMirror').value = 1;
 
-  cameraZoom = 0; document.getElementById('cameraZoom').value = 0;
+  cameraZoom = -800; document.getElementById('cameraZoom').value = -800;
 
   redrawStackCascade();
 }
@@ -320,7 +320,7 @@ function setCascade(){
 function setRun(){
   resetView();
 
-  mainText1 = "FUTURE LAB"; document.getElementById('mainText').value = "FUTURE LAB";
+  // mainText1 = "FUTURE LAB"; document.getElementById('mainText').value = "FUTURE LAB";
   drawInds();
   drawTextures();
 

@@ -131,8 +131,10 @@ function fieldGlitch(){
 
           beginShape(TRIANGLE_STRIP);
 
-          var neuStart = map(glitchAmount[8][y] + glitchBuild,0,100,0,xCount/2);
-          var neuEnd = map(glitchAmount[9][y] + glitchBuild,0,100,0,xCount/2);
+          // var neuStart = map(glitchAmount[8][y] + glitchBuild,0,100,0,xCount/2);
+          // var neuEnd = map(glitchAmount[9][y] + glitchBuild,0,100,0,xCount/2);
+          var neuStart = 0;
+          var neuEnd = 0;
 
           var topSt = map(neuYStart + t*neuYSpace,0,ySpace,0,1);
           var botSt = map(neuYStart + (t+1)*neuYSpace,0,ySpace,0,1);
