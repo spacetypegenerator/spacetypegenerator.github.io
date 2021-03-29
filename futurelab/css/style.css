@@ -1,3 +1,6 @@
+/*current left column is 720px*/
+/*needs to be below 647*/
+
 @font-face {
   font-family: 'Univers LT Std';
   src: url('UniversLTStd-Light.woff2') format('woff2'),
@@ -20,6 +23,7 @@ h2 {
   font-family: 'Univers LT Std';
   font-size: 12px;
   margin-top:5px;
+  margin-bottom:5px;
 }
 
 .tl-image {
@@ -94,7 +98,7 @@ button[type=button]:focus {
 }
 
 .flex-container {
-  padding-top: 20px;
+  padding-top: 10px;
   padding-left: 20px;
   width:260px;
   align-items:left;
@@ -117,13 +121,12 @@ button[type=button]:focus {
 
   color:white;
   width:100%;
-  height:40px;
+  height:30px;
   box-sizing:border-box;
   border:1px solid white;
   background-color:rgba(255, 255, 255, 0.0);
   resize:none;
   padding-left:5px;
-  margin-bottom:5px;
 }
 
 input[type=button] {
@@ -151,7 +154,7 @@ input[type=button]:focus {
 .button-container {
   border-top:1px solid white;
   padding-left:0px;
-  margin:9px 0 9px 0;
+  margin:5px 0 5px 0; /*9px 0 9px 0*/
   list-style-type:none;
   display:flex;
   flex-direction: column;
@@ -173,18 +176,21 @@ input[type=button]:focus {
   display:flex;
   flex-direction:row;
   justify-content: space-between;
+  margin-bottom:5px;
 }
 
 #major-field-slider-container {
   display:none;
   flex-direction:row;
   justify-content: space-between;
+  margin-bottom:5px;
 }
 
 #major-cascade-slider-container {
   display:none;
   flex-direction:row;
   justify-content: space-between;
+  margin-bottom:5px;
 }
 
 .button-container li {
@@ -254,8 +260,8 @@ input[type=button]:focus {
 }
 
 div.color-toggles{
-  height:65px;
-  margin-bottom:5px;
+  height:57px;
+  margin-bottom:2px;
 }
 
 .color-toggles {
@@ -405,45 +411,20 @@ div.color-toggles{
   filter: invert(0%);
 }
 
-#invertertoggle1 {
-  filter: invert(0%);
-}
-
-#invertertoggle2 {
-  filter: invert(0%);
-}
-
-#invertertoggle3 {
-  filter: invert(0%);
-}
-
-#invertertoggle4 {
-  filter: invert(0%);
-}
-
-#invertertoggle5 {
-  filter: invert(0%);
-}
-
-#invertertoggle6 {
-  filter: invert(0%);
-}
-
-#invertertopleft {
-  filter: invert(0%);
-}
-
-#invertertopright {
-  filter: invert(0%);
-}
-
-#inverterbottomleft {
-  filter: invert(0%);
-}
-
-#inverterbottomright {
-  filter: invert(0%);
-}
+#invertertoggle1 {filter: invert(0%);}
+#invertertoggle2 {filter: invert(0%);}
+#invertertoggle3 {filter: invert(0%);}
+#invertertoggle4 {filter: invert(0%);}
+#invertertoggle5 {filter: invert(0%);}
+#invertertoggle6 {filter: invert(0%);}
+#invertertoggle7 {filter: invert(0%);}
+#invertertoggle8 {filter: invert(0%);}
+#invertertoggle9 {filter: invert(0%);}
+#invertertoggle10 {filter: invert(0%);}
+#invertertopleft {filter: invert(0%);}
+#invertertopright {filter: invert(0%);}
+#inverterbottomleft {filter: invert(0%);}
+#inverterbottomright {filter: invert(0%);}
 
 .button-container-sizes {
   padding-left: 0px;

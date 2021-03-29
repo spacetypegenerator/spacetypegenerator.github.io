@@ -41,7 +41,7 @@ function cylinderGlitch(){
 
     for(var st = 0; st< stackCount; st++){
       if(glitchSelect[st][0]<glitchProb){
-        var neuRadius = radius + map(glitchAmount[st][2],0,100,-radius/100,radius/100);
+        var neuRadius = radius + map(glitchAmount[st][2],0,100,0,radius/50);
 
         for(var t = 0; t<3; t++){ // repeats
           var neuStackStart = map(glitchAmount[st][3],0,100,0,stackHeight/2);

@@ -28,15 +28,40 @@ function initializeRecord(){
     recordStop = (2*PI)/(speedWave/2) + frameCount + 2;
   } else {
     recordStop = (2*PI)/speedWave + frameCount + 2;
+    //recordStop = frameCount + 10;
   }
 
   startRecording({
     // preset:"veryfast",
     crf:26,
     // we're passing in 'onProgress' as a parameter to get status feedback on-screen - this is completely optional and you'd also get this info on the console!
-    onProgress: (progress) => document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`,
-    // onFinish: (videoBuffer) => {location.reload();},
+    // onProgress: (progress) => document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`,
+    onProgress: function(progress){
+      document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`;
+      if(progress>0.99){
+        print(true);
+        document.querySelector('#download').textContent = 'DOWNLOAD LOOP';
+      }
+    },
+    // onFinish: (recordedBlobs) => downloadThis(),
   });
+}
+//
+function downloadThis(){
+  const name = 'recording.mp4';
+  //const blob = new Blob(recordedBlobs, { type: supportedType });
+  const blob = new Blob(recordedBlobs, { type: 'video/mp4' });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+  }, 100);
 }
 
 ///////////////////////////////////////////////////////////////////////////////// RESETS
@@ -121,7 +146,7 @@ function setSingle(){
   // mainText1 = "BEYOND IMMEDIATE HORIZONS"; document.getElementById('mainText').value = "BEYOND IMMEDIATE HORIZONS";
   drawTextures();
 
-  textureRepeats = 2; document.getElementById('textureRepeats').value = 2;
+  textureRepeats = 1; document.getElementById('textureRepeats').value = 1;
   stackCount = 1; document.getElementById('stackCount').value = 1;
   stackSpace = 0; document.getElementById('stackSpace').value = 0;
   waveCount = 0; document.getElementById('waveCount').value = 0;
@@ -180,7 +205,7 @@ function setWeave(){
   resetView();
   resetCylinder();
 
-  textureRepeats = 4; document.getElementById('textureRepeats').value = 4;
+  textureRepeats = 1; document.getElementById('textureRepeats').value = 1;
   stackCount = 7; document.getElementById('stackCount').value = 7;
   stackSpace = 160; document.getElementById('stackSpace').value = 160;
   waveCount = 4; document.getElementById('waveCount').value = 4;
@@ -197,7 +222,7 @@ function setHoops(){
   resetView();
   resetCylinder();
 
-  textureRepeats = 4; document.getElementById('textureRepeats').value = 4;
+  textureRepeats = 1; document.getElementById('textureRepeats').value = 1;
   stackCount = 7; document.getElementById('stackCount').value = 7;
   stackSpace = 180; document.getElementById('stackSpace').value = 180;
   waveCount = 1; document.getElementById('waveCount').value = 1;
@@ -474,31 +499,26 @@ function updateCasSlope(val) {
 ///////////////////////////////////////////////////////////////////////////////// COLORS
 function setTC1(){
   typeCselect = 1;
-
   redrawAllStacks();
 }
 
 function setTC2(){
   typeCselect = 2;
-
   redrawAllStacks();
 }
 
 function setTC3(){
   typeCselect = 3;
-
   redrawAllStacks();
 }
 
 function setTC4(){
   typeCselect = 4;
-
   redrawAllStacks();
 }
 
 function setTC5(){
   typeCselect = 5;
-
   redrawAllStacks();
 }
 
@@ -513,26 +533,27 @@ function redrawAllStacks(){
 }
 
 function setBC1(){
+  invertCSS(1);
   backCselect = 1;
 }
 
 function setBC2(){
+  invertCSS(1);
   backCselect = 2;
 }
 
 function setBC3(){
+  invertCSS(1);
   backCselect = 3;
 }
 
 function setBC4(){
   invertCSS(0);
-
   backCselect = 4;
 }
 
 function setBC5(){
   invertCSS(1);
-
   backCselect = 5;
 }
 
@@ -549,6 +570,10 @@ function invertCSS(toggle){
     document.getElementById('invertertoggle4').style.filter = "invert(100%)";
     document.getElementById('invertertoggle5').style.filter = "invert(100%)";
     document.getElementById('invertertoggle6').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle7').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle8').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle9').style.filter = "invert(100%)";
+    document.getElementById('invertertoggle10').style.filter = "invert(100%)";
   } else if(toggle==1){
     document.getElementById('inverter').style.filter = "invert(0%)";
     document.getElementById('invertertopleft').style.filter = "invert(0%)";
@@ -561,6 +586,11 @@ function invertCSS(toggle){
     document.getElementById('invertertoggle4').style.filter = "invert(0%)";
     document.getElementById('invertertoggle5').style.filter = "invert(0%)";
     document.getElementById('invertertoggle6').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle7').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle8').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle9').style.filter = "invert(0%)";
+    document.getElementById('invertertoggle10').style.filter = "invert(0%)";
+
   }
 
 }
@@ -620,7 +650,6 @@ function refreshGlitch(){
 
   generateRandom();
 }
-
 
 function showPresets(element){
   if(element.value==0){
