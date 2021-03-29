@@ -38,19 +38,18 @@ function initializeRecord(){
     // onProgress: (progress) => document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`,
     onProgress: function(progress){
       document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`;
-      if(progress>0.99){
-        print(true);
-        document.querySelector('#download').textContent = 'DOWNLOAD LOOP';
-      }
+      // if(progress>0.99){
+      //   print(true);
+      //   document.querySelector('#download').textContent = 'DOWNLOAD LOOP';
+      // }
     },
-    // onFinish: (recordedBlobs) => downloadThis(),
+    onFinish: (recordedBlobs) => downloadThis(recordedBlobs),
   });
 }
 //
-function downloadThis(){
+function downloadThis(recordedBlobs){
   const name = 'recording.mp4';
-  //const blob = new Blob(recordedBlobs, { type: supportedType });
-  const blob = new Blob(recordedBlobs, { type: 'video/mp4' });
+  const blob = new Blob([recordedBlobs.buffer], { type: 'video/mp4' });
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.style.display = 'none';
@@ -62,6 +61,7 @@ function downloadThis(){
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
   }, 100);
+  document.querySelector('#download').textContent = 'DOWNLOAD LOOP';
 }
 
 ///////////////////////////////////////////////////////////////////////////////// RESETS
