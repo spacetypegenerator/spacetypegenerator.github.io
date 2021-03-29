@@ -1,6 +1,3 @@
-/*current left column is 720px*/
-/*needs to be below 647*/
-
 @font-face {
   font-family: 'Univers LT Std';
   src: url('UniversLTStd-Light.woff2') format('woff2'),
@@ -23,7 +20,6 @@ h2 {
   font-family: 'Univers LT Std';
   font-size: 12px;
   margin-top:5px;
-  margin-bottom:5px;
 }
 
 .tl-image {
@@ -81,11 +77,12 @@ button[type=button]:focus {
   position:absolute;
   left:20px;
   bottom:10px;
+  zoom:0.9;
 }
 
 .bl-button p {
   text-align: left;
-  width:250px;
+  width:260px;
 }
 
 .bl-button #status {
@@ -94,11 +91,11 @@ button[type=button]:focus {
 }
 
 .bl-button #download {
-  width:250px;
+  width:260px;
 }
 
 .flex-container {
-  padding-top: 10px;
+  padding-top: 20px;
   padding-left: 20px;
   width:260px;
   align-items:left;
@@ -121,12 +118,13 @@ button[type=button]:focus {
 
   color:white;
   width:100%;
-  height:30px;
+  height:40px;
   box-sizing:border-box;
   border:1px solid white;
   background-color:rgba(255, 255, 255, 0.0);
   resize:none;
   padding-left:5px;
+  margin-bottom:5px;
 }
 
 input[type=button] {
@@ -154,7 +152,7 @@ input[type=button]:focus {
 .button-container {
   border-top:1px solid white;
   padding-left:0px;
-  margin:5px 0 5px 0; /*9px 0 9px 0*/
+  margin:9px 0 9px 0;
   list-style-type:none;
   display:flex;
   flex-direction: column;
@@ -176,21 +174,21 @@ input[type=button]:focus {
   display:flex;
   flex-direction:row;
   justify-content: space-between;
-  margin-bottom:5px;
+  padding-bottom:6px;
 }
 
 #major-field-slider-container {
   display:none;
   flex-direction:row;
   justify-content: space-between;
-  margin-bottom:5px;
+  padding-bottom:6px;
 }
 
 #major-cascade-slider-container {
   display:none;
   flex-direction:row;
   justify-content: space-between;
-  margin-bottom:5px;
+  padding-bottom:6px;
 }
 
 .button-container li {
@@ -260,8 +258,8 @@ input[type=button]:focus {
 }
 
 div.color-toggles{
-  height:57px;
-  margin-bottom:2px;
+  height:65px;
+  margin-bottom:5px;
 }
 
 .color-toggles {
@@ -439,7 +437,7 @@ div.color-toggles{
   font-size: 12px;
   float:left;
   margin:0px 6px 0px 0px;
-  width:122px;
+  width:127px;
   height:25px;
   position:relative;
 }
@@ -474,4 +472,8 @@ div.color-toggles{
   background: #dadada;
   border:1px solid #dadada;
   color:black;
+}
+
+#scale-down {
+  zoom:0.9;
 }

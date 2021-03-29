@@ -9,14 +9,14 @@
     }
 
     input[type='range']::-webkit-slider-runnable-track {
-      height: 8px;
+      height: 10px;
       -webkit-appearance: none;
       color: #000000;
     }
 
     input[type='range']::-webkit-slider-thumb {
-      width: 14px;
-      height:14px;
+      width: 16px;
+      height:16px;
       -webkit-appearance: none;
       cursor: ew-resize;
       border-radius: 100%;

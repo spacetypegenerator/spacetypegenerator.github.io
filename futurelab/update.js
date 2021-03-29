@@ -48,7 +48,7 @@ function initializeRecord(){
 }
 //
 function downloadThis(recordedBlobs){
-  const name = 'recording.mp4';
+  const name = 'futurelab_stg_recording.mp4';
   const blob = new Blob([recordedBlobs.buffer], { type: 'video/mp4' });
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
