@@ -37,12 +37,12 @@
       </div>
       <div id="invertertopright" class="tr-info">
         <input type="button" value="ABOUT THIS PROJECT" id="aboutBut" onclick="change_showHideClass()">
-        <div class="tr-text">For the best experience please view this site on a desktop device in a Chrome browser</div>
+        <div class="tr-text">For the best experience please view this site on a laptop or computer</div>
       </div>
 
       <div id="about" class="hide">
         <div class="card">
-          <p>Space Type Generator and Future Lab have worked closely together to create a tool that can bring life to Future Lab, the experimental arm of House by Urban Splash. This new tool is a visual representation of the brand itself; creating endless experimentation and infinite possibilities.</p>
+          <p>Future Lab and Space Type Generator have collaboratively worked together to create a unique and innovative series of type tools that gives you, the user, freedom to play with an experimental brand in a number of fun, engaging and unexpected ways.</p>
           <button id ="closebutton" onclick="change_showHideClass()">CLOSE</button>
         </div>
       </div>
@@ -389,27 +389,34 @@
     </div>
     <div id="inverterbottomleft" class="bl-button">
       <!-- <input type="button" value="DOWNLOAD MP4" id="download" onclick="initializeRecord()"> -->
-      <button type="button" id="download" onclick="initializeRecord()">DOWNLOAD LOOP</button>
+      <button type="button" id="download" onclick="initializeRecord()">DOWNLOAD</button>
 
       <ul class="button-container-sizes">
         <div class="button-group-sizes">
           <li>
-            <input type="radio" id="size_sq" name="size" value="0" checked="checked" onchange="changeSizes(this)"/>
-            <label for="size_sq">SQUARE</label>
+            <input type="radio" id="size_sq" name="size" value="0" checked="checked" onchange="changeSaveType(this)"/>
+            <label for="size_sq">SQUARE LOOP</label>
           </li>
           <li>
-            <input type="radio" id="size_horz" name="size" value="1" onchange="changeSizes(this)"/>
-            <label for="size_horz">LANDSCAPE</label>
+            <input type="radio" id="size_horz" name="size" value="1" onchange="changeSaveType(this)"/>
+            <label for="size_horz">LANDSCAPE LOOP</label>
+          </li>
+          <li>
+            <input type="radio" id="png_save" name="size" value="2" onchange="changeSaveType(this)"/>
+            <label for="png_save">PNG IMAGE</label>
+          </li>
+          <li>
+            <input type="radio" id="jpg_save" name="size" value="3" onchange="changeSaveType(this)"/>
+            <label for="jpg_save">JPEG IMAGE</label>
           </li>
         </div>
-
-        <!-- <input type="button" value="CYLINDER" checked="checked">
-        <input type="button" value="FIELD">
-        <input type="button" value="CASCADE"> -->
       </ul>
-
+      <!-- <div class="button-save-images">
+        <button type="button" id="saveImages" onclick="savePNG()">PNG IMAGE</button>
+        <button type="button" id="saveImages" onclick="saveJPG()">JPEG IMAGE</button>
+      </div> -->
       <!-- <p id="status"></p> -->
-      <p id="warning">Please be patient, sometimes the download can take a little longer than expected</p>
+      <p id="warning">Downloads may take a minute or two, but it’s worth the wait</p>
 
     </div>
     <div id="inverterbottomright" class="br-image">

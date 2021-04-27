@@ -34,6 +34,8 @@ h2 {
   width:200px;
   right:20px;
   top:20px;
+
+  zoom:0.9;
 }
 
 .tr-info .tr-text{
@@ -97,7 +99,7 @@ button[type=button]:focus {
 .flex-container {
   padding-top: 20px;
   padding-left: 20px;
-  width:260px;
+  width:270px;
   align-items:left;
   /* margin-bottom:50px; */
 }
@@ -195,8 +197,8 @@ input[type=button]:focus {
   text-align:center;
   font-size: 12px;
   float:left;
-  margin:0px 6.65px 6px 0px;
-  width:80px;
+  margin:0px 5px 6px 0px;
+  width:85px;
   height:25px;
   position:relative;
 }
@@ -425,8 +427,8 @@ div.color-toggles{
 #inverterbottomright {filter: invert(0%);}
 
 .button-container-sizes {
-  padding-left: 0px;
-  margin-top: 7px;
+  width:270px;
+  padding-left:0;
   list-style-type:none;
   display:flex;
   flex-direction: column;
@@ -436,7 +438,7 @@ div.color-toggles{
   text-align:center;
   font-size: 12px;
   float:left;
-  margin:0px 6px 0px 0px;
+  margin:0px 5px 6px 0px;
   width:127px;
   height:25px;
   position:relative;

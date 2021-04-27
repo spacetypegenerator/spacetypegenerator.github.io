@@ -12,40 +12,64 @@ function change_showHideClass() {
 }
 
 function initializeRecord(){
-  if(saveSize==0){
-    wWidth = 1080;
-    wHeight = 1080;
-  } else if (saveSize==1){
-    wWidth = 1536;
-    wHeight = 864; //1536,864
+  if(saveSize==0 || saveSize ==1){
+    if(saveSize==0){
+      wWidth = 1080;
+      wHeight = 1080;
+    } else if (saveSize==1){
+      wWidth = 1536;
+      wHeight = 864; //1536,864
+    }
+
+    resizeCanvas(wWidth,wHeight);
+
+    recordSwitch = true;
+
+    if(generatorSelect==2){
+      recordStop = (2*PI)/(speedWave/2) + frameCount + 2;
+    } else {
+      recordStop = (2*PI)/speedWave + frameCount + 2;
+  //    recordStop = frameCount + 10;
+    }
+
+    startRecording({
+      // preset:"veryfast",
+      crf:26,
+      // we're passing in 'onProgress' as a parameter to get status feedback on-screen - this is completely optional and you'd also get this info on the console!
+      // onProgress: (progress) => document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`,
+      onProgress: function(progress){
+        document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`;
+        // if(progress>0.99){
+        //   print(true);
+        //   document.querySelector('#download').textContent = 'DOWNLOAD LOOP';
+        // }
+      },
+      onFinish: (recordedBlobs) => downloadThis(recordedBlobs),
+    });
+  } else if(saveSize == 2){
+    savePNG();
+  } else if(saveSize == 3){
+    saveJPG();
   }
-
-  resizeCanvas(wWidth,wHeight);
-
-  recordSwitch = true;
-
-  if(generatorSelect==2){
-    recordStop = (2*PI)/(speedWave/2) + frameCount + 2;
-  } else {
-    recordStop = (2*PI)/speedWave + frameCount + 2;
-    //recordStop = frameCount + 10;
-  }
-
-  startRecording({
-    // preset:"veryfast",
-    crf:26,
-    // we're passing in 'onProgress' as a parameter to get status feedback on-screen - this is completely optional and you'd also get this info on the console!
-    // onProgress: (progress) => document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`,
-    onProgress: function(progress){
-      document.querySelector('#download').textContent = `PROGRESS: ${(100 * progress).toFixed(1)}%`;
-      // if(progress>0.99){
-      //   print(true);
-      //   document.querySelector('#download').textContent = 'DOWNLOAD LOOP';
-      // }
-    },
-    onFinish: (recordedBlobs) => downloadThis(recordedBlobs),
-  });
 }
+
+function changeSaveType(element){
+  saveSize = element.value;
+
+  if(element.value == 0 || element.value == 1){
+    print(saveSize);
+    alphaSave = 200;
+  }
+}
+
+function saveJPG(){
+  recordJPG = true;
+}
+
+function savePNG(){
+  recordPNG = true;
+}
+
 //
 function downloadThis(recordedBlobs){
   const name = 'futurelab_stg_recording.mp4';
@@ -62,6 +86,7 @@ function downloadThis(recordedBlobs){
       window.URL.revokeObjectURL(url);
   }, 100);
   document.querySelector('#download').textContent = 'DOWNLOAD LOOP';
+  refreshSwitch = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////// RESETS
@@ -76,7 +101,8 @@ function resetView(){
   cameraXrot = 0; document.getElementById('cameraX').value = 0;
   cameraYrot = 0; document.getElementById('cameraY').value = 0;
   cameraZrot = 0; document.getElementById('cameraZ').value = 0;
-  cameraZoom = -500; document.getElementById('cameraZoom').value = -500;
+  // cameraZoom = -500; document.getElementById('cameraZoom').value = -500;
+  cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
 }
 
 function resetCylinder(){
@@ -196,7 +222,7 @@ function setComplex(){
 
   cameraXrot = -0.44; document.getElementById('cameraX').value = -0.44;
   cameraZrot = 0.44; document.getElementById('cameraZ').value = 0.44;
-  cameraZoom = -1500; document.getElementById('cameraZoom').value = -1500;
+  // cameraZoom = -1500; document.getElementById('cameraZoom').value = -1500;
 
   redrawStackCylinder();
 }
@@ -211,7 +237,7 @@ function setWeave(){
   waveCount = 4; document.getElementById('waveCount').value = 4;
   surfaceWave = 80;  document.getElementById('surfaceWave').value=80;
 
-  cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
+  // cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
 
   secretSwitch = 1;
 
@@ -229,7 +255,7 @@ function setHoops(){
   surfaceWave = 200;  document.getElementById('surfaceWave').value = 200;
   stWaveOffset = map(95,0,100,0,1); document.getElementById('stWaveOffset').value = 95;
 
-  cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
+  // cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
 
   redrawStackCylinder();
 }
@@ -254,7 +280,7 @@ function setStacks(){
   yAxisWave = 250; document.getElementById('yAxisWave').value = 250;
   fieldLatOffset = map(60,0,100,0,0.05); document.getElementById('fieldLatOffset').value = 60;
 
-  cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
+  // cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
 
   redrawStackField();
 }
@@ -275,7 +301,7 @@ function setSimpleField(){
 
   cameraXrot = 0.75; document.getElementById('cameraX').value = 0.75;
   cameraZrot = 0.75; document.getElementById('cameraZ').value = 0.75;
-  cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
+  // cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
 
   redrawStackField();
 }
@@ -296,7 +322,7 @@ function setComplexField(){
 
   cameraXrot = 0.65; document.getElementById('cameraX').value = 0.65;
   cameraZrot = 0.6; document.getElementById('cameraZ').value = 0.6;
-  cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
+  // cameraZoom = -2000; document.getElementById('cameraZoom').value = -2000;
 
   redrawStackField();
 }
@@ -316,7 +342,7 @@ function setHarlequin(){
   fieldLatOffset = map(100,0,100,0,0.05); document.getElementById('fieldLatOffset').value = 100;
   fieldLongOffset = map(0,0,100,0,5); document.getElementById('fieldLongOffset').value = 0;
 
-  cameraZoom = -1000; document.getElementById('cameraZoom').value = -1000;
+  // cameraZoom = -1000; document.getElementById('cameraZoom').value = -1000;
 
   redrawStackField();
 }
@@ -337,7 +363,7 @@ function setCascade(){
   casSlope = map(80,0,100,0,2*PI); document.getElementById('casSlope').value = 80;
   mirrorSwitch = false; document.getElementById('cascadeMirror').value = 1;
 
-  cameraZoom = -800; document.getElementById('cameraZoom').value = -800;
+  // cameraZoom = -800; document.getElementById('cameraZoom').value = -800;
 
   redrawStackCascade();
 }
@@ -354,7 +380,7 @@ function setRun(){
   casSlope = map(50,0,100,0,2*PI); document.getElementById('casSlope').value = 50;
   mirrorSwitch = true; document.getElementById('cascadeMirror').value = 2;
 
-  cameraZoom = 0; document.getElementById('cameraZoom').value = 0;
+  // cameraZoom = 0; document.getElementById('cameraZoom').value = 0;
 
   redrawStackCascade();
 }
@@ -691,11 +717,7 @@ function showPresets(element){
   }
 }
 
-function changeSizes(element){
-  saveSize = element.value;
-  print(saveSize);
-  alphaSave = 200;
-}
+
 
 function changeLogo(a){
   if(a==0){
