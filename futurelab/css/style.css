@@ -429,6 +429,7 @@ div.color-toggles{
 .button-container-sizes {
   width:270px;
   padding-left:0;
+  margin-top:6px;
   list-style-type:none;
   display:flex;
   flex-direction: column;
@@ -439,7 +440,7 @@ div.color-toggles{
   font-size: 12px;
   float:left;
   margin:0px 5px 6px 0px;
-  width:127px;
+  width:127.5px;
   height:25px;
   position:relative;
 }
@@ -471,8 +472,8 @@ div.color-toggles{
 }
 
 .button-container-sizes label:hover {
-  background: #dadada;
-  border:1px solid #dadada;
+  background: #ffffff;
+  border:1px solid #ffffff;
   color:black;
 }
 
