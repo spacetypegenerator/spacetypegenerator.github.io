@@ -1,0 +1,379 @@
+body {
+  background:black;
+
+  padding: 0;
+  margin: 0;
+}
+
+canvas {
+  padding: 0;
+  margin: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index:-1;
+}
+
+.collapsible {
+  background-color: #c2c2c2;
+  color: white;
+  cursor: pointer;
+  padding-top: 5px;
+  width: 140px;
+  /* border-width:1px; */
+  border:none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #c2c2c2;
+}
+
+.content {
+  padding: 0 10px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.collapsible:after {
+  margin-top:-25px;
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: blue;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+.controls {
+  position:absolute;
+  display:flex;
+  flex-direction: column;
+  top:50px;
+  left:50%;
+}
+
+input[type="text"]{
+  width:120px;
+  margin-bottom:5px;
+}
+
+input[type="button"]{
+}
+
+input[type="range"]{
+  margin-top:0px;
+  width:120px;
+}
+
+#generatorInput {
+  position: absolute;
+  display:flex;
+  flex-direction:column;
+
+  left:10px;
+  top:10px;
+}
+
+.textureSelect {
+  display:flex;
+  flex-direction:row;
+
+  padding-right:5px;
+}
+
+.textureSelect p {
+}
+
+.textureSelect input[type="button"] {
+  font-size:8px;
+  width:40px;
+}
+
+.toggleSelect {
+  display:flex;
+  flex-direction:row;
+
+  padding-top:3px;
+  padding-bottom:5px;
+
+}
+
+.toggleSelectHide {
+  display:none;
+}
+
+.hideThis {
+  display:none;
+}
+
+.tog_select p {
+  font-size:20px;
+}
+
+.toggleSelect input[type="checkbox"] {
+  margin-top:-1px;
+  margin-left:4px;
+}
+
+.module {
+  padding-bottom: 10px;
+  width:120px;
+}
+
+h1 {
+  font-family: 'IBM Plex Mono', monospace;
+  weight:900;
+  text-decoration: blue wavy underline;
+  color:blue;
+  font-size:14px;
+  margin-bottom:5px;
+  margin-top:0px;
+}
+
+.module p {
+  font-family: 'IBM Plex Mono', monospace;
+  weight:200;
+  font-style:italic;
+  color:blue;
+  font-size:10px;
+  margin-bottom:0px;
+  margin-top:0px;
+}
+
+.paletteSection {
+  display:flex;
+  flex-direction:column;
+
+  margin-top:10px;
+}
+
+.swatches {
+  display:flex;
+  flex-direction:row;
+
+  margin-top:5px;
+}
+
+.textureEdit {
+  margin-bottom:5px;
+}
+
+select {
+  width:120px;
+  margin-bottom:5px;
+}
+
+.imageHold {
+  display:none;
+}
+
+.imagePresetsSet{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  width: 120px;
+}
+
+.imagePresets {
+  background: white;
+  border: 1px solid #000;
+  outline: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+
+  font-family: 'IBM Plex Mono', monospace;
+  text-align:center;
+  weight:900;
+  color:black;
+  font-size:10px;
+
+  padding:2px 0px 2px 0px;
+  width:60px;
+  margin-bottom:2px;
+}
+
+.image0::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.image0::before {
+  content: 'Select an image...';
+  display: inline-block;
+  background: white;
+  border: 1px solid #000;
+  border-radius: 3px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+
+  font-family: 'IBM Plex Mono', monospace;
+  text-align:center;
+  text-decoration:underline;
+  weight:900;
+  color:black;
+  font-size:10px;
+
+  padding:5px 0px 5px 0px;
+  width:120px;
+  margin-bottom:5px;
+}
+
+input[type="color"]{
+  -webkit-appearance: none;
+  border:1px solid #000;
+  outline: none;
+
+  margin:0;
+  padding:0;
+
+  width:70px;
+  height:20px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
+.mainModule {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  background-color: #f1f1f1;
+
+  padding:5px;
+  margin-top:5px;
+  padding-bottom:0px;
+
+  width:130px;
+}
+
+.mainModule h1 {
+  padding-bottom:0px;
+}
+
+.module2 {
+  padding-bottom: 10px;
+  width:130px;
+}
+
+.invertButton {
+  background: white;
+  border: 1px solid #000;
+  outline: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+
+  font-family: 'IBM Plex Mono', monospace;
+  text-align:center;
+  weight:900;
+  color:black;
+  font-size:10px;
+
+  padding:2px 0px 2px 0px;
+  width:130px;
+  margin-top:5px;
+}
+
+#recordButton {
+  background: white;
+  border: 1px solid red;
+  outline: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+
+  font-family: 'IBM Plex Mono', monospace;
+  text-align:center;
+  weight:900;
+  color:red;
+  font-size:10px;
+
+  padding:2px 0px 2px 0px;
+  width:130px;
+  margin-top:5px;
+}
+
+#imageShape {
+  margin-top:10px;
+}
+
+#status {
+  outline: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+
+  font-family: 'IBM Plex Mono', monospace;
+  text-align:center;
+  weight:900;
+  color:blue;
+  font-size:10px;
+
+  margin-top:5px;
+  margin-bottom:0px;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 100;
+  text-align:center;
+  color: #000;
+  background-color:#FFF;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: fixed;
+  top:0;
+  right:0;
+  padding-right:20px;
+  padding-top:10px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 90px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 100;
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  display: block;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #0000ff;
+  color: #ffffff;
+}
