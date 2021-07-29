@@ -318,6 +318,10 @@ input[type="color"]::-webkit-color-swatch {
   margin-top:5px;
 }
 
+#recordButtonHide {
+  display:none;
+}
+
 #imageShape {
   margin-top:10px;
 }
