@@ -17,6 +17,18 @@ canvas {
   z-index:-1;
 }
 
+h3 {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 18px;
+  font-weight: 100;
+  text-align:center;
+  color: #fff;
+  background-color:#000;
+  /* text-decoration: underline; */
+  margin-top:0px;
+  margin-bottom:5px;
+}
+
 .collapsible {
   background-color: #c2c2c2;
   color: white;
