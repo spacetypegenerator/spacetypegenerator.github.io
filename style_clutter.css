@@ -14,10 +14,10 @@ textarea {
 
 .sec{
   position:absolute;
-  top:8%;
+  top:10px;
   left:50%;
 
-  transform: translate(-50%,-50%);
+  transform: translate(-50%,0);
 
   width:200px;
 
@@ -43,6 +43,23 @@ h3 {
   text-align:center;
   color: #fff;
   background-color:#000;
+
+  margin-bottom:0;
+}
+
+p {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: #fff;
+  background-color:#000;
+  text-align:center;
+}
+
+a {
+  color: #fff;
+  font-weight:300;
+  text-decoration: underline;
 }
 
 /* Dropdown Button */
