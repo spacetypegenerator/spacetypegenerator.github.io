@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1967THTB5E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-1967THTB5E');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STG _v.clutter</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.2/matter.js"></script>
+
+  <link rel="stylesheet" href="style_clutter.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="clutter_js/sketch_clutter.js" type="text/javascript"></script>
+  <script src="clutter_js/update.js" type="text/javascript"></script>
+  <script src="clutter_js/textures.js" type="text/javascript"></script>
+
+  <script src="clutter_js/circ.js" type="text/javascript"></script>
+
+  <script src="clutter_js/m_grfx.js" type="text/javascript"></script>
+
+  <script src="clutter_js/m_ring.js" type="text/javascript"></script>
+  <script src="clutter_js/m_cloud.js" type="text/javascript"></script>
+  <script src="clutter_js/m_cosmic.js" type="text/javascript"></script>
+  <script src="clutter_js/m_sphere.js" type="text/javascript"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap" rel="stylesheet">
+
+  <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+</head>
+
+<body>
+
+  <div class="dropdown">
+    <button class="dropbtn">Select...</button>
+    <div class="dropdown-content">
+      <a href="index.html">CYLINDER</a>
+      <a href="field.html">FIELD</a>
+      <a href="stripes.html">STRIPES</a>
+      <a href="coil.html">COIL</a>
+      <a href="flag.html">FLAG</a>
+      <a href="morisawa.html">MORISAWA</a>
+      <a href="cascade.html">CASCADE</a>
+      <a href="ribbon.html">RIBBON</a>
+      <a href="layers.html">LAYERS</a>
+      <a href="danger.html">DANGER</a>
+      <a href="string.html">STRING</a>
+      <a href="badge.html">BADGE</a>
+      <a href="clutter.html">CLUTTER</a>
+    </div>
+  </div>
+
+<div class="sec">
+<h3> STG: _v.clutter </h3>
+<textarea id="textArea" rows=4 oninput="setText()">
+no
+place
+for
+space
+</textarea>
+  <input type="range" min="1" max="300" value="150" id="pgSize" oninput="setPGsize(this.value)">
+  <div class="butts">
+    <input type="button" value="New Palette" id="newPalette" onclick="newPalette()">
+    <input type="button" value="Clear" id="clearAll" onclick="clearAll()">
+  </div>
+</div>
+</body>
+
+</html>
