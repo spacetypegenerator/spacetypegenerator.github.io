@@ -30,6 +30,8 @@ var m_3Dgrfx = [];
 // add up units in texture.js and the other m_ classes
 var gOptionCount = 17;
 
+var widgetOn = true;
+
 var engine;
 var runner;
 var circ = [];

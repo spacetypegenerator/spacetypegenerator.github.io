@@ -134,3 +134,12 @@ function clearAll(){
     i--;
   }
 }
+
+function hideWidget(){
+  widgetOn = !widgetOn;
+  if(widgetOn==true){
+    document.getElementById('widget').style.display = "block";
+  } else {
+    document.getElementById('widget').style.display = "none";
+  }
+}
