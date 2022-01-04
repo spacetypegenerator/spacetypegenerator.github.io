@@ -80,8 +80,8 @@ function assignState(){
 }
 
 function animater(){
-  textFont(font1); fill(foreColor);
-  text("ANIMATING!", width/2 - 100, height/2 - 100);
+  // textFont(font1); fill(foreColor);
+  // text("ANIMATING!", width/2 - 100, height/2 - 100);
 
   for(var k = 0; k<5; k++){
     if(animOn[k]){
@@ -104,8 +104,8 @@ function animater(){
 }
 
 function returner(){
-  textFont(font1); fill(foreColor);
-  text("RETURNING!", width/2 - 100, height/2 - 100);
+  // textFont(font1); fill(foreColor);
+  // text("RETURNING!", width/2 - 100, height/2 - 100);
 
   for(var k = 0; k<5; k++){
 
