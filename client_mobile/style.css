@@ -1,0 +1,38 @@
+.opts {
+  position:absolute;
+
+  transform: translate(0%,0%);
+
+  width:133px;
+
+  display:flex;
+  flex-direction:column;
+}
+
+input[type=button] {
+  height:133px;
+  margin-right:5px;
+  padding: 5px 10px 5px 10px;
+  box-sizing:border-box;
+  border:1px solid white;
+  /* background-color:rgba(255, 255, 255, 0.0); */
+  background-color:white;
+  color:black;
+  transition-duration:0.4s;
+}
+
+input[type=button]:hover {
+  /* background-color: red; */
+  cursor:pointer;
+
+  background-color: #54a5ec;
+  border:1px solid #54a5ec;
+  color:black;
+}
+
+input[type=button]:focus {
+  /* background-color: red; */
+  background-color: #54a5ec;
+  border:1px solid #54a5ec;
+  color:black;
+}
