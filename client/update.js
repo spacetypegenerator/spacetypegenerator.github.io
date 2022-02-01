@@ -3,7 +3,7 @@ function setState(state){
   animStop = frameCount + animLength;
 
   if(state == currentState){
-    for(var k = 0; k<5; k++){
+    for(var k = 0; k<partCount; k++){
       resetState(k);
     }
   } else {
@@ -14,89 +14,146 @@ function setState(state){
 }
 
 function assignState(){
-  zTarget[0] = -300;
+  zTarget[0] = -200;
+
+  for(var k = 1; k<partCount; k++){
+    resetState(k);
+  }
 
   if(currentState == 0){
-    xTarget[0] = 110;
-    yTarget[0] = 110;
+    xTarget[0] = 0;
+    yTarget[0] = 0;
 
-    xTarget[1] = -120;
-    yTarget[1] = -80;
-    zTarget[1] = 300;
-    aTarget[1] = 255;
-
-    xTarget[2] = 30;
-    yTarget[2] = -110;
-    zTarget[2] = 300;
-    aTarget[2] = 255;
-
-    resetState(3);
-    resetState(4);
+    xTarget[14] = 0;
+    yTarget[14] = -60;
+    zTarget[14] = 200;
+    aTarget[14] = 255;
   } else if(currentState == 1){
-    xTarget[0] = -100;
-    yTarget[0] = -20;
-
-    xTarget[2] = 150;
-    yTarget[2] = -60;
-    zTarget[2] = 300;
-    aTarget[2] = 255;
-
-    xTarget[4] = 40;
-    yTarget[4] = 160;
-    zTarget[4] = 300;
-    aTarget[4] = 255;
-
-    resetState(1);
-    resetState(3);
-  } else if(currentState == 2){
-    xTarget[0] = -40;
+    xTarget[0] = 0;
     yTarget[0] = 0;
 
-    xTarget[3] = 50;
-    yTarget[3] = 0;
-    zTarget[3] = 350;
-    aTarget[3] = 255;
-
-    resetState(1);
-    resetState(2);
-    resetState(4);
-  } else if(currentState == 3){
-    xTarget[0] = -200;
-    yTarget[0] = 0;
-
-    xTarget[2] = 160;
-    yTarget[2] = -80;
-    zTarget[2] = 300;
-    aTarget[2] = 255;
-
-    xTarget[3] = 200;
-    yTarget[3] = 0;
-    zTarget[3] = 300;
-    aTarget[3] = 255;
-
-    xTarget[4] = 120;
-    yTarget[4] = 100;
-    zTarget[4] = 300;
-    aTarget[4] = 255;
-
-    resetState(1);
-  } else if(currentState == 4){
-    xTarget[0] = 130;
-    yTarget[0] = 60;
-
-    xTarget[1] = -100;
-    yTarget[1] = -50;
-    zTarget[1] = 300;
+    xTarget[1] = 0;
+    yTarget[1] = -20;
+    zTarget[1] = 200;
     aTarget[1] = 255;
 
-    resetState(2);
-    resetState(3);
-    resetState(4);
+    xTarget[4] = -40;
+    yTarget[4] = -20;
+    zTarget[4] = 200;
+    aTarget[4] = 255;
+
+    xTarget[8] = 0;
+    yTarget[8] = -20;
+    zTarget[8] = 200;
+    aTarget[8] = 255;
+
+    xTarget[13] = 20;
+    yTarget[13] = 120;
+    zTarget[13] = 200;
+
+    xTarget[14] = 20;
+    yTarget[14] = 120;
+    zTarget[14] = 200;
+
+    xTarget[15] = 0;
+    yTarget[15] = -20;
+    zTarget[15] = 200;
+    aTarget[15] = 255;
+  } else if(currentState == 2){
+    xTarget[0] = 0;
+    yTarget[0] = 0;
+
+    xTarget[6] = 40;
+    yTarget[6] = -60;
+    zTarget[6] = 125;
+    aTarget[6] = 255;
+
+    xTarget[13] = 10;
+    yTarget[13] = 100;
+    zTarget[13] = 200;
+
+    xTarget[14] = 10;
+    yTarget[14] = 100;
+    zTarget[14] = 200;
+  } else if(currentState == 3){
+    xTarget[0] = 50;
+    yTarget[0] = 0;
+
+    xTarget[2] = -20;
+    yTarget[2] = 20;
+    zTarget[2] = 125;
+    aTarget[2] = 255;
+
+    xTarget[3] = -40;
+    yTarget[3] = -40;
+    zTarget[3] = 125;
+    aTarget[3] = 255;
+
+    xTarget[7] = 80;
+    yTarget[7] = 40;
+
+    xTarget[8] = 60;
+    yTarget[8] = -40;
+    // zTarget[8] = 200;
+
+    xTarget[10] = 60;
+    yTarget[10] = -40;
+    // zTarget[10] = 200;
+
+    xTarget[9] = 60;
+    yTarget[9] = -40;
+    // zTarget[9] = 200;
+
+    xTarget[11] = 60;
+    yTarget[11] = -40;
+    // zTarget[11] = 200;
+
+    xTarget[12] = -60;
+    yTarget[12] = -40;
+    zTarget[12] = 200;
+    aTarget[12] = 255;
+
+    xTarget[13] = 45;
+    yTarget[13] = 0;
+    // zTarget[13] = 200;
+
+    xTarget[14] = 45;
+    yTarget[14] = 0;
+    // zTarget[14] = 200;
+  } else if(currentState == 4){
+    xTarget[2] = -20;
+    yTarget[2] = 20;
+    zTarget[2] = 125;
+    aTarget[2] = 255;
+
+    xTarget[7] = 100;
+    yTarget[7] = 20;
+  } else if(currentState == 5){
+    xTarget[0] = 0;
+    yTarget[0] = 0;
+
+    xTarget[5] = 0;
+    yTarget[5] = -30;
+    zTarget[5] = 125;
+    aTarget[5] = 255;
+
+    xTarget[6] = 0;
+    yTarget[6] = -50;
+    zTarget[6] = 125;
+    aTarget[6] = 255;
+
+    xTarget[13] = 70;
+    yTarget[13] = 120;
+    zTarget[13] = 200;
+
+    xTarget[14] = 70;
+    yTarget[14] = 120;
+    zTarget[14] = 200;
   }
 }
 
 function animater(){
-  for(var k = 0; k<5; k++){
+  for(var k = 0; k<partCount; k++){
     var ticker = map(frameCount, animStart, animStop, 0, 1);
 
     x[k] = map(aSet(ticker, 5), 0, 1, xHold[k], xTarget[k]);

@@ -34,17 +34,44 @@ var font1;
 
 var cullSpace = 0.1;
 
-function preload(){
-  pg[0] = loadImage("resources/base.png");
-  pg[1] = loadImage("resources/frontal2.png");
-  pg[2] = loadImage("resources/parietal2.png");
-  pg[3] = loadImage("resources/occipital2.png");
-  pg[4] = loadImage("resources/temporal2.png");
+var partCount = 16;
 
-  pgPlus[1] = loadImage("resources/frontal2 plus.png");
-  pgPlus[2] = loadImage("resources/parietal2 plus.png");
-  pgPlus[3] = loadImage("resources/occipital2 plus.png");
-  pgPlus[4] = loadImage("resources/temporal2 plus.png");
+function preload(){
+  pg[0] = loadImage("resources/brain/0brainBkgd.png");
+
+  pg[1] = loadImage("resources/brain/2_oLines.png");
+  pg[2] = loadImage("resources/brain/2_locus.png");
+  pg[3] = loadImage("resources/brain/2_anteriorCing.png");
+  pg[4] = loadImage("resources/brain/2_lgn.png");
+  pg[5] = loadImage("resources/brain/2_entorhinal.png");
+  pg[6] = loadImage("resources/brain/2_hippocampus.png");
+
+  pg[7] = loadImage("resources/brain/1_cerebellum.png");
+  pg[8] = loadImage("resources/brain/1_visualcortex.png");
+  pg[9] = loadImage("resources/brain/1_frontal.png");
+  pg[10] = loadImage("resources/brain/1_occipital.png");
+  pg[11] = loadImage("resources/brain/1_parietal.png");
+  pg[12] = loadImage("resources/brain/1_prefrontal.png");
+  pg[13] = loadImage("resources/brain/1_temporal.png");
+  pg[14] = loadImage("resources/brain/1_auditory.png");
+
+  pg[15] = loadImage("resources/brain/0eye.png");
+
+  pgPlus[1] = loadImage("resources/brain/3plus_oLines.png");
+  pgPlus[2] = loadImage("resources/brain/3plus_locus.png");
+  pgPlus[3] = loadImage("resources/brain/3plus_anteriorCing.png");
+  pgPlus[4] = loadImage("resources/brain/3plus_lgn.png");
+  pgPlus[5] = loadImage("resources/brain/3plus_entorhinal.png");
+  pgPlus[6] = loadImage("resources/brain/3plus_hippocampus.png");
+  pgPlus[7] = loadImage("resources/brain/4_blank.png");
+  pgPlus[8] = loadImage("resources/brain/3plus_visualcortex.png");
+  pgPlus[9] = loadImage("resources/brain/4_blank.png");
+  pgPlus[10] = loadImage("resources/brain/4_blank.png");
+  pgPlus[11] = loadImage("resources/brain/4_blank.png");
+  pgPlus[12] = loadImage("resources/brain/3plus_prefrontal.png");
+  pgPlus[13] = loadImage("resources/brain/4_blank.png");
+  pgPlus[14] = loadImage("resources/brain/3plus_auditory.png");
+  pgPlus[15] = loadImage("resources/brain/0eye.png");
 
   font1 = loadFont("resources/SpaceMono-Bold.ttf");
 }
@@ -58,7 +85,7 @@ function setup(){
 
   frameRate(30);
 
-  for(var k = 0; k<5; k++){
+  for(var k = 0; k<partCount; k++){
     x[k] = 0;
     xTarget[k] = 0;
     xHold[k] = 0;
@@ -73,12 +100,10 @@ function setup(){
     aHold[k] = 0;
 
     animOn[k] = false;
-  }
 
-  xNudge[1] = -220;  yNudge[1] = -100;
-  xNudge[2] = 115;  yNudge[2] = -175;
-  xNudge[3] = 310;  yNudge[3] = 0;
-  xNudge[4] = 20;  yNudge[4] = 60;
+    xNudge[k] = 0;
+    yNudge[k] = 0;
+  }
 
   label[1] = "Frontal";
   label[2] = "Parietal";
@@ -88,6 +113,7 @@ function setup(){
 
 function draw(){
   background(bkgdColor);
+  // background(200);
   // orbitControl();
 
   if(animOn){
@@ -103,22 +129,37 @@ function draw(){
 
     translate(0,0,1);
 
-    for(var k = 1; k<5; k++){
+    for(var k = 1; k<partCount; k++){
+      push();
+        translate(x[k], y[k], z[k] + k*cullSpace);
+
+        translate(0,0,1);
+        tint(255,255)
+        image(pg[k],-width/2,-height/2);
+
+        // tint(255, a[k]);
+        // image(pgPlus[k],-width/2,-height/2);
+
+        // translate(xNudge[k], yNudge[k] + 62 - a[k]/4, 1);
+        // noStroke(); fill(84,165,236,a[k]);
+        // rect(0,0,120,30);
+        // fill(255,a[k]);
+        // text(label[k],5,25);
+      pop();
+    }
+
+    for(var k = 1; k<partCount; k++){
       push();
         translate(x[k], y[k], z[k] + k*cullSpace);
 
         tint(255, a[k]);
         image(pgPlus[k],-width/2,-height/2);
 
-        translate(0,0,1);
-        tint(255,255)
-        image(pg[k],-width/2,-height/2);
-
-        translate(xNudge[k], yNudge[k] + 62 - a[k]/4, 1);
-        noStroke(); fill(84,165,236,a[k]);
-        rect(0,0,120,30);
-        fill(255,a[k]);
-        text(label[k],5,25);
+        // translate(xNudge[k], yNudge[k] + 62 - a[k]/4, 1);
+        // noStroke(); fill(84,165,236,a[k]);
+        // rect(0,0,120,30);
+        // fill(255,a[k]);
+        // text(label[k],5,25);
       pop();
     }
   pop();
