@@ -32,7 +32,7 @@ var currentState = 6;
 
 var font1;
 
-var cullSpace = 0.1;
+var cullSpace = 1;
 
 var partCount = 16;
 
@@ -79,6 +79,7 @@ function setup(){
   foreColor = color("#000000");
 
   frameRate(24);
+  pixelDensity(1);
 
   for(var k = 0; k<partCount; k++){
     x[k] = 0;
@@ -100,10 +101,10 @@ function setup(){
     yNudge[k] = 0;
   }
 
-  label[1] = "Frontal";
-  label[2] = "Parietal";
-  label[3] = "Occipital";
-  label[4] = "Temporal";
+  // label[1] = "Frontal";
+  // label[2] = "Parietal";
+  // label[3] = "Occipital";
+  // label[4] = "Temporal";
 }
 
 function draw(){
