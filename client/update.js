@@ -1,4 +1,5 @@
 function setState(state){
+  loop();
   animStart = frameCount;
   animStop = frameCount + animLength;
 
@@ -22,7 +23,7 @@ function assignState(){
 
   if(currentState == 0){
     xTarget[0] = 0;
-    yTarget[0] = 0;
+    yTarget[0] = -75;
 
     xTarget[14] = 0;
     yTarget[14] = -60;
@@ -30,7 +31,7 @@ function assignState(){
     aTarget[14] = 255;
   } else if(currentState == 1){
     xTarget[0] = 0;
-    yTarget[0] = 0;
+    yTarget[0] = -75;
 
     xTarget[1] = 0;
     yTarget[1] = -20;
@@ -61,7 +62,7 @@ function assignState(){
     aTarget[15] = 255;
   } else if(currentState == 2){
     xTarget[0] = 0;
-    yTarget[0] = 0;
+    yTarget[0] = -75;
 
     xTarget[6] = 40;
     yTarget[6] = -60;
@@ -77,7 +78,7 @@ function assignState(){
     zTarget[14] = 200;
   } else if(currentState == 3){
     xTarget[0] = 50;
-    yTarget[0] = 0;
+    yTarget[0] = -75;
 
     xTarget[2] = -20;
     yTarget[2] = 20;
@@ -121,6 +122,9 @@ function assignState(){
     yTarget[14] = 0;
     // zTarget[14] = 200;
   } else if(currentState == 4){
+    xTarget[0] = 0;
+    yTarget[0] = -75;
+
     xTarget[2] = -20;
     yTarget[2] = 20;
     zTarget[2] = 125;
@@ -130,7 +134,7 @@ function assignState(){
     yTarget[7] = 20;
   } else if(currentState == 5){
     xTarget[0] = 0;
-    yTarget[0] = 0;
+    yTarget[0] = -75;
 
     xTarget[5] = 0;
     yTarget[5] = -30;
@@ -172,6 +176,7 @@ function animater(){
 
   if(frameCount == animStop-1){
     animOn = false;
+    noLoop();
   }
 }
 

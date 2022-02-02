@@ -24,7 +24,7 @@ var label = []
 
 var animOn = false;
 
-var animLength = 30;
+var animLength = 24;
 var animStart = 0;
 var animStop = 0;
 
@@ -63,13 +63,8 @@ function preload(){
   pgPlus[4] = loadImage("resources/brain/3plus_lgn.png");
   pgPlus[5] = loadImage("resources/brain/3plus_entorhinal.png");
   pgPlus[6] = loadImage("resources/brain/3plus_hippocampus.png");
-  pgPlus[7] = loadImage("resources/brain/4_blank.png");
   pgPlus[8] = loadImage("resources/brain/3plus_visualcortex.png");
-  pgPlus[9] = loadImage("resources/brain/4_blank.png");
-  pgPlus[10] = loadImage("resources/brain/4_blank.png");
-  pgPlus[11] = loadImage("resources/brain/4_blank.png");
   pgPlus[12] = loadImage("resources/brain/3plus_prefrontal.png");
-  pgPlus[13] = loadImage("resources/brain/4_blank.png");
   pgPlus[14] = loadImage("resources/brain/3plus_auditory.png");
   pgPlus[15] = loadImage("resources/brain/0eye.png");
 
@@ -83,7 +78,7 @@ function setup(){
   bkgdColor = color("#ffffff");
   foreColor = color("#000000");
 
-  frameRate(30);
+  frameRate(24);
 
   for(var k = 0; k<partCount; k++){
     x[k] = 0;
@@ -124,6 +119,7 @@ function draw(){
   textSize(20);
 
   push();
+    scale(0.85);
     translate(x[0], y[0], z[0]);
     image(pg[0],-width/2,-height/2);
 
@@ -149,18 +145,22 @@ function draw(){
     }
 
     for(var k = 1; k<partCount; k++){
-      push();
-        translate(x[k], y[k], z[k] + k*cullSpace);
+      if(pgPlus[k] != null){
+        push();
+          translate(x[k], y[k], z[k] + k*cullSpace);
 
-        tint(255, a[k]);
-        image(pgPlus[k],-width/2,-height/2);
-
-        // translate(xNudge[k], yNudge[k] + 62 - a[k]/4, 1);
-        // noStroke(); fill(84,165,236,a[k]);
-        // rect(0,0,120,30);
-        // fill(255,a[k]);
-        // text(label[k],5,25);
-      pop();
+          tint(255, a[k]);
+          image(pgPlus[k],-width/2,-height/2);
+        pop();
+      }
     }
   pop();
+
+  if(frameCount < 2){
+    noLoop();
+  }
+
+  // textFont(font1);
+  // fill(foreColor);
+  // text(frameCount, width/2 - 50, 50);
 }
