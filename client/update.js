@@ -7,6 +7,7 @@ function setState(state){
     for(var k = 0; k<partCount; k++){
       resetState(k);
     }
+    currentState = 6;
   } else {
     currentState = state;
     assignState();
@@ -16,6 +17,8 @@ function setState(state){
 
 function assignState(){
   zTarget[0] = -200;
+  labelAtarget = 255;
+  labelYtarget = 50;
 
   for(var k = 1; k<partCount; k++){
     resetState(k);
@@ -23,7 +26,7 @@ function assignState(){
 
   if(currentState == 0){
     xTarget[0] = 0;
-    yTarget[0] = -75;
+    yTarget[0] = -125;
 
     xTarget[14] = 0;
     yTarget[14] = -60;
@@ -31,7 +34,7 @@ function assignState(){
     aTarget[14] = 255;
   } else if(currentState == 1){
     xTarget[0] = 0;
-    yTarget[0] = -75;
+    yTarget[0] = -125;
 
     xTarget[1] = 0;
     yTarget[1] = -20;
@@ -61,13 +64,23 @@ function assignState(){
     zTarget[15] = 200;
     aTarget[15] = 255;
   } else if(currentState == 2){
-    xTarget[0] = 0;
-    yTarget[0] = -75;
+    xTarget[0] = 50;
+    yTarget[0] = -100;
 
     xTarget[6] = 40;
-    yTarget[6] = -60;
+    yTarget[6] = -20;
     zTarget[6] = 125;
     aTarget[6] = 255;
+
+    xTarget[11] = 40;
+    yTarget[11] = -30;
+    zTarget[11] = 125;
+    aTarget[11] = 255;
+
+    xTarget[12] = -10;
+    yTarget[12] = -10;
+    zTarget[12] = 200;
+    aTarget[12] = 255;
 
     xTarget[13] = 10;
     yTarget[13] = 100;
@@ -78,7 +91,7 @@ function assignState(){
     zTarget[14] = 200;
   } else if(currentState == 3){
     xTarget[0] = 50;
-    yTarget[0] = -75;
+    yTarget[0] = -100;
 
     xTarget[2] = -20;
     yTarget[2] = 20;
@@ -123,18 +136,18 @@ function assignState(){
     // zTarget[14] = 200;
   } else if(currentState == 4){
     xTarget[0] = 0;
-    yTarget[0] = -75;
+    yTarget[0] = -125;
 
-    xTarget[2] = -20;
-    yTarget[2] = 20;
+    xTarget[2] = -10;
+    yTarget[2] = 10;
     zTarget[2] = 125;
     aTarget[2] = 255;
 
-    xTarget[7] = 100;
+    xTarget[7] = 80;
     yTarget[7] = 20;
   } else if(currentState == 5){
     xTarget[0] = 0;
-    yTarget[0] = -75;
+    yTarget[0] = -125;
 
     xTarget[5] = 0;
     yTarget[5] = -30;
@@ -157,9 +170,9 @@ function assignState(){
 }
 
 function animater(){
-  for(var k = 0; k<partCount; k++){
-    var ticker = map(frameCount, animStart, animStop, 0, 1);
+  var ticker = map(frameCount, animStart, animStop, 0, 1);
 
+  for(var k = 0; k<partCount; k++){
     x[k] = map(aSet(ticker, 5), 0, 1, xHold[k], xTarget[k]);
     y[k] = map(aSet(ticker, 5), 0, 1, yHold[k], yTarget[k]);
     z[k] = map(aSet(ticker, 5), 0, 1, zHold[k], zTarget[k]);
@@ -174,6 +187,9 @@ function animater(){
     }
   }
 
+  labelY = map(aSet(ticker, 5), 0, 1, labelYhold, labelYtarget);
+  labelA = map(aSet(ticker, 5), 0, 1, labelAhold, labelAtarget);
+
   if(frameCount == animStop-1){
     animOn = false;
     noLoop();
@@ -185,6 +201,11 @@ function resetState(st){
   yTarget[st] = 0;
   zTarget[st] = 0;
   aTarget[st] = 0;
+}
+
+function resetLabel(){
+  labelYtarget = 0;
+  labelAtarget = 0;
 }
 
 function aSet(ticker, influ){          // takes a 0 - 1 and returns an eased 0 - 1
