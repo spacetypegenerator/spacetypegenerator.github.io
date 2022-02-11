@@ -11,7 +11,16 @@
   flex-direction:column;
 }
 
+@font-face {
+  font-family: "Action";
+  src: url("resources/ActionCondensedMedium-Grade1-Web.woff") format("woff"),
+       url("resources/ActionCondensedMedium-Grade1-Web.woff2") format("woff2");
+}
+
 input[type=button] {
+  font-family: "Action";
+  font-size: 26px;
+  letter-spacing:0.75px;
   margin-right:5px;
   padding: 5px 10px 5px 10px;
   box-sizing:border-box;

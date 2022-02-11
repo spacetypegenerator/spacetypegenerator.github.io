@@ -86,7 +86,7 @@ function preload(){
   pgLabel[14] = loadImage("resources/brain/4label_auditory.png");
 
   fontHead = loadFont("resources/ActionCondensedMedium-Grade1.otf");
-  fontSub = loadFont("resources/ActionTextDark-Medium.otf");
+  fontSub = loadFont("resources/ActionTextDark-Regular.otf");
 }
 
 function setup(){
@@ -198,8 +198,6 @@ function draw(){
       text(subhead[currentState], -width/2 + 50, height/2 - 280, 650, 120);
     pop();
   }
-
-  print(labelA);
 
   if(frameCount < 2){
     noLoop();
