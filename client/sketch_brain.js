@@ -83,6 +83,7 @@ function preload(){
   pgLabel[8] = loadImage("resources/brain/4label_visualcortex.png");
   pgLabel[11] = loadImage("resources/brain/4label_parietal.png");
   pgLabel[12] = loadImage("resources/brain/4label_prefrontal.png");
+  pgLabel[13] = loadImage("resources/brain/4label_prefrontalB.png");
   pgLabel[14] = loadImage("resources/brain/4label_auditory.png");
 
   fontHead = loadFont("resources/ActionCondensedMedium-Grade1.otf");
@@ -118,27 +119,6 @@ function setup(){
     xNudge[k] = 0;
     yNudge[k] = 0;
   }
-  labelA = 0;
-  labelY = 0;
-  labelAtarget = 0;
-  labelYtarget = 0;
-  labelAhold= 0;
-  labelYhold = 0;
-
-  headline[0] = "Nima Mesgarani";
-  headline[1] = "Ken Shepard";
-  headline[2] = "Dion Khodagholy";
-  headline[3] = "Paul Sajda";
-  headline[4] = "Qi Wang";
-  headline[5] = "Joshua Jacobs";
-
-  subhead[0] = "They use digital signal processing to separate an audio track into two, one for each voice. Then they use data from a listener’s auditory cortex to tell which track the listener wants to listen to, and they increase that track’s volume for the listener. These technologies are “looking at your brain to figure out what your intentions are,” Mesgarani says, “and based on that they modify the acoustic scene.”";
-  subhead[1] = "The chip could be used anywhere on the surface of the brain or even on a damaged spinal cord to amplify existing signals. It both stimulates underlying neural tissue and records information, mostly to monitor the health of underlying tissue. One early application may be helping blind people see again, by transmitting information from a camera to the visual cortex.";
-  subhead[2] = "In many memory disorders, the hippocampus fails to communicate properly with other brain regions. By recording from these brain regions together, Khodagholy reasons that it will be possible to identify markers of this communication and boost it using responsive electrical stimulation – with the goal of improving the longevity of memories.";
-  subhead[3] = "The ACC receives waves of electrical activity from the prefrontal cortex at 10 Hz. If you stimulate the PFC each time it’s at one phase of that wave, versus other phases, the PFC’s activation will more strongly activate the ACC. Sajda combines two forms of neuroimaging to measure the wave and figure out the optimal phase to amplify it — thereby helping promote decision-making.";
-  subhead[4] = "One hypothesized cause of Alzheimer’s disease is the buildup of amyloid plaques in the brain, which may lead to tangled tau proteins, which then kill surrounding cells. Tangled tau proteins have been found in young brains, too — but only in the LC. Wang reasons that stimulating the LC in young people might release more epinephrine, thus allowing microglia to clear the plaques, preventing tangled tau proteins and cell death.";
-  subhead[5] = "When rats store information, there are electrical “theta” oscillations around eight hertz in the hippocampus and entorhinal cortex, areas related to memory and navigation. Stimulating those areas in rats at that frequency has been shown to boost their retention. For years, researchers have tried to do the same in humans, with mixed results.";
-
 }
 
 function draw(){
@@ -152,7 +132,7 @@ function draw(){
 
   push();
     scale(0.85);
-    translate(50,-50,0);
+    translate(0, 30, 0);
     translate(x[0], y[0], z[0]);
     image(pg[0],-width/2,-height/2);
 
@@ -175,29 +155,29 @@ function draw(){
 
           tint(255, a[k]);
           image(pgPlus[k], -width/2, -height/2);
+        pop();
 
           if(pgLabel[k] != null){
-            image(pgLabel[k], -width/2, -height/2);
+            push();
+
+
+              if(currentState==2){
+                translate(x[12], y[12], z[12] + 12*cullSpace);
+                tint(255, a[12]);
+
+                image(pgLabel[13], -width/2, -height/2);
+              } else {
+                translate(x[k], y[k], z[k] + k*cullSpace);
+                tint(255, a[k]);
+
+                image(pgLabel[k], -width/2, -height/2);
+              }
+            pop();
+
           }
-        pop();
       }
     }
   pop();
-
-  if(currentState < 6){
-    push();
-      translate(0, labelY);
-      fill(0,0,0, labelA);
-
-      textFont(fontHead);
-      textSize(70);
-      text(headline[currentState], -width/2 + 50, height/2 - 300);
-
-      textFont(fontSub);
-      textSize(18);
-      text(subhead[currentState], -width/2 + 50, height/2 - 280, 650, 120);
-    pop();
-  }
 
   if(frameCount < 2){
     noLoop();

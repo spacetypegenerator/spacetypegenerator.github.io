@@ -1,32 +1,44 @@
 .opts {
   position:absolute;
-  top:10px;
-  left:10px;
+  top: 40px;
+  left: 50px;
 
   transform: translate(0%,0%);
 
-  width:130px;
+  /* width:130px; */
 
   display:flex;
-  flex-direction:column;
+  flex-direction:row;
 }
 
 @font-face {
-  font-family: "Action";
-  src: url("resources/ActionCondensedMedium-Grade1-Web.woff") format("woff"),
-       url("resources/ActionCondensedMedium-Grade1-Web.woff2") format("woff2");
+  font-family: "ActionH";
+  src: url("resources/ActionCondensedBold-Grade1-Web.woff") format("woff"),
+       url("resources/ActionCondensedBold-Grade1-Web.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "ActionT";
+  src: url("resources/ActionTextDark-Regular-Web.woff") format("woff"),
+       url("resources/ActionTextDark-Regular-Web.woff") format("woff2");
+}
+
+@font-face {
+  font-family: "ActionB";
+  src: url("resources/ActionTextDark-Bold-Web.woff") format("woff"),
+       url("resources/ActionTextDark-Bold-Web.woff") format("woff2");
 }
 
 input[type=button] {
-  font-family: "Action";
-  font-size: 26px;
-  letter-spacing:0.75px;
-  margin-right:5px;
-  padding: 5px 10px 5px 10px;
+  font-family: "ActionH";
+  font-size: 30px;
+  letter-spacing:0.03em;
+  margin-right:30px;
+  padding:0;
   box-sizing:border-box;
-  border:1px solid white;
+  border:none;
   background-color:rgba(255, 255, 255, 0.0);
-  color:black;
+  color:#666666;
   transition-duration:0.4s;
 }
 
@@ -35,13 +47,66 @@ input[type=button]:hover {
   cursor:pointer;
 
   background-color: #54a5ec;
-  border:1px solid #54a5ec;
   color:black;
 }
 
 input[type=button]:focus {
   /* background-color: red; */
-  background-color: #54a5ec;
-  border:1px solid #54a5ec;
-  color:black;
+  background-color: none;
+
+  color:#a02827;
+  text-decoration:underline;
+}
+
+.entryMain {
+  position: absolute;
+  left: 50px;
+  top: 150px;
+}
+
+.entryMain .headline {
+  font-family: "ActionH";
+
+  font-size:38pt;
+  line-height:45px;
+
+  width: 200px;
+}
+
+.entryMain .pBody {
+  font-family: "ActionT";
+  padding-top: 10px;
+
+  font-size:14pt;
+  line-height:28px;
+
+  width: 320px;
+}
+
+strong {
+  font-family: "ActionB";
+}
+
+#entry0{
+  display:none;
+}
+
+#entry1{
+  display:none;
+}
+
+#entry2{
+  display:none;
+}
+
+#entry3{
+  display:none;
+}
+
+#entry4{
+  display:none;
+}
+
+#entry5{
+  display:none;
 }
