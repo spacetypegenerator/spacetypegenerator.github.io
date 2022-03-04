@@ -161,9 +161,9 @@ function draw(){
             push();
 
 
-              if(currentState==2){
-                translate(x[12], y[12], z[12] + 12*cullSpace);
-                tint(255, a[12]);
+              if(currentState==2 && k == 12){
+                translate(x[k], y[k], z[k] + k*cullSpace);
+                tint(255, a[k]);
 
                 image(pgLabel[13], -width/2, -height/2);
               } else {
