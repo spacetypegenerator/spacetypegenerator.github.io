@@ -1,0 +1,202 @@
+/* input[type="text"]{
+  position:absolute;
+  top:10%;
+  left:50%;
+
+  transform: translate(-50%,-50%);
+} */
+
+textarea {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size:12;
+  text-align: center;
+}
+
+.sec{
+  position:absolute;
+  top:10px;
+  left:50%;
+
+  transform: translate(-50%,0);
+
+  width:200px;
+
+  display:flex;
+  flex-direction:column;
+}
+
+.butts{
+  width:auto;
+
+  display:flex;
+  flex-direction:row;
+}
+
+.rangers{
+  margin-top:-5;
+
+  display:flex;
+  flex-direction:row;
+}
+
+.rangers div{
+  width:100px;
+}
+
+input[type="button"]{
+  width:100px;
+}
+
+input[type="range"]{
+  width:100px;
+  margin:0px;
+}
+
+h3 {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 18px;
+  font-weight: 100;
+  text-align:center;
+  color: #fff;
+  background-color:#000;
+
+  margin-bottom:5px;
+}
+
+p {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: #fff;
+  background-color:#000;
+  text-align:center;
+  margin-top:2px;
+}
+
+a {
+  color: #fff;
+  font-weight:300;
+  text-decoration: underline;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 100;
+  text-align:center;
+  color: #000;
+  background-color:#FFF;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: fixed;
+  top:0;
+  right:0;
+  padding-right:20px;
+  padding-top:10px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 90px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 100;
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  display: block;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #0000ff;
+  color: #ffffff;
+}
+
+#widget {
+  display: block;
+}
+
+.switch {
+  position: absolute;
+  bottom:0px;
+  left:50%;
+
+  transform: translate(-50%,0);
+
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
