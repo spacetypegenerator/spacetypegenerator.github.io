@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STG _v.snap</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+  <script src="https://unpkg.com/h264-mp4-encoder/embuild/dist/h264-mp4-encoder.web.js"></script>
+
+  <link rel="stylesheet" href="style_snap.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="snap_script/sketch_snap.js" type="text/javascript"></script>
+  <script src="snap_script/update.js" type="text/javascript"></script>
+  <script src="snap_script/animators.js" type="text/javascript"></script>
+
+  <script src="snap_script/kineticLetter.js" type="text/javascript"></script>
+  <script src="snap_script/kineticWord.js" type="text/javascript"></script>
+  <script src="snap_script/kineticGroup.js" type="text/javascript"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap" rel="stylesheet">
+
+  <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+</head>
+
+<body>
+  <div class="dropdown">
+    <button class="dropbtn">Select...</button>
+    <div class="dropdown-content">
+      <a href="index.html">CYLINDER</a>
+      <a href="field.html">FIELD</a>
+      <a href="stripes.html">STRIPES</a>
+      <a href="coil.html">COIL</a>
+      <a href="flag.html">FLAG</a>
+      <a href="morisawa.html">MORISAWA</a>
+      <a href="cascade.html">CASCADE</a>
+      <a href="ribbon.html">RIBBON</a>
+      <a href="layers.html">LAYERS</a>
+      <a href="danger.html">DANGER</a>
+      <a href="string.html">STRING</a>
+      <a href="badge.html">BADGE</a>
+      <a href="clutter.html">CLUTTER</a>
+      <a href="construct.html">CONSTRUCT</a>
+      <a href="snap.html">SNAP</a>
+    </div>
+  </div>
+
+  <div id="generatorInput">
+    <div class="titleh2">
+      <h2>STG v.Snap</h2>
+      <p>a kinetic generator from <a href="https://www.instagram.com/kiel.d.m/">kielm</a></p>
+    </div>
+    <button type="button" class="collapsible"><h1>TEXT INPUT</h1></button>
+    <div class="content">
+      <div class="module">
+        <textarea id="textArea" rows=4 oninput="setText()">
+NO
+SPACE
+FOR
+PLACE</textarea>
+        <div class="textureEdit">
+          <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
+            <option value="0" selected="selected">Inter Medium</option>
+            <option value="1" >Inter Black</option>
+            <option value="2">Apoc_LC Regluar</option>
+          </select>
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Size</h3></div>
+            <input type="range" min="20" max="200" value="70" id="fontSize" oninput="setFontSize(this.value)">
+          </div>
+          <div class="coupling1">
+            <input type="color" id="bColor" name="bColor" value="#000000" oninput="setBkgdColor(this.value)">
+            <input type="color" id="fColor" name="fColor" value="#ffffff" oninput="setForeColor(this.value)">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <button type="button" class="collapsible"><h1>SAVE</h1></button>
+    <div class="content">
+      <div class="coupling2">
+        <div class="couplingEntry">
+          <input type="radio" id="window" name="saveSize" value=0 onclick="sizeSaveChange(this.value)" checked>
+          <label for="window">Window Size</label>
+        </div>
+        <div class="couplingEntry">
+          <input type="radio" id="vert" name="saveSize" value=1 onclick="sizeSaveChange(this.value)">
+          <label for="vert">Vertical, 9:16</label>
+        </div>
+        <div class="couplingEntry">
+          <input type="radio" id="squa" name="saveSize" value=2 onclick="sizeSaveChange(this.value)">
+          <label for="squa">Square, 1:1</label>
+        </div>
+      </div>
+      <div class="module">
+        <button type="button" class="saveButton" onclick="runSave()">SAVE LOOP</button>
+      </div>
+      <div id="recStatus">
+        <p>RECORDING IN PROCESS</p>
+      </div>
+    </div>
+
+    <script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+    
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+      </script>
+</body>
+
+</html>
