@@ -16,6 +16,7 @@ var fullHeight = 0;
 
 let cwidth, cheight;
 let cXadjust, cYadjust;
+let widthHold, heightHold;
 let cScale = 1;
 
 let encoder;
@@ -44,13 +45,16 @@ function setup(){
   cwidth = int(windowWidth);
   cheight = int(windowHeight);
 
+  widthHold = width;
+  heightHold = height;
+
   bkgdColor = color('#000000');
   foreColor = color('#FFFFFF');
   fadeColor = color('#FFFFFF');
   currentFont = tFont[0];
-  newWidth = width;
-  newHeight = height;
-  horzSpacer = width/2;
+  newWidth = widthHold;
+  newHeight = heightHold;
+  horzSpacer = widthHold/2;
   cXadjust = 0;
   cYadjust = 0;
 
@@ -68,16 +72,18 @@ function draw(){
   }
 
   push();
-    translate(width/2, height/2);
+    translate(widthHold/2, heightHold/2);
     if(recording){
       translate(cXadjust, cYadjust);
     }
     
-    stroke(foreColor);
-    strokeWeight(frameFade);
-    noFill();
-    rectMode(CENTER);
-    rect(0, 0, newWidth + 2, newHeight + 2);
+    if(!recording){
+      stroke(foreColor);
+      strokeWeight(frameFade);
+      noFill();
+      rectMode(CENTER);
+      rect(0, 0, newWidth, newHeight);
+    }
     
     translate(0, -fullHeight/2 + lineHeight);
 
@@ -121,12 +127,14 @@ function resetAnim(){
   for(var p = 0; p < groupCount; p++){
     // kineticGroups[p] = new KineticGroup(-horzSpacer * 2 + p * horzSpacer, 0, p);
     kineticGroups[p] = new KineticGroup(-horzSpacer * ((groupCount-1)/2) + p * horzSpacer, 0, p);
-
   }
 }
 
 function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
+  
+  widthHold = width;
+  heightHold = height;
 
   sizeSaveChange(saveSizeState);
 }
@@ -134,13 +142,13 @@ function windowResized(){
 function setRecorder(){
   HME.createH264MP4Encoder().then(enc => {
     encoder = enc;
-    encoder.outputFilename = 'test';
+    encoder.outputFilename = 'STG_vSnap';
     encoder.pixelDensity = 2;
     encoder.width = cwidth * 2;
     encoder.height = cheight * 2;
     encoder.frameRate = frate;
     encoder.kbps = 50000; // video quality
-    encoder.groupOfPictures = 10; // lower if you have fast actions.
+    encoder.groupOfPictures = 5; // lower if you have fast actions.
     encoder.initialize();
   })
 }

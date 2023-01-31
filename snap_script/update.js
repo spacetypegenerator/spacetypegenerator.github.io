@@ -27,17 +27,30 @@ function runSave(){
     cwidth = 1080/2;
     cheight = 1920/2;
 
-    cScale = cheight/height;
+    if(widthHold > heightHold * 9/16){
+      cScale = cheight/heightHold;
+    } else {
+      cScale = cwidth/widthHold;
+    }
   } else if(saveSizeState == 2){    // Sq
     cwidth = 1080/2;
     cheight = 1080/2;
 
-    if(width > height){
-      cScale = cheight/height;
+    if(widthHold > heightHold){
+      cScale = cheight/heightHold;
     } else {
-      cScale = cwidth/width;
-
+      cScale = cwidth/widthHold;
     }
+  }
+
+  if(width < cwidth){
+    print("Width too big!");
+    resizeCanvas(cwidth, height);
+  }
+  
+  if(height < cheight){
+    print("Height too big!");
+    resizeCanvas(width, cheight);
   }
 
   setRecorder();
@@ -72,30 +85,42 @@ function sizeSaveChange(val){
   saveSizeState = val;
 
   if(saveSizeState == 0){
-    newHeight = height;
-    newWidth = width;
+    newHeight = heightHold;
+    newWidth = widthHold;
 
     cXadjust = 0;
     cYadjust = 0;
   } else if(saveSizeState == 1){
-    newHeight = height;
-    newWidth = height * 9/16;
-
-    cXadjust = -(width - newWidth)/2;
-    cYadjust = 0;
-  } else if(saveSizeState == 2){
-    if(width > height){
-      newWidth = height;
-      newHeight = height;
-
-      cXadjust = -(width - newWidth)/2;
+    if(widthHold > heightHold * 9/16){
+      print("center on x");
+      
+      newHeight = heightHold;
+      newWidth = heightHold * 9/16;
+  
+      cXadjust = -(widthHold - newWidth)/2;
       cYadjust = 0;
-    } else if(height >= width){
-      newHeight = width;
-      newWidth = width;
+    } else {
+      print("center on y");
+
+      newHeight = widthHold * 16/9;
+      newWidth = widthHold;
 
       cXadjust = 0;
-      cYadjust = -(height - newHeight)/2
+      cYadjust = -(heightHold - newHeight)/2;
+    }
+  } else if(saveSizeState == 2){
+    if(widthHold > heightHold){
+      newWidth = heightHold;
+      newHeight = heightHold;
+
+      cXadjust = -(widthHold - newWidth)/2;
+      cYadjust = 0;
+    } else if(heightHold >= widthHold){
+      newHeight = widthHold;
+      newWidth = widthHold;
+
+      cXadjust = 0;
+      cYadjust = -(heightHold - newHeight)/2
     }
   }
 
