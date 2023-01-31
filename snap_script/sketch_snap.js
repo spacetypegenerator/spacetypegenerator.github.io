@@ -34,6 +34,8 @@ var newWidth;
 
 var frameFade = 3;
 
+var thisDensity;
+
 function preload(){
   tFont[0] = loadFont("snap_resources/Inter-Medium.ttf");
   tFont[1] = loadFont("snap_resources/Inter-Black.ttf");
@@ -44,6 +46,9 @@ function setup(){
   createCanvas(windowWidth,windowHeight);
   cwidth = int(windowWidth);
   cheight = int(windowHeight);
+
+  thisDensity = pixelDensity();
+  print("PixelDensity is " + thisDensity);
 
   widthHold = width;
   heightHold = height;
@@ -143,9 +148,9 @@ function setRecorder(){
   HME.createH264MP4Encoder().then(enc => {
     encoder = enc;
     encoder.outputFilename = 'STG_vSnap';
-    encoder.pixelDensity = 2;
-    encoder.width = cwidth * 2;
-    encoder.height = cheight * 2;
+    encoder.pixelDensity = thisDensity;
+    encoder.width = cwidth * thisDensity;
+    encoder.height = cheight * thisDensity;
     encoder.frameRate = frate;
     encoder.kbps = 50000; // video quality
     encoder.groupOfPictures = 5; // lower if you have fast actions.

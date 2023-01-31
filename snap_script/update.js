@@ -24,8 +24,8 @@ function runSave(){
 
     cScale = 1;
   } else if(saveSizeState == 1){    // Vert
-    cwidth = 1080/2;
-    cheight = 1920/2;
+    cwidth = 1080/thisDensity;
+    cheight = 1920/thisDensity;
 
     if(widthHold > heightHold * 9/16){
       cScale = cheight/heightHold;
@@ -33,8 +33,8 @@ function runSave(){
       cScale = cwidth/widthHold;
     }
   } else if(saveSizeState == 2){    // Sq
-    cwidth = 1080/2;
-    cheight = 1080/2;
+    cwidth = 1080/thisDensity;
+    cheight = 1080/thisDensity;
 
     if(widthHold > heightHold){
       cScale = cheight/heightHold;

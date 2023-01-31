@@ -4,6 +4,7 @@ body{
   margin:0
 }
 #generatorInput {
+  background:#000;
   border:#fff solid 1px;
 }
 canvas{
