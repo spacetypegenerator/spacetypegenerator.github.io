@@ -25,99 +25,108 @@
 </head>
 
 <body>
-  <div class="dropdown">
-    <button class="dropbtn">Select...</button>
-    <div class="dropdown-content">
-      <a href="index.html">CYLINDER</a>
-      <a href="field.html">FIELD</a>
-      <a href="stripes.html">STRIPES</a>
-      <a href="coil.html">COIL</a>
-      <a href="flag.html">FLAG</a>
-      <a href="morisawa.html">MORISAWA</a>
-      <a href="cascade.html">CASCADE</a>
-      <a href="ribbon.html">RIBBON</a>
-      <a href="layers.html">LAYERS</a>
-      <a href="danger.html">DANGER</a>
-      <a href="string.html">STRING</a>
-      <a href="badge.html">BADGE</a>
-      <a href="clutter.html">CLUTTER</a>
-      <a href="construct.html">CONSTRUCT</a>
-      <a href="snap.html">SNAP</a>
+  <div id="widget">
+    <div class="dropdown">
+      <button class="dropbtn">Select...</button>
+      <div class="dropdown-content">
+        <a href="index.html">CYLINDER</a>
+        <a href="field.html">FIELD</a>
+        <a href="stripes.html">STRIPES</a>
+        <a href="coil.html">COIL</a>
+        <a href="flag.html">FLAG</a>
+        <a href="morisawa.html">MORISAWA</a>
+        <a href="cascade.html">CASCADE</a>
+        <a href="ribbon.html">RIBBON</a>
+        <a href="layers.html">LAYERS</a>
+        <a href="danger.html">DANGER</a>
+        <a href="string.html">STRING</a>
+        <a href="badge.html">BADGE</a>
+        <a href="clutter.html">CLUTTER</a>
+        <a href="construct.html">CONSTRUCT</a>
+        <a href="snap.html">SNAP</a>
+      </div>
+    </div>
+
+    <div id="generatorInput">
+      <div class="titleh2">
+        <h2>STG v.Snap</h2>
+        <p>a kinetic generator from <a href="https://www.instagram.com/kiel.d.m/">kielm</a></p>
+      </div>
+      <button type="button" class="collapsible"><h1>TEXT INPUT</h1></button>
+      <div class="content">
+        <div class="module">
+          <textarea id="textArea" rows=4 oninput="setText()"></textarea>
+          <div class="textureEdit">
+            <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
+              <option value="0" selected="selected">Inter - Medium</option>
+              <option value="1">Inter - Black</option>
+              <option value="2">Apoc_LC - Regluar</option>
+              <option value="3">IBM_Plex_Mono - Bold Italic</option>
+              <option value="4">Space Mono - Regular</option>
+              <option value="5">Space Grotesk - Bold</option>
+            </select>
+            <div class="coupling1">
+              <div class="coupling_label"><h3>Size</h3></div>
+              <input type="range" min="20" max="200" value="70" id="fontSize" oninput="setFontSize(this.value)">
+            </div>
+            <div class="coupling1">
+              <input type="color" id="bColor" name="bColor" value="#000000" oninput="setBkgdColor(this.value)">
+              <input type="color" id="fColor" name="fColor" value="#ffffff" oninput="setForeColor(this.value)">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button type="button" class="collapsible"><h1>SAVE</h1></button>
+      <div class="content">
+        <div class="coupling2">
+          <div class="couplingEntry">
+            <input type="radio" id="window" name="saveSize" value=0 onclick="sizeSaveChange(this.value)" checked>
+            <label for="window">Window Size</label>
+          </div>
+          <div class="couplingEntry">
+            <input type="radio" id="vert" name="saveSize" value=1 onclick="sizeSaveChange(this.value)">
+            <label for="vert">Vertical, 9:16</label>
+          </div>
+          <div class="couplingEntry">
+            <input type="radio" id="squa" name="saveSize" value=2 onclick="sizeSaveChange(this.value)">
+            <label for="squa">Square, 1:1</label>
+          </div>
+        </div>
+        <div class="module">
+          <button type="button" class="saveButton" onclick="runSave()">SAVE LOOP</button>
+        </div>
+        <div id="recStatus">
+          <p>RECORDING IN PROCESS <br>(preview not accurate)</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="generatorInput">
-    <div class="titleh2">
-      <h2>STG v.Snap</h2>
-      <p>a kinetic generator from <a href="https://www.instagram.com/kiel.d.m/">kielm</a></p>
-    </div>
-    <button type="button" class="collapsible"><h1>TEXT INPUT</h1></button>
-    <div class="content">
-      <div class="module">
-        <textarea id="textArea" rows=4 oninput="setText()">
-NO
-SPACE
-FOR
-PLACE</textarea>
-        <div class="textureEdit">
-          <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
-            <option value="0" selected="selected">Inter Medium</option>
-            <option value="1" >Inter Black</option>
-            <option value="2">Apoc_LC Regluar</option>
-          </select>
-          <div class="coupling1">
-            <div class="coupling_label"><h3>Size</h3></div>
-            <input type="range" min="20" max="200" value="70" id="fontSize" oninput="setFontSize(this.value)">
-          </div>
-          <div class="coupling1">
-            <input type="color" id="bColor" name="bColor" value="#000000" oninput="setBkgdColor(this.value)">
-            <input type="color" id="fColor" name="fColor" value="#ffffff" oninput="setForeColor(this.value)">
-          </div>
-        </div>
+  <div>
+    <label class="switch">
+      <input type="checkbox" checked oninput="hideWidget()">
+      <span class="slider round"></span>
+    </label>
+  </div>
 
-      </div>
-    </div>
-
-    <button type="button" class="collapsible"><h1>SAVE</h1></button>
-    <div class="content">
-      <div class="coupling2">
-        <div class="couplingEntry">
-          <input type="radio" id="window" name="saveSize" value=0 onclick="sizeSaveChange(this.value)" checked>
-          <label for="window">Window Size</label>
-        </div>
-        <div class="couplingEntry">
-          <input type="radio" id="vert" name="saveSize" value=1 onclick="sizeSaveChange(this.value)">
-          <label for="vert">Vertical, 9:16</label>
-        </div>
-        <div class="couplingEntry">
-          <input type="radio" id="squa" name="saveSize" value=2 onclick="sizeSaveChange(this.value)">
-          <label for="squa">Square, 1:1</label>
-        </div>
-      </div>
-      <div class="module">
-        <button type="button" class="saveButton" onclick="runSave()">SAVE LOOP</button>
-      </div>
-      <div id="recStatus">
-        <p>RECORDING IN PROCESS</p>
-      </div>
-    </div>
-
-    <script>
-      var coll = document.getElementsByClassName("collapsible");
-      var i;
-    
-      for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          var content = this.nextElementSibling;
-          if (content.style.display === "block") {
-            content.style.display = "none";
-          } else {
-            content.style.display = "block";
-          }
-        });
-      }
-      </script>
+  <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+  
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

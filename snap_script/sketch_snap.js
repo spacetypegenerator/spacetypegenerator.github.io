@@ -1,5 +1,5 @@
 var tFont = [];
-var pgTextSize = 75;
+var pgTextSize = 90;
 var lineHeight = pgTextSize * 0.8;
 var bkgdColor, foreColor, fadeColor;
 
@@ -36,10 +36,15 @@ var frameFade = 3;
 
 var thisDensity;
 
+var widgetOn = true;
+
 function preload(){
   tFont[0] = loadFont("snap_resources/Inter-Medium.ttf");
   tFont[1] = loadFont("snap_resources/Inter-Black.ttf");
   tFont[2] = loadFont("snap_resources/ApocLC-Regular-Desktop.otf");
+  tFont[3] = loadFont("snap_resources/IBMPlexMono-BoldItalic.ttf");
+  tFont[4] = loadFont("snap_resources/SpaceMono-Regular.ttf");
+  tFont[5] = loadFont("snap_resources/SpaceGrotesk-Bold.ttf");
 }
 
 function setup(){
@@ -48,10 +53,21 @@ function setup(){
   cheight = int(windowHeight);
 
   thisDensity = pixelDensity();
-  print("PixelDensity is " + thisDensity);
 
   widthHold = width;
   heightHold = height;
+
+  pgTextSize = width/11;
+  document.getElementById("fontSize").value = pgTextSize;
+  lineHeight = pgTextSize * 0.8;
+
+  if(width < 600){
+    document.getElementById("textArea").value = "THIS\nAND\nTHEN\nTHAT\nAND\nNOW\nTHIS";
+  } else if(width > 1300){
+    document.getElementById("textArea").value = "CHANGES\nchanges";
+  } else {
+    document.getElementById("textArea").value = "ONE\nFINAL\nPERFECT\nFUTURE";
+  }
 
   bkgdColor = color('#000000');
   foreColor = color('#FFFFFF');

@@ -139,3 +139,13 @@ function toggleRecMessage(){
     document.getElementById('recStatus').style.display = "none";
   }
 }
+
+function hideWidget(){
+  widgetOn = !widgetOn;
+
+  if(widgetOn){
+    document.getElementById('widget').style.display = "block";
+  } else {
+    document.getElementById('widget').style.display = "none";
+  }
+}
