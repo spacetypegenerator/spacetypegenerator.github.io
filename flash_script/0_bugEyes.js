@@ -129,6 +129,7 @@ class BugEyes {
       this.pg[n].text(this.inp.charAt(n), this.pg[n].width/2, this.pg[n].height/2 + this.pgTextSize * thisFontAdjust/2);
     }
 
-    this.repeats = floor((height*2)/this.pg[0].height) + 2;
+    this.repeats = floor((height)/this.pg[0].height) + 2;
+    print(this.repeats);
   }
 }

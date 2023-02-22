@@ -8,7 +8,7 @@ class RiseSun {
     this.pgA, this.pgB;
     this.drawTextures();
 
-    this.res = 100;
+    this.res = 50;
     this.ang = 2*PI/this.res;
     this.radiusX = height * 1.25;
     this.radiusY = height;

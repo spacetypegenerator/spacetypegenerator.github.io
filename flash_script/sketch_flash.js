@@ -58,8 +58,6 @@ function setup(){
   cwidth = width;
   cheight = height;
 
-  print("cwidth: " + cwidth + " cheight: " + cheight);
-
   thisDensity = pixelDensity();
 
   bkgdColor = color('#ffffff');
