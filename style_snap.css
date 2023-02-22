@@ -21,7 +21,7 @@ canvas{
   z-index:-1
 }
 .collapsible{
-  background-color:#000;
+  background-image:linear-gradient(180deg,#000,#000,#383838,#f1f1f1);
   cursor:pointer;
   padding-top:5px;
   width:200px;
