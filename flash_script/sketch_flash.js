@@ -1,0 +1,222 @@
+var tFont = [];
+var pgTextSize = 100;
+var bkgdColor, foreColor;
+var colorA = [];
+
+var main;
+var selector = 0;
+var fullMainWidth;
+var budgeCenter = 0;
+
+var mainFlash;
+var sceneLength = 30;
+
+var starterText = "THE\nCOLLECTIVE\nPOWER\nOF\nTINY\nMOMENTS";
+
+var rampCounter = 0;
+
+var thisFont = 0;
+var thisFontAdjust = 0.7;
+
+var flashCount = 13;
+var sceneOn = [];
+var sceneCount = 15;
+
+var widgetOn = true;
+
+let encoder;
+
+const frate = 30;
+var numFrames = 100;
+let recording = false;
+let recordedFrames = 0;
+
+let sceneRepeats = 2;
+let thisDensity = 2;
+
+let cwidth, cheight;
+let saveMode = 0;
+
+let coreCounter = 0;
+let recMessageOn = false;
+let colorSwapOn = true;
+
+function preload(){
+  tFont[0] = loadFont("resources/TT Bluescreens Trial Medium.otf");
+  tFont[1] = loadFont("resources/TT Travels Next Trial Bold.ttf");
+  tFont[2] = loadFont("resources/Inter-Medium.ttf");
+  tFont[3] = loadFont("resources/Agrandir-TightBlack.otf");
+  tFont[4] = loadFont("resources/ApocLC-Regular-Desktop.otf");
+
+  currentFont = tFont[0];
+  thisFontAdjust = 0.7;
+}
+
+function setup(){
+  createCanvas(windowWidth,windowHeight,WEBGL);
+
+  cwidth = width;
+  cheight = height;
+
+  print("cwidth: " + cwidth + " cheight: " + cheight);
+
+  thisDensity = pixelDensity();
+
+  bkgdColor = color('#ffffff');
+  foreColor = color('#000000');
+  colorA[0] = color('#f25835');
+  colorA[1] = color('#0487d9');
+  colorA[2] = color('#014029');
+  colorA[3] = color('#f2ae30');
+  colorA[4] = color('#f2aec1');
+
+  for(var n = 0; n < flashCount; n++){
+    sceneOn[n] = true;
+  }
+
+  frameRate(frate);
+  textureMode(NORMAL);
+
+  document.getElementById("textArea").value = starterText;
+  setText(starterText);
+}
+
+function draw(){
+  background(bkgdColor);
+  ortho(-width / 2, width / 2, -height / 2, height / 2, -10000, 10000);
+  
+  push();
+    translate(-width/2, -height/2);
+
+    mainFlash.update();
+    mainFlash.display();
+  pop();
+
+  runRecording();
+
+  if((coreCounter+1) % sceneLength == 0){
+    pickScene();
+  }
+
+  coreCounter ++;
+}
+
+function pickScene(){
+  if(selector == keyArray.length){
+    selector = 0;
+  }
+
+  if(sceneCount == 0){
+    mainFlash = new Blank(rampCounter%2, keyArray[selector]);
+  } else {
+    var sceneSelecting = true;
+    var rs0 = random(flashCount * 10);
+    while(sceneSelecting){
+      if(rs0 < 10 && sceneOn[0]){
+        mainFlash = new Arcer(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 10 && rs0 < 20 && sceneOn[1]){
+        mainFlash = new Bend(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 20 && rs0 < 30 && sceneOn[2]){
+        mainFlash = new Box(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 30 && rs0 < 40 && sceneOn[3]) {
+        mainFlash = new BugEyes(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 60 && rs0 < 70 && sceneOn[4]){
+        mainFlash = new Halo(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 70 && rs0 < 80 && sceneOn[5]){
+        mainFlash = new RiseSun(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 80 && rs0 < 90 && sceneOn[6]){
+        mainFlash = new Shutters(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 90 && rs0 < 100 && sceneOn[7]){
+        mainFlash = new Shutters2(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 100 && rs0 < 110 && sceneOn[8]){
+        mainFlash = new SlotMachine(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 110 && rs0 < 120 && sceneOn[9]){
+        mainFlash = new Snap(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 120 && rs0 < 130 && sceneOn[10]){
+        mainFlash = new Split(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 130 && rs0 < 140 && sceneOn[11]){
+        mainFlash = new Starburst(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else if(rs0 > 140 && rs0 <= 150 && sceneOn[12]) {
+        mainFlash = new Twist(rampCounter%2, keyArray[selector]);
+        sceneSelecting = false;
+      } else {
+        rs0 = random(flashCount * 10);
+      }
+    }
+  }
+
+  if(colorSwapOn){
+    if(random(10) < 3){
+      var colorA = rgbToHex(foreColor.levels[0], foreColor.levels[1], foreColor.levels[2]);
+      var colorB = rgbToHex(bkgdColor.levels[0], bkgdColor.levels[1], bkgdColor.levels[2]);
+  
+      foreColor = color(colorB);
+      bkgdColor = color(colorA);
+  
+      document.getElementById('bColor').value = colorA;
+      document.getElementById('fColor').value = colorB;
+    }
+  }
+
+  rampCounter ++;
+  selector ++;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1);
+}
+
+function windowResized(){
+  resizeForPreview();
+}
+
+function resizeForSave(){
+  if(saveMode == 0){
+    resizeCanvas(windowWidth, windowHeight,WEBGL);
+  } else if(saveMode == 1){
+    resizeCanvas(1080, 1920, WEBGL);
+  } else if(saveMode == 2){
+    resizeCanvas(1080, 1080, WEBGL);
+  }
+}
+
+function resizeForPreview(){
+  var tempWidth, tempHeight;
+
+  if(saveMode == 0){
+    resizeCanvas(windowWidth, windowHeight,WEBGL);
+  } else if(saveMode == 1){
+    if(windowWidth > windowHeight * 9/16){
+      tempHeight = windowHeight;
+      tempWidth = windowHeight * 9/16;
+    } else {
+      tempWidth = windowWidth;
+      tempHeight = windowWidth * 16/9;
+    }
+    resizeCanvas(tempWidth, tempHeight, WEBGL);
+  } else if(saveMode == 2){
+    if(windowWidth < windowHeight){
+      tempWidth = windowWidth;
+      tempHeight = windowWidth;
+    } else {
+      tempHeight = windowHeight;
+      tempWidth = windowHeight;
+    }
+    resizeCanvas(tempWidth, tempHeight, WEBGL);
+  }
+
+  cwidth = width;
+  cheight = height;
+}
