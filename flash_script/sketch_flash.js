@@ -71,6 +71,8 @@ function setup(){
     document.getElementById("bugeyes").checked = false;
     sceneOn[4] = false;
     document.getElementById("halo").checked = false;
+    sceneOn[5] = false;
+    document.getElementById("risesun").checked = false;
     sceneOn[12] = false;
     document.getElementById("twist").checked = false;
   }else{
