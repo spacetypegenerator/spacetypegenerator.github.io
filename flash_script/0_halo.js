@@ -12,7 +12,7 @@ class Halo {
 
     this.ramp = ramp_;
 
-    this.res = 200;
+    this.res = 100;
     this.ang = 2*PI/this.res;
     this.radius = width/2;
     this.sec = (2 * PI * this.radius)/this.res;

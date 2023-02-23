@@ -130,6 +130,5 @@ class BugEyes {
     }
 
     this.repeats = floor((height)/this.pg[0].height) + 2;
-    print(this.repeats);
   }
 }

@@ -55,6 +55,14 @@ function preload(){
 function setup(){
   createCanvas(windowWidth,windowHeight,WEBGL);
 
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    print("ON MOBILE!");
+    pixelDensity(1);
+  }else{
+    // false for not mobile device
+    print("NOT on MOBILE");
+  }
+
   cwidth = width;
   cheight = height;
 
