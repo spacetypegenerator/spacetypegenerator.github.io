@@ -55,9 +55,24 @@ function preload(){
 function setup(){
   createCanvas(windowWidth,windowHeight,WEBGL);
 
+  for(var n = 0; n < flashCount; n++){
+    sceneOn[n] = true;
+  }
+
   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     print("ON MOBILE!");
     pixelDensity(1);
+
+    sceneOn[1] = false;
+    document.getElementById("bend").checked = false;
+    sceneOn[2] = false;
+    document.getElementById("box").checked = false;
+    sceneOn[3] = false;
+    document.getElementById("bugeyes").checked = false;
+    sceneOn[4] = false;
+    document.getElementById("halo").checked = false;
+    sceneOn[12] = false;
+    document.getElementById("twist").checked = false;
   }else{
     // false for not mobile device
     print("NOT on MOBILE");
@@ -75,10 +90,6 @@ function setup(){
   colorA[2] = color('#014029');
   colorA[3] = color('#f2ae30');
   colorA[4] = color('#f2aec1');
-
-  for(var n = 0; n < flashCount; n++){
-    sceneOn[n] = true;
-  }
 
   frameRate(frate);
   textureMode(NORMAL);
@@ -130,31 +141,31 @@ function pickScene(){
       } else if(rs0 > 30 && rs0 < 40 && sceneOn[3]) {
         mainFlash = new BugEyes(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
-      } else if(rs0 > 60 && rs0 < 70 && sceneOn[4]){
+      } else if(rs0 > 40 && rs0 < 50 && sceneOn[4]){
         mainFlash = new Halo(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
-      } else if(rs0 > 70 && rs0 < 80 && sceneOn[5]){
+      } else if(rs0 > 50 && rs0 < 60 && sceneOn[5]){
         mainFlash = new RiseSun(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
-      } else if(rs0 > 80 && rs0 < 90 && sceneOn[6]){
+      } else if(rs0 > 60 && rs0 < 70 && sceneOn[6]){
         mainFlash = new Shutters(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
-      } else if(rs0 > 90 && rs0 < 100 && sceneOn[7]){
+      } else if(rs0 > 70 && rs0 < 80 && sceneOn[7]){
         mainFlash = new Shutters2(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
-      } else if(rs0 > 100 && rs0 < 110 && sceneOn[8]){
+      } else if(rs0 > 80 && rs0 < 90 && sceneOn[8]){
         mainFlash = new SlotMachine(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
-      } else if(rs0 > 110 && rs0 < 120 && sceneOn[9]){
+      } else if(rs0 > 90 && rs0 < 100 && sceneOn[9]){
         mainFlash = new Snap(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
-      } else if(rs0 > 120 && rs0 < 130 && sceneOn[10]){
+      } else if(rs0 > 100 && rs0 < 110 && sceneOn[10]){
         mainFlash = new Split(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
-      } else if(rs0 > 130 && rs0 < 140 && sceneOn[11]){
+      } else if(rs0 > 110 && rs0 < 120 && sceneOn[11]){
         mainFlash = new Starburst(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
-      } else if(rs0 > 140 && rs0 <= 150 && sceneOn[12]) {
+      } else if(rs0 > 120 && rs0 <= 130 && sceneOn[12]) {
         mainFlash = new Twist(rampCounter%2, keyArray[selector]);
         sceneSelecting = false;
       } else {

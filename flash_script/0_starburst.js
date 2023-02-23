@@ -16,7 +16,6 @@ class Starburst {
     this.radiusMaxX = width/2;
     this.radiusMinY = 0;
     this.radiusMaxY = height/2;
-    var innerFactor = random(0.1, 0.3);
     this.radiusXinner = width/8;
     this.radiusYinner = height/8;
 
