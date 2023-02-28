@@ -198,4 +198,8 @@ class Cloud {
       this.sDh[m] = random(10, 80);
     }
   }
+
+  removeGraphics(){
+    
+  }
 }

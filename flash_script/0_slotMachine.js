@@ -30,13 +30,30 @@ class SlotMachine {
     var tk0 = map(this.ticker, 0, sceneLength, 0, 1);
     for(var n = 0; n < this.inp.length; n++){
       var tk1;
-      if(this.ramp==0){
-        tk1 = easeOutCirc(tk0);
-      } else if(this.ramp==1){
-        tk1 = easeInCirc(tk0);
+      var a0, b0;
+      if(accelMode == 0){
+        if(this.ramp==0){
+          tk1 = easeOutCirc(tk0);
+        } else if(this.ramp==1){
+          tk1 = easeInCirc(tk0);
+        }
+        a0 = this.yStart;
+        b0 = this.yTarget[n];
+      } else {
+        if(tk0 < 0.5){
+          var tk0b = map(tk0, 0, 0.5, 0, 1);
+          tk1 = easeOutCirc(tk0b);
+          a0 = this.yStart;
+          b0 = (this.yStart + this.yTarget[n])/2;
+        } else {
+          var tk0b = map(tk0, 0.5, 1, 0, 1);
+          tk1 = easeInCirc(tk0b);
+          a0 = (this.yStart + this.yTarget[n])/2;
+          b0 = this.yTarget[n];
+        }
       }
 
-      this.yAnim[n] = map(tk1, 0, 1, this.yStart, this.yTarget[n]);
+      this.yAnim[n] = map(tk1, 0, 1, a0, b0);
     }
   }
 
@@ -101,5 +118,7 @@ class SlotMachine {
     this.repeats = round((height*2)/this.pgTextSize) + 5;
   }
 
-  
+  removeGraphics(){
+    
+  }  
 }

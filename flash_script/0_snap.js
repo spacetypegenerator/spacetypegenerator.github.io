@@ -7,6 +7,7 @@ class Snap {
     
     this.xKern = [];
     this.xWidths = [];
+    this.xScaleMax = 0.2;
     this.xScale = [];
     this.xShear = [];
     this.xShearMax = -PI/8;
@@ -17,6 +18,7 @@ class Snap {
     this.ramp = ramp_;
 
     this.pacer = (sceneLength/1.5)/this.inp.length;
+
   }
 
   update(){
@@ -26,16 +28,39 @@ class Snap {
       var tk00 = constrain(this.ticker - n*this.pacer, 0, sceneLength);
       var tk0 = map(tk00, 0, sceneLength, 0, 1);
       var tk1;
-      if(this.ramp==0){
-        // tk1 = easeOutQuint(tk0);
-        tk1 = easeOutQuad(tk0);
-      } else if(this.ramp==1){
-        // tk1 = easeInQuint(tk0);
-        tk1 = easeInQuad(tk0);
+      var a0, b0;
+      var a1, b1;
+      if(accelMode == 0){
+        if(this.ramp==0){
+          tk1 = easeOutQuad(tk0);
+        } else if(this.ramp==1){
+          tk1 = easeInQuad(tk0);
+        }
+        a0 = this.xScaleMax;
+        b0 = 1;
+        a1 = this.xShearMax;
+        b1 = 0;
+      } else {
+        if(tk0 < 0.5){
+          var tk0b = map(tk0, 0, 0.5, 0, 1);
+          tk1 = easeOutCirc(tk0b);
+          a0 = this.xScaleMax;
+          b0 = (this.xScaleMax + 1)/2;
+          a1 = this.xShearMax;
+          b1 = this.xShearMax/2;
+        } else {
+          var tk0b = map(tk0, 0.5, 1, 0, 1);
+          tk1 = easeInCirc(tk0b);
+          a0 = (this.xScaleMax + 1)/2;
+          b0 = 1;
+          a1 = this.xShearMax/2;
+          b1 = 0;
+        }
       }
 
-      this.xScale[n] = map(tk1, 0, 1, 0.2, 1);
-      this.xShear[n] = map(tk1, 0, 1, this.xShearMax, 0);
+      this.xScale[n] = map(tk1, 0, 1, a0, b0);
+      this.xShear[n] = map(tk1, 0, 1, a1, b1);
+
       this.xWidths[n] = textWidth(this.inp.charAt(n)) * this.xScale[n];
     }
 
@@ -106,5 +131,9 @@ class Snap {
     if(this.pgTextSize * thisFontAdjust > height * 7/8){
       this.pgTextSize = (height * 7/8)/thisFontAdjust;
     }
+  }
+
+  removeGraphics(){
+
   }
 }

@@ -29,13 +29,28 @@ class Arcer {
     var tk0 = map(this.ticker, 0, sceneLength, 0, 1);
     for(var n = 0; n < this.inp.length; n++){
       var tk1;
-      if(this.ramp==0){
-        tk1 = easeOutCirc(tk0);
-      } else if(this.ramp==1){
-        tk1 = easeInCirc(tk0);
+      if(accelMode == 0){
+        if(this.ramp==0){
+          tk1 = easeOutCirc(tk0);
+        } else if(this.ramp==1){
+          tk1 = easeInCirc(tk0);
+        }
+        this.yAnim[n] = map(tk1, 0, 1, this.yStart, this.yTarget[n]);
+      } else {
+        let a, b;
+        if(tk0 < 0.5){
+          var tk0b = map(tk0, 0, 0.5, 0, 1);
+          tk1 = easeOutCirc(tk0b);
+          a = this.yStart;
+          b = this.yTarget[n]/2;
+        } else {
+          var tk0b = map(tk0, 0.5, 1, 0, 1);
+          tk1 = easeInCirc(tk0b);
+          a = this.yTarget[n]/2;
+          b = this.yTarget[n];
+        }
+        this.yAnim[n] = map(tk1, 0, 1, a, b);
       }
-
-      this.yAnim[n] = map(tk1, 0, 1, this.yStart, this.yTarget[n]);
     }
   }
 
@@ -95,5 +110,8 @@ class Arcer {
     if(this.pgTextSize * thisFontAdjust > height * 7/8){
       this.pgTextSize = (height * 7/8)/thisFontAdjust;
     }
+  }
+
+  removeGraphics(){
   }
 }

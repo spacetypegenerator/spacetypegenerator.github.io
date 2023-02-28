@@ -77,3 +77,23 @@ function easeInOutCirc(ticker) {
     : (Math.sqrt(1 - Math.pow(-2 * ticker + 2, 2)) + 1) / 2;
   }
 
+  function easeInOutBack(ticker) {
+    const c1 = 1.70158;
+    const c2 = c1 * 1.525;
+  
+    return ticker < 0.5
+      ? (Math.pow(2 * ticker, 2) * ((c2 + 1) * 2 * ticker - c2)) / 2
+      : (Math.pow(2 * ticker - 2, 2) * ((c2 + 1) * (ticker * 2 - 2) + c2) + 2) / 2;
+  }
+  
+  function easeInOutElastic(ticker) {
+    const c5 = (2 * Math.PI) / 4.5;
+    
+    return ticker === 0
+      ? 0
+      : ticker === 1
+      ? 1
+      : ticker < 0.5
+      ? -(Math.pow(2, 20 * ticker - 10) * Math.sin((20 * ticker - 11.125) * c5)) / 2
+      : (Math.pow(2, -20 * ticker + 10) * Math.sin((20 * ticker - 11.125) * c5)) / 2 + 1;
+    }

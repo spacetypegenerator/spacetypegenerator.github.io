@@ -45,7 +45,7 @@ class Blank {
     textFont(currentFont);
     var repeatSize = round(textWidth(this.inp));
   
-    this.pgA = createGraphics(repeatSize, this.pgTextSize * 0.8);
+    this.pgA = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.05));
     this.pgA.background(bkgdColor);
   
     this.pgA.fill(foreColor);
@@ -53,6 +53,12 @@ class Blank {
     this.pgA.textSize(this.pgTextSize);
     this.pgA.textAlign(CENTER);
     this.pgA.textFont(currentFont);
-    this.pgA.text(this.inp, this.pgA.width/2, this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2);
+    var thisAdjust = this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+    this.pgA.translate(width/2, thisAdjust);
+    this.pgA.text(this.inp, 0, 0);
+  }
+
+  removeGraphics(){
+    this.pgA.remove();
   }
 }

@@ -39,16 +39,48 @@ class Split {
 
     var tk0 = map(this.ticker, 0, sceneLength, 0, 1);
     var tk1;
-    if(this.ramp==0){
-      tk1 = easeOutCirc(tk0);
-    } else if(this.ramp==1){
-      tk1 = easeInCirc(tk0);
-    }
+    if(accelMode == 0){
+      if(this.ramp==0){
+        tk1 = easeOutCirc(tk0);
+      } else if(this.ramp==1){
+        tk1 = easeInCirc(tk0);
+      }
 
-    this.animShear = map(tk1, 0, 1, 0, this.animShearMax);
+      this.animShear = map(tk1, 0, 1, 0, this.animShearMax);
 
-    for(var m = 0; m < 3; m++){
-      this.animX[m] = map(tk1, 0, 1, 0, this.animXmax[m]);
+      for(var m = 0; m < 3; m++){
+        this.animX[m] = map(tk1, 0, 1, 0, this.animXmax[m]);
+      }
+    } else {
+      let a, b;
+      if(tk0 < 0.5){
+        var tk0b = map(tk0, 0, 0.5, 0, 1);
+        tk1 = easeOutCirc(tk0b);
+        a = 0;
+        b = this.animShearMax/2;
+      } else {
+        var tk0b = map(tk0, 0.5, 1, 0, 1);
+        tk1 = easeInCirc(tk0b);
+        a = this.animShearMax/2;
+        b = this.animShearMax;
+      }
+      this.animShear = map(tk1, 0, 1, a, b);
+
+      for(var m = 0; m < 3; m++){
+        let a, b;
+        if(tk0 < 0.5){
+          var tk0b = map(tk0, 0, 0.5, 0, 1);
+          tk1 = easeOutCirc(tk0b);
+          a = 0;
+          b = this.animXmax[m]/2;
+        } else {
+          var tk0b = map(tk0, 0.5, 1, 0, 1);
+          tk1 = easeInCirc(tk0b);
+          a = this.animXmax[m]/2;
+          b = this.animXmax[m];
+        }
+        this.animX[m] = map(tk1, 0, 1, a, b);
+      }
     }
   }
 
@@ -97,7 +129,7 @@ class Split {
     textFont(currentFont);
     var repeatSize = round(textWidth(this.inp));
   
-    this.pgA = createGraphics(repeatSize, this.pgTextSize * 0.8);
+    this.pgA = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.05));
     this.pgA.background(bkgdColor);
   
     this.pgA.fill(foreColor);
@@ -105,6 +137,11 @@ class Split {
     this.pgA.textSize(this.pgTextSize);
     this.pgA.textAlign(CENTER);
     this.pgA.textFont(currentFont);
-    this.pgA.text(this.inp, this.pgA.width/2, this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2);
+    var thisAdjust = this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+    this.pgA.text(this.inp, this.pgA.width/2, thisAdjust);
+  }
+
+  removeGraphics(){
+    this.pgA.remove();
   }
 }

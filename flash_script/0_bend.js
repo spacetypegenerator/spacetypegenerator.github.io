@@ -26,14 +26,42 @@ class Bend {
 
     var tk0 = map(this.ticker, 0, sceneLength, 0, 1);
     var tk1;
-    if(this.ramp==0){
-      tk1 = easeOutCirc(tk0);
-    } else if(this.ramp==1){
-      tk1 = easeInCirc(tk0);
+
+    let a0, b0;
+    let a1, b1;
+    if(accelMode == 0){
+      if(this.ramp==0){
+        tk1 = easeOutCirc(tk0);
+      } else if(this.ramp==1){
+        tk1 = easeInCirc(tk0);
+      }
+      a0 = 0;
+      b0 = -this.yTopCorner;
+
+      a1 = this.pgA.height;
+      b1 = this.yBotCorner;
+    } else {
+      if(tk0 < 0.5){
+        var tk0b = map(tk0, 0, 0.5, 0, 1);
+        tk1 = easeOutCirc(tk0b);
+        a0 = 0;
+        b0 = -this.yTopCorner/2;
+
+        a1 = this.pgA.height;
+        b1 = (this.yBotCorner + this.pgA.height)/2;
+      } else {
+        var tk0b = map(tk0, 0.5, 1, 0, 1);
+        tk1 = easeInCirc(tk0b);
+        a0 = -this.yTopCorner/2;
+        b0 = -this.yTopCorner;
+
+        a1 = (this.yBotCorner + this.pgA.height)/2;
+        b1 = this.yBotCorner;
+      }
     }
-    
-    this.yTopAnim = map(tk1, 0, 1, 0, -this.yTopCorner);
-    this.yBotAnim = map(tk1, 0, 1, this.pgA.height, this.yBotCorner);
+
+    this.yTopAnim = map(tk1, 0, 1, a0, b0);
+    this.yBotAnim = map(tk1, 0, 1, a1, b1);
   }
 
   display(){
@@ -84,7 +112,7 @@ class Bend {
     textFont(currentFont);
     var repeatSize = round(textWidth(this.inp));
   
-    this.pgA = createGraphics(repeatSize, this.pgTextSize * 0.8);
+    this.pgA = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.1));
     this.pgA.background(bkgdColor);
   
     this.pgA.fill(foreColor);
@@ -92,6 +120,11 @@ class Bend {
     this.pgA.textSize(this.pgTextSize);
     this.pgA.textAlign(CENTER);
     this.pgA.textFont(currentFont);
-    this.pgA.text(this.inp, this.pgA.width/2, this.pgA.height/2 + this.pgTextSize*thisFontAdjust/2);
+    var thisAdjust = this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+    this.pgA.text(this.inp, this.pgA.width/2, thisAdjust);
+  }
+
+  removeGraphics(){
+    this.pgA.remove();
   }
 }

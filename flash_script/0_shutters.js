@@ -14,9 +14,7 @@ class Shutters {
     this.ticker = 0;
 
     this.shutterAnim = [];
-    this.shutterAnimMax = this.pg[0].height;
     this.shutterYanim = [];
-    this.shutterYanimMax = this.pg[0].height/2;
 
     this.ramp = ramp_;
 
@@ -37,8 +35,8 @@ class Shutters {
         tk1 = easeInOutQuad(tk0);
       }
 
-      this.shutterAnim[n] = map(tk1, 0, 1, this.shutterAnimMax, 0);
-      this.shutterYanim[n] = map(tk1, 0, 1, -this.shutterYanimMax, 0);
+      this.shutterAnim[n] = map(tk1, 0, 1, this.pg[0].height, 0);
+      this.shutterYanim[n] = map(tk1, 0, 1, -this.pg[0].height/2, 0);
     }
   }
 
@@ -111,7 +109,7 @@ class Shutters {
 
       var repeatSize = round(textWidth(this.inp.charAt(n)));
     
-      this.pg[n] = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.1));
+      this.pg[n] = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.05));
       this.pg[n].background(bkgdColor);
     
       this.pg[n].fill(foreColor);
@@ -119,7 +117,14 @@ class Shutters {
       this.pg[n].textSize(this.pgTextSize);
       this.pg[n].textAlign(CENTER);
       this.pg[n].textFont(currentFont);
-      this.pg[n].text(this.inp.charAt(n), this.pg[n].width/2, this.pg[n].height/2 + this.pgTextSize * thisFontAdjust/2);
+      var thisAdjust = this.pg[n].height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+      this.pg[n].text(this.inp.charAt(n), this.pg[n].width/2, thisAdjust);
+    }
+  }
+
+  removeGraphics(){
+    for(var n = 0; n < this.inp.length; n++){
+      this.pg[n].remove();
     }
   }
 }

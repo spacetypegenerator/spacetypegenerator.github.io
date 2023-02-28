@@ -19,15 +19,44 @@ function setFont(val){
   currentFont = tFont[val];
   if(val == 0){
     thisFontAdjust = 0.7;
+    thisFontAdjustUp = 0;
   } else if(val == 1){
     thisFontAdjust = 0.7;
+    thisFontAdjustUp = 0;
   } else if(val == 2){
     thisFontAdjust = 0.75;
+    thisFontAdjustUp = 0;
   } else if(val == 3){
     thisFontAdjust = 0.7;
+    thisFontAdjustUp = 0;
   } else if(val == 4){
     thisFontAdjust = 0.75;
+    thisFontAdjustUp = 0;
+  } else if(val == 5){
+    thisFontAdjust = 0.775;
+    thisFontAdjustUp = 0;
+  } else if(val == 6){
+    thisFontAdjust = 1.05;
+    thisFontAdjustUp = -0.315;
   }
+}
+
+function setSelectMode(val){
+  displayMode = val;
+
+  if(displayMode == 0){               // TEXT
+    document.getElementById('textModeUI').style.display = "block";
+    document.getElementById('textModeUI2').style.display = "flex";
+  } else if(displayMode == 1){        // CLOCK
+    document.getElementById('textModeUI').style.display = "none";
+    document.getElementById('textModeUI2').style.display = "none";
+    sceneLength = floor(frameRate()) + 2;
+  }
+}
+
+function setAccelMode(val){
+  accelMode = val;
+  print(accelMode);
 }
 
 function setForeColor(val){

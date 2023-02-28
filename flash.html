@@ -33,9 +33,11 @@
   <script src="flash_script/0_split.js" type="text/javascript"></script>
   <script src="flash_script/0_bend.js" type="text/javascript"></script>
   <script src="flash_script/0_shutters.js" type="text/javascript"></script>
+  <script src="flash_script/0_shuttersEE.js" type="text/javascript"></script>
   <script src="flash_script/0_shutters2.js" type="text/javascript"></script>
   <script src="flash_script/0_slotMachine.js" type="text/javascript"></script>
   <script src="flash_script/0_bugEyes.js" type="text/javascript"></script>
+  <script src="flash_script/0_bugEyesEE.js" type="text/javascript"></script>
   <script src="flash_script/0_twist.js" type="text/javascript"></script>
   <script src="flash_script/0_halo.js" type="text/javascript"></script>
   <script src="flash_script/0_grid.js" type="text/javascript"></script>
@@ -90,10 +92,25 @@
           </span>
         </div>
       </div>
-      <button type="button" class="collapsible"><h1>TEXT INPUT</h1></button>
+      <button type="button" class="collapsible"><h1>TEXT</h1></button>
       <div class="content">
         <div class="module">
-          <textarea id="textArea" rows=5 oninput="setText()"></textarea>
+
+          <div class="couplingRadio">
+            <div class="radioOption">
+              <input type="radio" id="text_mode" name="TextMode" value=0 oninput="setSelectMode(this.value)" checked>
+              <label for="text_mode">Text</label>
+            </div>
+            <div class="radioOption">
+              <input type="radio" id="clock_mode" name="TextMode" value=1 oninput="setSelectMode(this.value)">
+              <label for="clock_mode">Clock</label>
+            </div>
+          </div>
+          
+          <div id="textModeUI">
+            <textarea id="textArea" rows=5 oninput="setText()"></textarea>
+          </div>
+
           <div class="textureEdit">
             <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
               <option value="0" selected="selected">TT BlueScreens - Medium</option>
@@ -101,26 +118,41 @@
               <option value="2">Inter - Medium</option>
               <option value="3">Agrandir - TightBlack</option>
               <option value="4">Apoc_LC - Regluar</option>
+              <option value="5">BaseNeue - CondensedBlack</option>
+              <option value="6">Cairo - Black (Arabic)</option>
             </select>
-            <div class="coupling1">
-              <div class="coupling_label"><h3>PACE</h3></div>
-              <input type="range" min="10" max="110" value="30" id="sceneLength" oninput="setSceneLength(this.value)">
-            </div>
+
             <div class="coupling1">
               <input type="color" id="bColor" name="bColor" value="#000000" oninput="setBkgdColor(this.value)">
               <input type="color" id="fColor" name="fColor" value="#ffffff" oninput="setForeColor(this.value)">
             </div>
             <div class="listItemFull">
               <input type="checkbox" id="colorSwap" name="colorSwap" onclick="toggleColorSwap()" checked>
-              <label for="colorSwap">Swap Colors</label>
+              <label for="colorSwap">Random Color Swap</label>
             </div>
           </div>
-
         </div>
       </div>
 
       <button type="button" class="collapsible"><h1>SCENES</h1></button>
       <div class="content">
+
+        <div class="couplingRadio">
+          <div class="radioOption">
+            <input type="radio" id="matchcut" name="accelMode" value=0 oninput="setAccelMode(this.value)" checked>
+            <label for="matchcut">MatchCut</label>
+          </div>
+          <div class="radioOption">
+            <input type="radio" id="easyease" name="accelMode" value=1 oninput="setAccelMode(this.value)">
+            <label for="easyease">EasyEase</label>
+          </div>
+        </div>
+
+        <div class="coupling1" id="textModeUI2">
+          <div class="coupling_label"><h3>PACE</h3></div>
+          <input type="range" min="10" max="110" value="30" id="sceneLength" oninput="setSceneLength(this.value)">
+        </div>
+
         <div class="contentChecks">
           <div class="checksColumnSet">
             <div class="checksColumn">

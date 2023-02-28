@@ -1,4 +1,4 @@
-class Shutters2 {
+class ShuttersEE {
   constructor(ramp_, inp_){
     this.inp = inp_;
 
@@ -13,13 +13,13 @@ class Shutters2 {
 
     this.ticker = 0;
 
-    this.xAnim = [];
-
     this.shutterAnim = [];
+    this.shutterAnimBot = [];
+    this.shutterYanim = [];
 
     this.ramp = ramp_;
 
-    this.pacer = (sceneLength/3)/this.inp.length;
+    this.pacer = (sceneLength/2)/this.inp.length;
   }
 
   update(){
@@ -28,40 +28,36 @@ class Shutters2 {
     for(var n = 0; n < this.inp.length; n++){
       var tk00 = constrain(this.ticker - this.pacer*n, 0, sceneLength);
       var tk0 = map(tk00, 0, sceneLength, 0, 1.0);
-      
+
       var tk1;
       var a0, b0;
       var a1, b1;
-      if(accelMode == 0){
-        if(this.ramp==0){
-          tk1 = easeOutQuad(tk0);
-        } else if(this.ramp==1){
-          tk1 = easeInOutQuad(tk0);
-        }
-        a0 = 0;
-        b0 = this.pg[n].width;
-        a1 = width/2;
-        b1 = this.xSpots[n];
+      var a2, b2;
+      if(tk0 < 0.5){
+        var tk0b = map(tk0, 0, 0.5, 0, 1);
+        tk1 = easeOutCirc(tk0b);
+        a0 = this.pg[n].height;
+        b0 = 0;
+        a1 = this.pg[n].height;
+        b1 = this.pg[n].height;
+
+        a2 = this.pg[0].height/2;
+        b2 = 0;
       } else {
-        if(tk0 < 0.5){
-          var tk0b = map(tk0, 0, 0.5, 0, 1);
-          tk1 = easeOutCirc(tk0b);
-          a0 = 0;
-          b0 = this.pg[n].width;
-          a1 = width/2;
-          b1 = this.xSpots[n];
-        } else {
-          var tk0b = map(tk0, 0.5, 1, 0, 1);
-          tk1 = easeInCirc(tk0b);
-          a0 = this.pg[n].width;
-          b0 = 0;
-          a1 = this.xSpots[n];
-          b1 = this.xSpots[n];
-        }
+        var tk0b = map(tk0, 0.5, 1, 0, 1);
+        tk1 = easeInCirc(tk0b);
+        a0 = 0;
+        b0 = 0;
+        a1 = this.pg[n].height;
+        b1 = 0;
+
+        a2 = 0;
+        b2 = -this.pg[0].height/2;
       }
 
       this.shutterAnim[n] = map(tk1, 0, 1, a0, b0);
-      this.xAnim[n] = map(tk1, 0, 1, a1, b1); 
+      this.shutterAnimBot[n] = map(tk1, 0, 1, a1, b1);
+      this.shutterYanim[n] = map(tk1, 0, 1, a2, b2);
     }
   }
 
@@ -79,20 +75,18 @@ class Shutters2 {
 
       for(var n = 0; n < this.inp.length; n++){
         push();
-          translate(this.xAnim[n], 0);
+          translate(this.xSpots[n], this.shutterYanim[n]);
 
           texture(this.pg[n]);
-          stroke(0, 0, 255);
-
-          var uLeft = 0;
-          var uRight = map(this.pg[n].width - this.shutterAnim[n], 0, this.pg[n].width, 1, 0);
-          // var uRight =1;
+          
+          var vTop = map(this.shutterAnimBot[n], 0, this.pg[n].height, 1, 0);
+          var vBot = map(this.pg[n].height - this.shutterAnim[n], 0, this.pg[n].height, 0, 1);
 
           beginShape(TRIANGLE_STRIP);
-            vertex(0, 0, uLeft, 0);
-            vertex(0, this.pg[n].height, uLeft, 1);
-            vertex(this.shutterAnim[n], 0, uRight, 0);
-            vertex(this.shutterAnim[n], this.pg[n].height, uRight, 1);
+            vertex(0, this.shutterAnim[n], 0, vTop);
+            vertex(0, this.shutterAnimBot[n], 0, vBot);
+            vertex(this.pg[n].width, this.shutterAnim[n], 1, vTop);
+            vertex(this.pg[n].width, this.shutterAnimBot[n], 1, vBot);
           endShape();
         pop();
       }
@@ -133,6 +127,7 @@ class Shutters2 {
     textFont(currentFont);
 
     for(var n = 0; n < this.inp.length; n++){
+
       var repeatSize = round(textWidth(this.inp.charAt(n)));
     
       this.pg[n] = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.05));

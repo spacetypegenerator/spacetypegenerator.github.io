@@ -41,7 +41,9 @@ canvas{
   overflow:hidden;
   background-color:#f1f1f1;
   display:flex;
-  flex-direction:column
+  flex-direction:column;
+
+  padding-top:5px;
 }
 .checksColumn{
   display:flex;
@@ -98,7 +100,7 @@ input[type=range]{
 textarea{
   text-align:center;
   width:190px;
-  margin:5px;
+  margin:5px 5px 2px 5px;
   padding:0
 }
 h1{
@@ -122,7 +124,7 @@ h3{
   font-family:'IBM Plex Mono',monospace;
   font-size:14px;
   font-weight:500;
-  padding-left:5px;
+  /* padding-left:5px; */
   margin:0
 }
 .titleh2{
@@ -138,7 +140,7 @@ h3{
   margin-top:0
 }
 .textureEdit{
-  margin-bottom:5px
+  margin:5px 0 5px 0;
 }
 select{
   width:190px;
@@ -178,17 +180,40 @@ a{
 button{
   width:200px
 }
+input[type=radio]{
+  margin-left:0px;
+}
+.radioOption{
+  width:95px;
+}
+.radioOption label {
+  margin-left:-2px;
+}
+#textModeUI {
+  display:block;
+}
+#textModeUI2 {
+  display:flex;
+  flex-direction:row;
+}
+.couplingRadio{
+  display:flex;
+  flex-direction:row;
+  padding-top:5px;
+  margin-left:5px
+}
 .coupling1{
   display:flex;
   flex-direction:row;
-  padding-top:10px;
+  padding-top:8px;
   margin-left:5px
 }
 .coupling2{
   display:flex;
   flex-direction:column;
   padding-top:10px;
-  padding-bottom:10px
+  padding-bottom:10px;
+  padding-left:5px;
 }
 label{
   font-family:'IBM Plex Mono',monospace;

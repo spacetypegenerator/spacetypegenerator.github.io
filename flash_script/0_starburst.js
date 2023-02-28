@@ -40,17 +40,55 @@ class Starburst {
 
     var tk0 = map(this.ticker, 0, sceneLength, 0, 1);
     var tk1;
-    if(this.ramp==0){
-      tk1 = easeOutCirc(tk0);
-    } else if(this.ramp==1){
-      tk1 = easeInCirc(tk0);
+    var a0, b0;
+    var a1, b1;
+    var a2, b2;
+    var a3, b3;
+    if(accelMode == 0){
+      if(this.ramp==0){
+        tk1 = easeOutCirc(tk0);
+      } else if(this.ramp==1){
+        tk1 = easeInCirc(tk0);
+      }
+      a0 = this.radiusMinX;
+      b0 = this.radiusMaxX;
+      a1 = this.radiusMinY;
+      b1 = this.radiusMaxY;
+      a2 = 0;
+      b2 = this.rotZmax;
+      a3 = this.yMin;
+      b3 = this.yMax;
+    } else {
+      if(tk0 < 0.5){
+        var tk0b = map(tk0, 0, 0.5, 0, 1);
+        tk1 = easeOutCirc(tk0b);
+        a0 = this.radiusMinX;
+        b0 = (this.radiusMinX + this.radiusMaxX)/2;
+        a1 = this.radiusMinY;
+        b1 = (this.radiusMinY + this.radiusMaxY)/2;
+        a2 = 0;
+        b2 = this.rotZmax/2;
+        a3 = this.yMin;
+        b3 = (this.yMin + this.yMax)/2;
+      } else {
+        var tk0b = map(tk0, 0.5, 1, 0, 1);
+        tk1 = easeInCirc(tk0b);
+        a0 = (this.radiusMinX + this.radiusMaxX)/2;
+        b0 = this.radiusMaxX;
+        a1 = (this.radiusMinY + this.radiusMaxY)/2;
+        b1 = this.radiusMaxY;
+        a2 = this.rotZmax/2;
+        b2 = this.rotZmax;
+        a3 = (this.yMin + this.yMax)/2;
+        b3 = this.yMax;
+      }
     }
 
-    this.radiusX = map(tk1, 0, 1, this.radiusMinX, this.radiusMaxX);
-    this.radiusY = map(tk1, 0, 1, this.radiusMinY, this.radiusMaxY);
-    this.rotZ = map(tk1, 0, 1, 0, this.rotZmax);
+    this.radiusX = map(tk1, 0, 1, a0, b0);
+    this.radiusY = map(tk1, 0, 1, a1, b1);
+    this.rotZ = map(tk1, 0, 1, 0, a2, b2);
 
-    this.yCenter = map(tk1, 0, 1, this.yMin, this.yMax)
+    this.yCenter = map(tk1, 0, 1, a3, b3);
   }
 
   display(){
@@ -103,7 +141,8 @@ class Starburst {
     this.pgA.textFont(currentFont);
     this.pgA.textAlign(CENTER);
     this.pgA.textSize(this.pgTextSize);
-    this.pgA.translate(width/2, height/2 + this.pgTextSize * thisFontAdjust/2);
+    var thisAdjust = this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+    this.pgA.translate(width/2, thisAdjust);
     this.pgA.text(this.inp, 0, 0);
 
     this.pgB = createGraphics(width, height);
@@ -113,7 +152,13 @@ class Starburst {
     this.pgB.textFont(currentFont);
     this.pgB.textAlign(CENTER);
     this.pgB.textSize(this.pgTextSize);
-    this.pgB.translate(width/2, height/2 + this.pgTextSize * thisFontAdjust/2);
+    var thisAdjust = this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+    this.pgB.translate(width/2, thisAdjust);
     this.pgB.text(this.inp, 0, 0);
+  }
+
+  removeGraphics(){
+    this.pgA.remove();
+    this.pgB.remove();
   }
 }

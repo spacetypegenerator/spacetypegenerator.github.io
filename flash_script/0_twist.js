@@ -35,22 +35,68 @@ class Twist {
 
     var tk0 = map(this.ticker, 0, sceneLength, 0, 1);
     var tk1;
-    if(this.ramp==0){
-      tk1 = easeOutCirc(tk0);
-    } else if(this.ramp==1){
-      tk1 = easeInCirc(tk0);
+    var a0, b0;
+    var a1, b1;
+
+    if(accelMode == 0){
+      if(this.ramp==0){
+        tk1 = easeOutCirc(tk0);
+      } else if(this.ramp==1){
+        tk1 = easeInCirc(tk0);
+      }
+      if(this.d == 1){
+        a0 = 0;
+        b0 = -this.yOutside;
+        a1 = this.pgA.height;
+        b1 = this.pgA.height + this.yOutside;
+      } else {
+        a0 = this.pgA.height;
+        b0 = this.pgA.height + this.yOutside;
+        a1 = 0;
+        b1 = this.d * this.yOutside;
+      }
+    } else {
+      if(tk0 < 0.5){
+        var tk0b = map(tk0, 0, 0.5, 0, 1);
+        tk1 = easeOutCirc(tk0b);
+        if(this.d == 1){
+          a0 = 0;
+          b0 = -this.yOutside/2;
+          a1 = this.pgA.height;
+          b1 = this.pgA.height + this.yOutside/2;
+        } else {
+          a0 = this.pgA.height;
+          b0 = this.pgA.height + this.yOutside/2;
+          a1 = 0;
+          b1 = (this.d * this.yOutside)/2;
+        }
+      } else {
+        var tk0b = map(tk0, 0.5, 1, 0, 1);
+        tk1 = easeInCirc(tk0b);
+        if(this.d == 1){
+          a0 = -this.yOutside/2;
+          b0 = -this.yOutside;
+          a1 = this.pgA.height + this.yOutside/2;
+          b1 = this.pgA.height + this.yOutside;
+        } else {
+          a0 = this.pgA.height + this.yOutside/2;
+          b0 = this.pgA.height + this.yOutside;
+          a1 = (this.d * this.yOutside)/2;
+          b1 = this.d * this.yOutside;
+        }
+      }
     }
 
     if(this.d == 1){
-      this.tl.y = map(tk1, 0, 1, 0, -this.yOutside);
-      this.tml.y = map(tk1, 0, 1, 0, -this.yOutside);
-      this.bmr.y = map(tk1, 0, 1, this.pgA.height, this.pgA.height + this.yOutside);
-      this.br.y = map(tk1, 0, 1, this.pgA.height, this.pgA.height + this.yOutside);
+      this.tl.y = map(tk1, 0, 1, a0, b0);
+      this.tml.y = this.tl.y;
+      this.bmr.y = map(tk1, 0, 1, a1, b1);
+      this.br.y = this.bmr.y;
     } else {
-      this.bl.y = map(tk1, 0, 1, this.pgA.height, this.pgA.height + this.yOutside);
-      this.bml.y = map(tk1, 0, 1, this.pgA.height, this.pgA.height + this.yOutside);
-      this.tmr.y = map(tk1, 0, 1, 0, this.d * this.yOutside);
-      this.tr.y = map(tk1, 0, 1, 0, this.d * this.yOutside);
+      this.bl.y = map(tk1, 0, 1, a0, b0);
+      this.bml.y = this.bl.y;
+      this.tmr.y = map(tk1, 0, 1, a1, b1);
+      this.tr.y = this.tmr.y;
     }
   }
 
@@ -104,7 +150,7 @@ class Twist {
     textFont(currentFont);
     var repeatSize = round(textWidth(this.inp));
   
-    this.pgA = createGraphics(repeatSize, this.pgTextSize * 0.8);
+    this.pgA = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.05));
     this.pgA.background(bkgdColor);
   
     this.pgA.fill(foreColor);
@@ -112,6 +158,11 @@ class Twist {
     this.pgA.textSize(this.pgTextSize);
     this.pgA.textAlign(CENTER);
     this.pgA.textFont(currentFont);
-    this.pgA.text(this.inp, this.pgA.width/2, this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2);
+    var thisAdjust = this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+    this.pgA.text(this.inp, this.pgA.width/2, thisAdjust);
+  }
+
+  removeGraphics(){
+    this.pgA.remove();
   }
 }

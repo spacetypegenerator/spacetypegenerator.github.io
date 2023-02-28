@@ -135,4 +135,8 @@ class Grid {
     this.pgA.textFont(currentFont);
     this.pgA.text(this.inp, this.pgA.width/2, this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2);
   }
+
+  removeGraphics(){
+    this.pgA.remove();
+  }
 }

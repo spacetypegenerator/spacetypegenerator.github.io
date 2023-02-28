@@ -32,14 +32,40 @@ class Halo {
 
     var tk0 = map(this.ticker, 0, sceneLength, 0, 1);
     var tk1;
-    if(this.ramp==0){
-      tk1 = easeOutCirc(tk0);
-    } else if(this.ramp==1){
-      tk1 = easeInCirc(tk0);
+
+    let a0, b0;
+    let a1, b1;
+    if(accelMode == 0){
+      if(this.ramp==0){
+        tk1 = easeOutCirc(tk0);
+      } else if(this.ramp==1){
+        tk1 = easeInCirc(tk0);
+      }
+
+      a0 = 0;
+      b0 = this.xRotMax;
+      a1 = 0;
+      b1 = this.zRotMax;
+    } else {
+      if(tk0 < 0.5){
+        var tk0b = map(tk0, 0, 0.5, 0, 1);
+        tk1 = easeOutCirc(tk0b);
+        a0 = 0;
+        b0 = this.xRotMax/2;
+        a1 = 0;
+        b1 = this.zRotMax/2;
+      } else {
+        var tk0b = map(tk0, 0.5, 1, 0, 1);
+        tk1 = easeInCirc(tk0b);
+        a0 = this.xRotMax/2;
+        b0 = this.xRotMax;
+        a1 = this.zRotMax/2;
+        b1 = this.zRotMax;
+      }
     }
     
-    this.xRot = map(tk1, 0, 1, 0, this.xRotMax);
-    this.zRot = map(tk1, 0, 1, 0, this.zRotMax);
+    this.xRot = map(tk1, 0, 1, a0, b0);
+    this.zRot = map(tk1, 0, 1, a1, b1);
   }
 
   display(){
@@ -101,22 +127,29 @@ class Halo {
     textFont(currentFont);
     var repeatSize = round(textWidth(this.inp)) + 200;
   
-    this.pgA = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.05));
+    this.pgA = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.1));
     this.pgA.background(bkgdColor);
     this.pgA.fill(foreColor);
     this.pgA.noStroke();
     this.pgA.textSize(this.pgTextSize);
     this.pgA.textAlign(CENTER);
     this.pgA.textFont(currentFont);
-    this.pgA.text(this.inp, this.pgA.width/2, this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2);
+    var thisAdjust = this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+    this.pgA.text(this.inp, this.pgA.width/2, thisAdjust);
 
-    this.pgB = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.05));
+    this.pgB = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.1));
     this.pgB.background(foreColor);
     this.pgB.fill(bkgdColor);
     this.pgB.noStroke();
     this.pgB.textSize(this.pgTextSize);
     this.pgB.textAlign(CENTER);
     this.pgB.textFont(currentFont);
-    this.pgB.text(this.inp, this.pgA.width/2, this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2);
+    var thisAdjust = this.pgA.height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+    this.pgB.text(this.inp, this.pgA.width/2, thisAdjust);
+  }
+
+  removeGraphics(){
+    this.pgA.remove();
+    this.pgB.remove();
   }
 }

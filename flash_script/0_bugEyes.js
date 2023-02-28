@@ -35,8 +35,9 @@ class BugEyes {
         if(this.ramp==0){
           tk1 = easeOutQuad(tk0);
         } else if(this.ramp==1){
-          tk1 = easeInOutQuad(tk0);
+          tk1 = easeInQuad(tk0);
         }
+
         this.shutterAnim[n][p] = map(tk1, 0, 1, this.pg[n].height, 0);
       }
     }
@@ -57,7 +58,9 @@ class BugEyes {
       for(var n = 0; n < this.inp.length; n++){
         push();
           translate(0, -this.repeats * this.pg[n].height/2);
+
           translate(0, (n%2)*this.pg[n].height/2);
+
           for(var p = 0; p < this.repeats; p++){
             push();
               translate(this.xSpots[n], p * this.pg[n].height);
@@ -115,10 +118,9 @@ class BugEyes {
     textFont(currentFont);
 
     for(var n = 0; n < this.inp.length; n++){
-
       var repeatSize = round(textWidth(this.inp.charAt(n)));
     
-      this.pg[n] = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.1));
+      this.pg[n] = createGraphics(repeatSize, this.pgTextSize * (thisFontAdjust + 0.05));
       this.pg[n].background(bkgdColor);
     
       this.pg[n].fill(foreColor);
@@ -126,9 +128,16 @@ class BugEyes {
       this.pg[n].textSize(this.pgTextSize);
       this.pg[n].textAlign(CENTER);
       this.pg[n].textFont(currentFont);
-      this.pg[n].text(this.inp.charAt(n), this.pg[n].width/2, this.pg[n].height/2 + this.pgTextSize * thisFontAdjust/2);
+      var thisAdjust = this.pg[n].height/2 + this.pgTextSize * thisFontAdjust/2 + this.pgTextSize * thisFontAdjustUp;
+      this.pg[n].text(this.inp.charAt(n), this.pg[n].width/2, thisAdjust);
     }
 
     this.repeats = floor((height)/this.pg[0].height) + 2;
+  }
+
+  removeGraphics(){
+    for(var n = 0; n < this.inp.length; n++){
+      this.pg[n].remove();
+    }
   }
 }
