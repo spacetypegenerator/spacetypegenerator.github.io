@@ -1,5 +1,15 @@
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6BVJ8YZHL5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-6BVJ8YZHL5');
+  </script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>STG _v.Analog</title>
@@ -38,27 +48,27 @@
       <div id="cwCredits">
         <h8>TYPE</h8>
         <h6>CW-19</h6>
-        <h7>by <a href="https://www.j-w.global/">Hal Wolverton</a></h7>
+        <h7>by <a href="https://www.j-w.global/" target="_blank" rel="noopener noreferrer">Hal Wolverton</a></h7>
       </div>
       <div id="rightCredits">
         <h8>TYPE</h8>
         <h6>RIGHT GROTESK</h6>
-        <h7>by <a href="https://www.instagram.com/slobzheninov/">Alex Slobzheninov</a></h7>
-        <h7>at <a href="https://pangrampangram.com/">Pangram Pangram</a></h7>
+        <h7>by <a href="https://www.instagram.com/slobzheninov/" target="_blank" rel="noopener noreferrer">Alex Slobzheninov</a></h7>
+        <h7>at <a href="https://pangrampangram.com/" target="_blank" rel="noopener noreferrer">Pangram Pangram</a></h7>
       </div>
       <div id="sharpCredits">
         <h8>TYPE</h8>
         <h6>SHARP GROTESK</h6>
-        <h7>by <a href="http://lucassharp.com/">Lucas Sharp</a></h7>
-        <h7>with <a href="https://www.connordavenport.com/">Connor Davenport</a></h7>
-        <h7>at <a href="https://www.sharptype.co/">Sharp Type</a></h7>
+        <h7>by <a href="http://lucassharp.com/" target="_blank" rel="noopener noreferrer">Lucas Sharp</a></h7>
+        <h7>with <a href="https://www.connordavenport.com/" target="_blank" rel="noopener noreferrer">Connor Davenport</a></h7>
+        <h7>at <a href="https://www.sharptype.co/" target="_blank" rel="noopener noreferrer">Sharp Type</a></h7>
       </div>
     </div>
     <div id="set2credits">
       <div id="stgCredits">
         <h8>CODE</h8>
         <h6>STG: v.Analog</h6>
-        <h7>by <a href="https://www.instagram.com/kiel.d.m/">Kiel D. Mutschelknaus</a></h7>
+        <h7>by <a href="https://www.instagram.com/kiel.d.m/" target="_blank" rel="noopener noreferrer">Kiel D. Mutschelknaus</a></h7>
       </div>
     </div>
   </div>
@@ -105,6 +115,9 @@
             <input type="color" class="colorSetInput" id="colorA1" name="colorA1" value="#ffffff" oninput="setColorA(1, this.value)">
             <input type="color" class="colorSetInput" id="colorA2" name="colorA2" value="#ffffff" oninput="setColorA(2, this.value)">
             <input type="color" class="colorSetInput" id="colorA3" name="colorA3" value="#ffffff" oninput="setColorA(3, this.value)">
+          </div>
+          <div class="module">
+            <button type="button" class="randomPalette" onclick="randomPalette()">Random Palette</button>
           </div>
         </div>
 

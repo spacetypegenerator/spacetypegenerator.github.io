@@ -5,7 +5,7 @@ class AnMin {
     this.baseAng = PI/6 * this.n;
     this.currentAng = this.baseAng;
 
-    this.res = 60;
+    this.res = 50;
     
     this.section = minSpread;
     this.crust = this.section * mainMinRadius

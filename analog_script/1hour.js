@@ -5,7 +5,7 @@ class AnHour {
     this.baseAng = PI/6 * this.n;
     this.currentAng = this.baseAng;
 
-    this.res = 100;
+    this.res = 60;
     
     this.section = hourSpread;
     this.crust = this.section * mainHourRadius
