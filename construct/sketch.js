@@ -77,7 +77,7 @@ function setup(){
 function draw(){
   background(bkgdColor);
 
-  // image(pGrad, width/2, height/2);
+  // image(pImg[0], width/2, height/2);
 
   push();
     translate(width/2, height/2 - fullHeight/2);

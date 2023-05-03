@@ -1,0 +1,207 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STG _v.Analog</title>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js"></script>
+
+  <link rel="stylesheet" href="style_analog.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
+  <script src="analog_script/sketch_analog.js" type="text/javascript"></script>
+  <script src="analog_script/update.js" type="text/javascript"></script>
+  <script src="analog_script/textures.js" type="text/javascript"></script>
+  <script src="analog_script/gradients.js" type="text/javascript"></script>
+
+  <script src="analog_script/animators.js" type="text/javascript"></script>
+  <script src="analog_script/0clockHour.js" type="text/javascript"></script>
+  <script src="analog_script/0clockMin.js" type="text/javascript"></script>
+  <script src="analog_script/0clockSec.js" type="text/javascript"></script>
+  <script src="analog_script/1hour.js" type="text/javascript"></script>
+  <script src="analog_script/1min.js" type="text/javascript"></script>
+  <script src="analog_script/1sec.js" type="text/javascript"></script>
+  <script src="analog_script/pathFunctions.js" type="text/javascript"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700&display=swap" rel="stylesheet">
+
+  <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+</head>
+
+<body>
+  <div id="credits">
+    <div id="set1credits">
+      <div id="cwCredits">
+        <h8>TYPE</h8>
+        <h6>CW-19</h6>
+        <h7>by <a href="https://www.j-w.global/">Hal Wolverton</a></h7>
+      </div>
+      <div id="rightCredits">
+        <h8>TYPE</h8>
+        <h6>RIGHT GROTESK</h6>
+        <h7>by <a href="https://www.instagram.com/slobzheninov/">Alex Slobzheninov</a></h7>
+        <h7>at <a href="https://pangrampangram.com/">Pangram Pangram</a></h7>
+      </div>
+      <div id="sharpCredits">
+        <h8>TYPE</h8>
+        <h6>SHARP GROTESK</h6>
+        <h7>by <a href="http://lucassharp.com/">Lucas Sharp</a></h7>
+        <h7>with <a href="https://www.connordavenport.com/">Connor Davenport</a></h7>
+        <h7>at <a href="https://www.sharptype.co/">Sharp Type</a></h7>
+      </div>
+    </div>
+    <div id="set2credits">
+      <div id="stgCredits">
+        <h8>CODE</h8>
+        <h6>STG: v.Analog</h6>
+        <h7>by <a href="https://www.instagram.com/kiel.d.m/">Kiel D. Mutschelknaus</a></h7>
+      </div>
+    </div>
+  </div>
+
+  <div id="widget">
+    <div id="generatorInput">
+      <div class="titleh2">
+        <h2>STG: v.Analog</h2>
+      </div>
+
+      <button type="button" class="collapsible"><h1>SETTINGS</h1></button>
+      <div class="content">
+        <h4>Font</h4>
+        <div class="couplingRadio">
+          <div class="radioOption">
+            <input type="radio" id="fontCW" name="fontMode" value=0 oninput="setFontMode(this.value)" checked>
+            <label for="fontCW">CW-19</label>
+          </div>
+          <div class="radioOption">
+            <input type="radio" id="fontRights" name="fontMode" value=1 oninput="setFontMode(this.value)">
+            <label for="fontRights">Right Grotesk</label>
+          </div>
+          <div class="radioOption">
+            <input type="radio" id="fontSharp" name="fontMode" value=2 oninput="setFontMode(this.value)">
+            <label for="fontSharp">Sharp Grotesk</label>
+          </div>
+        </div>
+
+        <h4>Color</h4>
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Bkgd</h3></div>
+          <input type="color" class="oneColorInput" id="bColor" name="bColor" value="#000000" oninput="setBkgdColor(this.value)">
+        </div>
+        <h5>Text</h5>
+        <div class="coupling2">
+          <select name="textColorChange" id="textColorChange" onchange="setTextColorMode(this.value)">
+            <option value="0" selected="selected">Solid Color</option>
+            <option value="1">2-Color Gradient</option>
+            <option value="2">3-Color Gradient</option>
+            <option value="3">4-Color Gradient</option>
+          </select>
+          <div id="colorSet">
+            <input type="color" class="colorSetInput" id="colorA0" name="colorA0" value="#ffffff" oninput="setColorA(0, this.value)">
+            <input type="color" class="colorSetInput" id="colorA1" name="colorA1" value="#ffffff" oninput="setColorA(1, this.value)">
+            <input type="color" class="colorSetInput" id="colorA2" name="colorA2" value="#ffffff" oninput="setColorA(2, this.value)">
+            <input type="color" class="colorSetInput" id="colorA3" name="colorA3" value="#ffffff" oninput="setColorA(3, this.value)">
+          </div>
+        </div>
+
+        <h4>Radii</h4>
+        <div class="coupling1" id="scaleRing">
+          <div class="coupling_label"><h3>Scale</h3></div>
+          <input type="range" min="0" max="100" value="45" id="scaleSlider" oninput="setScale(this.value)">
+        </div>
+        <div class="coupling1" id="hourRing">
+          <div class="coupling_label"><h3>Hour</h3></div>
+          <input type="range" min="0" max="100" value="100" id="hourRadiusSlider" oninput="setHourRadius(this.value)">
+        </div>
+        <div class="coupling1" id="minRing">
+          <div class="coupling_label"><h3>Minute</h3></div>
+          <input type="range" min="0" max="100" value="75" id="minRadiusSlider" oninput="setMinRadius(this.value)">
+        </div>
+        <div class="coupling1" id="secRing">
+          <div class="coupling_label"><h3>Second</h3></div>
+          <input type="range" min="0" max="100" value="50" id="secRadiusSlider" oninput="setSecRadius(this.value)">
+        </div>
+        <div class="module">
+          <button type="button" class="resetRadii" onclick="resetRadii()">Reset</button>
+        </div>
+
+        <h4>Hands</h4>
+        <div class="listCheck">
+          <input type="checkbox" id="handsOnCheck" name="handsOn" onclick="toggleHandsOn()" checked>
+          <label for="handsOn">Visible</label>
+        </div>
+        <div class="coupling1" id="handsRadius">
+          <div class="coupling_label"><h3>Size</h3></div>
+          <input type="range" min="0" max="100" value="50" id="handsRadius" oninput="setHandsRadius(this.value)">
+        </div>
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Hour/Min</h3></div>
+          <input type="color" class="oneColorInput" id="fColor" name="fColor" value="#ffffff" oninput="setForeColor(this.value)">
+        </div>
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Second</h3></div>
+          <input type="color" class="oneColorInput" id="sColor" name="sColor" value="#ff0000" oninput="setSecColor(this.value)">
+        </div>
+
+
+        <h4>Misc</h4>
+        <div class="listItemFull">
+          <div class="listCheck">
+            <input type="checkbox" id="flipBottomCheck" name="flipBottom" onclick="toggleFlipBottom()">
+            <label for="flipBottom">Flip Bottom</label>
+          </div>
+          <div class="listCheck">
+            <input type="checkbox" id="timeFliesCheck" name="timeFlies" onclick="toggleTimeFlies()">
+            <label for="timeFlies">Time Flies</label>
+          </div>
+          <div class="listCheck">
+            <input type="checkbox" id="creditsCheck" name="creditsOn" onclick="toggleCreditsOn()" checked>
+            <label for="creditsOn">Credits</label>
+          </div>
+          <div class="listCheck">
+            <input type="checkbox" id="lockRotCheck" name="lockRotOn" onclick="toggleLockRotOn()">
+            <label for="lockRotOn">Lock Rotate</label>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+
+  <div>
+    <label class="switch">
+      <input type="checkbox" checked oninput="hideWidget()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <script>
+    // When the user clicks on <div>, open the popup
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+  </script>
+
+  <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+  
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
