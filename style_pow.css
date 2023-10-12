@@ -314,3 +314,56 @@ input:checked+.slider:before{
 .popuptext a{
   color:#00f
 }
+
+button.dropbtn {
+  width:90px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 100;
+  text-align: center;
+  color: #000;
+  background-color: #FFF;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: fixed;
+  top:0;
+  right:0;
+  padding-right:20px;
+  padding-top:10px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 90px;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  font-family:'IBM Plex Mono', monospace;
+  font-size: 14px;
+  font-weight: 100;
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  display: block;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #0000ff;
+  color: #ffffff;
+}
