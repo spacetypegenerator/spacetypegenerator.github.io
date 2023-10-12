@@ -1,0 +1,185 @@
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VYBT93NSW8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-VYBT93NSW8');
+  </script>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STG _v.Pow</title>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="https://unpkg.com/p5.js-svg@1.5.1"></script>
+  <script src="https://unpkg.com/h264-mp4-encoder/embuild/dist/h264-mp4-encoder.web.js"></script>
+
+  <link rel="stylesheet" href="style_pow.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="sketch_pow.js" type="text/javascript"></script>
+  <script src="pow_script/update.js" type="text/javascript"></script>
+  <script src="pow_script/recording.js" type="text/javascript"></script>
+
+  <script src="pow_script/class_0mousePop.js" type="text/javascript"></script>
+  <script src="pow_script/class_1all.js" type="text/javascript"></script>
+  <script src="pow_script/class_2line.js" type="text/javascript"></script>
+  <script src="pow_script/class_3letter.js" type="text/javascript"></script>
+  <script src="pow_script/animators.js" type="text/javascript"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap" rel="stylesheet">
+
+  <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+</head>
+
+<body>
+  <div id="widget">
+
+    <div id="generatorInput">
+      <div class="titleh2">
+        <h2>STG v.POW</h2>
+        <p>a kinetic generator from <a href="https://www.instagram.com/kiel.d.m/" target="_blank">kielm</a></p>
+        <div class="popup" onclick="myFunction()">Readme and Support!
+          <span class="popuptext" id="myPopup">
+            STG v.Pow 1.0
+            <br>
+            <br>Exporting and enjoying? <a href="https://www.buymeacoffee.com/kieldm" target="_blank">Buy Me A Coffee!</a>
+            <br>
+            <br>Use for anything!
+            <br>Give me a <a href="https://www.instagram.com/kiel.d.m/" target="_blank">tag</a> if possible.
+            <br>
+            <br>Featuring fonts from <a href="https://pangrampangram.com/" target="_blank">Pangram Pangram</a>(Formula Condensed, Editorial New, Neue World), <br>
+            <a href="https://typetype.org/" target="_blank">TypeType</a> (BlueScreens, Travels Next),<br>
+            and <a href="https://groteskly.xyz/" target="_blank">Groteskly Yours</a> (Oktah Neue)
+          </span>
+        </div>
+      </div>
+
+      <button type="button" class="collapsible"><h1>EXPORT</h1></button>
+      <div class="content">
+        <div class="coupling1">
+          <button type="button" class="saveSVGbutton" onclick="runSVGsave()">SAVE SVG</button>
+        </div>
+        <div class="coupling1">
+          <button type="button" class="saveJPGbutton" onclick="runJPGsave()">SAVE JPG</button>
+        </div>
+        <div class="coupling1">
+          <button type="button" class="saveMP4button" onclick="runSave()">RECORD MP4</button>
+        </div>
+        <div class="coupling1">
+          <div id="recStatus">
+            <p>RECORDING IN PROCESS <br><span id="recTicker"></span>/300 frames</p>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="collapsible"><h1>TEXT</h1></button>
+      <div class="content">
+        <div class="module">
+          <textarea id="text0" rows=4 oninput="setText()"></textarea>
+        </div>
+        
+        <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
+          <option value="0" selected="selected">Formula Condensed - Bold</option>
+          <option value="1">Editorial New - Thin</option>
+          <option value="2">Neue World - CondensedRegular</option>
+          <option value="3">TT Bluescreens - Medium</option>
+          <option value="4">TT Travels - BlackItalic</option>
+          <option value="5">Oktah Neue - SemiBold</option>
+        </select>
+
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Size</h3></div>
+          <input type="range" min="1" max="100" value="62" id="pgTextSize" oninput="setPGtextSize(this.value)">
+        </div>
+      </div>
+
+      <button type="button" class="collapsible"><h1>STYLE</h1></button>
+      <div class="content">
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Fill</h3></div>
+          <input type="color" id="fillColor" name="fillColor" value="#ffffff" oninput="setFillColor(this.value)">
+        </div>
+        
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Bkgd</h3></div>
+          <input type="color" id="bkgdColor" name="bkgdColor" value="#049dd9" oninput="setBkgdColor(this.value)">
+        </div>
+
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Stroke</h3></div>
+          <input type="color" id="strokeColor" name="strokeColor" value="#000000" oninput="setStrokeColor(this.value)">
+        </div>
+
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Weight</h3></div>
+          <input type="range" min="1" max="100" value="50" id="coreSW" oninput="setCoreSW(this.value)">
+        </div>
+      </div>
+
+      <button type="button" class="collapsible"><h1>BLAST</h1></button>
+      <div class="content">
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Detail</h3></div>
+          <input type="range" min="1" max="100" value="50" id="detailFactor" oninput="setDetailFactor(this.value)">
+        </div>
+        
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Strength</h3></div>
+          <input type="range" min="1" max="100" value="50" id="blastFactor" oninput="setBlastFactor(this.value)">
+        </div>
+
+        <div class="coupling1">
+          <div class="coupling_label"><h3>Ratio</h3></div>
+          <input type="range" min="1" max="100" value="25" id="ratioFactor" oninput="setRatioFactor(this.value)">
+        </div>
+
+        <div class="coupling1">
+          <label for="mousePop">Mouse Pop</label>
+          <input type="checkbox" id="mousePop" name="mousePop" onclick="toggleMousePop()" checked>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label class="switch">
+      <input type="checkbox" checked oninput="hideWidget()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+  
+  <script>
+    // When the user clicks on <div>, open the popup
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.toggle("show");
+    }
+  </script>
+  
+  <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+  
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
