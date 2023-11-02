@@ -78,9 +78,9 @@ function setup() {
 
   inp = select("#textfield");
 
-  textColorPicker = createColorPicker('#ffffff');
+  textColorPicker = createColorPicker('#000000');
   textColorPicker.position(25, 240); textColorPicker.style('width', '20px');
-  blockColorPicker = createColorPicker('#000000');
+  blockColorPicker = createColorPicker('#ffffff');
   blockColorPicker.position(50, 240); blockColorPicker.style('width', '20px');
   strokeColorPicker = createColorPicker('#545454');
   strokeColorPicker.position(75, 240); strokeColorPicker.style('width', '20px');

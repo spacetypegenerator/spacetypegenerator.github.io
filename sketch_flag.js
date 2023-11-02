@@ -106,7 +106,7 @@ function setup() {
   edgeSet = createButton('Edge Case'); edgeSet.position(490,height-40); edgeSet.mousePressed(edge);
 
   inp0check = createCheckbox('', false);inp0check.position(150, 65);
-  inp1 = createColorPicker('#c9c9c9');inp1.position(170, 93);inp1.style('width', '20px');
+  inp1 = createColorPicker('#f5f5f5');inp1.position(170, 93);inp1.style('width', '20px');
   inp1check = createCheckbox('', true);inp1check.position(150, 95);
   inp2 = createColorPicker('#000000');inp2.position(170, 123);inp2.style('width', '20px');
   inp2check = createCheckbox('', true);inp2check.position(150, 125);
@@ -117,7 +117,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(170, 213);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(150, 215);
 
-  bkgdColorPicker = createColorPicker('#000');bkgdColorPicker.position(150, 255);bkgdColorPicker.style('height', '50px');
+  bkgdColorPicker = createColorPicker('#fff');bkgdColorPicker.position(150, 255);bkgdColorPicker.style('height', '50px');
 
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);

@@ -98,7 +98,7 @@ function setup() {
   inp5 = createColorPicker('#000');inp5.position(170, 225);inp5.style('width', '20px');
   inp5check = createCheckbox('', false);inp5check.position(150, 227);
 
-  bkgdColorPicker = createColorPicker('#000');bkgdColorPicker.position(152, 270);bkgdColorPicker.style('height', '50px');
+  bkgdColorPicker = createColorPicker('#fff');bkgdColorPicker.position(152, 270);bkgdColorPicker.style('height', '50px');
 
   inp1check.changed(inp1checker);
   inp2check.changed(inp2checker);
