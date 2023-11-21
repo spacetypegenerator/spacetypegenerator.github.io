@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQ5PJQXV5Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NQ5PJQXV5Q');
+    </script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+   
+    <link rel="stylesheet" type="text/css" href="style_crash.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
+
+    <script src="https://unpkg.com/p5.js-svg@1.5.1"></script>
+    <script src="https://unpkg.com/h264-mp4-encoder/embuild/dist/h264-mp4-encoder.web.js"></script>
+
+    <script src="sketch_crash.js"></script>
+    <script src="crash_script/animators.js"></script>
+    <script src="crash_script/class_0boundary.js"></script>
+    <script src="crash_script/class_0circle.js"></script>
+    <script src="crash_script/class_1all.js"></script>
+    <script src="crash_script/class_2line.js"></script>
+    <script src="crash_script/class_3letter.js"></script>
+    <script src="crash_script/class_3debris.js"></script>
+    <script src="crash_script/class_3word.js"></script>
+    <script src="crash_script/update.js"></script>
+
+    <script src="crash_script/recording.js"></script>
+
+    <meta charset="utf-8" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap" rel="stylesheet">  
+
+  </head>
+  <body>
+    <div id="widget">
+      <div class="dropdown">
+        <button class="dropbtn">Select...</button>
+        <div class="dropdown-content">
+          <a href="index.html">CYLINDER</a>
+          <a href="field.html">FIELD</a>
+          <a href="stripes.html">STRIPES</a>
+          <a href="coil.html">COIL</a>
+          <a href="flag.html">FLAG</a>
+          <a href="morisawa.html">MORISAWA</a>
+          <a href="cascade.html">CASCADE</a>
+          <a href="ribbon.html">RIBBON</a>
+          <a href="layers.html">LAYERS</a>
+          <a href="danger.html">DANGER</a>
+          <a href="string.html">STRING</a>
+          <a href="badge.html">BADGE</a>
+          <a href="clutter.html">CLUTTER</a>
+          <a href="construct.html">CONSTRUCT</a>
+          <a href="snap.html">SNAP</a>
+          <a href="flash.html">FLASH</a>
+          <a href="pow.html">POW</a>
+          <a href="crash.html">CRASH</a>
+        </div>
+      </div>
+
+      <div id="generatorInput">
+        <div class="titleh2">
+          <h2>STG v.CRASH</h2>
+          <p>a kinetic generator from <a href="https://www.instagram.com/kiel.d.m/" target="_blank">kielm</a></p>
+          <div class="popup" onclick="myFunction()">Readme and Support!
+            <span class="popuptext" id="myPopup">
+              STG v.Crash 1.0
+              <br>
+              <br>Consider supporting STG by <br> <a href="https://www.buymeacoffee.com/kieldm" target="_blank">Buying Me A Coffee</a>
+              <br>
+              <br>Use for anything!
+              <br>Give me a <a href="https://www.instagram.com/kiel.d.m/" target="_blank">tag</a> if possible.
+              <br>
+              <br>Featuring fonts from <br><a href="https://www.zetafonts.com/" target="_blank">Zetafonts</a> (Extenda, Evans),<br>
+              <a href="https://pangrampangram.com/" target="_blank">Pangram Pangram</a>(Editorial New),<br>
+              and <a href="https://www.grootfontein.net/" target="_blank">Art Grootfontein</a> (Gilway)
+            </span>
+          </div>
+        </div>
+        <div class="coupling1">
+          <button type="button" class="resetPos" onclick="resetPos()">RESET</button>
+        </div>
+  
+        <button type="button" class="collapsible"><h1>TEXT</h1></button>
+        <div class="content">
+          <div class="module">
+            <textarea id="text0" rows=4 oninput="newText()"></textarea>
+          </div>
+          
+          <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
+            <option value="0">Extenda - Deca</option>
+            <option value="1">Inter - Medium</option>
+            <option value="2" selected="selected">Gilway - Bold</option>
+            <option value="3">Editorial New - Thin</option>
+            <option value="4">Evans - Narrow - Heavy</option>
+          </select>
+  
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Size</h3></div>
+            <input type="range" min="1" max="100" value="75" id="textScaler" oninput="setTextScaler(this.value)">
+          </div>
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Fill</h3></div>
+            <input type="color" id="fillColor" name="fillColor" value="#000000" oninput="setFillColor(this.value)">
+          </div>
+          
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Bkgd</h3></div>
+            <input type="color" id="bkgdColor" name="bkgdColor" value="#ffffff" oninput="setBkgdColor(this.value)">
+          </div>
+        </div>
+          
+        <button type="button" class="collapsible"><h1>PHYSICS</h1></button>
+        <div class="content">
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Gravity<br>Angle</h3></div>
+            <div id="handle2"></div>
+          </div>
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Strength</h3></div>
+            <input type="range" min="0" max="100" value="0" id="gravityStrength" oninput="setGravityStrength(this.value)">
+          </div>
+          <!-- <div class="coupling1">
+            <label for="constrainOn">Connect Text</label>
+            <input type="checkbox" id="constrainOn" name="constrainOn" onclick="toggleConstrainOn()" checked>
+          </div> -->
+
+          <div class="coupling3">
+            <div class="coupling_label3"><h3>Type Connections</h3></div>
+            <div class="coupling2">
+              <div class="couplingEntry">
+                <input type="radio" id="none" name="connectSet" value=0 onclick="setConnectSet(this.value)">
+                <label for="none">None</label>
+              </div>
+              <!-- <div class="couplingEntry">
+                <input type="radio" id="loose" name="connectSet" value=1 onclick="setConnectSet(this.value)" checked>
+                <label for="loose">Loose</label>
+              </div> -->
+              <div class="couplingEntry">
+                <input type="radio" id="strong" name="connectSet" value=1 onclick="setConnectSet(this.value)" checked>
+                <label for="strong">Chain</label>
+              </div>
+            </div>
+            <div class="coupling2">
+              <div class="couplingEntry">
+                <input type="radio" id="solid" name="connectSet" value=2 onclick="setConnectSet(this.value)">
+                <label for="solid">Block</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="random" name="connectSet" value=3 onclick="setConnectSet(this.value)">
+                <label for="random">Mixture</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Boundary</h3></div>
+            <input type="range" min="0" max="100" value="50" id="padFactor" oninput="setPadFactor(this.value)">
+          </div>
+        </div>
+        
+        <button type="button" class="collapsible"><h1>DEBRIS</h1></button>
+        <div class="content">
+          <div class="coupling1">
+            <button type="button" class="addDebris" onclick="addDebris()">+</button>
+            <button type="button" class="removeDebris" onclick="removeDebris()">-</button>
+          </div>
+
+          <div class="coupling3" id="debris1">
+            <div class="coupling_label3"><h3>Debris One</h3></div>
+            <div class="coupling2">
+              <div class="coupling_label"><h3>Position</h3></div>
+              <input type="range" min="0" max="100" value="0" id="setDebrisPlace0" oninput="setDebrisPlace(0, this.value)">
+            </div>
+            <div class="module">
+              <image id="uploadedImage0" src="crash_resources/images/0.gif"></image>
+              <input type="file" id="imageDebris0" title= " " class="fileInput" name="imageDebris0" accept="image/png, image/jpeg, image/gif" oninput="setDebrisImage(0)">
+              <span class="uploadSpan" id="uploadDebris"></span>
+            </div>
+          </div>
+
+          <div class="coupling3" id="debris2">
+            <div class="coupling_label3"><h3>Debris Two</h3></div>
+            <div class="coupling2">
+              <div class="coupling_label"><h3>Position</h3></div>
+              <input type="range" min="0" max="100" value="0" id="setDebrisPlace1" oninput="setDebrisPlace(1, this.value)">
+            </div>
+            <div class="module">
+              <image id="uploadedImage1" src="crash_resources/images/1.gif"></image>
+              <input type="file" id="imageDebris1" title= " " class="fileInput" name="imageDebris1" accept="image/png, image/jpeg, image/gif" oninput="setDebrisImage(1)">
+              <span class="uploadSpan" id="uploadDebris"></span>
+            </div>
+          </div>
+
+          <div class="coupling3" id="debris3">
+            <div class="coupling_label3"><h3>Debris Three</h3></div>
+            <div class="coupling2">
+              <div class="coupling_label"><h3>Position</h3></div>
+              <input type="range" min="0" max="100" value="0" id="setDebrisPlace2" oninput="setDebrisPlace(2, this.value)">
+            </div>
+            <div class="module">
+              <image id="uploadedImage2" src="crash_resources/images/2.gif"></image>
+              <input type="file" id="imageDebris2" title= " " class="fileInput" name="imageDebris2" accept="image/png, image/jpeg, image/gif" oninput="setDebrisImage(2)">
+              <span class="uploadSpan" id="uploadDebris"></span>
+            </div>
+          </div>
+
+          <div class="coupling3" id="debris4">
+            <div class="coupling_label3"><h3>Debris Four</h3></div>
+            <div class="coupling2">
+              <div class="coupling_label"><h3>Position</h3></div>
+              <input type="range" min="0" max="100" value="0" id="setDebrisPlace3" oninput="setDebrisPlace(3, this.value)">
+            </div>
+            <div class="module">
+              <image id="uploadedImage3" src="crash_resources/images/3.gif"></image>
+              <input type="file" id="imageDebris3" title= " " class="fileInput" name="imageDebris3" accept="image/png, image/jpeg, image/gif" oninput="setDebrisImage(3)">
+              <span class="uploadSpan" id="uploadDebris"></span>
+            </div>
+          </div>
+
+          <div class="coupling3" id="debris5">
+            <div class="coupling_label3"><h3>Debris Five</h3></div>
+            <div class="coupling2">
+              <div class="coupling_label"><h3>Position</h3></div>
+              <input type="range" min="0" max="100" value="0" id="setDebrisPlace4" oninput="setDebrisPlace(4, this.value)">
+            </div>
+            <div class="module">
+              <image id="uploadedImage4" src="crash_resources/images/4.gif"></image>
+              <input type="file" id="imageDebris4" title= " " class="fileInput" name="imageDebris4" accept="image/png, image/jpeg, image/gif" oninput="setDebrisImage(4)">
+              <span class="uploadSpan" id="uploadDebris"></span>
+            </div>
+          </div>
+
+          <div class="coupling3" id="debris6">
+            <div class="coupling_label3"><h3>Debris Six</h3></div>
+            <div class="coupling2">
+              <div class="coupling_label"><h3>Position</h3></div>
+              <input type="range" min="0" max="100" value="0" id="setDebrisPlace5" oninput="setDebrisPlace(5, this.value)">
+            </div>
+            <div class="module">
+              <image id="uploadedImage5" src="crash_resources/images/5.gif"></image>
+              <input type="file" id="imageDebris5" title= " " class="fileInput" name="imageDebris5" accept="image/png, image/jpeg, image/gif" oninput="setDebrisImage(5)">
+              <span class="uploadSpan" id="uploadDebris"></span>
+            </div>
+          </div>
+
+          <div class="coupling3" id="debris7">
+            <div class="coupling_label3"><h3>Debris Seven</h3></div>
+            <div class="coupling2">
+              <div class="coupling_label"><h3>Position</h3></div>
+              <input type="range" min="0" max="100" value="0" id="setDebrisPlace6" oninput="setDebrisPlace(6, this.value)">
+            </div>
+            <div class="module">
+              <image id="uploadedImage6" src="crash_resources/images/6.gif"></image>
+              <input type="file" id="imageDebris6" title= " " class="fileInput" name="imageDebris5" accept="image/png, image/jpeg, image/gif" oninput="setDebrisImage(6)">
+              <span class="uploadSpan" id="uploadDebris"></span>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="collapsible"><h1>EXPORT</h1></button>
+        <div class="content">
+          <p>Rendering?<br>Consider supporting STG by <a href="https://www.buymeacoffee.com/kieldm" target="_blank">Buying a Coffee</a></p>
+          <!-- <div class="coupling1">
+            <button type="button" class="saveSVGbutton" onclick="runSVGsave()">SAVE SVG</button>
+          </div> -->
+          <div class="coupling1">
+            <button type="button" class="saveJPGbutton" onclick="runJPGsave()">SAVE JPG</button>
+          </div>
+          <div class="coupling1">
+            <button type="button" class="saveMP4button" onclick="runSave()">RECORD MP4</button>
+          </div>
+          <div class="coupling1">
+            <div id="recStatus">
+              <p>RECORDING IN PROCESS <br><span id="recTicker"></span>/300 frames</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  
+    <div>
+      <label class="switch">
+        <input type="checkbox" checked oninput="hideWidget()">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    
+    <script>
+      // When the user clicks on <div>, open the popup
+      function myFunction() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+      }
+    </script>
+    
+    <script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+    
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
