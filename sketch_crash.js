@@ -44,7 +44,7 @@ var padFactor = 0.5;
 var padAnim = 30;
 
 var gravityAng = 1.5708;
-var gravityStrength = 0.0000; // 0.0001
+var gravityStrength = 0.0001; // 0.0001
 
 var unitCore = [];
 var lineWidths = [];
