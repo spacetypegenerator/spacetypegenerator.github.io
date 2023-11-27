@@ -351,7 +351,7 @@ function toggleGyro(){
       gyroOn = true;
     }
 
-    window.addEventListener('deviceorientation', handleOrientation);
+    // window.addEventListener('deviceorientation', handleOrientation);
   }
 
   if(gyroOn){
