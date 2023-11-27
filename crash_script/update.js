@@ -340,7 +340,7 @@ function toggleGyro(){
         if (state === 'granted') {
           // window.addEventListener('devicemotion', handleOrientation);
           window.addEventListener('deviceorientation', handleOrientation);
-          gyroOn = true;
+          // gyroOn = true;
         } else {
           console.error('Request to access the orientation was rejected');
         }
@@ -350,7 +350,7 @@ function toggleGyro(){
       // Handle regular non iOS 13+ devices.
       // window.addEventListener('devicemotion', handleOrientation);
       window.addEventListener('deviceorientation', handleOrientation);
-      gyroOn = true;
+      // gyroOn = true;
     }
 
     // window.addEventListener('deviceorientation', handleOrientation);

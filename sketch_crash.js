@@ -158,11 +158,11 @@ function setup() {
 }
 
 function draw() {
-  if(gyroOn){
-    console.log("in GyroOn, alphaAng is: " + alphaAng);
-    gravityAng = radians(alphaAng);
-    console.log("new gravityAng is: " + gravityAng);
-  }
+  // if(gyroOn){
+  //   console.log("in GyroOn, alphaAng is: " + alphaAng);
+  //   gravityAng = radians(alphaAng);
+  //   console.log("new gravityAng is: " + gravityAng);
+  // }
 
   world.gravity.x = cos(gravityAng);
   world.gravity.y = sin(gravityAng);
@@ -202,7 +202,10 @@ function windowResized(){
 function handleOrientation(event) {
   const alphaAng = event.alpha;
 
-  console.log("In handleOrientation, alphaAng is: " + alphaAng);
+  gravityAng = radians(alphaAng) + PI/2;
+  console.log("new gravityAng is: " + gravityAng);
+
+  // console.log("In handleOrientation, alphaAng is: " + alphaAng);
 }
 
 function positionBoundaries(){
