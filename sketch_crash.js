@@ -67,8 +67,9 @@ let recordedFrames = 0;
 let thisDensity = 2;
 let recMessageOn = false;
 
-let mobileOn = false;
 let gyroOn = false;
+
+var alpha = -PI/2;
 
 function preload(){
   tFont[0] = loadFont("crash_resources/Extenda-30-Deca.otf");
@@ -154,18 +155,16 @@ function setup() {
   canvasMouse.pixelRatio = pixelDensity();
   mConstraint = MouseConstraint.create(engine, options);
   World.add(world, mConstraint);
-
-  // IF MOBILE, ASK FOR DEVICE MOTION
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    mobileOn = true;
-  }
 }
 
 function draw() {
   if(gyroOn){
+    console.log("ARE WE IN GYRO MODE?")
     window.addEventListener('deviceorientation', handleOrientation);
 
+    console.log("alpha is: " + alpha);
     gravityAng = radians(alpha);
+    console.log("new gravityAng is: " + gravityAng);
   }
 
   world.gravity.x = cos(gravityAng);
@@ -204,7 +203,7 @@ function windowResized(){
 }
 
 function handleOrientation(event) {
-  const alpha = event.alpha;
+  alpha = event.alpha;
 }
 
 function positionBoundaries(){
