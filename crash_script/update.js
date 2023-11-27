@@ -332,7 +332,7 @@ function runJPGsave(){
 }
 
 function toggleGyro(){
-  if(gyroOn == false){
+  // if(gyroOn == false){
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       // Handle iOS 13+ devices.
       DeviceMotionEvent.requestPermission()
@@ -354,11 +354,11 @@ function toggleGyro(){
     }
 
     // window.addEventListener('deviceorientation', handleOrientation);
-  }
+  // }
 
-  if(gyroOn){
-    gyroOn = false;
-  }
+  // if(gyroOn){
+  //   gyroOn = false;
+  // }
 }
 
 // function runSVGsave(){

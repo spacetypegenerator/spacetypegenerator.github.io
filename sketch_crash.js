@@ -69,7 +69,7 @@ let recMessageOn = false;
 
 let gyroOn = false;
 
-var alphaAng = -PI/2;
+// var alphaAng = -PI/2;
 
 function preload(){
   tFont[0] = loadFont("crash_resources/Extenda-30-Deca.otf");
@@ -200,7 +200,7 @@ function windowResized(){
 }
 
 function handleOrientation(event) {
-  alphaAng = event.alpha;
+  const alphaAng = event.alpha;
 
   console.log("In handleOrientation, alphaAng is: " + alphaAng);
 }
