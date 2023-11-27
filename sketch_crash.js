@@ -166,15 +166,10 @@ function setup() {
 }
 
 function draw() {
-  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-    print("is the screen locking?");
-    var myScreenOrientation = screen.orientation;
-    myScreenOrientation.lock("portrait");
-  }
-  // if(gyroOn){
-  //   console.log("in GyroOn, alphaAng is: " + alphaAng);
-  //   gravityAng = radians(alphaAng);
-  //   console.log("new gravityAng is: " + gravityAng);
+  // if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  //   print("is the screen locking?");
+  //   var myScreenOrientation = screen.orientation;
+  //   myScreenOrientation.lock("portrait");
   // }
 
   world.gravity.x = cos(gravityAng);
