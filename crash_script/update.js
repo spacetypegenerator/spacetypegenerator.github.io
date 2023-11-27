@@ -350,6 +350,8 @@ function toggleGyro(){
       window.addEventListener('devicemotion', handleOrientation);
       gyroOn = true;
     }
+
+    window.addEventListener('deviceorientation', handleOrientation);
   }
 
   if(gyroOn){

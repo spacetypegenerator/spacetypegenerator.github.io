@@ -159,10 +159,7 @@ function setup() {
 
 function draw() {
   if(gyroOn){
-    console.log("ARE WE IN GYRO MODE?")
-    window.addEventListener('deviceorientation', handleOrientation);
-
-    console.log("alpha is: " + alphaAng);
+    console.log("in GyroOn, alphaAng is: " + alphaAng);
     gravityAng = radians(alphaAng);
     console.log("new gravityAng is: " + gravityAng);
   }
@@ -205,8 +202,7 @@ function windowResized(){
 function handleOrientation(event) {
   alphaAng = event.alpha;
 
-  console.log("DID THE GYRO GET READ?");
-  console.log("alphaAng detected: " + alphaAng);
+  console.log("In handleOrientation, alphaAng is: " + alphaAng);
 }
 
 function positionBoundaries(){
