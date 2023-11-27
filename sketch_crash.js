@@ -155,6 +155,12 @@ function setup() {
   canvasMouse.pixelRatio = pixelDensity();
   mConstraint = MouseConstraint.create(engine, options);
   World.add(world, mConstraint);
+
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    console.log("WE'RE MOBILE!");
+    gravityStrength = 0.0002;
+    document.getElementById("gravityStrength").value = 50;
+  }
 }
 
 function draw() {
