@@ -67,6 +67,8 @@ let recordedFrames = 0;
 let thisDensity = 2;
 let recMessageOn = false;
 
+let mobileOn = false;
+
 function preload(){
   tFont[0] = loadFont("crash_resources/Extenda-30-Deca.otf");
   pgTextFactor[0] = 0.69;
@@ -151,9 +153,36 @@ function setup() {
   canvasMouse.pixelRatio = pixelDensity();
   mConstraint = MouseConstraint.create(engine, options);
   World.add(world, mConstraint);
+
+  // IF MOBILE, ASK FOR DEVICE MOTION
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  mobileOn = true;
+
+  if (typeof DeviceMotionEvent.requestPermission === 'function') {
+    // Handle iOS 13+ devices.
+    DeviceMotionEvent.requestPermission()
+      .then((state) => {
+        if (state === 'granted') {
+          window.addEventListener('devicemotion', handleOrientation);
+        } else {
+          console.error('Request to access the orientation was rejected');
+        }
+      })
+      .catch(console.error);
+    } else {
+      // Handle regular non iOS 13+ devices.
+      window.addEventListener('devicemotion', handleOrientation);
+    }
+  }
 }
 
 function draw() {
+  if(mobileOn){
+    window.addEventListener('deviceorientation', handleOrientation);
+
+    gravityAng = degreesToRadians(alpha);
+  }
+
   world.gravity.x = cos(gravityAng);
   world.gravity.y = sin(gravityAng);
   world.gravity.scale = gravityStrength;
@@ -187,6 +216,10 @@ function windowResized(){
   resizeCanvas(windowWidth, windowHeight);
 
   newText();
+}
+
+function handleOrientation(event) {
+  const alpha = event.alpha;
 }
 
 function positionBoundaries(){
