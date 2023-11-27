@@ -69,7 +69,7 @@ let recMessageOn = false;
 
 let gyroOn = false;
 
-var alpha = -PI/2;
+var alphaAng = -PI/2;
 
 function preload(){
   tFont[0] = loadFont("crash_resources/Extenda-30-Deca.otf");
@@ -162,8 +162,8 @@ function draw() {
     console.log("ARE WE IN GYRO MODE?")
     window.addEventListener('deviceorientation', handleOrientation);
 
-    console.log("alpha is: " + alpha);
-    gravityAng = radians(alpha);
+    console.log("alpha is: " + alphaAng);
+    gravityAng = radians(alphaAng);
     console.log("new gravityAng is: " + gravityAng);
   }
 
@@ -203,7 +203,7 @@ function windowResized(){
 }
 
 function handleOrientation(event) {
-  alpha = event.alpha;
+  alphaAng = event.alpha;
 }
 
 function positionBoundaries(){
