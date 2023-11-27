@@ -161,12 +161,16 @@ function setup() {
     gravityStrength = 0.0002;
     document.getElementById("gravityStrength").value = 50;
 
-    var myScreenOrientation = window.screen.orientation;
-    myScreenOrientation.lock("portrait");
+    // var myScreenOrientation = window.screen.orientation;
+    // myScreenOrientation.lock("portrait");
   }
 }
 
 function draw() {
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    var myScreenOrientation = window.screen.orientation;
+    myScreenOrientation.lock("portrait");
+  }
   // if(gyroOn){
   //   console.log("in GyroOn, alphaAng is: " + alphaAng);
   //   gravityAng = radians(alphaAng);
