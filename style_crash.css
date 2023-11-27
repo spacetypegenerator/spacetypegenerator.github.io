@@ -261,6 +261,27 @@ div.coupling_label3{
   width:0;
   height:0
 }
+
+.switchGyro{
+  position:block;
+  bottom:0;
+  left:50%;
+  transform:translate(0,0);
+  display:inline-block;
+  width:38px;
+  height:20px
+}
+.switchGyro input{
+  opacity:0;
+  width:0;
+  height:0
+}
+span.gyroHead {
+  color: white;
+}
+#gyroControl {
+  display:none;
+}
 .slider{
   position:absolute;
   cursor:pointer;

@@ -8,6 +8,12 @@
     transform: scale(0.7);
     transform-origin: top right;
   }
+
+  #gyroControl {
+    display:flex;
+    flex-direction: row;
+    width:200px;
+  }
 }
 
 /* @media screen and (max-width: 600px) and (orientation: landscape){

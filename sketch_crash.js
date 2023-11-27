@@ -68,6 +68,7 @@ let thisDensity = 2;
 let recMessageOn = false;
 
 let mobileOn = false;
+let gyroOn = false;
 
 function preload(){
   tFont[0] = loadFont("crash_resources/Extenda-30-Deca.otf");
@@ -155,32 +156,16 @@ function setup() {
   World.add(world, mConstraint);
 
   // IF MOBILE, ASK FOR DEVICE MOTION
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  mobileOn = true;
-
-  if (typeof DeviceMotionEvent.requestPermission === 'function') {
-    // Handle iOS 13+ devices.
-    DeviceMotionEvent.requestPermission()
-      .then((state) => {
-        if (state === 'granted') {
-          window.addEventListener('devicemotion', handleOrientation);
-        } else {
-          console.error('Request to access the orientation was rejected');
-        }
-      })
-      .catch(console.error);
-    } else {
-      // Handle regular non iOS 13+ devices.
-      window.addEventListener('devicemotion', handleOrientation);
-    }
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    mobileOn = true;
   }
 }
 
 function draw() {
-  if(mobileOn){
+  if(gyroOn){
     window.addEventListener('deviceorientation', handleOrientation);
 
-    gravityAng = degreesToRadians(alpha);
+    gravityAng = radians(alpha);
   }
 
   world.gravity.x = cos(gravityAng);

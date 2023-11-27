@@ -331,6 +331,32 @@ function runJPGsave(){
   save("STGcrashStatic.jpg");
 }
 
+function toggleGyro(){
+  if(gyroOn == false){
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+      // Handle iOS 13+ devices.
+      DeviceMotionEvent.requestPermission()
+      .then((state) => {
+        if (state === 'granted') {
+          window.addEventListener('devicemotion', handleOrientation);
+          gyroOn = true;
+        } else {
+          console.error('Request to access the orientation was rejected');
+        }
+      })
+      .catch(console.error);
+    } else {
+      // Handle regular non iOS 13+ devices.
+      window.addEventListener('devicemotion', handleOrientation);
+      gyroOn = true;
+    }
+  }
+
+  if(gyroOn){
+    gyroOn = false;
+  }
+}
+
 // function runSVGsave(){
 //   createCanvas(windowWidth, windowHeight, SVG);
 
