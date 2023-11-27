@@ -157,7 +157,6 @@ function setup() {
   World.add(world, mConstraint);
 
   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-    console.log("WE'RE MOBILE!");
     gravityStrength = 0.0002;
     document.getElementById("gravityStrength").value = 50;
 
@@ -168,7 +167,8 @@ function setup() {
 
 function draw() {
   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-    var myScreenOrientation = window.screen.orientation;
+    print("is the screen locking?");
+    var myScreenOrientation = canvas.screen.orientation;
     myScreenOrientation.lock("portrait");
   }
   // if(gyroOn){
@@ -216,9 +216,6 @@ function handleOrientation(event) {
   const alphaAng = event.alpha;
 
   gravityAng = radians(alphaAng) + PI/2;
-  console.log("new gravityAng is: " + gravityAng);
-
-  // console.log("In handleOrientation, alphaAng is: " + alphaAng);
 }
 
 function positionBoundaries(){
