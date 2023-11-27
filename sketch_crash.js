@@ -204,6 +204,9 @@ function windowResized(){
 
 function handleOrientation(event) {
   alphaAng = event.alpha;
+
+  console.log("DID THE GYRO GET READ?");
+  console.log("alphaAng detected: " + alphaAng);
 }
 
 function positionBoundaries(){
