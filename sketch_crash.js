@@ -69,8 +69,6 @@ let recMessageOn = false;
 
 let gyroOn = false;
 
-let lockOn = false;
-let lockStart;
 // var alphaAng = -PI/2;
 
 function preload(){
@@ -163,15 +161,12 @@ function setup() {
     gravityStrength = 0.0002;
     document.getElementById("gravityStrength").value = 50;
 
-    lockOn = true;
-    lockStart = deviceOrientation;
+    var myScreenOrientation = window.screen.orientation;
+    myScreenOrientation.lock("portrait");
   }
 }
 
 function draw() {
-  if(lockOn){
-    deviceOrientation = lockStart;
-  }
   // if(gyroOn){
   //   console.log("in GyroOn, alphaAng is: " + alphaAng);
   //   gravityAng = radians(alphaAng);
