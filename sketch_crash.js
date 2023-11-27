@@ -168,7 +168,7 @@ function setup() {
 function draw() {
   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     print("is the screen locking?");
-    var myScreenOrientation = canvas.screen.orientation;
+    var myScreenOrientation = screen.orientation;
     myScreenOrientation.lock("portrait");
   }
   // if(gyroOn){
