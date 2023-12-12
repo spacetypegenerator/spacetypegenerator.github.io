@@ -181,6 +181,11 @@ button{
   margin-left:5px;
   margin-bottom:5px;
 }
+.coupling1b{
+  display:flex;
+  flex-direction:row;
+  margin-left:5px;
+}
 .coupling2{
   display:flex;
   flex-direction:column;
@@ -191,7 +196,7 @@ label{
   font-family:'IBM Plex Mono',monospace;
   font-size:14px;
   font-weight:500;
-  margin-top:2px
+  /* margin-top:2px */
 }
 div.coupling_label{
   padding-right:10px;
@@ -207,6 +212,8 @@ div.module{
   padding-bottom:1px;
   background-color:red
 }
+#cloudOption1{ display:flex; }
+#spurOption1{ display:none; }
 #widget{
   display:block
 }

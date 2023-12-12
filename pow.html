@@ -31,6 +31,7 @@
   <script src="pow_script/class_1all.js" type="text/javascript"></script>
   <script src="pow_script/class_2line.js" type="text/javascript"></script>
   <script src="pow_script/class_3letter.js" type="text/javascript"></script>
+  <script src="pow_script/class_4spur.js" type="text/javascript"></script>
   <script src="pow_script/animators.js" type="text/javascript"></script>
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -41,29 +42,29 @@
 
 <body>
   <div id="widget">
-    <div class="dropdown">
-      <button class="dropbtn">Select...</button>
-      <div class="dropdown-content">
-        <a href="index.html">CYLINDER</a>
-        <a href="field.html">FIELD</a>
-        <a href="stripes.html">STRIPES</a>
-        <a href="coil.html">COIL</a>
-        <a href="flag.html">FLAG</a>
-        <a href="morisawa.html">MORISAWA</a>
-        <a href="cascade.html">CASCADE</a>
-        <a href="ribbon.html">RIBBON</a>
-        <a href="layers.html">LAYERS</a>
-        <a href="danger.html">DANGER</a>
-        <a href="string.html">STRING</a>
-        <a href="badge.html">BADGE</a>
-        <a href="clutter.html">CLUTTER</a>
-        <a href="construct.html">CONSTRUCT</a>
-        <a href="snap.html">SNAP</a>
-        <a href="flash.html">FLASH</a>
-        <a href="pow.html">POW</a>
-        <a href="crash.html">CRASH</a>
-      </div>
+  <div class="dropdown">
+    <button class="dropbtn">Select...</button>
+    <div class="dropdown-content">
+      <a href="index.html">CYLINDER</a>
+      <a href="field.html">FIELD</a>
+      <a href="stripes.html">STRIPES</a>
+      <a href="coil.html">COIL</a>
+      <a href="flag.html">FLAG</a>
+      <a href="morisawa.html">MORISAWA</a>
+      <a href="cascade.html">CASCADE</a>
+      <a href="ribbon.html">RIBBON</a>
+      <a href="layers.html">LAYERS</a>
+      <a href="danger.html">DANGER</a>
+      <a href="string.html">STRING</a>
+      <a href="badge.html">BADGE</a>
+      <a href="clutter.html">CLUTTER</a>
+      <a href="construct.html">CONSTRUCT</a>
+      <a href="snap.html">SNAP</a>
+      <a href="flash.html">FLASH</a>
+      <a href="pow.html">POW</a>
+      <a href="crash.html">CRASH</a>
     </div>
+  </div>
 
     <div id="generatorInput">
       <div class="titleh2">
@@ -71,9 +72,9 @@
         <p>a kinetic generator from <a href="https://www.instagram.com/kiel.d.m/">kielm</a><br>
           <a href="https://www.buymeacoffee.com/kieldm">Buy me a coffee</a> to support STG<br>
         </p>
-        <div class="popup" onclick="myFunction()">Readme!
+        <div class="popup" onclick="myFunction()">Readme and Support!
           <span class="popuptext" id="myPopup">
-            STG v.Pow 1.0
+            STG v.Pow 1.1
             <br>
             <br>Exporting and enjoying? <a href="https://www.buymeacoffee.com/kieldm" target="_blank">Buy Me A Coffee!</a>
             <br>
@@ -118,6 +119,7 @@
           <option value="3">TT Bluescreens - Medium</option>
           <option value="4">TT Travels - BlackItalic</option>
           <option value="5">Oktah Neue - SemiBold</option>
+          <option value="6">NotoSans Korean - Black</option>
         </select>
 
         <div class="coupling1">
@@ -135,7 +137,7 @@
         
         <div class="coupling1">
           <div class="coupling_label"><h3>Bkgd</h3></div>
-          <input type="color" id="bkgdColor" name="bkgdColor" value="#049dd9" oninput="setBkgdColor(this.value)">
+          <input type="color" id="bkgdColor" name="bkgdColor" value="#f2B441" oninput="setBkgdColor(this.value)">
         </div>
 
         <div class="coupling1">
@@ -151,9 +153,14 @@
 
       <button type="button" class="collapsible"><h1>BLAST</h1></button>
       <div class="content">
+        <select name="blastType" id="blastType" onchange="setBlastType(this.value)">
+          <option value="0" selected="selected">Clouds</option>
+          <option value="1">Spurs</option>
+        </select>
+
         <div class="coupling1">
           <div class="coupling_label"><h3>Detail</h3></div>
-          <input type="range" min="1" max="100" value="50" id="detailFactor" oninput="setDetailFactor(this.value)">
+          <input type="range" min="1" max="100" value="60" id="detailFactor" oninput="setDetailFactor(this.value)">
         </div>
         
         <div class="coupling1">
@@ -161,9 +168,14 @@
           <input type="range" min="1" max="100" value="50" id="blastFactor" oninput="setBlastFactor(this.value)">
         </div>
 
-        <div class="coupling1">
+        <div class="coupling1" id="cloudOption1">
           <div class="coupling_label"><h3>Ratio</h3></div>
-          <input type="range" min="1" max="100" value="25" id="ratioFactor" oninput="setRatioFactor(this.value)">
+          <input type="range" min="1" max="100" value="50" id="ratioFactor" oninput="setRatioFactor(this.value)">
+        </div>
+
+        <div class="coupling1b" id="spurOption1">
+          <label for="messySpur">Messy</label>
+          <input type="checkbox" id="messySpur" name="messySpur" onclick="toggleSpurMessy()">
         </div>
 
         <div class="coupling1">

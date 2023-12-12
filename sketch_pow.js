@@ -1,4 +1,4 @@
-var bkgdColor = '#049dd9';
+var bkgdColor = '#f2B441';
 var strokeColor = '#000000';
 var fillColor = '#ffffff';
 
@@ -10,7 +10,8 @@ var pgTextFactor = [];
 var fontSelect = 0;
 
 // var starterText = "SPACE\n& TIME";
-var starterText = "NEVER\nPERFECT\nENOUGH";
+// var starterText = "NEVER\nPERFECT\nENOUGH";
+var starterText = "AND\nBEGIN\nAGAIN";
 
 var inputText;
 var coreSplode;
@@ -22,8 +23,9 @@ var coreSW = 2;
 var widgetOn = true;
 
 var blastFactor = 1;
-var detailFactor = 1;
-var ratioFactor = 1;
+var detailFactor = 0.7;
+var ratioFactor = 2;
+let spurMessyToggle = false;
 
 var mousePopOn = true;
 
@@ -34,6 +36,8 @@ let recordedFrames = 0;
 
 let thisDensity = 2;
 let recMessageOn = false;
+
+let blastType = 0;
 
 function preload(){
   tFont[0] = loadFont("resources/FormulaCondensed-Bold.otf");
@@ -53,6 +57,9 @@ function preload(){
 
   tFont[5] = loadFont("resources/Oktah Neue SemiBold.otf");
   pgTextFactor[5] = 0.75;
+
+  tFont[6] = loadFont("resources/NotoSansKR-Black.otf");
+  pgTextFactor[6] = 1.0;
 }
 
 function setup(){

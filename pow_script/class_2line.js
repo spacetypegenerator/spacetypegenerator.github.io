@@ -33,7 +33,11 @@ class SplodeLine {
       // thisY += height/2 + pgTextSize * pgTextFactor[fontSelect]/2 - (inputText.length - 1) * pgTextSize * pgTextFactor[fontSelect]/2;
       thisY += height/2 - (inputText.length - 2) * pgTextSize * pgTextFactor[fontSelect]/2;
 
-      this.splodeLetters[m] = new SplodeLetter(m, thisLetter, thisX, thisY);
+      if(blastType == 0){
+        this.splodeLetters[m] = new SplodeLetter(m, thisLetter, thisX, thisY);
+      } else if(blastType == 1){
+        this.splodeLetters[m] = new SpurLetter(m, thisLetter, thisX, thisY);
+      }
     }
   }
 

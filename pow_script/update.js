@@ -57,6 +57,17 @@ function toggleMousePop(){
   }
 }
 
+function toggleSpurMessy(){
+  if(document.getElementById('messySpur').checked){
+    spurMessyToggle = true;
+  } else {
+    spurMessyToggle = false;
+  }
+
+  resetPop();
+  coreSplode.refresh();
+}
+
 function hideWidget(){
   widgetOn = !widgetOn;
 
@@ -97,6 +108,23 @@ function runSVGsave(){
   save("STGpow.svg"); // give file name
 
   resetWithCustomUrl();
+}
+
+function setBlastType(val){
+  blastType = val;
+
+  if(val == 0){
+    document.getElementById('cloudOption1').style.display = "flex";
+    document.getElementById('spurOption1').style.display = "none";
+  } else {
+    document.getElementById('cloudOption1').style.display = "none";
+    document.getElementById('spurOption1').style.display = "flex";
+  }
+
+  orgX = width/2;
+  orgY = height/2;
+
+  buildIt();
 }
 
 function resetWithCustomUrl(){
