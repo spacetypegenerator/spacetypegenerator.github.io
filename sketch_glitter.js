@@ -37,6 +37,10 @@ function preload(){
 function setup(){
   createCanvas(windowWidth,windowHeight);
 
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    starterText = "20\n23";
+  }
+
   thisDensity = pixelDensity();
 
   bkgdColor = color('#000000');
