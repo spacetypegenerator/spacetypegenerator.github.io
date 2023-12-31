@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap" rel="stylesheet">
 
-  <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+  <style> body {padding: 0; margin: 0;} canvas {position: absolute; z-index:-100; top:50%; left:50%; transform:translate(-50%, -50%)} </style>
 </head>
 
 <body>
@@ -27,8 +27,10 @@
 
     <div class="sec">
       <h3>STG: Glitter</h3>
-      <p>a wish from <a href="http://www.kielm.com">kielm</a></p>
-      <div class="butts">
+      <p>a wish from <a href="http://www.kielm.com">kielm</a><br>
+      <a href="https://www.buymeacoffee.com/kieldm">support STG</a>
+      </p>
+        <div class="butts">
         <!-- <input type="text" id="text0" oninput="setText()"> -->
         <textarea id="text0" rows=3 oninput="setText()"></textarea>
       </div>
@@ -36,7 +38,7 @@
       <button type="button" class="saveMP4button" onclick="runSave()">EXPORT</button>
       <div class="coupling1">
         <div id="recStatus">
-          <p>RECORDING IN PROCESS <br><span id="recTicker"></span>/150 frames</p>
+          <p>RECORDING IN PROCESS <br><span id="recTicker"></span>/300 frames</p>
         </div>
       </div>
     </div>

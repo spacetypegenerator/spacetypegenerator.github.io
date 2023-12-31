@@ -18,7 +18,7 @@ var leading = 20;
 var typeCoreH = 0;
 
 const frate = 30;
-var numFrames = 150;
+var numFrames = 300;
 let recording = false;
 let recordedFrames = 0;
 
