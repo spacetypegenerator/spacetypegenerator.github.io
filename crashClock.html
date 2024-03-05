@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+   
+    <link rel="stylesheet" type="text/css" href="style_crashClock.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+                                    
+    <link href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css" rel="stylesheet" />
+                                        
+    <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
+
+    <script src="crashClock_script/animators.js"></script>
+    <script src="crashClock_script/class_0boundary.js"></script>
+    <script src="crashClock_script/class_0hand.js"></script>
+    <script src="crashClock_script/class_0particle.js"></script>
+    <script src="crashClock_script/class_1all.js"></script>
+    <script src="crashClock_script/class_2line.js"></script>
+    <script src="crashClock_script/class_3letter.js"></script>
+    <script src="sketch_crashClock.js"></script>
+    <script src="crashClock_script/update.js"></script>
+
+    <meta charset="utf-8" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap" rel="stylesheet">  
+
+  </head>
+  <body>
+    <div id="widget">
+
+      <div id="generatorInput">
+        <div class="titleh2">
+          <h2>Crash Clock</h2>
+          <p>a kinetic generator from <a href="https://www.instagram.com/kiel.d.m/" target="_blank">kielm</a></p>
+          <div class="popup" onclick="myFunction()">Readme and Support!
+            <span class="popuptext" id="myPopup">
+              Crash Clock 1.0
+              <br>
+              <br>Consider supporting STG by <br> <a href="https://www.buymeacoffee.com/kieldm" target="_blank">Buying Me A Coffee</a>
+              <br>
+              <br>Use for anything!
+              <br>Give me a <a href="https://www.instagram.com/kiel.d.m/" target="_blank">tag</a> if possible.
+              <br>
+              <br>Featuring fonts from <br><a href="https://www.zetafonts.com/" target="_blank">Zetafonts</a> (Milligram, Evans),<br>
+              <a href="https://pangrampangram.com/" target="_blank">Pangram Pangram</a>(Editorial New),<br>
+              and <a href="https://www.grootfontein.net/" target="_blank">Art Grootfontein</a> (Gilway)
+            </span>
+          </div>
+        </div>
+        <div class="coupling1">
+          <button type="button" class="resetPos" onclick="resetPos()">RESET</button>
+        </div>
+  
+        <button type="button" class="collapsible"><h1>TYPE</h1></button>
+        <div class="content">
+
+          <div class="coupling0">
+            <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
+              <option value="0">Milligram - Heavy</option>
+              <option value="1">Inter - Medium</option>
+              <option value="2">Gilway - Bold</option>
+              <option value="3">Editorial New - Thin</option>
+              <option value="4" selected="selected">Evans - Narrow - Heavy</option>
+            </select>
+          </div>
+  
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Size</h3></div>
+            <input type="range" min="1" max="100" value="50" id="textScaler" onchange="setTextScaler(this.value)">
+          </div>
+
+          <div class="coupling_label3"><h3>Display</h3></div>
+          <div class="coupling2">
+            <div class="couplingEntry">
+              <input type="radio" id="setHours" name="setSet" value=0 onclick="setSet(this.value)" checked>
+              <label for="none">Hours</label>
+            </div>
+            <div class="couplingEntry">
+              <input type="radio" id="setHoursMin" name="setSet" value=1 onclick="setSet(this.value)">
+              <label for="loose">Hours & Min</label>
+            </div>
+            <div class="couplingEntry">
+              <input type="radio" id="setText" name="setSet" value=2 onclick="setSet(this.value)">
+              <label for="strong">Text</label>
+            </div>
+          </div>
+
+          <div id="topBotText">
+            <div class="coupling4">
+              <div class="coupling_label"><h4>Top</h4></div>
+              <input type="text" value="TIME" id="text0" oninput="setTextTop(this.value)">
+            </div>
+  
+            <div class="coupling4">
+              <div class="coupling_label"><h4>Bottom</h4></div>
+              <input type="text" value="FLIES" id="text0" oninput="setTextBottom(this.value)">
+            </div>
+          </div>
+
+          <div class="coupling_label3"><h3>Reset every...</h3></div>
+          <div class="coupling2">
+            <div class="couplingEntry">
+              <input type="radio" id="resetNever" name="setReset" value=0 onclick="setReset(this.value)" checked>
+              <label for="none">Never</label>
+            </div>
+            <div class="couplingEntry">
+              <input type="radio" id="reset5sec" name="setReset" value=1 onclick="setReset(this.value)">
+              <label for="loose">5 Seconds</label>
+            </div>
+            <div class="couplingEntry">
+              <input type="radio" id="reset1min" name="setReset" value=2 onclick="setReset(this.value)">
+              <label for="strong">Minute</label>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="collapsible"><h1>CLOCK</h1></button>
+        <div class="content">
+          <div class="coupling0">
+            <select name="styleChange" id="styleChange" onchange="setStyle(this.value)">
+              <option value="0" selected>None</option>
+              <option value="1">Border</option>
+              <option value="2">Silhouette</option>
+            </select>
+          </div>
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Fill</h3></div>
+            <input type="color" id="fillColor" name="fillColor" value="#000000" oninput="setFillColor(this.value)">
+          </div>
+          
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Bkgd</h3></div>
+            <input type="color" id="bkgdColor" name="bkgdColor" value="#ffffff" oninput="setBkgdColor(this.value)">
+          </div>
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Accent</h3></div>
+            <input type="color" id="accentColor" name="accentColor" value="#ff0000" oninput="setAccentColor(this.value)">
+          </div>
+        </div>
+  
+        <button type="button" class="collapsible"><h1>PHYSICS</h1></button>
+        <div class="content">
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Gravity<br>Angle</h3></div>
+            <div id="handle2"></div>
+          </div>
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Strength</h3></div>
+            <input type="range" min="0" max="100" value="0" id="gravityStrength" oninput="setGravityStrength(this.value)">
+          </div>
+          <!-- <div class="coupling1">
+            <label for="constrainOn">Connect Text</label>
+            <input type="checkbox" id="constrainOn" name="constrainOn" onclick="toggleConstrainOn()" checked>
+          </div> -->
+
+          <!-- <div class="coupling3">
+            <div class="coupling_label3"><h3>Type Connections</h3></div>
+            <div class="coupling2">
+              <div class="couplingEntry">
+                <input type="radio" id="none" name="connectSet" value=0 onclick="setConnectSet(this.value)">
+                <label for="none">None</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="loose" name="connectSet" value=1 onclick="setConnectSet(this.value)" checked>
+                <label for="loose">Loose</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="strong" name="connectSet" value=2 onclick="setConnectSet(this.value)">
+                <label for="strong">Strong</label>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Boundary</h3></div>
+            <input type="range" min="0" max="100" value="0" id="padFactor" oninput="setPadFactor(this.value)">
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+    <div>
+      <label class="switch">
+        <input type="checkbox" checked oninput="hideWidget()">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    
+    <script>
+      // When the user clicks on <div>, open the popup
+      function myFunction() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+      }
+    </script>
+    
+    <script>
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+    
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
