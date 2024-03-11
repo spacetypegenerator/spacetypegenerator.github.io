@@ -187,20 +187,24 @@ function draw() {
   if(styleMode == 0){
     stroke(fillColor);
     noFill();
-    strokeWeight(borderDraw);
-    ellipse(width/2, height/2, clockBorder);    
+    if(borderDraw > 0.15){
+      strokeWeight(borderDraw);
+      ellipse(width/2, height/2, clockBorder);    
+    }
   } else if(styleMode == 1){
     stroke(fillColor);
     noFill();
     strokeWeight(3);
     ellipse(width/2, height/2, clockBorder);
   } else {
-    background(fillColor);
-    fill(handColor);
-    noStroke();
+    background(handColor);
+    fill(bkgdColor);
+    stroke(bkgdColor);
+    strokeWeight(4);
     ellipse(width/2, height/2, clockBorder);
   }
 
+  noStroke();
   fill(fillColor);
   if(dropGroupHour != null){ dropGroupHour.run(); }
   if(dropGroupMin != null){ dropGroupMin.run(); }
