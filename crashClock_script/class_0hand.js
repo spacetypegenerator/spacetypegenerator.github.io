@@ -13,10 +13,10 @@ class Hand {
             isStatic: true
         }
 
-        this.strkColor = accentColor;
-        if(type == 1 || type == 2){
-            this.strkColor = fillColor;
-        }
+        // this.strkColor = accentColor;
+        // if(type == 1 || type == 2){
+        //     this.strkColor = fillColor;
+        // }
 
         this.body = Bodies.rectangle(this.x, this.y, this.w, this.h, options);
         Composite.add(world, this.body);
@@ -32,7 +32,7 @@ class Hand {
             rectMode(CENTER);
 
             if(this.type == 1 || this.type == 2){
-                fill(fillColor);               
+                fill(handColor);               
             } else {
                 fill(accentColor);
             }

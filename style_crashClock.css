@@ -139,7 +139,8 @@ h4{
 }
 select{
   width:190px;
-  margin:5px;
+  margin:0px;
+  margin-left:5px;
   margin-bottom: 10px;
 }
 input[type=color]{
@@ -182,6 +183,9 @@ button{
   /* margin-top:5px; */
   width:190px;
 }
+.coupling0 {
+  margin: 0px;
+}
 .coupling1 button{
   margin-top:5px;
 }
@@ -193,10 +197,16 @@ button{
 }
 .coupling3{
   display:flex;
-  flex-direction:column;
+  flex-direction:row;
   margin-left:5px;
   margin-bottom:5px;
   padding-bottom:10px;
+}
+.coupling3sub{
+  display:flex;
+  flex-direction:column;
+  font-size:10px;
+  width:95px;
 }
 .coupling2{
   display:flex;
@@ -242,7 +252,8 @@ div.coupling_label3{
 .coupling2 label{
   font-size:10px;
 }
-div.couplingEntry {
+.coupling3 label{
+  font-size:10px;
 }
 div.module{
   /* margin-bottom:10px */

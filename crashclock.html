@@ -15,6 +15,7 @@
     <script src="crashClock_script/class_0boundary.js"></script>
     <script src="crashClock_script/class_0hand.js"></script>
     <script src="crashClock_script/class_0particle.js"></script>
+    <script src="crashClock_script/class_0partPac.js"></script>
     <script src="crashClock_script/class_1all.js"></script>
     <script src="crashClock_script/class_2line.js"></script>
     <script src="crashClock_script/class_3letter.js"></script>
@@ -58,11 +59,11 @@
 
           <div class="coupling0">
             <select name="fontChange" id="fontChange" onchange="setFont(this.value)">
-              <option value="0">Milligram - Heavy</option>
-              <option value="1">Inter - Medium</option>
-              <option value="2">Gilway - Bold</option>
-              <option value="3">Editorial New - Thin</option>
-              <option value="4" selected="selected">Evans - Narrow - Heavy</option>
+              <option id="font0" value="0">Milligram - Heavy</option>
+              <option id="font1" value="1">Inter - Medium</option>
+              <option id="font2" value="2">Gilway - Bold</option>
+              <option id="font3" value="3">Editorial New - Thin</option>
+              <option id="font4" value="4" selected="selected">Evans - Narrow - Heavy</option>
             </select>
           </div>
   
@@ -72,30 +73,39 @@
           </div>
 
           <div class="coupling_label3"><h3>Display</h3></div>
-          <div class="coupling2">
-            <div class="couplingEntry">
-              <input type="radio" id="setHours" name="setSet" value=0 onclick="setSet(this.value)" checked>
-              <label for="none">Hours</label>
+          <div class="coupling3">
+            <div class="coupling3sub">
+              <div class="couplingEntry">
+                <input type="radio" id="setHours" name="setSet" value=0 onclick="setSet(this.value)" checked>
+                <label for="none">Hours</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="setHoursMin" name="setSet" value=1 onclick="setSet(this.value)">
+                <label for="loose">Hours & Min</label>
+              </div>
             </div>
-            <div class="couplingEntry">
-              <input type="radio" id="setHoursMin" name="setSet" value=1 onclick="setSet(this.value)">
-              <label for="loose">Hours & Min</label>
-            </div>
-            <div class="couplingEntry">
-              <input type="radio" id="setText" name="setSet" value=2 onclick="setSet(this.value)">
-              <label for="strong">Text</label>
+
+            <div class="coupling3sub">
+              <div class="couplingEntry">
+                <input type="radio" id="setText" name="setSet" value=2 onclick="setSet(this.value)">
+                <label for="strong">Text</label>
+              </div>
+              <div class="couplingEntry">
+                <input type="radio" id="setParticle" name="setSet" value=3 onclick="setSet(this.value)">
+                <label for="strong">Particles</label>
+              </div>
             </div>
           </div>
 
           <div id="topBotText">
             <div class="coupling4">
               <div class="coupling_label"><h4>Top</h4></div>
-              <input type="text" value="TIME" id="text0" oninput="setTextTop(this.value)">
+              <input type="text" value="TIME" id="textTop" oninput="setTextTop(this.value)">
             </div>
   
             <div class="coupling4">
               <div class="coupling_label"><h4>Bottom</h4></div>
-              <input type="text" value="FLIES" id="text0" oninput="setTextBottom(this.value)">
+              <input type="text" value="FLIES" id="textBot" oninput="setTextBottom(this.value)">
             </div>
           </div>
 
@@ -118,11 +128,16 @@
 
         <button type="button" class="collapsible"><h1>CLOCK</h1></button>
         <div class="content">
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Scale</h3></div>
+            <input type="range" min="1" max="100" value="50" id="textScaler" onchange="setFullScale(this.value)">
+          </div>
+
           <div class="coupling0">
             <select name="styleChange" id="styleChange" onchange="setStyle(this.value)">
-              <option value="0" selected>None</option>
-              <option value="1">Border</option>
-              <option value="2">Silhouette</option>
+              <option id="style0" value="0" selected>None</option>
+              <option id="style1" value="1">Border</option>
+              <option id="style2" value="2">Silhouette</option>
             </select>
           </div>
 
@@ -136,6 +151,11 @@
             <input type="color" id="bkgdColor" name="bkgdColor" value="#ffffff" oninput="setBkgdColor(this.value)">
           </div>
 
+          <div class="coupling1">
+            <div class="coupling_label"><h3>Hands</h3></div>
+            <input type="color" id="handColor" name="handColor" value="#000000" oninput="setHandColor(this.value)">
+          </div>
+          
           <div class="coupling1">
             <div class="coupling_label"><h3>Accent</h3></div>
             <input type="color" id="accentColor" name="accentColor" value="#ff0000" oninput="setAccentColor(this.value)">

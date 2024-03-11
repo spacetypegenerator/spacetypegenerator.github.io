@@ -19,8 +19,8 @@ let hourAngle, minAngle, secAngle;
 let mConstraint;
 
 var bkgdColor = '#ffffff';
-var strokeColor = '#0000ff';
 var fillColor = '#000000';
+var handColor = '#000000';
 var accentColor = '#ff0000';
 
 var textScaler = 1;
@@ -49,6 +49,7 @@ var inputTextBottom = [];
 let dropGroupHour;
 let dropGroupMin;
 let dropGroupHead;
+let dropGroupParticles;
 
 var widgetOn = true;
 
@@ -58,7 +59,7 @@ var smoothAng = 0;
 var secHold = 0;
 var holdMin = 0;
 
-var setMode = 0;
+var setMode = 3;
 var resetMode = 0;
 
 var gravityAng = 1.5708;
@@ -78,6 +79,7 @@ var clockBorder;
 var fontSelect = 4;
 var borderDraw = 2;
 
+var fullScale = 1;
 var styleMode = 0;
 
 function preload(){
@@ -99,6 +101,8 @@ function preload(){
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
+
+  randomStart();
 
   setText();
 
@@ -142,8 +146,10 @@ function setup() {
   } else if(setMode == 1){
     dropGroupHour = new DropAll(0);    
     dropGroupMin = new DropAll(1);
-  } else {
+  } else if(setMode == 2){
     dropGroupHead = new DropAll(2);
+  } else if(setMode == 3){
+    dropGroupParticles = new PartPac();
   }
 
   // BOUNDARY
@@ -190,7 +196,7 @@ function draw() {
     ellipse(width/2, height/2, clockBorder);
   } else {
     background(fillColor);
-    fill(bkgdColor);
+    fill(handColor);
     noStroke();
     ellipse(width/2, height/2, clockBorder);
   }
@@ -199,11 +205,12 @@ function draw() {
   if(dropGroupHour != null){ dropGroupHour.run(); }
   if(dropGroupMin != null){ dropGroupMin.run(); }
   if(dropGroupHead != null){ dropGroupHead.run(); }
+  if(dropGroupParticles != null){ dropGroupParticles.run(); }
 
   minHand.show();
   hourHand.show();
   noStroke();
-  fill(fillColor);
+  fill(handColor);
   ellipse(width/2, height/2, 50, 50);
   secHand.show();
   fill(accentColor);
@@ -275,9 +282,9 @@ function runClock(){
 
 function configureClock(){
   if(width > height){
-    handsRadius = (height * 5/6)/2;
+    handsRadius = (height)/2 * fullScale;
   } else {
-    handsRadius = (width * 5/6)/2;
+    handsRadius = (width)/2 * fullScale;
   }
   borderRadius = handsRadius * 2 + 6;
 
@@ -314,15 +321,12 @@ function configureClock(){
   }
 
   pgTextSizeHourMax = ((TWO_PI * handsRadius)/keyTextHour.length) * 1.5;
-  print("Hour size max: " + pgTextSizeHourMax);
   pgTextSizeMinMax = ((TWO_PI * (handsRadius - pgTextSizeHourMax))/inputTextMin.length) * 0.75;
-  print("Min size max: " + pgTextSizeMinMax);
   if(inputTextTop.length > inputTextBottom.length){
     pgTextSizeHeadMax = ((PI * handsRadius)/inputTextTop.length) * 1.0;
   } else {
     pgTextSizeHeadMax = ((PI * handsRadius)/inputTextBottom.length) * 1.0;
   }
-  print("Head size max: " + pgTextSizeHeadMax);
 
   pgTextSizeHour = textScaler * pgTextSizeHourMax;
   pgTextSizeMin = textScaler * pgTextSizeMinMax;
@@ -345,4 +349,169 @@ function positionBoundaries(){
     Matter.Body.setPosition(boundaries[m].body, {x: xB, y: yB});
     Matter.Body.setAngle(boundaries[m].body, ang + PI/2);    
   }
+}
+
+function randomStart(){
+  var ran = int(random(8));
+
+  if(ran == 0){             ////////////////////////////////// DEFAULT
+
+  } else if(ran == 1){      ////////////////////////////////// GRAVITY WITH HOURS & MINS
+    fontSelect = 1;
+    document.getElementById('font1').selected = true;
+    
+    setMode = 1;
+    document.getElementById('setHours').checked = false;
+    document.getElementById('setHoursMin').checked = true;
+    document.getElementById('setText').checked = false;
+    document.getElementById('setParticle').checked = false;
+
+    textScaler = 1.25;
+    document.getElementById('textScaler').value = 65;
+
+    gravityStrength = 0.00025;
+    document.getElementById('gravityStrength').value = 50;
+
+    bkgdColor = '#5080bf'; document.getElementById('bkgdColor').value = bkgdColor;
+    fillColor = '#ffffff'; document.getElementById('fillColor').value = fillColor;
+    handColor = '#000000'; document.getElementById('handColor').value = handColor;
+    accentColor = '#f2aec7'; document.getElementById('accentColor').value = accentColor;
+  } else if(ran == 2){      ////////////////////////////////// HEAVY TYPE, GRAVITY
+    fontSelect = 0;
+    document.getElementById('font0').selected = true;
+    
+    setMode = 0;
+    document.getElementById('setHours').checked = true;
+    document.getElementById('setHoursMin').checked = false;
+    document.getElementById('setText').checked = false;
+    document.getElementById('setParticle').checked = false;
+
+    styleMode = 2;
+    document.getElementById('style2').selected = true;
+
+    textScaler = 1.75;
+    document.getElementById('textScaler').value = 80;
+
+    gravityStrength = 0.00025;
+    document.getElementById('gravityStrength').value = 50;
+
+    borderExtra = 100;
+    document.getElementById('padFactor').value = 20;
+
+    bkgdColor = '#000000'; document.getElementById('bkgdColor').value = bkgdColor;
+    fillColor = '#f2b441'; document.getElementById('fillColor').value = fillColor;
+    handColor = '#ffffff'; document.getElementById('handColor').value = handColor;
+    accentColor = '#f2aec7';document.getElementById('accentColor').value = accentColor;
+  } else if(ran == 3){      ////////////////////////////////// TEXT VERSION, W/ EDITORIAL
+    fontSelect = 3;
+    document.getElementById('font3').selected = true;
+
+    setMode = 2;
+    document.getElementById('setHours').checked = false;
+    document.getElementById('setHoursMin').checked = false;
+    document.getElementById('setText').checked = true;
+    document.getElementById('setParticle').checked = false;
+
+    resetMode = 1;
+    document.getElementById('resetNever').checked = false;
+    document.getElementById('reset5sec').checked = true;
+    document.getElementById('reset1min').checked = false;
+
+    bkgdColor = '#000000'; document.getElementById('bkgdColor').value = bkgdColor;
+    fillColor = '#ffffff'; document.getElementById('fillColor').value = fillColor;
+    handColor = '#5080bf'; document.getElementById('handColor').value = handColor;
+    accentColor = '#f24535'; document.getElementById('accentColor').value = accentColor;
+  } else if(ran == 4){      ////////////////////////////////// GILWAY, RAN ANGLE
+    fontSelect = 2;
+    document.getElementById('font2').selected = true;
+
+    textScaler = 1.75;
+    document.getElementById('textScaler').value = 65;
+
+    setMode = 1;
+    document.getElementById('setHours').checked = false;
+    document.getElementById('setHoursMin').checked = true;
+    document.getElementById('setText').checked = false;
+    document.getElementById('setParticle').checked = false;
+
+    gravityAng = random(TWO_PI);
+    document.getElementById('handle2').value = gravityAng;
+
+    gravityStrength = 0.00025;
+    document.getElementById('gravityStrength').value = 50;
+
+    borderExtra = 100;
+    document.getElementById('padFactor').value = 20;
+
+    bkgdColor = '#000000'; document.getElementById('bkgdColor').value = bkgdColor;
+    fillColor = '#f2aec7'; document.getElementById('fillColor').value = fillColor;
+    handColor = '#f2b441'; document.getElementById('handColor').value = handColor;
+    accentColor = '#ffffff'; document.getElementById('accentColor').value = accentColor;
+  } else if(ran == 5){      ////////////////////////////////// TEXT VERSION, W/ EDITORIAL
+    fontSelect = 1;
+    document.getElementById('font1').selected = true;
+
+    setMode = 2;
+    document.getElementById('setHours').checked = false;
+    document.getElementById('setHoursMin').checked = false;
+    document.getElementById('setText').checked = true;
+
+    resetMode = 1;
+    document.getElementById('resetNever').checked = true;
+    document.getElementById('reset5sec').checked = false;
+    document.getElementById('reset1min').checked = false;
+    document.getElementById('setParticle').checked = false;
+
+    textScaler = 1.5;
+    document.getElementById('textScaler').value = 60;
+
+    document.getElementById('topBotText').style.display = "block"
+    keyTextTop = "ABCDEFGHIJ";
+    document.getElementById('textTop').value = keyTextTop;
+    keyTextBottom = "MNOPQRST";
+    document.getElementById('textBot').value = keyTextBottom;
+
+    gravityStrength = 0.00025;
+    document.getElementById('gravityStrength').value = 50;
+
+    bkgdColor = '#000000'; document.getElementById('bkgdColor').value = bkgdColor;
+    fillColor = '#ffffff';document.getElementById('fillColor').value = fillColor;
+    handColor = '#f24535'; document.getElementById('handColor').value = handColor;
+    accentColor = '#f2b441'; document.getElementById('accentColor').value = accentColor;
+  } else if(ran == 6){      ////////////////////////////////// PARTICLES
+    setMode = 3;
+    document.getElementById('setHours').checked = false;
+    document.getElementById('setHoursMin').checked = false;
+    document.getElementById('setText').checked = false;
+    document.getElementById('setParticle').checked = true;
+
+    resetMode = 1;
+    document.getElementById('resetNever').checked = true;
+    document.getElementById('reset5sec').checked = false;
+    document.getElementById('reset1min').checked = false;
+
+    bkgdColor = '#000000'; document.getElementById('bkgdColor').value = bkgdColor;
+    fillColor = '#5080bf'; document.getElementById('fillColor').value = fillColor;
+    handColor = '#f2aec7'; document.getElementById('handColor').value = handColor;
+    accentColor = '#ffffff'; document.getElementById('accentColor').value = accentColor;
+  } else if(ran == 7){      ////////////////////////////////// PARTICLES
+    setMode = 3;
+    document.getElementById('setHours').checked = false;
+    document.getElementById('setHoursMin').checked = false;
+    document.getElementById('setText').checked = false;
+    document.getElementById('setParticle').checked = true;
+
+    resetMode = 1;
+    document.getElementById('resetNever').checked = false;
+    document.getElementById('reset5sec').checked = true;
+    document.getElementById('reset1min').checked = false;
+
+    bkgdColor = '#f2b441'; document.getElementById('bkgdColor').value = bkgdColor;
+    fillColor = '#ffffff'; document.getElementById('fillColor').value = fillColor;
+    handColor = '#000000'; document.getElementById('handColor').value = handColor;
+    accentColor = '#f2b441'; document.getElementById('accentColor').value = accentColor;
+
+    gravityStrength = 0.00025;
+    document.getElementById('gravityStrength').value = 50;
+  } 
 }

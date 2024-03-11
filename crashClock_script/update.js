@@ -18,15 +18,19 @@ function hideWidget(){
 function setTextScaler(val){
   textScaler = map(val, 1, 100, 0.25, 1.75);
 
-  pgTextSizeHour = constrain(textScaler * pgTextSizeHourMax, 25, 300);
-  pgTextSizeMin = constrain(textScaler * pgTextSizeMinMax, 25, 300);
-  pgTextSizeHead = constrain(textScaler * pgTextSizeHeadMax, 25, 400);
+  pgTextSizeHour = constrain(textScaler * pgTextSizeHourMax, 25, 500);
+  pgTextSizeMin = constrain(textScaler * pgTextSizeMinMax, 25, 500);
+  pgTextSizeHead = constrain(textScaler * pgTextSizeHeadMax, 25, 500);
 
   resetText();
 }
 
 function resetPos(){
-  resetText();
+  if(setMode == 3){
+    dropGroupParticles.resetIt();
+  } else {
+    resetText();
+  }
   // if(dropGroupHour != null){ dropGroupHour.resetPos(); }
   // if(dropGroupMin != null){ dropGroupMin.resetPos(); }
   // if(dropGroupHead != null){ dropGroupHead.resetPos(); }
@@ -56,6 +60,14 @@ function setTextBottom(val){
   setText();
   resetText();
   configureClock();
+}
+
+function setFullScale(val){
+  fullScale = map(val, 0, 100, 0.1, 2);
+
+  configureClock();
+  positionBoundaries();
+  resetText();
 }
 
 function setFont(val){
@@ -102,6 +114,7 @@ function setPadFactor(val){
 
 function setFillColor(val){ fillColor = val; }
 function setBkgdColor(val){ bkgdColor = val; }
+function setHandColor(val){ handColor = val; }
 function setAccentColor(val){ accentColor = val; }
 
 function resetText(){
@@ -117,13 +130,19 @@ function resetText(){
     dropGroupHead.removeIt();
     dropGroupHead = null;
   }
+  if(dropGroupParticles != null){
+    dropGroupParticles.removeIt();
+    dropGroupParticles = null;
+  }
 
   if(setMode == 0){
     dropGroupHour = new DropAll(0);    
   } else if(setMode == 1){
     dropGroupHour = new DropAll(0);    
     dropGroupMin = new DropAll(1);
-  } else {
+  } else if(setMode == 2){
     dropGroupHead = new DropAll(2);
+  }else if(setMode == 3){
+    dropGroupParticles = new PartPac();
   }
 }
